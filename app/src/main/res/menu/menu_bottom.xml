@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_name"
+        android:icon="@drawable/icon_home"
+        android:title="HOME" />
+
+    <item
+        android:id="@+id/menu_decaf"
+        android:icon="@drawable/icon_book"
+        android:title="DECAF" />
+
+    <item
+        android:id="@+id/menu_report"
+        android:icon="@drawable/icon_mypage"
+        android:title="REPORT" />
+
+
+</menu>
