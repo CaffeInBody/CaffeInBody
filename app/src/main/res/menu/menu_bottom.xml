@@ -8,14 +8,13 @@
         android:title="HOME" />
 
     <item
-        android:id="@+id/menu_decaf"
-        android:icon="@drawable/icon_book"
-        android:title="DECAF" />
-
-    <item
         android:id="@+id/menu_report"
         android:icon="@drawable/icon_mypage"
         android:title="REPORT" />
+    <item
+        android:id="@+id/menu_decaf"
+        android:icon="@drawable/icon_book"
+        android:title="DECAF" />
 
 
 </menu>

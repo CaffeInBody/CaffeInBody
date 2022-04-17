@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             layoutInflater
         )
     }
-    //hello hihi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 transaction.replace(R.id.frame_layout,fragmentA, "HOME")
             }
             R.id.menu_decaf -> {
-                val fragmentB = DecafFragment()
+                val fragmentB = SettingFragment()
                 transaction.replace(R.id.frame_layout,fragmentB, "CHAT")
             }
             R.id.menu_report -> {
