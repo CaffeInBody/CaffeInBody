@@ -35,10 +35,11 @@ class HomeFragment : Fragment() {
         //   initRecycler()
 
         binding.addBeverageBtn.setOnClickListener{
-            val selectActivity =  SelectActivity()
+            activity?.let{
+            val selectActivity =  DrinkTypeActivity()
             val intent = Intent(context, selectActivity::class.java)
             startActivity(intent)
-        }
+        }}
         return binding.root
     }
 
