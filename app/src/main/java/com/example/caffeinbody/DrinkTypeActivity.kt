@@ -8,7 +8,7 @@ import android.view.View
 import com.example.caffeinbody.databinding.ActivityDrinkTypeBinding
 
 class DrinkTypeActivity : AppCompatActivity() {
-
+    //음료 타입 선택
     private val binding: ActivityDrinkTypeBinding by lazy {
         ActivityDrinkTypeBinding.inflate(
             layoutInflater
@@ -29,7 +29,6 @@ class DrinkTypeActivity : AppCompatActivity() {
         val caffeineListActivity =  CaffeineListActivity()
         val intent = Intent(this, caffeineListActivity::class.java)
         intent.putExtra("listnum",num)
-        finish()
         startActivity(intent)
 
     }

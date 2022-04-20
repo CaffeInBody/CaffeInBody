@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CaffeInBody">
         <activity
-            android:name=".CaffeineListActivity" />
+            android:name=".DrinkCaffeineActivity"
+            android:exported="false" />
+        <activity android:name=".CaffeineListActivity" />
         <activity android:name=".DrinkTypeActivity" />
         <activity
             android:name=".MainActivity"
