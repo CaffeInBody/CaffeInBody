@@ -18,7 +18,7 @@
             android:layout_weight="1" />
         <ImageView
             android:id="@+id/myPageBtn"
-            android:src="@drawable/icon_mypage"
+            android:src="@drawable/icon_bulb"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="end"
