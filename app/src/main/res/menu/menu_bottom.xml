@@ -4,12 +4,12 @@
 
     <item
         android:id="@+id/menu_name"
-        android:icon="@drawable/icon_home"
+        android:icon="@drawable/icon_home_linear"
         android:title="HOME" />
 
     <item
         android:id="@+id/menu_report"
-        android:icon="@drawable/icon_mypage"
+        android:icon="@drawable/icon_mypage_linear"
         android:title="REPORT" />
     <item
         android:id="@+id/menu_decaf"
