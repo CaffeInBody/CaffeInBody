@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:paddingHorizontal="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView_survey1_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="당신의 기본 정보를 입력해주세요"
+            android:textStyle="bold"
+            android:textSize="20dp" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginVertical="40dp"/>
+
+        <TextView
+            android:id="@+id/textView_survey1_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:text="나이" />
+
+        <EditText
+            android:id="@+id/editText_survey1_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginVertical="10dp"
+            android:height="35dp"
+            android:background="@drawable/roundcorner_rectangle2"
+            android:ems="15"/>
+
+        <TextView
+            android:id="@+id/textView_survey1_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:text="성별" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
+
+            <Button
+                android:id="@+id/button_female"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="여자"
+                android:background="@drawable/btn_select"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="60dp"
+                android:paddingRight="60dp"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/button_male"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="남자"
+                android:background="@drawable/btn_select"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="60dp"
+                android:paddingRight="60dp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_survey1_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:text="체중"/>
+
+        <EditText
+            android:id="@+id/editText_survey1_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginVertical="10dp"
+            android:height="35dp"
+            android:background="@drawable/roundcorner_rectangle2"
+            android:ems="15"/>
+
+        <TextView
+            android:id="@+id/textView_survey1_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_gravity="left"
+            android:textStyle="bold"
+            android:text="임신 여부"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
+
+            <Button
+                android:id="@+id/button_pregnant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="O"
+                android:background="@drawable/btn_select"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="60dp"
+                android:paddingRight="60dp"
+                android:gravity="center"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/button_notPregnant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="X"
+                android:background="@drawable/btn_select"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="60dp"
+                android:paddingRight="60dp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#6AA7A3"
+        android:text="다음"
+        android:textColor="@color/white"
+        android:layout_marginTop="175dp"
+        android:gravity="center"/>
+
+</LinearLayout>

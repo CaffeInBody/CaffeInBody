@@ -9,14 +9,22 @@
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1205" />
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/drawable/round.xml" value="0.1205" />
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/drawable/roundcorner_rectangle.xml" value="0.1205" />
-        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/fragment_home.xml" value="0.152" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/drawable/roundcorner_rectangle2.xml" value="0.246" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/activity_caffeine_list.xml" value="0.1852355072463768" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/activity_drink_caffeine.xml" value="0.1852355072463768" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/activity_drink_type.xml" value="0.1852355072463768" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/activity_main.xml" value="0.1852355072463768" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/activity_survey1.xml" value="0.2" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/fragment_report.xml" value="0.264" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/fragment_setting.xml" value="0.13451086956521738" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/item_caffeine.xml" value="0.24947916666666667" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/survey3.xml" value="0.24947916666666667" />
+        <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/menu/menu_bottom.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/btn_check.xml" value="0.1945" />
         <entry key="app/src/main/res/drawable/btn_select.xml" value="0.255" />
         <entry key="app/src/main/res/drawable/heart_draw.xml" value="0.1945" />
         <entry key="app/src/main/res/drawable/icon_home.xml" value="0.1405" />
-        <entry key="app/src/main/res/drawable/icon_report.xml" value="0.126" />
-        <entry key="app/src/main/res/drawable/icon_setting.xml" value="0.126" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.1945" />
         <entry key="app/src/main/res/drawable/roundcorner_rectangle.xml" value="0.255" />
         <entry key="app/src/main/res/font/font_custom.xml" value="0.23854166666666668" />
