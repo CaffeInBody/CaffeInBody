@@ -4,16 +4,16 @@
 
     <item
         android:id="@+id/menu_name"
-        android:icon="@drawable/icon_home_linear"
+        android:icon="@drawable/icon_home"
         android:title="HOME" />
 
     <item
         android:id="@+id/menu_report"
-        android:icon="@drawable/icon_mypage_linear"
+        android:icon="@drawable/icon_report"
         android:title="REPORT" />
     <item
         android:id="@+id/menu_decaf"
-        android:icon="@drawable/icon_book"
+        android:icon="@drawable/icon_setting"
         android:title="DECAF" />
 
 

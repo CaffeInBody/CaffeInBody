@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 버튼이 눌렸을 때 -->
     <item android:state_checked="false"
-        android:drawable="@drawable/icon_home_linear"/>
+        android:drawable="@drawable/icon_report_linear"/>
 
     <item
         android:state_checked="true"
-        android:drawable="@drawable/icon_home_fill"/>
+        android:drawable="@drawable/icon_report_fill"/>
 
 </selector>

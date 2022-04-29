@@ -23,7 +23,6 @@
         android:background="@color/white"
         android:splitMotionEvents="false"
         app:labelVisibilityMode="labeled"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:menu="@menu/menu_bottom" />
