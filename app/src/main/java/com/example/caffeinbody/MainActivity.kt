@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
         binding.bottomNavigationView.selectedItemId = R.id.menu_name
+
         // HOME as default tab
         supportFragmentManager.beginTransaction().add(
             R.id.frame_layout,

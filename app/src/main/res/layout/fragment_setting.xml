@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="16dp"
-            android:text="앎림 설정" />
+            android:text="알림 설정" />
     </LinearLayout>
 
 
