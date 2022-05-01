@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CaffeInBody"
 include ':app'
-include ':caffeinbody'
+include ':wachacha'
