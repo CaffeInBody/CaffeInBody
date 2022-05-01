@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="30dp"
         android:layout_weight="0"
         android:text="평소 카페인을 섭취하는\n 이유를 알려주세요"
         android:textSize="20dp"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_weight="0"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginHorizontal="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_servey2_1" />
@@ -34,7 +34,7 @@
         android:id="@+id/textView_servey3_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="12dp"
         android:layout_weight="0"
         android:text="중복선택 가능"
@@ -45,70 +45,102 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="24dp"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="30dp"
         app:layout_constraintTop_toBottomOf="@+id/textView_servey3_2"
 >
 
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/btn_select"
             android:gravity="center"
-            android:text="CheckBox"
-            android:layout_marginVertical="10dp"
+            android:text="습관처럼"
+            android:paddingVertical="15dp"
+            android:layout_marginVertical="5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_servey3_2" />
 
         <CheckBox
             android:id="@+id/checkBox2"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/btn_select"
             android:gravity="center"
-            android:text="CheckBox"
-            android:layout_marginVertical="10dp"
+            android:text="잠을 깨기 위해서"
+            android:paddingVertical="15dp"
+            android:layout_marginVertical="5dp"
             app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
         <CheckBox
             android:id="@+id/checkBox3"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginVertical="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
             android:background="@drawable/btn_select"
             android:gravity="center"
-            android:text="CheckBox"
+            android:text="맛이 좋아서"
+            android:paddingVertical="15dp"
             app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
         <CheckBox
             android:id="@+id/checkBox4"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginVertical="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
             android:background="@drawable/btn_select"
             android:gravity="center"
-            android:text="CheckBox"
+            android:text="집중하기 위해서"
+            android:paddingVertical="15dp"
             app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
         <CheckBox
             android:id="@+id/checkBox5"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginVertical="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
             android:background="@drawable/btn_select"
             android:gravity="center"
-            android:text="CheckBox"
+            android:paddingVertical="15dp"
+            android:text="피로회복을 위해"
             app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
         <CheckBox
             android:id="@+id/checkBox6"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginVertical="10dp"
+            android:layout_height="wrap_content"
+            android:paddingVertical="15dp"
+            android:layout_marginVertical="5dp"
             android:background="@drawable/btn_select"
             android:gravity="center"
-            android:text="CheckBox"
+            android:text="입이 심심해서"
             app:layout_constraintTop_toBottomOf="@+id/checkBox5" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="-40dp">
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="건너뛰기" />
+
+        <Button
+            android:id="@+id/button_next"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:background="#6AA7A3"
+            android:gravity="center"
+            android:text="다음"
+            android:textColor="@color/white" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

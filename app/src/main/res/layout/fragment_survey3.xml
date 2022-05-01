@@ -163,7 +163,7 @@
             android:gravity="center"/>
 
         <Button
-            android:id="@+id/button6"
+            android:id="@+id/button_next"
             android:layout_width="170dp"
             android:layout_height="50dp"
             android:background="#6AA7A3"
