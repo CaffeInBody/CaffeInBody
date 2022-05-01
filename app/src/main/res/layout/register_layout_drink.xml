@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="음료마시기"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/imageViewDrink"
+        android:layout_width="300dp"
+        android:layout_weight="0"
+        android:layout_height="300dp"
+        android:src="@drawable/coffee_sample"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="아메리카노"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:background="@drawable/btn_select"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100~200" />
+
+            <ImageButton
+                android:id="@+id/imagebutton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="none"
+                android:src="@drawable/icon_coffee"
+                android:text="100~200" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:background="@drawable/btn_select"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="300~400" />
+
+            <ImageButton
+                android:id="@+id/imagebutton2"
+                android:layout_width="wrap_content"
+                android:layout_height="65dp"
+                android:background="none"
+                android:src="@drawable/icon_coffee"
+                android:text="300~400" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+            android:background="@drawable/btn_select"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500~600" />
+
+            <ImageButton
+                android:id="@+id/imagebutton3"
+                android:layout_width="69dp"
+                android:layout_height="74dp"
+                android:background="none"
+                android:src="@drawable/icon_coffee"
+                android:text="500~600" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="용량"
+            android:textSize="20dp"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="174dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/heart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="70dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카페인 함량"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="25dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100mg"
+            android:layout_marginLeft="200dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:layout_weight="0"
+        android:text="확인"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/roundcorner_rectangle"/>
+
+</LinearLayout>
