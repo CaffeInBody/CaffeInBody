@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/fragment_report.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_survey1.xml" value="0.2171875" />
         <entry key="app/src/main/res/layout/fragment_survey2.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/fragment_survey3.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/fragment_test2.xml" value="0.375" />

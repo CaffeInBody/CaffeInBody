@@ -14,5 +14,13 @@
         android:left="2dp"
         android:right="2dp"
         android:top="2dp" />
-    <solid android:color="#ffffff" />
+    <item  android:state_checked="true">
+        <solid android:color="#EDF5F5" />
+    </item>
+    <item  android:state_checked="false">
+        <solid android:color="#ffffff" />
+    </item>
+
+
+
 </shape>
