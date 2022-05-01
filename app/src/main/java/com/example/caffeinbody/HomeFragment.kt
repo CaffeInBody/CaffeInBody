@@ -40,6 +40,13 @@ class HomeFragment : Fragment() {
             val intent = Intent(context, selectActivity::class.java)
             startActivity(intent)
         }}
+        binding.showDetailText.setOnClickListener{
+            activity?.let{
+                val selectActivity =  DetailActivity()
+                val intent = Intent(context, selectActivity::class.java)
+                startActivity(intent)
+            }
+        }
         return binding.root
     }
 

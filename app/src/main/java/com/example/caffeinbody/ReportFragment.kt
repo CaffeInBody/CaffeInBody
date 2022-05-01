@@ -40,9 +40,9 @@ class ReportFragment : Fragment() {
 
     private fun setChartView(view: View) {
         var chartWeek = binding.barchart
-        var chartWeekLine = binding.linechart
+        //var chartWeekLine = binding.linechart
         setWeek(chartWeek)
-        setWeekLine(chartWeekLine)
+        //setWeekLine(chartWeekLine)
     }
 
     private fun initBarDataSet(barDataSet: BarDataSet) {
@@ -162,7 +162,7 @@ class ReportFragment : Fragment() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         //set the horizontal distance of the grid line
         xAxis.granularity = 1f
-        xAxis.textColor = Color.RED
+        xAxis.textColor = Color.DKGRAY
         //hiding the x-axis line, default true if not set
         xAxis.setDrawAxisLine(false)
         //hiding the vertical grid lines, default true if not set
@@ -172,13 +172,13 @@ class ReportFragment : Fragment() {
         //좌측 값 hiding the left y-axis line, default true if not set
         val leftAxis: YAxis = barChart.getAxisLeft()
         leftAxis.setDrawAxisLine(false)
-        leftAxis.textColor = Color.RED
+        leftAxis.textColor = Color.DKGRAY
 
 
         //우측 값 hiding the right y-axis line, default true if not set
         val rightAxis: YAxis = barChart.getAxisRight()
         rightAxis.setDrawAxisLine(false)
-        rightAxis.textColor = Color.RED
+        rightAxis.textColor = Color.DKGRAY
 
 
         //바차트의 타이틀
