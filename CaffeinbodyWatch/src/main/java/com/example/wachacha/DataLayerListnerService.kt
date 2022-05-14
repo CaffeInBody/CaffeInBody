@@ -14,7 +14,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
-class DataLayerListenerService : WearableListenerService() {
+class DataLayerListenerService : WearableListenerService() {//wear에서 데이터 영역 이벤트 처리
 
     private val messageClient by lazy { Wearable.getMessageClient(this) }
 
@@ -22,7 +22,7 @@ class DataLayerListenerService : WearableListenerService() {
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {
         super.onDataChanged(dataEvents)
-
+        //데이터전달하기
         dataEvents.forEach { dataEvent ->
             val uri = dataEvent.dataItem.uri
             when (uri.path) {
@@ -30,14 +30,15 @@ class DataLayerListenerService : WearableListenerService() {
                     scope.launch {
                         try {
                             val nodeId = uri.host!!
-                            val payload = uri.toString().toByteArray()
+                            val payload = "hello this is watch hahahaha".toByteArray()
+                            // uri.toString().toByteArray()
                             messageClient.sendMessage(
                                 nodeId,
                                 DATA_ITEM_RECEIVED_PATH,
                                 payload
                             )
                                 .await()
-                            Log.d(TAG, "Message sent successfully")
+                            Log.d(TAG, "Message sent successfully hahahahah" + uri.toString())
                         } catch (cancellationException: CancellationException) {
                             throw cancellationException
                         } catch (exception: Exception) {
@@ -72,7 +73,7 @@ class DataLayerListenerService : WearableListenerService() {
         private const val TAG = "DataLayerService"
 
         private const val START_ACTIVITY_PATH = "/start-activity3"
-        private const val DATA_ITEM_RECEIVED_PATH = "/data-item-received"
+        const val DATA_ITEM_RECEIVED_PATH = "/data-item-received"
         const val COUNT_PATH = "/count"
         const val IMAGE_PATH = "/image"
         const val IMAGE_KEY = "photo"

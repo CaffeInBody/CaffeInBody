@@ -3,6 +3,8 @@ package com.example.caffeinbody
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,12 +14,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.caffeinbody.databinding.FragmentHomeBinding
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.NodeClient
 import com.google.android.gms.wearable.Wearable
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import java.lang.Math.E
 import java.time.Duration
@@ -71,7 +71,49 @@ class HomeFragment : Fragment() {
         }
         return binding.root
     }
+///////////리스너 등록/제거 부분
+    override fun onResume() {
+        super.onResume()
+        dataClient.addListener(clientDataViewModel)
+        messageClient.addListener(clientDataViewModel)
+        capabilityClient.addListener(
+            clientDataViewModel,
+            Uri.parse("wear://"),
+            CapabilityClient.FILTER_REACHABLE
+        )
 
+        lifecycleScope.launch {
+            try {
+                capabilityClient.addLocalCapability(CAMERA_CAPABILITY).await()
+            } catch (cancellationException: CancellationException) {
+                throw cancellationException
+            } catch (exception: Exception) {
+                Log.e(TAG, "Could not add capability: $exception")
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        dataClient.removeListener(clientDataViewModel)
+        messageClient.removeListener(clientDataViewModel)
+        capabilityClient.removeListener(clientDataViewModel)
+
+        lifecycleScope.launch {
+            // This is a judicious use of NonCancellable.
+            // This is asynchronous clean-up, since the capability is no longer available.
+            // If we allow this to be cancelled, we may leave the capability in-place for other
+            // nodes to see.
+            withContext(NonCancellable) {
+                try {
+                    capabilityClient.removeLocalCapability(CAMERA_CAPABILITY).await()
+                } catch (exception: Exception) {
+                    Log.e(TAG, "Could not remove capability: $exception")
+                }
+            }
+        }
+    }
+////////////////워치로 열기 버튼 누르면 워치로 메시지 보내서 앱 열게 함
     private fun startWearableActivity() {
         lifecycleScope.launch {
             try {
@@ -99,14 +141,14 @@ class HomeFragment : Fragment() {
         private const val TAG = "MainActivity"
 
         private const val START_ACTIVITY_PATH = "/start-activity3"
-        /*private const val COUNT_PATH = "/count"
+        private const val COUNT_PATH = "/count"
         private const val IMAGE_PATH = "/image"
         private const val IMAGE_KEY = "photo"
         private const val TIME_KEY = "time"
         private const val COUNT_KEY = "count"
         private const val CAMERA_CAPABILITY = "camera"
 
-        private val countInterval = Duration.ofSeconds(5)*/
+        private val countInterval = Duration.ofSeconds(5)
     }
 
 }

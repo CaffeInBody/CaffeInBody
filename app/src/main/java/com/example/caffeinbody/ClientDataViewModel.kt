@@ -1,6 +1,7 @@
 package com.example.caffeinbody
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -25,19 +26,15 @@ class ClientDataViewModel :
     CapabilityClient.OnCapabilityChangedListener {
 
     private val _events = mutableStateListOf<Event>()
-
-    /**
-     * The list of events from the clients.
-     */
+    /**The list of events from the clients.**/
     val events: List<Event> = _events
 
-    /**
-     * The currently captured image (if any), available to send to the wearable devices.
-     */
+    /***The currently captured image (if any), available to send to the wearable devices.*/
     var image by mutableStateOf<Bitmap?>(null)
         private set
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {
+        Log.e("데이터 추가됨", "-------------------------------")
         _events.addAll(
             dataEvents.map { dataEvent ->
                 val title = when (dataEvent.type) {
@@ -58,9 +55,11 @@ class ClientDataViewModel :
         _events.add(
             Event(
                 title = R.string.message_from_watch,
-                text = messageEvent.toString()
+                //text = messageEvent.toString()
+                text = messageEvent.data.decodeToString()//bytearray를 디코드하기
             )
         )
+        Log.e("메시지 왔음: ", messageEvent.data.decodeToString() )
     }
 
     override fun onCapabilityChanged(capabilityInfo: CapabilityInfo) {

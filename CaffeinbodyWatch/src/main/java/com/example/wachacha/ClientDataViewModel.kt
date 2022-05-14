@@ -51,28 +51,31 @@ class ClientDataViewModel(
 
     private var loadPhotoJob: Job = Job().apply { complete() }
 
-    override fun onDataChanged(dataEvents: DataEventBuffer) {
+    //데이터항목동기화
+    //수신 대기
+    //이게 mainapp에 표기되는 내용(그냥 뭘 보내면)
+    override fun onDataChanged(dataEvents: DataEventBuffer) {//데이터이벤트버퍼에 무언가 일어나면
         // Add all events to the event log
-        _events.addAll(
+        _events.addAll(//_events에 추가하기
             dataEvents.map { dataEvent ->
-                val title = when (dataEvent.type) {
+                val title = when (dataEvent.type) {//타입이 존재하면 title에 타입 너호
                     DataEvent.TYPE_CHANGED -> R.string.data_item_changed
                     DataEvent.TYPE_DELETED -> R.string.data_item_deleted
                     else -> R.string.data_item_unknown
                 }
 
-                Event(
+                Event(//map으로 만들어서 _events에 추가하기
                     title = title,
                     text = dataEvent.dataItem.toString()
                 )
             }
         )
-
+        //사진 받으면
         // Do additional work for specific events
-        dataEvents.forEach { dataEvent ->
+        dataEvents.forEach { dataEvent ->//반복문
             when (dataEvent.type) {
                 DataEvent.TYPE_CHANGED -> {
-                    when (dataEvent.dataItem.uri.path) {
+                    when (dataEvent.dataItem.uri.path) {//path 가 존재하면
                         DataLayerListenerService.IMAGE_PATH -> {
                             loadPhotoJob.cancel()
                             loadPhotoJob = viewModelScope.launch {
@@ -89,7 +92,7 @@ class ClientDataViewModel(
         }
     }
 
-    override fun onMessageReceived(messageEvent: MessageEvent) {
+    override fun onMessageReceived(messageEvent: MessageEvent) {//메시지 받으면
         _events.add(
             Event(
                 title = R.string.message,
