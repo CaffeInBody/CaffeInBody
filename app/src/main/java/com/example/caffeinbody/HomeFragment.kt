@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.caffeinbody.databinding.FragmentHomeBinding
@@ -37,6 +38,10 @@ class HomeFragment : Fragment() {
         arguments?.let {
 
         }
+
+        lateinit var mainActivity: MainActivity
+        mainActivity = context as MainActivity
+        clientDataViewModel.mainActivity = mainActivity
     }
 
     private val binding: FragmentHomeBinding by lazy {

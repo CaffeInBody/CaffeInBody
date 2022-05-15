@@ -1,7 +1,9 @@
 package com.example.caffeinbody
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.util.Log
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -15,6 +17,7 @@ import com.google.android.gms.wearable.DataEvent
 import com.google.android.gms.wearable.DataEventBuffer
 import com.google.android.gms.wearable.MessageClient
 import com.google.android.gms.wearable.MessageEvent
+import com.google.android.material.internal.ContextUtils.getActivity
 
 /**
  * A state holder for the client data.
@@ -25,7 +28,9 @@ class ClientDataViewModel :
     MessageClient.OnMessageReceivedListener,
     CapabilityClient.OnCapabilityChangedListener {
 
-    private val _events = mutableStateListOf<Event>()
+    lateinit var mainActivity: MainActivity
+
+    private var _events = mutableStateListOf<Event>()
     /**The list of events from the clients.**/
     val events: List<Event> = _events
 
@@ -52,6 +57,7 @@ class ClientDataViewModel :
     }
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
+        //_events = mutableStateListOf<Event>()//초기화 필요한가 안필요한가 음
         _events.add(
             Event(
                 title = R.string.message_from_watch,
@@ -59,6 +65,9 @@ class ClientDataViewModel :
                 text = messageEvent.data.decodeToString()//bytearray를 디코드하기
             )
         )
+        events.forEach {
+                event -> Toast.makeText(mainActivity,event.text, Toast.LENGTH_SHORT).show()
+        }
         Log.e("메시지 왔음: ", messageEvent.data.decodeToString() )
     }
 
