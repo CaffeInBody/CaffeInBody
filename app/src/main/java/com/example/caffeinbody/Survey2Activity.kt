@@ -1,11 +1,14 @@
 package com.example.caffeinbody
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -24,6 +27,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Survey2Activity  : AppCompatActivity() {
+    var question = Array(6, {0})
 
     private val binding: FragmentSurvey2Binding by lazy {
         FragmentSurvey2Binding.inflate(
@@ -33,14 +37,75 @@ class Survey2Activity  : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.buttonNext.setOnClickListener {
 
+        binding.progressBar.incrementProgressBy(33)
+
+        binding.checkBox.setOnClickListener(CheckBoxListener())
+        binding.checkBox2.setOnClickListener(CheckBoxListener())
+        binding.checkBox3.setOnClickListener(CheckBoxListener())
+        binding.checkBox4.setOnClickListener(CheckBoxListener())
+        binding.checkBox5.setOnClickListener(CheckBoxListener())
+        binding.checkBox6.setOnClickListener(CheckBoxListener())
+
+        binding.buttonNext.setOnClickListener {
+            val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
+            val editor = shared.edit()//sharedpreferences 값 확인해보기
+            //editor.putString("age", )
+            //editor.apply()
+            val selectActivity =  Survey3Activity()
+            val intent = Intent(this, selectActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        binding.button5.setOnClickListener{
             val selectActivity =  Survey3Activity()
             val intent = Intent(this, selectActivity::class.java)
             startActivity(intent)
             finish()
         }
         setContentView(binding.root)
+    }
+
+    inner class CheckBoxListener: View.OnClickListener {
+        override fun onClick(v:View?){
+            when(v?.id){
+                binding.checkBox.getId() -> {
+                    if(binding.checkBox.isChecked){
+                        question[0] = 1
+                    }else question[0] = 0
+                    Log.e("checkBox pressed", binding.checkBox.isChecked.toString())
+                }
+                binding.checkBox2.getId() -> {
+                    if(binding.checkBox2.isChecked){
+                        question[1] = 1
+                    }else question[1] = 0
+                }
+                binding.checkBox3.getId() -> {
+                    if(binding.checkBox3.isChecked){
+                        question[2] = 1
+                    }else question[2] = 0
+                }
+                binding.checkBox4.getId() -> {
+                    if(binding.checkBox4.isChecked){
+                        question[3] = 1
+                    }else question[3] = 0
+                }
+                binding.checkBox5.getId() -> {
+                    if(binding.checkBox5.isChecked){
+                        question[4] = 1
+                    }else question[4] = 0
+                }
+                binding.checkBox6.getId() -> {
+                    if(binding.checkBox6.isChecked){
+                        question[5] = 1
+                    }else question[5] = 0
+                }
+                else ->
+                Log.e("none", "")
+            }
+
+        }
     }
 
 
