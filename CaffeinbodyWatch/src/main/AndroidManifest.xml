@@ -6,7 +6,14 @@
 
     <uses-feature android:name="android.hardware.type.watch" />
 
+    <uses-permission android:name="android.permission.BODY_SENSORS" />
+
+    <queries>
+        <package android:name="com.google.android.wearable.healthservices" />
+    </queries>
+
     <application
+        android:name = ".MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="CaffeinbodyWatch"
@@ -54,6 +61,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HeartRateActivity"
+            android:theme="@style/Theme.AppCompat"/>
+        <activity android:name=".Hilt_HeartRateActivity" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.wachacha
 
 import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -36,6 +37,12 @@ class MainActivityWearOS : ComponentActivity() {
             Log.e("btn pressed", "버튼 눌림")
             val watchMessage = binding.testMessageEdit.text.toString()//입력한 텍스트 가져와서 보내기
             onQueryOtherDevicesClicked(watchMessage)
+        }
+        binding.button2.setOnClickListener{
+            val selectActivity = MainActivityWearOS()
+            val intent = Intent(this, HeartRateActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
     //전송 버튼 전체적인 작업 실행

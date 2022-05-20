@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/CaffeInBody/CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.264" />
+        <entry key="..\:/CaffeInBody/CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.1" />
         <entry key="..\:/CaffeInBody/app/src/main/res/drawable/btn_select.xml" value="0.1235" />
         <entry key="..\:/CaffeInBody/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1235" />
         <entry key="..\:/CaffeInBody/app/src/main/res/drawable/round.xml" value="0.1235" />
@@ -34,6 +34,9 @@
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/drawable/roundcorner_rectangle.xml" value="0.1205" />
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/fragment_home.xml" value="0.152" />
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/fragment_report.xml" value="0.264" />
+        <entry key="CaffeinbodyWatch/src/main/res/drawable/ic_broken_heart.xml" value="0.121" />
+        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_heartrate.xml" value="0.1500453309156845" />
+        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.25" />
         <entry key="app/src/main/res/font/font_custom.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_decaf.xml" value="0.20833333333333334" />
