@@ -26,21 +26,15 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         val size3_btn = binding.size3
 
         size1_btn.setOnClickListener {
-            size1_btn.setBackgroundResource(R.drawable.selected)
-            size2_btn.setBackgroundResource(R.drawable.btn_select)
-            size3_btn.setBackgroundResource(R.drawable.btn_select)
+
         }
 
         size2_btn.setOnClickListener {
-            size1_btn.setBackgroundResource(R.drawable.btn_select)
-            size2_btn.setBackgroundResource(R.drawable.selected)
-            size3_btn.setBackgroundResource(R.drawable.btn_select)
+
         }
 
         size3_btn.setOnClickListener {
-            size1_btn.setBackgroundResource(R.drawable.btn_select)
-            size2_btn.setBackgroundResource(R.drawable.btn_select)
-            size3_btn.setBackgroundResource(R.drawable.selected)
+
         }
 
 

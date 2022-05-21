@@ -52,6 +52,7 @@
 
         <CheckBox
             android:id="@+id/checkBox"
+            android:button="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_select"
@@ -64,6 +65,7 @@
 
         <CheckBox
             android:id="@+id/checkBox2"
+            android:button="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_select"
@@ -75,6 +77,7 @@
 
         <CheckBox
             android:id="@+id/checkBox3"
+            android:button="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
@@ -86,6 +89,7 @@
 
         <CheckBox
             android:id="@+id/checkBox4"
+            android:button="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
@@ -97,6 +101,7 @@
 
         <CheckBox
             android:id="@+id/checkBox5"
+            android:button="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
@@ -108,6 +113,7 @@
 
         <CheckBox
             android:id="@+id/checkBox6"
+            android:button="@null"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="15dp"
@@ -132,6 +138,7 @@
             android:layout_width="170dp"
             android:layout_height="50dp"
             android:gravity="center"
+            android:background="@color/white"
             android:text="건너뛰기" />
 
         <Button

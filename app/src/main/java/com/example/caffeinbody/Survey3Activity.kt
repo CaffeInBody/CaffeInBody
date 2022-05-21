@@ -74,41 +74,9 @@ class Survey3Activity  : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {//변경한 후
             }
         })
-
-        binding.button.setOnClickListener(ClickListener())
-        binding.button2.setOnClickListener(ClickListener())
-        binding.button3.setOnClickListener(ClickListener())
-        binding.button4.setOnClickListener(ClickListener())
+        
 
         setContentView(binding.root)
-    }
-
-    inner class ClickListener: View.OnClickListener {
-        override fun onClick(v:View?){
-            if (v != null) {
-                when(v.getId()){
-                    binding.button.getId() -> {sensitivity = "yes"
-                        binding.button.isSelected = true
-                        binding.button2.isSelected = false
-                    }
-                    binding.button2.getId() -> {sensitivity =" no"
-                        binding.button.isSelected = false
-                        binding.button2.isSelected = true
-                    }
-                    binding.button3.getId()-> {headache="yes"
-                        binding.button3.isSelected = true
-                        binding.button4.isSelected = false
-                    }
-                    binding.button4.getId()-> {headache="no"
-                        binding.button3.isSelected = false
-                        binding.button4.isSelected = true
-                    }
-                    else-> Log.e("error: ", "뭔가의 에러")
-                }
-            }else{
-                Log.e("none", "아무것도 선택되지 않음")
-            }
-        }
     }
 
 

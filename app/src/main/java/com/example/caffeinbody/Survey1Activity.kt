@@ -41,39 +41,8 @@ class Survey1Activity  : AppCompatActivity() {
 
         }
 
-        binding.buttonFemale.setOnClickListener(ClickListener())
-        binding.buttonMale.setOnClickListener(ClickListener())
-        binding.buttonPregnant.setOnClickListener(ClickListener())
-        binding.buttonNotPregnant.setOnClickListener(ClickListener())
         Log.e("id: ", binding.btnGenderLayout.getId().toString())
 
     }
 
-    inner class ClickListener: View.OnClickListener {
-            override fun onClick(v:View?){
-                if (v != null) {
-                    when(v.getId()){
-                        binding.buttonFemale.getId() -> {gender = "여자"
-                            binding.buttonFemale.isSelected = true
-                            binding.buttonMale.isSelected = false
-                        }
-                        binding.buttonMale.getId() -> {gender =" 남자"
-                            binding.buttonFemale.isSelected = false
-                            binding.buttonMale.isSelected = true
-                        }
-                        binding.buttonPregnant.getId()-> {ispregnant="True"
-                            binding.buttonPregnant.isSelected = true
-                            binding.buttonNotPregnant.isSelected = false
-                            }
-                        binding.buttonNotPregnant.getId()-> {ispregnant="False"
-                            binding.buttonPregnant.isSelected = false
-                            binding.buttonNotPregnant.isSelected = true
-                        }
-                        else-> Log.e("error: ", v.getId().toString() + " " + binding.buttonFemale.getId().toString())
-                    }
-                }else{
-                    Log.e("none", binding.buttonFemale.getId().toString())
-                }
-            }
-    }
 }

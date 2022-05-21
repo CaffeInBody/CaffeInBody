@@ -40,12 +40,6 @@ class Survey2Activity  : AppCompatActivity() {
 
         binding.progressBar.incrementProgressBy(33)
 
-        binding.checkBox.setOnClickListener(CheckBoxListener())
-        binding.checkBox2.setOnClickListener(CheckBoxListener())
-        binding.checkBox3.setOnClickListener(CheckBoxListener())
-        binding.checkBox4.setOnClickListener(CheckBoxListener())
-        binding.checkBox5.setOnClickListener(CheckBoxListener())
-        binding.checkBox6.setOnClickListener(CheckBoxListener())
 
         binding.buttonNext.setOnClickListener {
             val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)

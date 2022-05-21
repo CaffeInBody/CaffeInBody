@@ -32,39 +32,42 @@
         android:textAlignment="center"
         android:gravity="center"/>
 
-    <LinearLayout
+    <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:gravity="center"
         android:layout_gravity="center"
         android:orientation="horizontal">
 
-        <Button
+        <RadioButton
             android:id="@+id/size1"
             android:layout_width="100dp"
             android:layout_height="120dp"
+            android:button="@null"
             android:background="@drawable/btn_select"
             android:text="100~200"
             android:gravity="center"
             android:drawableBottom= "@drawable/icon_coffee"
             android:paddingBottom="30dp"/>
 
-        <Button
+        <RadioButton
             android:id="@+id/size2"
             android:layout_width="100dp"
             android:layout_height="120dp"
             android:background="@drawable/btn_select"
             android:text="100~200"
+            android:button="@null"
             android:gravity="center"
             android:drawableBottom= "@drawable/icon_coffee"
             android:paddingBottom="30dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginHorizontal="15dp"
+/>
 
-        <Button
+        <RadioButton
             android:id="@+id/size3"
             android:layout_width="100dp"
             android:layout_height="120dp"
+            android:button="@null"
             android:background="@drawable/btn_select"
             android:text="100~200"
             android:gravity="center"
@@ -72,7 +75,7 @@
             android:paddingBottom="30dp"/>
 
 
-    </LinearLayout>
+    </RadioGroup>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

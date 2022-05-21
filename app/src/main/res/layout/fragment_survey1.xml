@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:ignore="MissingDefaultResource">
+>
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -65,38 +65,34 @@
             android:text="성별"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <RadioGroup
             android:id="@+id/btn_gender_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginVertical="10dp"
             android:orientation="horizontal">
 
-            <Button
+            <RadioButton
                 android:id="@+id/button_female"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:button="@null"
                 android:background="@drawable/btn_select"
-                android:paddingLeft="60dp"
-                android:paddingTop="10dp"
-                android:paddingRight="60dp"
-                android:paddingBottom="10dp"
+                android:gravity="center"
                 android:text="여자" />
 
-            <Button
+            <RadioButton
                 android:id="@+id/button_male"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:gravity="center"
+                android:button="@null"
                 android:background="@drawable/btn_select"
-                android:paddingLeft="60dp"
-                android:paddingTop="10dp"
-                android:paddingRight="60dp"
-                android:paddingBottom="10dp"
                 android:text="남자" />
-        </LinearLayout>
+        </RadioGroup>
 
         <TextView
             android:id="@+id/textView_survey1_4"
@@ -126,46 +122,40 @@
             android:text="임신 여부"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <RadioGroup
             android:id="@+id/btn_preg_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginVertical="10dp"
             android:orientation="horizontal">
 
-            <Button
+            <RadioButton
                 android:id="@+id/button_pregnant"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
+                android:button="@null"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:gravity="center"
-                android:paddingLeft="60dp"
-                android:paddingTop="10dp"
-                android:paddingRight="60dp"
-                android:paddingBottom="10dp"
                 android:text="O" />
 
-            <Button
+            <RadioButton
                 android:id="@+id/button_notPregnant"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:button="@null"
                 android:background="@drawable/btn_select"
                 android:gravity="center"
-                android:paddingLeft="60dp"
-                android:paddingTop="10dp"
-                android:paddingRight="60dp"
-                android:paddingBottom="10dp"
                 android:text="X" />
-        </LinearLayout>
+        </RadioGroup>
 
     </LinearLayout>
 
     <Button
         android:id="@+id/button_next"
-        android:layout_width="400dp"
+        android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="#6AA7A3"
         android:gravity="center"

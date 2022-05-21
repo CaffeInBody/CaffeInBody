@@ -7,6 +7,13 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:includeFontPadding">false</item>
     </style>
+    <style name="btn_basic_16dp">
+        <item name="android:fontFamily">@font/notosanskrregular</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:background">@drawable/btn_select</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
     <style name="bold_16dp">
         <item name="android:fontFamily">@font/notosanskrbold</item>
         <item name="android:textSize">16dp</item>
