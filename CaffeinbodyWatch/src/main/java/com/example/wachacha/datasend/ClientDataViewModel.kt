@@ -50,6 +50,7 @@ class ClientDataViewModel(
         private set
 
     private var loadPhotoJob: Job = Job().apply { complete() }
+    private var favorite: String = ""
 
     //데이터항목동기화
     //수신 대기
@@ -58,38 +59,19 @@ class ClientDataViewModel(
         // Add all events to the event log
         _events.addAll(//_events에 추가하기
             dataEvents.map { dataEvent ->
+                Log.e("hello", "hi")
                 val title = when (dataEvent.type) {//타입이 존재하면 title에 타입 너호
                     DataEvent.TYPE_CHANGED -> R.string.data_item_changed
                     DataEvent.TYPE_DELETED -> R.string.data_item_deleted
                     else -> R.string.data_item_unknown
                 }
-
+                Log.e("CDVM", dataEvent.dataItem.toString())
                 Event(//map으로 만들어서 _events에 추가하기
                     title = title,
                     text = dataEvent.dataItem.toString()
                 )
             }
         )
-        //사진 받으면
-        // Do additional work for specific events
-        dataEvents.forEach { dataEvent ->//반복문
-            when (dataEvent.type) {
-                DataEvent.TYPE_CHANGED -> {
-                    when (dataEvent.dataItem.uri.path) {//path 가 존재하면
-                        DataLayerListenerService.IMAGE_PATH -> {
-                            loadPhotoJob.cancel()
-                            loadPhotoJob = viewModelScope.launch {
-                                image = loadBitmap(
-                                    DataMapItem.fromDataItem(dataEvent.dataItem)
-                                        .dataMap
-                                        .getAsset(DataLayerListenerService.IMAGE_KEY)
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 
     override fun onMessageReceived(messageEvent: MessageEvent) {//메시지 받으면
@@ -109,17 +91,6 @@ class ClientDataViewModel(
                 text = capabilityInfo.toString()
             )
         )
-    }
-
-    private suspend fun loadBitmap(asset: Asset?): Bitmap? {
-        if (asset == null) return null
-        val response =
-            Wearable.getDataClient(getApplication<Application>()).getFdForAsset(asset).await()
-        return response.inputStream.use { inputStream ->
-            withContext(Dispatchers.IO) {
-                BitmapFactory.decodeStream(inputStream)
-            }
-        }
     }
 }
 

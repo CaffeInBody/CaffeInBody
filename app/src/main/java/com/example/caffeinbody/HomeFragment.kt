@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.caffeinbody.databinding.FragmentHomeBinding
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.NodeClient
+import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
@@ -25,6 +26,7 @@ import java.time.Duration
 
 
 class HomeFragment : Fragment() {
+    var count = 1
     // TODO: Rename and change types of parameters
     private val dataClient by lazy { Wearable.getDataClient(activity) }
     private val messageClient by lazy { Wearable.getMessageClient(getActivity()) }
@@ -58,6 +60,7 @@ class HomeFragment : Fragment() {
         //   initRecycler()
 
         binding.addBeverageBtn.setOnClickListener{
+            sendFavorite()
             activity?.let{
             val selectActivity =  DrinkTypeActivity()
             val intent = Intent(context, selectActivity::class.java)
@@ -141,19 +144,37 @@ class HomeFragment : Fragment() {
             }
         }
     }
+    ///////////////즐겨찾기 데이터 보내기(동기화 시점은...?)
+    private fun sendFavorite() {
+        Log.e("보내짐", "")
+        lifecycleScope.launch {
+            Log.e("TAG", "안녕")
+            try {
+                val request = PutDataMapRequest.create(FAVORITE_PATH).apply {
+                    dataMap.putString(FAVORITE_KEY, (++count).toString())
+                    //dataMap.putString(FAVORITE_KEY, (++count).toString())//메시지가 변경돼야 전송됨.
+                    //dataMap.putStringArrayList(FAVORITE_KEY, 리스트)//즐겨찾기 리스트
+                }
+                    .asPutDataRequest()
+                    .setUrgent()
+
+                val result = dataClient.putDataItem(request).await()
+                Log.e(TAG, "DataItem saved: $result")
+            } catch (cancellationException: CancellationException) {
+                Log.e(TAG, "캔슬됨")
+            } catch (exception: Exception) {
+                Log.d(TAG, "Saving DataItem failed: $exception")
+            }
+        }
+    }
 
     companion object {
         private const val TAG = "MainActivity"
 
         private const val START_ACTIVITY_PATH = "/start-activity3"
-        private const val COUNT_PATH = "/count"
-        private const val IMAGE_PATH = "/image"
-        private const val IMAGE_KEY = "photo"
-        private const val TIME_KEY = "time"
-        private const val COUNT_KEY = "count"
         private const val CAMERA_CAPABILITY = "camera"
-
-        private val countInterval = Duration.ofSeconds(5)
+        private const val FAVORITE_PATH = "/favorite"
+        private const val FAVORITE_KEY = "favorite"
     }
 
 }
