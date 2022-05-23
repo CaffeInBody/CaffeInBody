@@ -6,15 +6,15 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="음료마시기"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginTop="20dp"/>
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:minHeight="?attr/actionBarSize"
+        android:paddingTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageViewDrink"
