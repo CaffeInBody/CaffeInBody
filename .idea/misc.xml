@@ -39,10 +39,10 @@
         <entry key="app/src/main/res/drawable/btn_select.xml" value="0.1455" />
         <entry key="app/src/main/res/drawable/selected.xml" value="0.1455" />
         <entry key="app/src/main/res/font/font_custom.xml" value="0.23854166666666668" />
-        <entry key="app/src/main/res/layout/activity_caffeine_list.xml" value="0.11423390752493201" />
+        <entry key="app/src/main/res/layout/activity_caffeine_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_drink_caffeine.xml" value="0.20051303976058144" />
-        <entry key="app/src/main/res/layout/activity_drink_type.xml" value="0.33967391304347827" />
+        <entry key="app/src/main/res/layout/activity_drink_caffeine.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_drink_type.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_decaf.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.20833333333333334" />
