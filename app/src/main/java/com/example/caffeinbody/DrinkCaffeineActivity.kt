@@ -44,19 +44,19 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         binding.size1.setOnClickListener {
             resultInt = arraySize[0] * rangevalue /100
             size = 0
-            binding.result.setText(resultInt.toString())
+            binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size2.setOnClickListener {
             resultInt = arraySize[1] * rangevalue /100
             size = 1
-            binding.result.setText(resultInt.toString())
+            binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size3.setOnClickListener {
             resultInt = arraySize[2] * rangevalue /100
             size = 2
-            binding.result.setText(resultInt.toString())
+            binding.result.setText(resultInt.toString()+"mg")
         }
 
         //용량 선택
@@ -65,7 +65,8 @@ class DrinkCaffeineActivity : AppCompatActivity() {
                 println(value)
                 rangevalue = value
                 resultInt = value * arraySize[size] / 100
-                binding.result.setText(resultInt.toString())
+                binding.textView7.setText((value.toDouble() / 100).toString()+"잔")
+                binding.result.setText(resultInt.toString()+"mg")
             }
 
             override fun onStartTrackingTouch(boxedPoints: BoxedVertical) {
