@@ -27,6 +27,7 @@ import java.time.Duration
 
 class HomeFragment : Fragment() {
     var count = 1
+
     // TODO: Rename and change types of parameters
     private val dataClient by lazy { Wearable.getDataClient(activity) }
     private val messageClient by lazy { Wearable.getMessageClient(getActivity()) }
@@ -58,6 +59,7 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         //   initRecycler()
+        setUI()
 
         binding.addBeverageBtn.setOnClickListener{
             sendFavorite()
@@ -82,6 +84,9 @@ class HomeFragment : Fragment() {
 ///////////리스너 등록/제거 부분
     override fun onResume() {
         super.onResume()
+
+        setUI()
+
         dataClient.addListener(clientDataViewModel)
         messageClient.addListener(clientDataViewModel)
         capabilityClient.addListener(
@@ -167,6 +172,13 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+
+    private fun setUI(){
+        val msg = App.prefs.todayCaf
+        binding.intakenCaffeineText.setText(msg.toString())
+    }
+
 
     companion object {
         private const val TAG = "MainActivity"
