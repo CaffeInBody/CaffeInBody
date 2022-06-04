@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CaffeInBody">
         <activity
-            android:name=".MainActivity"
+            android:name=".Survey1Activity"
             android:exported="true" >
             <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -27,6 +27,11 @@
             android:exported="false" />
         <activity android:name=".CaffeineListActivity" />
         <activity android:name=".DrinkTypeActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
+
+        </activity>
 
         <activity android:name=".Survey2Activity" />
         <activity android:name=".Survey3Activity" />
