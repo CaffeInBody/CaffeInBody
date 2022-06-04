@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -72,4 +73,17 @@ dependencies {
     implementation 'com.google.android.gms:play-services-wearable:17.1.0'
 
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.1"
+
+    //room
+    implementation 'androidx.room:room-common:2.4.2'
+    kapt 'androidx.room:room-compiler:2.4.2'
+
+    //room2
+    implementation("androidx.room:room-runtime:2.4.2")
+    annotationProcessor("androidx.room:room-compiler:2.4.2")
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:2.4.2")
+
+
 }

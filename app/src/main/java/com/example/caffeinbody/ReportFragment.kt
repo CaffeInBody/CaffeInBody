@@ -2,22 +2,21 @@ package com.example.caffeinbody
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.graphics.Color.Companion.Red
 import com.example.caffeinbody.databinding.FragmentReportBinding
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.LineChart
-import com.github.mikephil.charting.components.Description
-import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.XAxis
-import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 
 class ReportFragment : Fragment() {
-    private val lineChartData = ArrayList<Entry>()
     private val binding: FragmentReportBinding by lazy {
         FragmentReportBinding.inflate(
             layoutInflater
@@ -29,9 +28,6 @@ class ReportFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        lineChartData.add(Entry(3.toFloat(), 10.toFloat()));
-        lineChartData.add(Entry(5.toFloat(), 1.toFloat()));
-        lineChartData.add(Entry(7.toFloat(), 20.toFloat()));
         setChartView(binding.root)
         return binding.root
     }
@@ -56,38 +52,6 @@ class ReportFragment : Fragment() {
         barDataSet.valueTextSize = 12f
     }
 
-    private fun setWeekLine(lineChart: LineChart) {
-        /*val entries = mutableListOf<Entry>()  //차트 데이터 셋에 담겨질 데이터
-
-        for (item in chartData) {
-            entries.add(Entry(item.lableData.replace(("[^\\d.]").toRegex(), "").toFloat(), item.lineData.toFloat()))
-        }
-
-        //LineDataSet 선언
-        val lineDataSet: LineDataSet
-        lineDataSet = LineDataSet(entries, "라인챠트 예시")
-        lineDataSet.color = Color.BLUE  //LineChart에서 Line Color 설정
-        lineDataSet.setCircleColor(Color.DKGRAY)  // LineChart에서 Line Circle Color 설정
-        lineDataSet.setCircleHoleColor(Color.DKGRAY) // LineChart에서 Line Hole Circle Color 설정
-
-        val dataSets = ArrayList<ILineDataSet>()
-        dataSets.add(lineDataSet) // add the data sets
-
-        // create a data object with the data sets
-        val data = LineData(dataSets)
-
-        // set data
-        lineChart.setData(data)
-        lineChart.setDescription(null); //차트에서 Description 설정 삭제
-        */
-
-        val chartData = LineData()
-        val set1 = LineDataSet(lineChartData, "첫번째")
-        chartData.addDataSet(set1)
-        lineChart.setData(chartData)
-        lineChart.invalidate()
-    }
-
     private fun setWeek(barChart: BarChart) {
         initBarChart(barChart)
 
@@ -95,16 +59,16 @@ class ReportFragment : Fragment() {
 
         val valueList = ArrayList<Double>()
         val entries: ArrayList<BarEntry> = ArrayList()
-        val title = "걸음 수"
+        val title = "요일별 카페인 섭취량"
 
-        //input data
-        for (i in 0..7) {
-            valueList.add(i * 100.1)
+        for (i in 1..8) {
+            valueList.add(i * 100.1)//여기에 요일별 카페인 수치 들어감
         }
 
         //fit the data into a bar
-        for (i in 0 until valueList.size) {
-            val barEntry = BarEntry(i.toFloat(), valueList[i].toFloat())//월화수목금토일
+        for (i in 1 until valueList.size) {
+            Log.e("size", valueList.size.toString())
+            val barEntry = BarEntry(i.toFloat(), valueList[i - 1].toFloat())//월화수목금토일
             entries.add(barEntry)
         }
         val barDataSet = BarDataSet(entries, title)
@@ -112,31 +76,6 @@ class ReportFragment : Fragment() {
         barChart.data = data
         barChart.invalidate()
     }
-
-    /*private fun setWeekLine(lineChart: LineChart) {
-        initBarChart(lineChart)
-
-        lineChart.setScaleEnabled(false) //Zoom In/Out
-
-        val valueList = ArrayList<Double>()
-        val entries: ArrayList<BarEntry> = ArrayList()
-        val title = "걸음 수"
-
-        //input data
-        for (i in 0..5) {
-            valueList.add(i * 100.1)
-        }
-
-        //fit the data into a bar
-        for (i in 0 until valueList.size) {
-            val barEntry = BarEntry(i.toFloat(), valueList[i].toFloat())
-            entries.add(barEntry)
-        }
-        val barDataSet = BarDataSet(entries, title)
-        val data = BarData(barDataSet)
-        lineChart.data = data
-        lineChart.invalidate()
-    }*/
 
     private fun initBarChart(barChart: BarChart) {
         //hiding the grey background of the chart, default false if not set
@@ -162,11 +101,13 @@ class ReportFragment : Fragment() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         //set the horizontal distance of the grid line
         xAxis.granularity = 1f
-        xAxis.textColor = Color.DKGRAY
+        xAxis.textColor = Color.RED
         //hiding the x-axis line, default true if not set
         xAxis.setDrawAxisLine(false)
         //hiding the vertical grid lines, default true if not set
         xAxis.setDrawGridLines(false)
+        xAxis.valueFormatter = MyXAxisFormatter()
+        xAxis.textSize = 14f
 
 
         //좌측 값 hiding the left y-axis line, default true if not set
@@ -195,5 +136,12 @@ class ReportFragment : Fragment() {
         legend.orientation = Legend.LegendOrientation.HORIZONTAL
         //setting the location of legend outside the chart, default false if not set
         legend.setDrawInside(false)
+    }
+
+    inner class MyXAxisFormatter : ValueFormatter(){
+        private val days = arrayOf("월","화","수","목","금","토","일")
+        override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+            return days.getOrNull(value.toInt()-1) ?: value.toString()
+        }
     }
 }

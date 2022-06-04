@@ -2,15 +2,16 @@ package com.example.caffeinbody
 
 import abak.tr.com.boxedverticalseekbar.BoxedVertical
 import abak.tr.com.boxedverticalseekbar.BoxedVertical.OnValuesChangeListener
-import android.R
 import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.caffeinbody.databinding.ActivityDrinkCaffeineBinding
+import org.json.JSONArray
+import java.util.*
+
 
 var arraySize = arrayOf<Int>(100,200,300)
 var resultInt:Int = 100
@@ -80,6 +81,9 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         // 저장
         binding.save.setOnClickListener {
+            addTimeJson()//카페인 등록 시간을 jsonArray로
+            addCaffeineJson(resultInt)//각각의 카페인 양을 jsonArray로
+
             val msg = App.prefs.todayCaf
             if (msg != null) {
                 resultInt = msg + resultInt
@@ -91,6 +95,40 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
             finish()
+        }
+    }
+
+    public fun addTimeJson(){
+        //시간을 json으로 저장
+        val calendar = Calendar.getInstance()
+        val date = Date()
+        calendar.setTime(date)
+
+        var blank = App.prefs.date
+        if (blank != null){
+            var a = JSONArray(blank)
+            a.put(calendar.time.hours*60 + calendar.time.minutes)
+            App.prefs.date = a.toString()
+            Log.e("json length", " // " + calendar.time.seconds)
+        }else{
+            var a = JSONArray()
+            a.put(calendar.time.hours*60 + calendar.time.minutes)
+            App.prefs.date = a.toString()
+        }
+    }
+
+    public fun addCaffeineJson(caffeine: Int){
+        var blank = App.prefs.todayCafJson
+        if (blank != null){
+            var a = JSONArray(blank)
+            a.put(caffeine)
+            App.prefs.todayCafJson = a.toString()
+            Log.e("json caffeine", " // $caffeine" + " " + a.length())
+        }else{
+            var a = JSONArray()
+            a.put(caffeine)
+            App.prefs.todayCafJson = a.toString()
+            Log.e("json caffeine", " // $caffeine" + " " + a.length())
         }
     }
 

@@ -71,8 +71,8 @@
 
                 <com.github.mikephil.charting.charts.BarChart
                     android:id="@+id/barchart"
-                    android:layout_width="335dp"
-                    android:layout_height="176dp" />
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
             </androidx.cardview.widget.CardView>
 
             <TextView
