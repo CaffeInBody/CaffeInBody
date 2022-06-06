@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CaffeineListActivity">
+    tools:context=".CaffeineListActivity"
+>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -12,6 +13,7 @@
         android:layout_height="76dp"
         android:minHeight="?attr/actionBarSize"
         android:paddingTop="15dp"
+        android:paddingEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,9 +22,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/caffein_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingStart="20dp"
+        android:layout_marginTop="80dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-
+        app:spanCount="2"
         tools:listitem="@layout/item_caffeine" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
