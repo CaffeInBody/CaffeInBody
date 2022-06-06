@@ -75,6 +75,11 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
         }
+        binding.myPageBtn.setOnClickListener{
+            val recommendActivity =  RecommendActivity()
+            val intent = Intent(context, recommendActivity::class.java)
+            startActivity(intent)
+        }
         binding.checkWatchBtn.setOnClickListener{
             startWearableActivity()
             Log.e("폰에서 워치앱 열기 on HomeFrag", "하자!!!")

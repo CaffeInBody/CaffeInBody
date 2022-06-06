@@ -1,8 +1,10 @@
 package com.example.caffeinbody
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.caffeinbody.databinding.ActivityCaffeineListBinding
 
@@ -28,7 +30,15 @@ class CaffeineListActivity : AppCompatActivity() {
         supportActionBar!!.setTitle((arrayString[num]))
 
         caffeineadapter = CaffeineAdapter(this)
-        caffeineadapter.datas.add(CaffeineData(0,"아메리카노","")) //샘플 데이터
+
+        if(num==0) {
+            caffeineadapter.datas.add(CaffeineData(0, 0, "아메리카노", R.drawable.coffee_sample)) //샘플 데이터
+            caffeineadapter.datas.add(CaffeineData(0, 1, "카페라떼", R.drawable.latte_sample)) //샘플 데이터
+            caffeineadapter.datas.add(CaffeineData(0, 2, "카페모카", R.drawable.moca_sample)) //샘플 데이터
+        }
+        else{
+            caffeineadapter.datas.add(CaffeineData(1,0, "콜라", R.drawable.cola_sample)) //샘플 데이터
+        }
         binding.caffeinList.adapter = caffeineadapter
         caffeineadapter.notifyDataSetChanged()
 
@@ -39,8 +49,28 @@ class CaffeineListActivity : AppCompatActivity() {
     }
 
 
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(com.example.caffeinbody.R.menu.menu_search,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         android.R.id.home -> {
+            finish()
+            true
+        }
+        R.id.search-> {
+            // User chose the "Settings" item, show the app settings UI...
+            true
+        }
+        R.id.home-> {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            startActivity(intent)
             finish()
             true
         }

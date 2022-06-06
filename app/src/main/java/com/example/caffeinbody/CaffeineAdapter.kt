@@ -2,6 +2,7 @@ package com.example.caffeinbody
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,9 +32,13 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
 
 
         holder.itemView.setOnClickListener{
-            //TODO
             val intent = Intent(holder.itemView?.context, DrinkCaffeineActivity::class.java)
             intent.putExtra("id",position)
+
+            //서버있으면지워도됨
+            intent.putExtra("name",article.name)
+            intent.putExtra("img", article.img)
+
             ContextCompat.startActivity(holder.itemView.context, intent, null)
             //카페인 마시기로 이동
         }}
@@ -45,7 +50,7 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
         fun bind(article: CaffeineData){
             txt.text = article.name
 
-            if(article.img=="")
+            if(article.img==null)
                 Glide.with(itemView).load(R.drawable.coffee_sample).into(img)
             else Glide.with(itemView).load(article.img).centerCrop().into(img)
 

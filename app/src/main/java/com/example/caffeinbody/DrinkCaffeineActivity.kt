@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.example.caffeinbody.databinding.ActivityDrinkCaffeineBinding
 import org.json.JSONArray
 import java.util.*
@@ -31,8 +32,16 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         //    supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setTitle("아메리카노")
+
         //setContentView(R.layout.activity_drink_caffeine)
+
+        val intent = getIntent()
+        val name = intent.getStringExtra("name")
+        val image= intent.getIntExtra("img",0)
+
+        supportActionBar!!.setTitle(name.toString())
+
+        Glide.with(this).load(image).into(binding.imageViewDrink)
 
 
         val display = windowManager.defaultDisplay // in case of Activity
