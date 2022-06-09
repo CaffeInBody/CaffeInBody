@@ -5,16 +5,16 @@
     <item
         android:id="@+id/menu_name"
         android:icon="@drawable/icon_home"
-        android:title="HOME" />
+        android:title="홈" />
 
     <item
         android:id="@+id/menu_report"
         android:icon="@drawable/icon_report"
-        android:title="REPORT" />
+        android:title="통계" />
     <item
         android:id="@+id/menu_decaf"
         android:icon="@drawable/icon_setting"
-        android:title="DECAF" />
+        android:title="설정" />
 
 
 </menu>

@@ -58,6 +58,9 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
+    implementation 'com.github.john990:WaveView:v0.9'
+
+
     //데이터링크
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1'
