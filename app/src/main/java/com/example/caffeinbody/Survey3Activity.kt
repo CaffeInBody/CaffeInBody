@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +18,8 @@ import com.example.caffeinbody.databinding.FragmentSurvey1Binding
 import com.example.caffeinbody.databinding.FragmentSurvey3Binding
 
 class Survey3Activity  : AppCompatActivity() {
-    var sensitivity: String =""
-    var headache: String = ""
+    var sensitivity: Boolean =false
+    var headache: Boolean = false
     var quantity: String = ""
     var before: Int = 0
 
@@ -30,29 +31,63 @@ class Survey3Activity  : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var caffeine = intent.getDoubleExtra("caffeine", 0.0)
+        binding.progressBar.incrementProgressBy(66)
+        binding.seekBar.setProgress(0)
+
+        binding.buttonNext.setOnClickListener {
+            if (sensitivity==true && headache==true) caffeine *= 0.4
+            else if(sensitivity==true || headache==true) caffeine *= 0.7
+
+            val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
+            val editor = shared.edit()//sharedpreferences 값 확인해보기
+            editor.putString("sensitivity", sensitivity.toString())
+            editor.putString("headache", headache.toString())
+            editor.putString("quantity", quantity)
+            //editor.apply()
+
+            val selectActivity = RecommendCaffeineActivity()
+            val intent = Intent(this, selectActivity::class.java)
+            intent.putExtra("caffeine", caffeine)
+        }
         binding.progressBar.incrementProgressBy(66)
         binding.seekBar.setProgress(0)
         binding.buttonNext.setOnClickListener {
             val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
             val editor = shared.edit()//sharedpreferences 값 확인해보기
-            editor.putString("sensitivity", sensitivity)
-            editor.putString("headache", headache)
+            editor.putString("sensitivity", sensitivity.toString())
+            editor.putString("headache", headache.toString())
             editor.putString("quantity", quantity)
             //editor.apply()
 
-            val selectActivity = MainActivity()
+            val selectActivity = RecommendCaffeineActivity()
             val intent = Intent(this, selectActivity::class.java)
             startActivity(intent)
             finish()
         }
 
         binding.button5.setOnClickListener{
-            val selectActivity = MainActivity()
+            val selectActivity = RecommendCaffeineActivity()
             val intent = Intent(this, selectActivity::class.java)
             startActivity(intent)
             finish()
         }
 
+        binding.heartFastLayout.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId) {
+                R.id.button -> sensitivity = true
+                R.id.button2 -> sensitivity = false
+            }
+        }
+
+        binding.headacheLayout.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId) {
+                R.id.button3 -> headache = true
+                R.id.button4 -> headache =false
+            }
+        }
+
+5f
         binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 binding.seekBar.setProgress((progress / 150) * 150)
@@ -64,7 +99,7 @@ class Survey3Activity  : AppCompatActivity() {
                     quantity = 150.toString()}
                 else{
                     binding.seekBar.setProgress(300)
-                    quantity = 0.toString()}
+                    quantity = 300.toString()}
 
                 Log.e("quantity: ", progress.toString())
             }

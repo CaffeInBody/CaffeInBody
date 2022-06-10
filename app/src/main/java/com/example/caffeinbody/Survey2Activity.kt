@@ -38,6 +38,8 @@ class Survey2Activity  : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var caffeine = intent.getDoubleExtra("caffeine",0.0)
+
         binding.progressBar.incrementProgressBy(33)
 
 
@@ -48,6 +50,7 @@ class Survey2Activity  : AppCompatActivity() {
             //editor.apply()
             val selectActivity =  Survey3Activity()
             val intent = Intent(this, selectActivity::class.java)
+            intent.putExtra("caffeine", caffeine)
             startActivity(intent)
             finish()
         }
@@ -55,6 +58,7 @@ class Survey2Activity  : AppCompatActivity() {
         binding.button5.setOnClickListener{
             val selectActivity =  Survey3Activity()
             val intent = Intent(this, selectActivity::class.java)
+            intent.putExtra("caffeine", caffeine)
             startActivity(intent)
             finish()
         }

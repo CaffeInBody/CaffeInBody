@@ -42,6 +42,7 @@
             android:text="카페인을 섭취한 후 심장이 빨리 뛴 적이 있나요?" />
 
         <RadioGroup
+            android:id="@+id/heartFastLayout"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginVertical="10dp"
@@ -78,6 +79,7 @@
             android:text="카페인을 섭취한 후 두통을 느낀 적이 있나요?" />
 
         <RadioGroup
+            android:id="@+id/headacheLayout"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:gravity="center"
@@ -144,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:layout_weight="0"
-                android:text="200-400" />
+                android:text="200mg" />
 
             <TextView
                 android:id="@+id/textView_servey3_7"
@@ -152,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
                 android:layout_weight="0"
-                android:text="500mg" />
+                android:text="300mg+" />
 
         </LinearLayout>
     </LinearLayout>
