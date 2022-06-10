@@ -182,6 +182,8 @@ class HomeFragment : Fragment() {
     private fun setUI(){
         val msg = App.prefs.todayCaf
         binding.intakenCaffeineText.setText(msg.toString())
+        val percent = msg?.div(4)
+        percent?.let { binding.heart.setProgress(it.toInt()) }
     }
 
 
