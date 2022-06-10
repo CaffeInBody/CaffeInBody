@@ -140,6 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginVertical="10dp"
+            android:inputType="numberDecimal"
             android:height="35dp"
             android:background="@drawable/roundcorner_rectangle2"
             android:ems="15" />

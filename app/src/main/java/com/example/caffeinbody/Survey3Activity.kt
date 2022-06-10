@@ -49,19 +49,6 @@ class Survey3Activity  : AppCompatActivity() {
             val selectActivity = RecommendCaffeineActivity()
             val intent = Intent(this, selectActivity::class.java)
             intent.putExtra("caffeine", caffeine)
-        }
-        binding.progressBar.incrementProgressBy(66)
-        binding.seekBar.setProgress(0)
-        binding.buttonNext.setOnClickListener {
-            val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
-            val editor = shared.edit()//sharedpreferences 값 확인해보기
-            editor.putString("sensitivity", sensitivity.toString())
-            editor.putString("headache", headache.toString())
-            editor.putString("quantity", quantity)
-            //editor.apply()
-
-            val selectActivity = RecommendCaffeineActivity()
-            val intent = Intent(this, selectActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -69,6 +56,7 @@ class Survey3Activity  : AppCompatActivity() {
         binding.button5.setOnClickListener{
             val selectActivity = RecommendCaffeineActivity()
             val intent = Intent(this, selectActivity::class.java)
+            intent.putExtra("caffeine",caffeine)
             startActivity(intent)
             finish()
         }
