@@ -21,6 +21,7 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
+        android:progressTint="#D5F8786F"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -60,6 +61,7 @@
             android:text="습관처럼"
             android:paddingVertical="15dp"
             android:layout_marginVertical="5dp"
+            android:textColor="@drawable/txt_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_servey3_2" />
 
@@ -73,6 +75,7 @@
             android:text="잠을 깨기 위해서"
             android:paddingVertical="15dp"
             android:layout_marginVertical="5dp"
+            android:textColor="@drawable/txt_color"
             app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
         <CheckBox
@@ -85,6 +88,7 @@
             android:gravity="center"
             android:text="맛이 좋아서"
             android:paddingVertical="15dp"
+            android:textColor="@drawable/txt_color"
             app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
 
         <CheckBox
@@ -97,6 +101,7 @@
             android:gravity="center"
             android:text="집중하기 위해서"
             android:paddingVertical="15dp"
+            android:textColor="@drawable/txt_color"
             app:layout_constraintTop_toBottomOf="@+id/checkBox3" />
 
         <CheckBox
@@ -109,6 +114,7 @@
             android:gravity="center"
             android:paddingVertical="15dp"
             android:text="피로회복을 위해"
+            android:textColor="@drawable/txt_color"
             app:layout_constraintTop_toBottomOf="@+id/checkBox4" />
 
         <CheckBox
@@ -121,6 +127,7 @@
             android:background="@drawable/btn_select"
             android:gravity="center"
             android:text="입이 심심해서"
+            android:textColor="@drawable/txt_color"
             app:layout_constraintTop_toBottomOf="@+id/checkBox5" />
     </LinearLayout>
 
@@ -138,6 +145,7 @@
             android:layout_width="170dp"
             android:layout_height="50dp"
             android:gravity="center"
+            style="@style/basic_16dp"
             android:background="@color/white"
             android:text="건너뛰기" />
 
@@ -145,8 +153,9 @@
             android:id="@+id/button_next"
             android:layout_width="170dp"
             android:layout_height="50dp"
-            android:background="#6AA7A3"
+            android:background="#9D5812"
             android:gravity="center"
+            style="@style/bold_16dp"
             android:text="다음"
             android:textColor="@color/white" />
     </LinearLayout>

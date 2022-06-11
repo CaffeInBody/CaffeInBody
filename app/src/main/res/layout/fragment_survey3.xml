@@ -29,6 +29,7 @@
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
+            android:progressTint="#D5F8786F"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="40dp"
@@ -58,6 +59,7 @@
                 android:button="@null"
                 android:background="@drawable/btn_select"
                 android:gravity="center"
+                android:textColor="@drawable/txt_color"
                 android:text="네" />
 
             <RadioButton
@@ -68,6 +70,7 @@
                 android:gravity="center"
                 android:button="@null"
                 android:background="@drawable/btn_select"
+                android:textColor="@drawable/txt_color"
                 android:text="아니오" />
         </RadioGroup>
 
@@ -97,6 +100,7 @@
                 android:background="@drawable/btn_select"
                 android:button="@null"
                 android:gravity="center"
+                android:textColor="@drawable/txt_color"
                 android:text="네" />
 
             <RadioButton
@@ -107,6 +111,7 @@
                 android:background="@drawable/btn_select"
                 android:button="@null"
                 android:gravity="center"
+                android:textColor="@drawable/txt_color"
                 android:text="아니오" />
         </RadioGroup>
 
@@ -174,6 +179,7 @@
             android:layout_width="170dp"
             android:layout_height="50dp"
             android:gravity="center"
+            style="@style/basic_16dp"
             android:background="@color/white"
             android:text="건너뛰기" />
 
@@ -181,7 +187,8 @@
             android:id="@+id/button_next"
             android:layout_width="170dp"
             android:layout_height="50dp"
-            android:background="#6AA7A3"
+            style="@style/bold_16dp"
+            android:background="#9D5812"
             android:gravity="center"
             android:text="다음"
             android:textColor="@color/white" />

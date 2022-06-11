@@ -182,7 +182,9 @@ class HomeFragment : Fragment() {
         val msg = App.prefs.todayCaf
         binding.intakenCaffeineText.setText(msg.toString())
         val percent = msg?.div(4)
-        percent?.let { binding.heart.setProgress(it.toInt()) }
+        binding.heart.start()
+        binding.heart.waveHeightPercent = (percent)!!.toFloat() / 100
+    //  percent?.let { binding.heart.setProgress(it.toInt()) }
     }
 
 

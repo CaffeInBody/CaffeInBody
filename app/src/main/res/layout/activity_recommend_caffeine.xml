@@ -54,11 +54,12 @@
     <Button
         android:id="@+id/button_check"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="#6AA7A3"
+        android:layout_height="50dp"
+        android:background="#9D5812"
         android:gravity="center"
-        android:text="확인"
+        android:text="홈으로"
         android:textColor="@color/white"
+        style="@style/bold_16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

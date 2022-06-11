@@ -47,24 +47,29 @@
 
         <FrameLayout
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content">
 
-            <com.john.waveview.WaveView
+            <com.github.onlynight.waveview.WaveView
                 android:id="@+id/heart"
                 android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_height="270dp"
+                android:layout_weight="1"
+                app:isCircle="false"
                 android:background="@color/white"
-                app:above_wave_color="#F8786F"
-                app:blow_wave_color="#F8786F"
-                app:wave_height="large"
-                android:layout_marginBottom="60dp"
-                app:progress="50"
-                android:layout_gravity="center"
-                />
+                app:wave1Color="#D5F8786F"
+                app:wave2Color="#D7FBC7C3"
+                app:period="3"
+                app:waveHeightPercent="0.9"
+                app:waveRange="15dp"
+                app:waveSpeed="5"
+                app:waveStrokeWidth="3dp"
+                android:layout_gravity="center|top"/>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/homeheart"/>
+                android:background="@drawable/homeheart"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -84,6 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -91,15 +97,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="100"
+                        android:textColor="@color/brown"
+                        android:textStyle="bold"
                         android:textAlignment="center"
-                        android:textSize="35dp" />
+                        android:textSize="40dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="mg"
+                        android:textColor="@color/brown"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="2dp"
                         android:textAlignment="center"
-                        android:textSize="35dp" />
+                        android:textSize="30dp" />
                 </LinearLayout>
 
                 <TextView
@@ -161,17 +172,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:clipToPadding="false"
+        android:paddingVertical="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <LinearLayout
             android:id="@+id/addBeverageBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="50dp"
             android:background="@drawable/roundcorner_rectangle"
             android:orientation="horizontal"
+            android:elevation="1dp"
             android:layout_marginBottom="15dp"
             android:padding="25dp"
             >
@@ -189,19 +203,20 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/round" />
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/icon_plus" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/checkWatchBtn"
             android:layout_width="wrap_content"
-            android:layout_height="83dp"
+            android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginHorizontal="50dp"
             android:background="@drawable/roundcorner_rectangle"
             android:orientation="horizontal"
+            android:elevation="1dp"
             android:padding="25dp">
 
             <TextView
@@ -217,9 +232,9 @@
                 android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/round" />
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/icon_watch" />
         </LinearLayout>
     </LinearLayout>
 

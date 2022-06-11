@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+
 >
 
     <LinearLayout
@@ -44,47 +45,52 @@
             android:layout_gravity="left"
             android:layout_weight="0"
             android:text="나이"
-            android:textStyle="bold" />
+            style="@style/bold_14dp"/>
 
         <RadioGroup
             android:id="@+id/btn_age_layout"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:orientation="horizontal">
 
             <RadioButton
                 android:checked="true"
                 android:id="@+id/btn_age_minor"
-                android:layout_width="wrap_content"
+                android:paddingVertical="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:button="@null"
                 android:gravity="center"
+                android:textColor="@drawable/txt_color"
                 android:text="미성년자\n(13~19)" />
 
             <RadioButton
                 android:id="@+id/btn_age_adult"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:paddingVertical="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:button="@null"
                 android:gravity="center"
+                android:textColor="@drawable/txt_color"
                 android:text="성인\n(20~64)" />
 
             <RadioButton
                 android:id="@+id/btn_age_senior"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
+                android:paddingVertical="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:button="@null"
                 android:gravity="center"
+                android:textColor="@drawable/txt_color"
                 android:text="노인\n(65~)" />
         </RadioGroup>
 
@@ -94,6 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="0"
+            android:layout_marginTop="10dp"
             android:text="성별"
             android:textStyle="bold" />
 
@@ -114,6 +121,7 @@
                 android:button="@null"
                 android:background="@drawable/btn_select"
                 android:gravity="center"
+                android:textColor="@drawable/txt_color"
                 android:text="여자" />
 
             <RadioButton
@@ -124,6 +132,7 @@
                 android:gravity="center"
                 android:button="@null"
                 android:background="@drawable/btn_select"
+                android:textColor="@drawable/txt_color"
                 android:text="남자" />
         </RadioGroup>
 
@@ -134,13 +143,15 @@
             android:layout_gravity="left"
             android:layout_weight="0"
             android:text="체중"
+            android:layout_marginTop="10dp"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editText_survey1_weight"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_gravity="left"
+            android:paddingStart="10dp"
             android:layout_marginVertical="10dp"
             android:inputType="numberDecimal"
             android:height="35dp"
@@ -153,7 +164,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="0"
+
             android:text="현재 임신 여부"
+            android:layout_marginTop="10dp"
             android:textStyle="bold" />
 
         <RadioGroup
@@ -173,6 +186,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:gravity="center"
+                android:textColor="@drawable/txt_color"
                 android:text="O" />
 
             <RadioButton
@@ -183,6 +197,7 @@
                 android:button="@null"
                 android:background="@drawable/btn_select"
                 android:gravity="center"
+                android:textColor="@drawable/txt_color"
                 android:text="X" />
         </RadioGroup>
 
@@ -191,10 +206,11 @@
     <Button
         android:id="@+id/button_next"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="#6AA7A3"
+        android:layout_height="50dp"
+        android:background="#9D5812"
         android:gravity="center"
         android:text="다음"
+        style="@style/bold_16dp"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
