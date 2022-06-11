@@ -101,7 +101,7 @@ class ReportFragment : Fragment() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         //set the horizontal distance of the grid line
         xAxis.granularity = 1f
-        xAxis.textColor = Color.RED
+        xAxis.textColor = Color.DKGRAY
         //hiding the x-axis line, default true if not set
         xAxis.setDrawAxisLine(false)
         //hiding the vertical grid lines, default true if not set
@@ -118,9 +118,9 @@ class ReportFragment : Fragment() {
 
         //우측 값 hiding the right y-axis line, default true if not set
         val rightAxis: YAxis = barChart.getAxisRight()
-        rightAxis.setDrawAxisLine(false)
-        rightAxis.textColor = Color.DKGRAY
-
+       // rightAxis.setDrawAxisLine(false)
+       // rightAxis.set
+        rightAxis.isEnabled = false
 
         //바차트의 타이틀
         val legend: Legend = barChart.getLegend()
@@ -128,7 +128,7 @@ class ReportFragment : Fragment() {
         legend.form = Legend.LegendForm.LINE
         //setting the text size of the legend
         legend.textSize = 11f
-        legend.textColor = Color.YELLOW
+        legend.textColor = Color.DKGRAY
         //setting the alignment of legend toward the chart
         legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
         legend.horizontalAlignment = Legend.LegendHorizontalAlignment.CENTER
