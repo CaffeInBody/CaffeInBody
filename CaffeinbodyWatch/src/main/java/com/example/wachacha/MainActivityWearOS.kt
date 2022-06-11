@@ -44,6 +44,12 @@ class MainActivityWearOS : ComponentActivity() {
             startActivity(intent)
             finish()
         }
+
+        binding.button3.setOnClickListener {
+            val intent = Intent(this, DrinkActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
     //전송 버튼 전체적인 작업 실행
     private fun onQueryOtherDevicesClicked(watchMessage: String) {

@@ -17,6 +17,8 @@ class RecommendCaffeineActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         var caffeine = intent.getDoubleExtra("caffeine", 0.0)
+        //민감도 곱하는 수치 저장!
+        App.prefs.sensetivity = caffeine.toString()
 
         binding.tvRecommendCaffeine.text = caffeine.toString()
 

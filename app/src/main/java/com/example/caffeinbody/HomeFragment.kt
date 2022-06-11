@@ -161,7 +161,7 @@ class HomeFragment : Fragment() {
             Log.e("TAG", "안녕")
             try {
                 val request = PutDataMapRequest.create(FAVORITE_PATH).apply {
-                    dataMap.putString(FAVORITE_KEY, (++count).toString())
+                    dataMap.putString(FAVORITE_KEY, "받은 메시지: " + (++count).toString())
                     //dataMap.putString(FAVORITE_KEY, (++count).toString())//메시지가 변경돼야 전송됨.
                     //dataMap.putStringArrayList(FAVORITE_KEY, 리스트)//즐겨찾기 리스트
                 }
@@ -187,7 +187,7 @@ class HomeFragment : Fragment() {
 
 
     companion object {
-        private const val TAG = "MainActivity"
+        private const val TAG = "HomeFragment"
 
         private const val START_ACTIVITY_PATH = "/start-activity3"
         private const val CAMERA_CAPABILITY = "camera"

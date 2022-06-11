@@ -53,6 +53,8 @@ class DetailActivity : AppCompatActivity() {
         var chartWeekLine = binding.linechart
         setWeekLine(chartWeekLine)
 
+        binding.textView11.setText(App.prefs.todayCaf.toString() + "mg")
+
     }
     //새 카페인이 추가되면 총 마신 카페인량이 저장됨
     fun calculateHalfLife(sensitivity: Double){
@@ -91,6 +93,7 @@ class DetailActivity : AppCompatActivity() {
                         currentTime = times[timeI] + (halfTime * count).toFloat()
                         caffeineRemain = caffeineRemain!!/(2.0).toFloat()
                         lineChartData.add(Entry(currentTime, caffeineRemain))
+                        Log.e("time", "one")
                     }else{//그래프 중간에 끼워야 할 때
                         val timeGap = times[timeI + 1] - currentTime//일수도 있고
                         currentTime = times[timeI + 1]
@@ -99,11 +102,13 @@ class DetailActivity : AppCompatActivity() {
 
                         timeI++
                         count = 0
+                        Log.e("time", "two")
                     }
                 }else{//이게 끝일 때
                     currentTime = times[timeI] + (halfTime * count).toFloat()
                     caffeineRemain = caffeineRemain!!/(2.0).toFloat()
                     lineChartData.add(Entry(currentTime, caffeineRemain))
+                    Log.e("time", "three")
                 }
                 count++
             }/////여기까지만

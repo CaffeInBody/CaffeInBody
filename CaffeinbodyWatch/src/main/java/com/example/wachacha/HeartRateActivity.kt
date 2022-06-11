@@ -77,9 +77,10 @@ class HeartRateActivity : AppCompatActivity() {
         }
         lifecycleScope.launchWhenStarted {
             viewModel.heartRateBpm.collect {
-		binding.lastMeasuredValue.text = String.format("%.1f", it)
+		        binding.lastMeasuredValue.text = String.format("%.1f", it)
             }//한 30초 정도만 측정하게
             average += viewModel.heartRateBpm.toString().toFloat()
+            Log.e("heartrate", average.toString())
         }
     }
 

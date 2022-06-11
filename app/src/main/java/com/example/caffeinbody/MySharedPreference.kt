@@ -27,4 +27,8 @@ class MySharedPreferences(context: Context) {
     var todayCafJson: String?
         get() = prefs.getString("drinkCafJson", null)
         set(value) = prefs.edit().putString("drinkCafJson", value).apply()
+
+    var sensetivity: String?
+        get() = prefs.getString("sensitivity", null)
+        set(value) = prefs.edit().putString("sensitivity", value!!).apply()
 }

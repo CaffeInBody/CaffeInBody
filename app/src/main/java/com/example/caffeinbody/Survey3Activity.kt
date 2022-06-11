@@ -35,6 +35,7 @@ class Survey3Activity  : AppCompatActivity() {
         binding.progressBar.incrementProgressBy(66)
         binding.seekBar.setProgress(0)
 
+        //총 곱하는 수치 저장
         binding.buttonNext.setOnClickListener {
             if (sensitivity==true && headache==true) caffeine *= 0.4
             else if(sensitivity==true || headache==true) caffeine *= 0.7

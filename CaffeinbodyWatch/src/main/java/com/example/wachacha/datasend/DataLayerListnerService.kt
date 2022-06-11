@@ -1,7 +1,10 @@
 package com.example.wachacha
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.util.Log
+import android.widget.Toast
 import com.google.android.gms.wearable.*
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -29,6 +32,9 @@ class DataLayerListenerService : WearableListenerService() {//wear에서 데이�
                         .dataMap
                         .getString(DataLayerListenerService.FAVORITE_KEY)
                     Log.e("스마트폰에서 온 favorite", favorite)
+                    App.prefs.favorite = favorite
+                    var prefsFav = App.prefs.favorite
+                    Log.e("favorite prefs", prefsFav.toString())
                 }
                 else ->{
                     Log.e("DLLS", "none")

@@ -13,7 +13,7 @@
     </queries>
 
     <application
-        android:name = ".MainApplication"
+        android:name = ".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="CaffeinbodyWatch"
@@ -22,6 +22,7 @@
         <uses-library
             android:name="com.google.android.wearable"
             android:required="true" />
+
 
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
@@ -64,6 +65,10 @@
         <activity android:name=".HeartRateActivity"
             android:theme="@style/Theme.AppCompat"/>
         <activity android:name=".Hilt_HeartRateActivity" />
+        <activity
+            android:name=".DrinkActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat"/>
     </application>
 
 </manifest>
