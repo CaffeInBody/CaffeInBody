@@ -44,6 +44,8 @@ class MainViewModel @Inject constructor(
     private val _heartRateBpm = MutableStateFlow(0.0)
     val heartRateBpm: StateFlow<Double> = _heartRateBpm
 
+    var average = 0.toDouble()
+
     init {
         // Check that the device has the heart rate capability and progress to the next state
         // accordingly.
@@ -67,6 +69,8 @@ class MainViewModel @Inject constructor(
                     val bpm = it.data.last().value.asDouble()
                     Log.d(TAG, "Data update: $bpm")
                     _heartRateBpm.value = bpm
+                    average += bpm
+                    Log.e("heartrate", average.toString())
                 }
             }
         }

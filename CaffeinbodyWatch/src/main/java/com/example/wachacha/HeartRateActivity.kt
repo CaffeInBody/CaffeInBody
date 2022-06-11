@@ -57,6 +57,7 @@ class HeartRateActivity : AppCompatActivity() {
                         // sampling rate of device sensors, so we must be careful not to remain
                         // registered any longer than necessary.
                         lifecycleScope.launchWhenStarted {
+                            Log.e("hello", "??")
                             viewModel.measureHeartRate()
                         }
                     }
@@ -79,8 +80,6 @@ class HeartRateActivity : AppCompatActivity() {
             viewModel.heartRateBpm.collect {
 		        binding.lastMeasuredValue.text = String.format("%.1f", it)
             }//한 30초 정도만 측정하게
-            average += viewModel.heartRateBpm.toString().toFloat()
-            Log.e("heartrate", average.toString())
         }
     }
 
