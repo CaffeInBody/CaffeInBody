@@ -5,6 +5,6 @@ data class CaffeineData (
     val id: Int,
     val name : String,
  //   val img : String,
-    val img : Int,
+    val img : Int?,
 //    val caffeine : Array<String>
 )

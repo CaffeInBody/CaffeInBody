@@ -32,7 +32,7 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
 
 
         holder.itemView.setOnClickListener{
-            val intent = Intent(holder.itemView?.context, DrinkCaffeineActivity::class.java)
+            val intent = Intent(holder.itemView.context, DrinkCaffeineActivity::class.java)
             intent.putExtra("id",position)
 
             //서버있으면지워도됨
