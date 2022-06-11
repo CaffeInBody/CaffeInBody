@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.CaffeInBody" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#6AA7A3</item>
-        <item name="colorPrimaryVariant">#6AA7A3</item>
+        <item name="colorPrimary">#9D5812</item>
+        <item name="colorPrimaryVariant">#F87E76</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -15,7 +15,7 @@
 
 
         <item name="android:editTextStyle">@style/basic_16dp</item>
-        <item name="android:textViewStyle">@style/basic_16dp</item>
+        <item name="android:textViewStyle">@style/basic_14dp</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

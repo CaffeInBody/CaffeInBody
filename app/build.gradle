@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.caffeinbody"
-        minSdk 30
+        minSdk 27
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -59,7 +59,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     implementation 'com.github.john990:WaveView:v0.9'
-
+    implementation 'com.github.onlynight:WaveView:1.0.0'
 
     //데이터링크
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
