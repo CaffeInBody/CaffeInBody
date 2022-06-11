@@ -42,11 +42,11 @@ class Survey1Activity  : AppCompatActivity() {
 
         //첫 번째 설문조사 때만 저장하자..!(or 한 번 실행 후 함수 주석처리해아함)
         db = DrinksDatabase.getInstance(applicationContext)!!
-        /*addDrinksDatabaseStarbucks(db)
+        addDrinksDatabaseStarbucks(db)
         addDrinksDatabaseHalis(db)
         addDrinksDatabaseTwosome(db)
         addDrinksDatabaseEdiya(db)
-        addDrinksDatabasePaiks(db)*/
+        addDrinksDatabasePaiks(db)
 
         binding.btnAgeLayout.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId) {
