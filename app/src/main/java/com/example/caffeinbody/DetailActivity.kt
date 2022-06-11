@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import com.example.caffeinbody.database.CafeDatas
+import com.example.caffeinbody.database.CafeDatas.Companion.testRoom
+import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.ActivityDetailBinding
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
@@ -22,6 +25,7 @@ import kotlin.math.pow
 //라인차트 그리기
 class DetailActivity : AppCompatActivity() {
     val basicTime = 5
+    private lateinit var db: DrinksDatabase
 
     private val lineChartData = ArrayList<Entry>()
     private val binding: ActivityDetailBinding by lazy {
@@ -33,6 +37,11 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        db = DrinksDatabase.getInstance(applicationContext)!!
+        testRoom(db)
+        CafeDatas.hello()
+        Log.e("testDetail", "한글 깨지나")
 
         setSupportActionBar(binding.toolbar)
         //    supportActionBar!!.setDisplayShowTitleEnabled(false)
@@ -78,16 +87,14 @@ class DetailActivity : AppCompatActivity() {
             while (caffeineRemain!! >= 10){
                 Log.e("time", "남은 카페인 : $caffeineRemain")
                 if (times[timeI + 1] != 0f){//더 추가된 카페인 데이터가 있으면
-                    if (currentTime+ basicTime < times[timeI + 1]){//5시간 뒤보다 후에 추가됐으면
+                    if (currentTime+ halfTime < times[timeI + 1]){//5시간 뒤보다 후에 추가됐으면
                         currentTime = times[timeI] + (halfTime * count).toFloat()
                         caffeineRemain = caffeineRemain!!/(2.0).toFloat()
                         lineChartData.add(Entry(currentTime, caffeineRemain))
-                        Log.e("time", "여기는 1")
                     }else{//그래프 중간에 끼워야 할 때
-                        Log.e("time", "여기는 2")
                         val timeGap = times[timeI + 1] - currentTime//일수도 있고
                         currentTime = times[timeI + 1]
-                        caffeineRemain = caffeineRemain - caffeineRemain/2*(timeGap/basicTime) + caffeines[timeI + 1]//시간이 흘러 줄어든 후 남은 카페인 양
+                        caffeineRemain = caffeineRemain - caffeineRemain/2*(timeGap/halfTime.toFloat()) + caffeines[timeI + 1]//시간이 흘러 줄어든 후 남은 카페인 양
                         lineChartData.add(Entry(currentTime, caffeineRemain))
 
                         timeI++

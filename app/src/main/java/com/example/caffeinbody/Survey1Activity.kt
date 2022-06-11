@@ -8,8 +8,14 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseEdiya
+import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseHalis
+import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabasePaiks
+import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseStarbucks
+import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseTwosome
+import com.example.caffeinbody.database.Drinks
+import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.FragmentSurvey1Binding
-
 
 class Survey1Activity  : AppCompatActivity() {
     /*lateinit */var gender: String = ""
@@ -18,6 +24,10 @@ class Survey1Activity  : AppCompatActivity() {
     var weight = 0.0
     var caffeine = 0.0
     var coefficient = 0.0
+
+    private lateinit var db: DrinksDatabase
+    //val cafeDatas = CafeDatas
+
 
     private val binding: FragmentSurvey1Binding by lazy {
         FragmentSurvey1Binding.inflate(
@@ -29,6 +39,14 @@ class Survey1Activity  : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        //첫 번째 설문조사 때만 저장하자..!(or 한 번 실행 후 함수 주석처리해아함)
+        db = DrinksDatabase.getInstance(applicationContext)!!
+        /*addDrinksDatabaseStarbucks(db)
+        addDrinksDatabaseHalis(db)
+        addDrinksDatabaseTwosome(db)
+        addDrinksDatabaseEdiya(db)
+        addDrinksDatabasePaiks(db)*/
 
         binding.btnAgeLayout.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId) {
