@@ -5,18 +5,18 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
+import com.example.wachacha.databaseWatch.FavFunctions.Companion.addFav
+import com.example.wachacha.databaseWatch.FavFunctions.Companion.selectFav
+import com.example.wachacha.databaseWatch.Favorites
+import com.example.wachacha.databaseWatch.FavoritesDatabase
 import com.google.android.gms.wearable.*
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 
 class DataLayerListenerService : WearableListenerService() {//wear에서 데이터 영역 이벤트 처리
     private var favorite: String = ""
     private val messageClient by lazy { Wearable.getMessageClient(this) }
+    private lateinit var db: FavoritesDatabase
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
@@ -32,9 +32,9 @@ class DataLayerListenerService : WearableListenerService() {//wear에서 데이�
                         .dataMap
                         .getString(DataLayerListenerService.FAVORITE_KEY)
                     Log.e("스마트폰에서 온 favorite", favorite)
-                    App.prefs.favorite = favorite
-                    var prefsFav = App.prefs.favorite
-                    Log.e("favorite prefs", prefsFav.toString())
+
+                    db = FavoritesDatabase.getInstance(applicationContext)!!
+                    addFav(db, favorite)
                 }
                 else ->{
                     Log.e("DLLS", "none")
