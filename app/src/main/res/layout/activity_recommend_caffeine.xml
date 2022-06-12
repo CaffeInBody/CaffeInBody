@@ -25,19 +25,70 @@
             android:layout_weight="0"
             android:layout_marginBottom="30dp"
             android:layout_gravity="center"
-            android:text="당신의 1회 권장 카페인 섭취량은"
+            android:text="당신의 권장 카페인 섭취량은"
             android:textSize="20dp"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/tv_recommendCaffeine"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="30dp"
-            android:gravity="center"
-            android:textSize="30dp"
-            android:textStyle="bold"/>
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:text="1회: "
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/tv_recommendOnceCaffeine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:text="1일최대: "
+                android:textSize="25dp"/>
+
+            <TextView
+                android:id="@+id/tv_recommendDayCaffeine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:textSize="10dp"
+            android:textColor="#bdbdbd"
+            android:text="*아메리카노 한잔의 카페인함량은 150mg입니다(스타벅스 톨사이즈 기준)."/>
 
         <TextView
             android:id="@+id/tv_endSentence"

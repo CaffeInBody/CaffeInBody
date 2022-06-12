@@ -28,7 +28,7 @@
         <entry key="..\:/CaffeInBody/app/src/main/res/layout/report_item.xml" value="0.264" />
         <entry key="..\:/CaffeInBody/app/src/main/res/layout/servey3.xml" value="0.264" />
         <entry key="..\:/CaffeInBody/wachacha/src/main/res/layout/activity_main_wear_os.xml" value="0.264" />
-        <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/activity_recommend_caffeine.xml" value="0.18541666666666667" />
+        <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/activity_recommend_caffeine.xml" value="0.264" />
         <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/fragment_survey1.xml" value="0.24947916666666667" />
         <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/fragment_survey2.xml" value="0.18541666666666667" />
         <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/fragment_survey3.xml" value="0.18541666666666667" />
@@ -46,23 +46,19 @@
         <entry key="app/src/main/res/drawable/home_back.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/icon_home.xml" value="0.133" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.138" />
-        <entry key="app/src/main/res/drawable/roundcorner_rectangle.xml" value="0.1085" />
         <entry key="app/src/main/res/drawable/selected.xml" value="0.1455" />
-        <entry key="app/src/main/res/drawable/txt_color.xml" value="0.1085" />
         <entry key="app/src/main/res/font/font_custom.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/activity_caffeine_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1726027397260274" />
         <entry key="app/src/main/res/layout/activity_drink_caffeine.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_drink_type.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_recommend.xml" value="0.14375" />
-        <entry key="app/src/main/res/layout/activity_recommend_caffeine.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_survey.xml" value="0.1496030087755955" />
         <entry key="app/src/main/res/layout/fragment_decaf.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21225372314453125" />
         <entry key="app/src/main/res/layout/fragment_report.xml" value="0.20833333333333334" />
-        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.21248396750748183" />
-        <entry key="app/src/main/res/layout/fragment_survey1.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_survey1.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_survey2.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_survey3.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_caffeine.xml" value="0.1" />

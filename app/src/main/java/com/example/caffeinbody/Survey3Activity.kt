@@ -18,7 +18,7 @@ import com.example.caffeinbody.databinding.FragmentSurvey1Binding
 import com.example.caffeinbody.databinding.FragmentSurvey3Binding
 
 class Survey3Activity  : AppCompatActivity() {
-    var sensitivity: Boolean =false
+    var heartbeat: Boolean =false
     var headache: Boolean = false
     var quantity: String = ""
     var before: Int = 0
@@ -37,15 +37,18 @@ class Survey3Activity  : AppCompatActivity() {
 
         //총 곱하는 수치 저장
         binding.buttonNext.setOnClickListener {
-            if (sensitivity==true && headache==true) caffeine *= 0.4
-            else if(sensitivity==true || headache==true) caffeine *= 0.7
+//            if (heartbeat==true && headache==true) caffeine *= 0.4
+//            else if(heartbeat==true || headache==true) caffeine *= 0.7
 
             val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
             val editor = shared.edit()//sharedpreferences 값 확인해보기
-            editor.putString("sensitivity", sensitivity.toString())
+            editor.putString("heartbeat", heartbeat.toString())
             editor.putString("headache", headache.toString())
             editor.putString("quantity", quantity)
             //editor.apply()
+
+            App.prefs.heartbeat = heartbeat
+            App.prefs.headache = headache
 
             val selectActivity = RecommendCaffeineActivity()
             val intent = Intent(this, selectActivity::class.java)
@@ -64,8 +67,8 @@ class Survey3Activity  : AppCompatActivity() {
 
         binding.heartFastLayout.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId) {
-                R.id.button -> sensitivity = true
-                R.id.button2 -> sensitivity = false
+                R.id.button -> heartbeat = true
+                R.id.button2 -> heartbeat = false
             }
         }
 

@@ -88,17 +88,19 @@ class Survey1Activity  : AppCompatActivity() {
 
             caffeine = weight * coefficient
 
-            when(ispregnant==true || age=="senior") {
-                true -> caffeine *= 0.75
-                false -> caffeine
-            }
+//            when(ispregnant==true || age=="senior") {
+//                true -> caffeine *= 0.75
+//                false -> caffeine
+//            }
 
-            editor.putString("age", age)
-            editor.putString("weight", weight.toString())
-            editor.putString("gender", gender)
-            editor.putBoolean("ispregnant", ispregnant)
+//            editor.putString("age", age)
+//            editor.putString("weight", weight.toString())
+//            editor.putString("gender", gender)
+//            editor.putBoolean("ispregnant", ispregnant)
             //editor.apply()
 
+            App.prefs.age = age
+            App.prefs.isPregnant = ispregnant
 
             val selectActivity =  Survey2Activity()
             val intent = Intent(this, selectActivity::class.java)

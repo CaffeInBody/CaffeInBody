@@ -31,4 +31,20 @@ class MySharedPreferences(context: Context) {
     var sensetivity: String?
         get() = prefs.getString("sensitivity", null)
         set(value) = prefs.edit().putString("sensitivity", value!!).apply()
+
+    var age: String?
+        get() = prefs.getString("age", null)
+        set(value) = prefs.edit().putString("age", value).apply()
+
+    var isPregnant: Boolean
+        get() = prefs.getBoolean("isPregnant", false)
+        set(value) = prefs.edit().putBoolean("isPregnant", value).apply()
+
+    var heartbeat: Boolean
+        get() = prefs.getBoolean("heartbeat", false)
+        set(value) = prefs.edit().putBoolean("heartbeat", value).apply()
+
+    var headache: Boolean
+        get() = prefs.getBoolean("headache", false)
+        set(value) = prefs.edit().putBoolean("headache", value).apply()
 }
