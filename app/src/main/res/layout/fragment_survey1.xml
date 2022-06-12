@@ -55,6 +55,7 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:checked="true"
                 android:id="@+id/btn_age_minor"
                 android:paddingVertical="10dp"
                 android:layout_width="match_parent"
@@ -111,6 +112,7 @@
             android:orientation="horizontal">
 
             <RadioButton
+                android:checked="true"
                 android:id="@+id/button_female"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -187,6 +189,7 @@
                 android:text="O" />
 
             <RadioButton
+                android:checked="true"
                 android:id="@+id/button_notPregnant"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
