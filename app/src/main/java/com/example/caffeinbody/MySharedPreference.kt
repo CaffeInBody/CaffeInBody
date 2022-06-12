@@ -52,4 +52,11 @@ class MySharedPreferences(context: Context) {
     var currentcaffeine: String?
         get() = prefs.getString("currentCaf", null)
         set(value) = prefs.edit().putString("currentCaf", value!!).apply()
+
+    var oncecaffeine: String?
+        get() = prefs.getString("oncecaffeine", null)
+        set(value) = prefs.edit().putString("oncecaffeine", value!!).apply()
+    var dayCaffeine: String?
+        get() = prefs.getString("dayCaffeine", null)
+        set(value) = prefs.edit().putString("dayCaffeine", value!!).apply()
 }

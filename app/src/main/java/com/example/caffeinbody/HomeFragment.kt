@@ -182,6 +182,7 @@ class HomeFragment : Fragment() {
 
         val msg = App.prefs.todayCaf
         binding.intakenCaffeineText.setText(msg.toString())
+        App.prefs.dayCaffeine?.let { binding.maximumADayText.setText(it) }
         val percent = msg?.div(4)
         val servingsize = App.prefs.currentcaffeine
         if(servingsize!= null)  binding.AvailableCaffeineText.setText(servingsize)

@@ -41,6 +41,10 @@ class RecommendCaffeineActivity : AppCompatActivity() {
         binding.tvRecommendOnceCaffeine.text = caffeine.toString() + "mg"
         binding.tvRecommendDayCaffeine.text = recommendDayCaffeine.toString() + "mg"
 
+        App.prefs.dayCaffeine = recommendDayCaffeine.toString()
+        App.prefs.oncecaffeine = caffeine.toString()
+
+
         binding.buttonCheck.setOnClickListener {
             val selectActivity = MainActivity()
             val intent = Intent(this, selectActivity::class.java)
