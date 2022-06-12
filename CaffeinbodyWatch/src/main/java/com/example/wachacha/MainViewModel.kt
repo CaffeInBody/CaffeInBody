@@ -59,7 +59,9 @@ class MainViewModel @Inject constructor(
     }
 
     suspend fun measureHeartRate() {
+        Log.e("heartrate", "반복되는 중1")
         healthServicesManager.heartRateMeasureFlow().collect {
+            Log.e("heartrate", "반복되는 중2")
             when (it) {
                 is MeasureMessage.MeasureAvailabilty -> {
                     Log.d(TAG, "Availability changed: ${it.availability}")

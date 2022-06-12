@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import com.example.caffeinbody.database.CafeDatas
 import com.example.caffeinbody.database.CafeDatas.Companion.testRoom
 import com.example.caffeinbody.database.DrinksDatabase
@@ -54,13 +55,16 @@ class DetailActivity : AppCompatActivity() {
         setWeekLine(chartWeekLine)
 
      //   binding.textView11.setText(App.prefs.todayCaf.toString() + "mg")
+        binding.textView11.setText(App.prefs.currentcaffeine + "mg")
 
     }
     //새 카페인이 추가되면 총 마신 카페인량이 저장됨
     fun calculateHalfLife(sensitivity: Double){
+        binding.textView11.setText(App.prefs.currentcaffeine + "mg")
         var caffeineVolume = App.prefs.todayCaf
         var halfTime = basicTime * (2 - sensitivity)//-> 민감도 반영 반감기 시간
         var timeI = 0
+        //var nowTime = getTime()
 
         if (caffeineVolume != 0) {
             var blank = App.prefs.date
@@ -84,23 +88,9 @@ class DetailActivity : AppCompatActivity() {
 
             //첫번째 점 그려줌
             var caffeineRemain = caffeines[timeI]!!
+            //putCurrentCaffeine(caffeineRemain)
             currentTime = times[timeI] + (halfTime * count++).toFloat()
             lineChartData.add(Entry(currentTime, caffeineRemain))
-
-
-            //---------------섭취권고량 설정-----------------
-            //TODO 소현
-            var servingsize = App.prefs.sensetivity?.toDouble()
-            if (servingsize != null) {
-                if((servingsize - caffeineRemain!!) > 0 ) {
-                    var current = servingsize - caffeineRemain
-                    binding.textView11.setText("%.2f".format(current) +"mg")
-                    App.prefs.currentcaffeine = "%.2f".format(current)
-                }
-                else    binding.textView11.setText("0mg")
-            }
-            //----------------------------------------
-
 
             while (caffeineRemain!! >= 10){
                 Log.e("time", "남은 카페인 : $caffeineRemain")
@@ -138,6 +128,8 @@ class DetailActivity : AppCompatActivity() {
 
 
     }
+
+
     private fun setWeekLine(lineChart: LineChart) {
         val lineData = LineData()
         val set1 = LineDataSet(lineChartData, "체내 남은 카페인 양")

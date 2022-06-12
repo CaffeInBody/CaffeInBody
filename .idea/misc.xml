@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Cafein-Android/CaffeinbodyWatch/src/main/res/layout/activity_drinkregister.xml" value="0.47577092511013214" />
+        <entry key="..\:/Cafein-Android/app/src/main/res/layout/activity_detail.xml" value="0.1125" />
+        <entry key="..\:/Cafein-Android/app/src/main/res/layout/fragment_home.xml" value="0.1125" />
         <entry key="..\:/CaffeInBody/CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.1" />
         <entry key="..\:/CaffeInBody/app/src/main/res/drawable/btn_select.xml" value="0.1235" />
         <entry key="..\:/CaffeInBody/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1235" />
@@ -28,7 +31,7 @@
         <entry key="..\:/CaffeInBody/app/src/main/res/layout/report_item.xml" value="0.264" />
         <entry key="..\:/CaffeInBody/app/src/main/res/layout/servey3.xml" value="0.264" />
         <entry key="..\:/CaffeInBody/wachacha/src/main/res/layout/activity_main_wear_os.xml" value="0.264" />
-        <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/activity_recommend_caffeine.xml" value="0.264" />
+        <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/activity_recommend_caffeine.xml" value="0.18541666666666667" />
         <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/fragment_survey1.xml" value="0.24947916666666667" />
         <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/fragment_survey2.xml" value="0.18541666666666667" />
         <entry key="..\:/yoogus/smu4/project/CafeInBody/app/src/main/res/layout/fragment_survey3.xml" value="0.18541666666666667" />
