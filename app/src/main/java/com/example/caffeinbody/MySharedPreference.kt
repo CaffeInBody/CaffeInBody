@@ -47,4 +47,9 @@ class MySharedPreferences(context: Context) {
     var headache: Boolean
         get() = prefs.getBoolean("headache", false)
         set(value) = prefs.edit().putBoolean("headache", value).apply()
+
+
+    var currentcaffeine: String?
+        get() = prefs.getString("currentCaf", null)
+        set(value) = prefs.edit().putString("currentCaf", value!!).apply()
 }

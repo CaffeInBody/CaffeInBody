@@ -53,7 +53,7 @@ class DetailActivity : AppCompatActivity() {
         var chartWeekLine = binding.linechart
         setWeekLine(chartWeekLine)
 
-        binding.textView11.setText(App.prefs.todayCaf.toString() + "mg")
+     //   binding.textView11.setText(App.prefs.todayCaf.toString() + "mg")
 
     }
     //새 카페인이 추가되면 총 마신 카페인량이 저장됨
@@ -81,10 +81,26 @@ class DetailActivity : AppCompatActivity() {
             }//여기까지가 입력한 시간과 양 어레이로 가져오기
             times.add(0f)//공백 넣어줌
 
+
             //첫번째 점 그려줌
             var caffeineRemain = caffeines[timeI]!!
             currentTime = times[timeI] + (halfTime * count++).toFloat()
             lineChartData.add(Entry(currentTime, caffeineRemain))
+
+
+            //---------------섭취권고량 설정-----------------
+            //TODO 소현
+            var servingsize = App.prefs.sensetivity?.toDouble()
+            if (servingsize != null) {
+                if((servingsize - caffeineRemain!!) > 0 ) {
+                    var current = servingsize - caffeineRemain
+                    binding.textView11.setText("%.2f".format(current) +"mg")
+                    App.prefs.currentcaffeine = "%.2f".format(current)
+                }
+                else    binding.textView11.setText("0mg")
+            }
+            //----------------------------------------
+
 
             while (caffeineRemain!! >= 10){
                 Log.e("time", "남은 카페인 : $caffeineRemain")
@@ -103,6 +119,7 @@ class DetailActivity : AppCompatActivity() {
                         timeI++
                         count = 0
                         Log.e("time", "two")
+
                     }
                 }else{//이게 끝일 때
                     currentTime = times[timeI] + (halfTime * count).toFloat()
@@ -111,10 +128,15 @@ class DetailActivity : AppCompatActivity() {
                     Log.e("time", "three")
                 }
                 count++
+
+
             }/////여기까지만
+
         } else{
             lineChartData.add(Entry(0.toFloat(), 0.toFloat()))
         }
+
+
     }
     private fun setWeekLine(lineChart: LineChart) {
         val lineData = LineData()

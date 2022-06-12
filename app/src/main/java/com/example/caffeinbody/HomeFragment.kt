@@ -179,9 +179,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUI(){
+
         val msg = App.prefs.todayCaf
         binding.intakenCaffeineText.setText(msg.toString())
         val percent = msg?.div(4)
+        val servingsize = App.prefs.currentcaffeine
+        if(servingsize!= null)  binding.AvailableCaffeineText.setText(servingsize)
+        else binding.AvailableCaffeineText.setText(App.prefs.sensetivity)
         binding.heart.start()
         binding.heart.waveHeightPercent = (percent)!!.toFloat() / 100
     //  percent?.let { binding.heart.setProgress(it.toInt()) }
