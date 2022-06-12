@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CaffeInBody" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.CaffeInBody" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#9D5812</item>
-        <item name="colorPrimaryVariant">#F87E76</item>
+        <item name="colorPrimaryVariant">#724618</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">#F87E76</item>
