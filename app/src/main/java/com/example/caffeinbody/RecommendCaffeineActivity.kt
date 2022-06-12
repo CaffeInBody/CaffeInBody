@@ -32,6 +32,9 @@ class RecommendCaffeineActivity : AppCompatActivity() {
         else if (heartbeat==true || headache==true)
             recommendDayCaffeine *= 0.7
 
+        if (caffeine >= recommendDayCaffeine)
+            caffeine = recommendDayCaffeine
+
         //민감도 곱하는 수치 저장!
         App.prefs.sensetivity = caffeine.toString()
 
