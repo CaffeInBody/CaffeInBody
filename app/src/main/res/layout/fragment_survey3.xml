@@ -62,6 +62,7 @@
                 android:text="네" />
 
             <RadioButton
+                android:checked="true"
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -102,6 +103,7 @@
                 android:text="네" />
 
             <RadioButton
+                android:checked="true"
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

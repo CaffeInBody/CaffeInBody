@@ -1,12 +1,14 @@
 package com.example.caffeinbody
 
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseEdiya
 import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseGongCha
@@ -18,11 +20,12 @@ import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseTwo
 import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.FragmentSurvey1Binding
+import java.lang.NullPointerException
 
 class Survey1Activity  : AppCompatActivity() {
-    /*lateinit */var gender: String = ""
+    /*lateinit */var gender: String = "female"
     /*lateinit */var ispregnant: Boolean = false
-    var age:String = ""
+    var age:String = "minor"
     var weight = 0.0
     var caffeine = 0.0
     var coefficient = 0.0
@@ -88,25 +91,20 @@ class Survey1Activity  : AppCompatActivity() {
 
             caffeine = weight * coefficient
 
-//            when(ispregnant==true || age=="senior") {
-//                true -> caffeine *= 0.75
-//                false -> caffeine
-//            }
-
-//            editor.putString("age", age)
-//            editor.putString("weight", weight.toString())
-//            editor.putString("gender", gender)
-//            editor.putBoolean("ispregnant", ispregnant)
+            editor.putString("age", age)
+            editor.putString("weight", weight.toString())
+            editor.putString("gender", gender)
+            editor.putBoolean("ispregnant", ispregnant)
             //editor.apply()
 
             App.prefs.age = age
             App.prefs.isPregnant = ispregnant
 
-            val selectActivity =  Survey2Activity()
+            val selectActivity = Survey2Activity()
             val intent = Intent(this, selectActivity::class.java)
             intent.putExtra("caffeine", caffeine)
             startActivity(intent)
-            finish()
+
             Log.e("tag", "나이: $age, 무게: $weight, 성별: $gender, 임신여부: $ispregnant, 추천카페인: $caffeine")
         }
 
