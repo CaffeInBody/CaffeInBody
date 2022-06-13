@@ -187,13 +187,17 @@ class HomeFragment : Fragment() {
         val msg = App.prefs.todayCaf
         binding.intakenCaffeineText.setText(msg.toString())
         App.prefs.dayCaffeine?.let { binding.maximumADayText.setText(it) }
-        val percent = msg?.div(4)
+
         currentCaffeineCalculate(1f)
         val servingsize = App.prefs.currentcaffeine//내가 하루에 섭취할 수 있는 최대 섭취량..? sensitivity와 currentcaffeine의 용도 차이
         if(servingsize!= null)  binding.AvailableCaffeineText.setText(servingsize)
         else binding.AvailableCaffeineText.setText(App.prefs.sensetivity)
+        var percent = 1.0
+        if(servingsize!= null) {
+            percent = servingsize!!.toDouble() / App.prefs.sensetivity!!.toDouble()
+        }
         binding.heart.start()
-        binding.heart.waveHeightPercent = (percent)!!.toFloat() / 100
+        binding.heart.waveHeightPercent = (percent)!!.toFloat()
     //  percent?.let { binding.heart.setProgress(it.toInt()) }
     }
 
