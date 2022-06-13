@@ -279,7 +279,7 @@ class HomeFragment : Fragment() {
                 var current = servingsize - caffeineRemain
                 App.prefs.currentcaffeine = "%.2f".format(current)
             }
-            else App.prefs.currentcaffeine = "0mg"
+            else App.prefs.currentcaffeine = "0"
         }
         //----------------------------------------
     }
