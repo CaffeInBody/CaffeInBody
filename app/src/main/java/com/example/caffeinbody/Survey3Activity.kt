@@ -40,12 +40,12 @@ class Survey3Activity  : AppCompatActivity() {
 //            if (heartbeat==true && headache==true) caffeine *= 0.4
 //            else if(heartbeat==true || headache==true) caffeine *= 0.7
 
-            val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
+            /*val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
             val editor = shared.edit()//sharedpreferences 값 확인해보기
             editor.putString("heartbeat", heartbeat.toString())
             editor.putString("headache", headache.toString())
             editor.putString("quantity", quantity)
-            //editor.apply()
+            //editor.apply()*/
 
             App.prefs.heartbeat = heartbeat
             App.prefs.headache = headache

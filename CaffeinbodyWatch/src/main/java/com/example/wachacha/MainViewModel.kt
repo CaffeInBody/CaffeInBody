@@ -16,15 +16,18 @@
 
 package com.example.wachacha
 
+import android.content.Intent
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.health.services.client.data.DataTypeAvailability
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -34,6 +37,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val healthServicesManager: HealthServicesManager
 ) : ViewModel() {
+
+    var count = 0
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Startup)
     val uiState: StateFlow<UiState> = _uiState
@@ -59,23 +64,34 @@ class MainViewModel @Inject constructor(
     }
 
     suspend fun measureHeartRate() {
-        Log.e("heartrate", "반복되는 중1")
         healthServicesManager.heartRateMeasureFlow().collect {
             Log.e("heartrate", "반복되는 중2")
             when (it) {
                 is MeasureMessage.MeasureAvailabilty -> {
-                    Log.d(TAG, "Availability changed: ${it.availability}")
+                    Log.d("heartrate", "Availability changed: ${it.availability}")
                     _heartRateAvailable.value = it.availability
                 }
                 is MeasureMessage.MeasureData -> {
                     val bpm = it.data.last().value.asDouble()
-                    Log.d(TAG, "Data update: $bpm")
                     _heartRateBpm.value = bpm
-                    average += bpm
-                    Log.e("heartrate", average.toString())
+
+                    if (bpm!= 0.toDouble()){//값이 있으면
+                        average += bpm
+                        count++
+                        Log.e("heartrate", "bom: $bpm, average: $average")
+                    }else{
+                        healthServicesManager.count = 0
+                    }
+
                 }
             }
+
         }
+    }
+
+    companion object {
+        const val MIllIS_IN_FUTURE = 10000L
+        const val TICK_INTERVAL = 1000L
     }
 }
 
@@ -84,3 +100,4 @@ sealed class UiState {
     object HeartRateAvailable : UiState()
     object HeartRateNotAvailable : UiState()
 }
+

@@ -15,6 +15,10 @@ import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import org.json.JSONArray
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ReportFragment : Fragment() {
     private val binding: FragmentReportBinding by lazy {
@@ -30,6 +34,56 @@ class ReportFragment : Fragment() {
         // Inflate the layout for this fragment
         setChartView(binding.root)
         return binding.root
+    }
+
+    fun setWeek(){
+        val nowTime = Calendar.getInstance().getTime()
+        val weekdayFormat = SimpleDateFormat("EE", Locale.getDefault())
+        val weekDay = weekdayFormat.format(nowTime)
+        Log.e("time: 요일", weekDay)
+
+        var blank = App.prefs.weekCafJson
+        var a = JSONArray(blank)
+
+        when (weekDay){
+            "월" -> {
+                a.optString(0)
+            }
+            "화" -> {
+                a.optString(1)
+            }
+            "수" -> {
+                a.optString(2)
+            }
+            "목" -> {
+                a.optString(3)
+            }
+            "금" -> {
+                a.optString(4)
+            }
+            "토" -> {
+                a.optString(5)
+            }
+            "일" -> {
+                a.optString(6)
+            }
+        //요일에 해당하는 누적 카페인양}
+            //저장을 어찌할까!!
+        }
+    }
+
+    fun initWeekJson(){//room과 함께 처음 실행할 때만 생성하기
+        var blank = App.prefs.weekCafJson
+        if (blank != null){
+            var a = JSONArray(blank)
+            for (i in 0..7){
+                a.put("")
+            }
+            App.prefs.date = a.toString()
+            Log.e("json length", " // " + a.length())
+        }else{
+            Log.e("initWeekJson", "error")
+        }
     }
 
 

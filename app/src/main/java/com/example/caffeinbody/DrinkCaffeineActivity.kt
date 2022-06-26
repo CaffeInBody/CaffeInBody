@@ -139,7 +139,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         }
     }
 
-    public fun addTimeJson(){
+    fun addTimeJson(){
         //시간을 json으로 저장
         val calendar = Calendar.getInstance()
         val date = Date()
@@ -158,7 +158,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         }
     }
 
-    public fun addCaffeineJson(caffeine: Int){
+    fun addCaffeineJson(caffeine: Int){
         var blank = App.prefs.todayCafJson
         if (blank != null){
             var a = JSONArray(blank)

@@ -44,10 +44,6 @@ class Survey2Activity  : AppCompatActivity() {
 
 
         binding.buttonNext.setOnClickListener {
-            val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
-            val editor = shared.edit()//sharedpreferences 값 확인해보기
-            //editor.putString("age", )
-            //editor.apply()
             val selectActivity =  Survey3Activity()
             val intent = Intent(this, selectActivity::class.java)
             intent.putExtra("caffeine", caffeine)

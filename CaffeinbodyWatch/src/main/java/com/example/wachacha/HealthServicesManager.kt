@@ -16,6 +16,7 @@
 
 package com.example.wachacha
 
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.concurrent.futures.await
 import androidx.health.services.client.HealthServicesClient
@@ -24,6 +25,7 @@ import androidx.health.services.client.data.Availability
 import androidx.health.services.client.data.DataPoint
 import androidx.health.services.client.data.DataType
 import androidx.health.services.client.data.DataTypeAvailability
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.channels.trySendBlocking
@@ -38,6 +40,9 @@ class HealthServicesManager @Inject constructor(
     healthServicesClient: HealthServicesClient
 ) {
     private val measureClient = healthServicesClient.measureClient
+
+    var count = 0
+    var repeat = 30
 
     suspend fun hasHeartRateCapability(): Boolean {
         val capabilities = measureClient.capabilities.await()
@@ -62,6 +67,13 @@ class HealthServicesManager @Inject constructor(
 
             override fun onData(data: List<DataPoint>) {
                 trySendBlocking(MeasureMessage.MeasureData(data))
+                Log.e("heart", "count: $count" )
+
+                if (count == repeat){
+                    Log.e("heart", "finally finished")
+                    close()
+                }
+                count++
             }
         }
 
@@ -73,6 +85,21 @@ class HealthServicesManager @Inject constructor(
             measureClient.unregisterCallback(DataType.HEART_RATE_BPM, callback)
         }
     }
+
+    /*private fun setUpCountDownTimer() {
+        timer = object : CountDownTimer(MainViewModel.MIllIS_IN_FUTURE, MainViewModel.TICK_INTERVAL) {
+            override fun onTick(millisUntilFinished: Long) {
+                countDownTimerDuration.value = millisUntilFinished
+                Log.e("heartrate", "timer duration: " + countDownTimerDuration.value.toString())
+            }
+
+            override fun onFinish() {
+                Log.e("heartrate", "timer finished")
+                timer.cancel()
+            }
+        }
+        timer.start()
+    }*/
 }
 
 sealed class MeasureMessage {

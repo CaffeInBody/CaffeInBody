@@ -81,7 +81,7 @@ class DetailActivity : AppCompatActivity() {
             for (i in 0 .. a.length() - 1){//원래는 -1 해야 함
                 times.add(a.optString(i).toFloat()/60)
                 caffeines.add(a2.optString(i).toFloat())
-                Log.e("time", "times: " + times[i]+ " Caffeines: " + caffeines[i] + " " + i + "번째")
+                Log.e("time", "저장된 카페인 데이터 times: " + times[i]+ " Caffeines: " + caffeines[i] + " " + i + "번째")
             }//여기까지가 입력한 시간과 양 어레이로 가져오기
             times.add(0f)//공백 넣어줌
 

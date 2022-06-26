@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Cafein-Android/CaffeinbodyWatch/src/main/res/drawable/ic_broken_heart.xml" value="0.1945" />
+        <entry key="..\:/Cafein-Android/CaffeinbodyWatch/src/main/res/layout/activity_heartrate.xml" value="0.47175732217573224" />
         <entry key="..\:/CaffeInBody/CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.1" />
         <entry key="..\:/CaffeInBody/app/src/main/res/drawable/btn_select.xml" value="0.1235" />
         <entry key="..\:/CaffeInBody/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1235" />

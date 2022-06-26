@@ -18,6 +18,8 @@ package com.example.wachacha
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
+import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -45,6 +47,7 @@ class HeartRateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityHeartrateBinding.inflate(layoutInflater)
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(binding.root)
 
         permissionLauncher =
@@ -57,8 +60,10 @@ class HeartRateActivity : AppCompatActivity() {
                         // sampling rate of device sensors, so we must be careful not to remain
                         // registered any longer than necessary.
                         lifecycleScope.launchWhenStarted {
-                            Log.e("hello", "??")
+                            Log.e("heartrate2", "heartrateactivity")
+                            binding.statusText.setText("측정 시작")
                             viewModel.measureHeartRate()
+                            binding.statusText.setText("측정완료 : " + String.format("%.1f", viewModel.average/30))
                         }
                     }
                     false -> Log.i(TAG, "Body sensors permission not granted")

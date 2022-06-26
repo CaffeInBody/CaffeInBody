@@ -59,4 +59,8 @@ class MySharedPreferences(context: Context) {
     var dayCaffeine: String?
         get() = prefs.getString("dayCaffeine", null)
         set(value) = prefs.edit().putString("dayCaffeine", value!!).apply()
+
+    var weekCafJson: String?
+        get() = prefs.getString("drinkCafJson", null)
+        set(value) = prefs.edit().putString("drinkCafJson", value).apply()
 }

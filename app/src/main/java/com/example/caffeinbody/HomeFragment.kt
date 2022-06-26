@@ -233,10 +233,10 @@ class HomeFragment : Fragment() {
             var caffeineRemain = caffeines[timeI]!!
             currentTime = times[timeI] + (halfTime * count++).toFloat()
             putCurrentCaffeine(caffeineRemain)
-            Log.e("time", "nowTime: $nowTime, currentTime: $currentTime, caffeineRemain: $caffeineRemain, times[timeI]: " + times[timeI])
+            Log.e("time", "첫 점: nowTime: $nowTime, currentTime: $currentTime, caffeineRemain: $caffeineRemain, times[timeI]: " + times[timeI])
 
 
-            while (nowTime>=currentTime){
+            while (nowTime>=currentTime){//날짜가 바뀌는 경우 어떻게 계산할지
                 val timeGap2 = nowTime - currentTime
                 var caffeineRemain2 = caffeineRemain
                 if (timeGap2>=0){
