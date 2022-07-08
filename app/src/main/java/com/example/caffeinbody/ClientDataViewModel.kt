@@ -54,6 +54,7 @@ class ClientDataViewModel :
                 )
             }
         )
+        Log.e("ClientDataViewModel", "뭔가가 추가됐음")
     }
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
@@ -66,9 +67,10 @@ class ClientDataViewModel :
             )
         )
         events.forEach {
-                event -> Toast.makeText(mainActivity,event.text, Toast.LENGTH_SHORT).show()
+                event -> Log.e("메시지 왔음: ", event.text)
         }
         Log.e("메시지 왔음: ", messageEvent.data.decodeToString() )
+
     }
 
     override fun onCapabilityChanged(capabilityInfo: CapabilityInfo) {

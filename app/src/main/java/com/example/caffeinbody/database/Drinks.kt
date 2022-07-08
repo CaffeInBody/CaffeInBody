@@ -9,7 +9,9 @@ data class Drinks(
     var size: Int,
     var caffeine: Int,
     var category: String,
-    var madeBy: String
+    var madeBy: String,
+    var url: String,
+    var isCoffee: Boolean
 ){
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }

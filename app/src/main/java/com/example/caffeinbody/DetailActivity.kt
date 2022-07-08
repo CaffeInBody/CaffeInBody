@@ -49,13 +49,25 @@ class DetailActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        calculateHalfLife(1.0)
+        val multiply = App.prefs.multiply
+        if (multiply != 0.0f) {
+            calculateHalfLife(multiply!!.toDouble())
+        }else{
+            calculateHalfLife(1.0)
+        }
+        Log.e("DetailActivity", multiply.toString())
+
 
         var chartWeekLine = binding.linechart
         setWeekLine(chartWeekLine)
 
      //   binding.textView11.setText(App.prefs.todayCaf.toString() + "mg")
-        binding.textView11.setText(App.prefs.currentcaffeine + "mg")
+        if (App.prefs.currentcaffeine == null){
+            binding.textView11.setText("0mg")
+        }else{
+            binding.textView11.setText(App.prefs.currentcaffeine + "mg")
+        }
+
 
     }
     //새 카페인이 추가되면 총 마신 카페인량이 저장됨
@@ -101,7 +113,7 @@ class DetailActivity : AppCompatActivity() {
                         lineChartData.add(Entry(currentTime, caffeineRemain))
                         Log.e("time", "one")
                     }else{//그래프 중간에 끼워야 할 때
-                        val timeGap = times[timeI + 1] - currentTime//일수도 있고
+                        val timeGap = times[timeI + 1] - currentTime//일수도 있고(-일경우)
                         currentTime = times[timeI + 1]
                         caffeineRemain = caffeineRemain - caffeineRemain/2*(timeGap/halfTime.toFloat()) + caffeines[timeI + 1]//시간이 흘러 줄어든 후 남은 카페인 양
                         lineChartData.add(Entry(currentTime, caffeineRemain))

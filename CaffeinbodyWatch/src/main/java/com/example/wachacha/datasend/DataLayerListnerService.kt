@@ -50,7 +50,7 @@ class DataLayerListenerService : WearableListenerService() {//wear에서 데이�
             START_ACTIVITY_PATH -> {
                 Log.e("메시지옴", "2")
                 startActivity(
-                    Intent(this, MainActivityWearOS::class.java)
+                    Intent(this, HeartRateActivity::class.java)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 )
             }

@@ -63,4 +63,12 @@ class MySharedPreferences(context: Context) {
     var weekCafJson: String?
         get() = prefs.getString("drinkCafJson", null)
         set(value) = prefs.edit().putString("drinkCafJson", value).apply()
+
+    var multiply: Float?
+        get() = prefs.getFloat("multiply", 0.0f)
+        set(value) = prefs.edit().putFloat("multiply", value!!).apply()
+
+    var heartrateAvg: String?
+        get() = prefs.getString("heartrateAvg", null)
+        set(value) = prefs.edit().putString("heartrateAvg", value).apply()
 }

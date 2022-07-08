@@ -3,6 +3,7 @@ package com.example.caffeinbody
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.caffeinbody.databinding.ActivityRecommendCaffeineBinding
 
 class RecommendCaffeineActivity : AppCompatActivity() {
@@ -27,10 +28,17 @@ class RecommendCaffeineActivity : AppCompatActivity() {
         if (age=="minor" || age=="senior" || isPregnant==true)
             recommendDayCaffeine = 300.0
 
-        if (heartbeat==true && headache==true)
+        if (heartbeat==true && headache==true){
             recommendDayCaffeine *= 0.4
-        else if (heartbeat==true || headache==true)
+            App.prefs.multiply = 0.4f
+        }
+        else if (heartbeat==true || headache==true){
             recommendDayCaffeine *= 0.7
+            App.prefs.multiply = 0.7f
+        }else
+            App.prefs.multiply = 1f
+
+        Log.e("detailActivity", App.prefs.multiply.toString())
 
         if (caffeine >= recommendDayCaffeine)
             caffeine = recommendDayCaffeine

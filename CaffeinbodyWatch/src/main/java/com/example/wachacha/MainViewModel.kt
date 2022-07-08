@@ -78,7 +78,7 @@ class MainViewModel @Inject constructor(
                     if (bpm!= 0.toDouble()){//값이 있으면
                         average += bpm
                         count++
-                        Log.e("heartrate", "bom: $bpm, average: $average")
+                        Log.e("heartrate", "bpm: $bpm, average: $average")
                     }else{
                         healthServicesManager.count = 0
                     }
@@ -87,11 +87,6 @@ class MainViewModel @Inject constructor(
             }
 
         }
-    }
-
-    companion object {
-        const val MIllIS_IN_FUTURE = 10000L
-        const val TICK_INTERVAL = 1000L
     }
 }
 

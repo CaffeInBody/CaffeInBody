@@ -10,13 +10,13 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseEdiya
-import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseGongCha
+//import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseEdiya
+//import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseGongCha
 import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseHalis
-import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabasePaiks
+//import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabasePaiks
 import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseStarbucks
-import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseTheVenti
-import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseTwosome
+//import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseTheVenti
+//import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseTwosome
 import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.FragmentSurvey1Binding
@@ -49,11 +49,11 @@ class Survey1Activity  : AppCompatActivity() {
         db = DrinksDatabase.getInstance(applicationContext)!!
         addDrinksDatabaseStarbucks(db)
         addDrinksDatabaseHalis(db)
-        addDrinksDatabaseTwosome(db)
+        /*addDrinksDatabaseTwosome(db)
         addDrinksDatabaseEdiya(db)
         addDrinksDatabasePaiks(db)
         addDrinksDatabaseTheVenti(db)
-        addDrinksDatabaseGongCha(db)
+        addDrinksDatabaseGongCha(db)*/
 
         binding.btnAgeLayout.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId) {
