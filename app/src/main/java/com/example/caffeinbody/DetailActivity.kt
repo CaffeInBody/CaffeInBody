@@ -9,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.example.caffeinbody.database.CafeDatas
-import com.example.caffeinbody.database.CafeDatas.Companion.testRoom
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.ActivityDetailBinding
 import com.github.mikephil.charting.charts.LineChart
@@ -38,11 +37,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        db = DrinksDatabase.getInstance(applicationContext)!!
-        testRoom(db)
-        CafeDatas.hello()
-        Log.e("testDetail", "한글 깨지나")
 
         setSupportActionBar(binding.toolbar)
         //    supportActionBar!!.setDisplayShowTitleEnabled(false)

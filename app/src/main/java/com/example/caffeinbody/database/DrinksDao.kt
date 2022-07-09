@@ -16,13 +16,15 @@ interface DrinksDao {
     @Delete
     fun delete(drink: Drinks)
 
-    @Query("select * from Drinks where madeBy = :something")
+    @Query("select * from Drinks where madeBy like :something")
     fun selectDrinkMadeBy(something: String): List<Drinks>
 
     @Query("select count(*) from Drinks")
     fun selectCount(): Int
 
     @Query("select * from Drinks where drinkName like :something")
-    fun selectDrinkTest(something: String): List<Drinks>
+    fun selectDrinkName(something: String): List<Drinks>
 
+    @Query("select * from Drinks where category like :something")
+    fun selectDrinkCategory(something: String): List<Drinks>
 }

@@ -5,6 +5,13 @@
       <map>
         <entry key="..\:/Cafein-Android/CaffeinbodyWatch/src/main/res/drawable/ic_broken_heart.xml" value="0.1945" />
         <entry key="..\:/Cafein-Android/CaffeinbodyWatch/src/main/res/layout/activity_heartrate.xml" value="0.47175732217573224" />
+        <entry key="..\:/Cafein-Android/app/src/main/res/layout/activity_caffeine_list.xml" value="0.13541666666666666" />
+        <entry key="..\:/Cafein-Android/app/src/main/res/layout/activity_main.xml" value="0.13541666666666666" />
+        <entry key="..\:/Cafein-Android/app/src/main/res/layout/activity_search.xml" value="0.264" />
+        <entry key="..\:/Cafein-Android/app/src/main/res/layout/fragment_setting.xml" value="0.13541666666666666" />
+        <entry key="..\:/Cafein-Android/app/src/main/res/layout/item_caffeine.xml" value="0.13541666666666666" />
+        <entry key="..\:/Cafein-Android/app/src/main/res/menu/menu_bottom.xml" value="0.152" />
+        <entry key="..\:/Cafein-Android/app/src/main/res/menu/menu_search.xml" value="0.13541666666666666" />
         <entry key="..\:/CaffeInBody/CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.1" />
         <entry key="..\:/CaffeInBody/app/src/main/res/drawable/btn_select.xml" value="0.1235" />
         <entry key="..\:/CaffeInBody/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1235" />

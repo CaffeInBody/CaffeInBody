@@ -48,10 +48,6 @@ class CaffeineListActivity : AppCompatActivity() {
 
     }
 
-
-
-
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(com.example.caffeinbody.R.menu.menu_search,menu)
         return super.onCreateOptionsMenu(menu)
@@ -63,7 +59,8 @@ class CaffeineListActivity : AppCompatActivity() {
             true
         }
         R.id.search-> {
-            // User chose the "Settings" item, show the app settings UI...
+            val intent = Intent(this, SearchDrinksActivity::class.java)
+            startActivity(intent)
             true
         }
         R.id.home-> {
