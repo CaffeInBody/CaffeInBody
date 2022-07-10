@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -120,10 +121,28 @@
     <TextView
         android:id="@+id/resultText"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="25dp"
         android:text="TextView"
         android:scrollbars="vertical"
         android:background="@color/brown"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/caffein_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingStart="20dp"
+
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:spanCount="2"
+            tools:listitem="@layout/item_caffeine" />
+
+    </ScrollView>
 
 
 

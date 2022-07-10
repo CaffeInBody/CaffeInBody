@@ -7,4 +7,5 @@ data class CaffeineData (
  //   val img : String,
     val img : Int?,
 //    val caffeine : Array<String>
+//제조사
 )

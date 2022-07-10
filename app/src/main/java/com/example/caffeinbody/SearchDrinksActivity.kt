@@ -5,6 +5,7 @@ import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.caffeinbody.database.CafeDatas
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.ActivitySearchBinding
@@ -16,6 +17,8 @@ import kotlinx.coroutines.launch
 class SearchDrinksActivity: AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private lateinit var db: DrinksDatabase
+    lateinit var caffeineadapter: CaffeineAdapter
+    var datas = mutableListOf<CaffeineData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +26,15 @@ class SearchDrinksActivity: AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        caffeineadapter = CaffeineAdapter(this)
+        binding.caffeinList.adapter = caffeineadapter
+
         binding.resultText.setMovementMethod(ScrollingMovementMethod())
 
         binding.searchBtn.setOnClickListener {
             var find = binding.editText2.text.toString()
             binding.resultText.setText(null)
             db = DrinksDatabase.getInstance(applicationContext)!!
-            //var datas = CafeDatas()
             selectDrinkName(db, find)
         }
 
@@ -46,6 +51,9 @@ class SearchDrinksActivity: AppCompatActivity() {
             db = DrinksDatabase.getInstance(applicationContext)!!
             selectDrinkCategory(db, find)
         }
+
+        val layoutManager = GridLayoutManager(this,2)
+        binding.caffeinList.layoutManager = layoutManager
     }
 
     fun selectDrinkName(db: DrinksDatabase, find: String){
@@ -54,10 +62,15 @@ class SearchDrinksActivity: AppCompatActivity() {
                 db.drinksDao().selectDrinkName("%$find%")
             }.await()
             var count = 0
+            drinkNames.count()
             for (names in drinkNames){
                 Log.e("NameNew", "selectDrinkName: " + names)
+                datas.add(CaffeineData(1, names.id, names.drinkName, 0) )
                 binding.resultText.append((++count).toString() + ")" + names.toString() + "\n")
             }
+            Log.e("datas", datas.count().toString())
+            initRecycler()
+            datas.clear()
         }
     }
 
@@ -69,8 +82,11 @@ class SearchDrinksActivity: AppCompatActivity() {
             var count = 0
             for (maker in makers){
                 Log.e("maker", "selectDrinkName: " + maker)
+                datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
                 binding.resultText.append((++count).toString() + ")" + maker.toString() + "\n")
             }
+            initRecycler()
+            datas.clear()
         }
     }
 
@@ -82,8 +98,17 @@ class SearchDrinksActivity: AppCompatActivity() {
             var count = 0
             for (category in categories){
                 Log.e("maker", "selectDrinkName: " + category)
+                datas.add(CaffeineData(1, category.id, category.drinkName, 0) )
                 binding.resultText.append((++count).toString() + ")" + category.toString() + "\n")
             }
+            initRecycler()
+            datas.clear()
         }
+    }
+
+    private fun initRecycler(){
+        caffeineadapter.datas.clear()
+        caffeineadapter.datas.addAll(datas)
+        caffeineadapter.notifyDataSetChanged()
     }
 }
