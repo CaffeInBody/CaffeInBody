@@ -45,11 +45,16 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         val intent = getIntent()
         val name = intent.getStringExtra("name")
-        val image= intent.getIntExtra("img",0)
+        val image= intent.getStringExtra("img")
 
         supportActionBar!!.setTitle(name.toString())
 
         Glide.with(this).load(image).into(binding.imageViewDrink)
+
+        if(image == null || image == "" )
+            Glide.with(this).load(R.drawable.coffee_sample).into(binding.imageViewDrink)
+        else if ( image == "url") Glide.with(this).load(R.drawable.cola_sample).into(binding.imageViewDrink)
+        else Glide.with(this).load(image).centerCrop().into(binding.imageViewDrink)
 
 
         val display = windowManager.defaultDisplay // in case of Activity

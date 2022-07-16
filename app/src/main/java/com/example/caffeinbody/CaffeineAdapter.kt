@@ -11,11 +11,12 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.caffeinbody.database.Drinks
 
 class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<CaffeineAdapter.ViewHolder>() {
 
 
-    var datas = mutableListOf<CaffeineData>()
+    var datas = mutableListOf<Drinks>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_caffeine,parent,false)
@@ -27,7 +28,7 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val article : CaffeineData = datas.get(position)
+        val article : Drinks = datas.get(position)
         holder.bind(article)
 
 
@@ -36,8 +37,8 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
             intent.putExtra("id",position)
 
             //서버있으면지워도됨
-            intent.putExtra("name",article.name)
-            intent.putExtra("img", article.img)
+            intent.putExtra("name",article.drinkName)
+            intent.putExtra("img", article.imgurl)
 
             ContextCompat.startActivity(holder.itemView.context, intent, null)
             //카페인 마시기로 이동
@@ -47,12 +48,13 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
         private val txt: TextView = itemView.findViewById(R.id.txt_caffeine)
         private val img: ImageView = itemView.findViewById(R.id.img_caffeine)
 
-        fun bind(article: CaffeineData){
-            txt.text = article.name
+        fun bind(article: Drinks){
+            txt.text = article.drinkName
 
-            if(article.img==null)
+            if(article.imgurl==null || article.imgurl == "" )
                 Glide.with(itemView).load(R.drawable.coffee_sample).into(img)
-            else Glide.with(itemView).load(article.img).centerCrop().into(img)
+            else if ( article.imgurl == "url") Glide.with(itemView).load(R.drawable.cola_sample).into(img)
+            else Glide.with(itemView).load(article.imgurl).centerCrop().into(img)
 
         }
 

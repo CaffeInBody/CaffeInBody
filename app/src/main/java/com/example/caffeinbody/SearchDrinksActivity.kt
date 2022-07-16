@@ -108,7 +108,7 @@ class SearchDrinksActivity: AppCompatActivity() {
 
     private fun initRecycler(){
         caffeineadapter.datas.clear()
-        caffeineadapter.datas.addAll(datas)
+      //  caffeineadapter.datas.addAll(datas)
         caffeineadapter.notifyDataSetChanged()
     }
 }
