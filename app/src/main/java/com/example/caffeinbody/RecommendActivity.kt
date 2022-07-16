@@ -19,6 +19,7 @@ class RecommendActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
+        val servingsize = App.prefs.currentcaffeine
 
     }
 
