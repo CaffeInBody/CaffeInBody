@@ -16,6 +16,9 @@ interface DrinksDao {
     @Delete
     fun delete(drink: Drinks)
 
+    @Query("SELECT * FROM Drinks")
+    fun getAll(): List<Drinks>
+
     @Query("select * from Drinks where madeBy like :something")
     fun selectDrinkMadeBy(something: String): List<Drinks>
 
@@ -27,4 +30,7 @@ interface DrinksDao {
 
     @Query("select * from Drinks where category like :something")
     fun selectDrinkCategory(something: String): List<Drinks>
+
+    @Query("select * from Drinks where iscafe like :something")
+    fun selectiscafe(something: Boolean): List<Drinks>
 }

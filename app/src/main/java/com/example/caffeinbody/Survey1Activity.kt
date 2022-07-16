@@ -255,7 +255,7 @@ class Survey1Activity  : AppCompatActivity() {
         }
     }
 
-    fun addDrinksDatabaseTwosome(db: DrinksDatabase) {
+    fun addDrinksDatabaseTwosome(db: DrinksDatabase) { //TODO 사이즈별 요소를 추가하는게 아니라 한 요소에 추가 사이즈가 들어가야해여
         CoroutineScope(Dispatchers.IO).launch {
             db.drinksDao().insertAll(
                 Drinks("스페니쉬 연유 카페라떼(Regular)", 355, 177, "커피", "투썸플레이스", "", true),
