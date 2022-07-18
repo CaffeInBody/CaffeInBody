@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.caffeinbody.database.CafeDatas
+import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.ActivitySearchBinding
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +19,7 @@ class SearchDrinksActivity: AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private lateinit var db: DrinksDatabase
     lateinit var caffeineadapter: CaffeineAdapter
-    var datas = mutableListOf<CaffeineData>()
+    var datas = mutableListOf<Drinks>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +66,8 @@ class SearchDrinksActivity: AppCompatActivity() {
             drinkNames.count()
             for (names in drinkNames){
                 Log.e("NameNew", "selectDrinkName: " + names)
-                datas.add(CaffeineData(1, names.id, names.drinkName, 0) )
+              //  datas.add(CaffeineData(1, names.id, names.drinkName, 0) )
+                datas.add(names)
                 binding.resultText.append((++count).toString() + ")" + names.toString() + "\n")
             }
             Log.e("datas", datas.count().toString())
@@ -82,7 +84,8 @@ class SearchDrinksActivity: AppCompatActivity() {
             var count = 0
             for (maker in makers){
                 Log.e("maker", "selectDrinkName: " + maker)
-                datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
+             //   datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
+                datas.add(maker)
                 binding.resultText.append((++count).toString() + ")" + maker.toString() + "\n")
             }
             initRecycler()
@@ -98,7 +101,8 @@ class SearchDrinksActivity: AppCompatActivity() {
             var count = 0
             for (category in categories){
                 Log.e("maker", "selectDrinkName: " + category)
-                datas.add(CaffeineData(1, category.id, category.drinkName, 0) )
+              //  datas.add(CaffeineData(1, category.id, category.drinkName, 0) )
+                datas.add(category)
                 binding.resultText.append((++count).toString() + ")" + category.toString() + "\n")
             }
             initRecycler()
@@ -108,7 +112,7 @@ class SearchDrinksActivity: AppCompatActivity() {
 
     private fun initRecycler(){
         caffeineadapter.datas.clear()
-      //  caffeineadapter.datas.addAll(datas)
+        caffeineadapter.datas.addAll(datas)
         caffeineadapter.notifyDataSetChanged()
     }
 }
