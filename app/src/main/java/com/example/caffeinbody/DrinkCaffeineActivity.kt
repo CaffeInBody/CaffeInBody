@@ -20,10 +20,11 @@ import org.json.JSONArray
 import java.util.*
 
 
-var arraySize = arrayOf<Int>(100,200,300)
+var arraySize = arrayOf<Int>(1,2,3)
 var resultInt:Int = 100
 
-var rangevalue:Int = 100
+var caffeine:Int = 100 //샷
+var rangevalue:Int = 100 //샷
 var size:Int = 0
 
 class DrinkCaffeineActivity : AppCompatActivity() {
@@ -46,6 +47,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         val intent = getIntent()
         val name = intent.getStringExtra("name")
         val image= intent.getStringExtra("img")
+        caffeine = intent.getIntExtra("caffeine",100)
 
         supportActionBar!!.setTitle(name.toString())
 
@@ -65,19 +67,19 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         //음료 사이즈 선택
         binding.size1.setOnClickListener {
-            resultInt = arraySize[0] * rangevalue /100
+            resultInt = arraySize[0] * caffeine * rangevalue /100
             size = 0
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size2.setOnClickListener {
-            resultInt = arraySize[1] * rangevalue /100
+            resultInt = arraySize[1] * caffeine * rangevalue /100
             size = 1
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size3.setOnClickListener {
-            resultInt = arraySize[2] * rangevalue /100
+            resultInt = arraySize[2] * caffeine * rangevalue /100
             size = 2
             binding.result.setText(resultInt.toString()+"mg")
         }
@@ -87,7 +89,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             override fun onPointsChanged(boxedPoints: BoxedVertical, value: Int) {
                 println(value)
                 rangevalue = value
-                resultInt = value * arraySize[size] / 100
+                resultInt = caffeine * value * arraySize[size] / 100
                 binding.textView7.setText((value.toDouble() / 100).toString()+"잔")
                 binding.result.setText(resultInt.toString()+"mg")
             }

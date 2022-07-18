@@ -42,7 +42,7 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
             //서버있으면지워도됨
             intent.putExtra("name",article.drinkName)
             intent.putExtra("img", article.imgurl)
-
+            intent.putExtra("caffeine", article.caffeine)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
             //카페인 마시기로 이동
         }}

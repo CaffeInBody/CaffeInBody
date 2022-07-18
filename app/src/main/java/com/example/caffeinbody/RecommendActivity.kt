@@ -29,7 +29,7 @@ class RecommendActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        var caffeine = App.prefs.sensetivity?.toDouble()
+        var caffeine = App.prefs.currentcaffeine?.toDouble()
         caffeineadapter = CaffeineAdapter(this)
 
 
@@ -46,6 +46,7 @@ class RecommendActivity : AppCompatActivity() {
                         //데이터가 많아서 랜덤으로 6개만 뽑아서 보여줌
                         it.shuffled() //데이터 섞기
                         for (i in 0 until 6){ //6개만 뽑아서 넣음
+                            if(it[i]==null) break
                             caffeineadapter.datas.add(it[i])
                         }
                         //caffeineadapter.datas.addAll(it)
