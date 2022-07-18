@@ -4,11 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.caffeinbody.databinding.ActivityRecommendCaffeineBinding
+import com.example.caffeinbody.databinding.ActivitySurveyResultBinding
 
-class RecommendCaffeineActivity : AppCompatActivity() {
-    private val binding: ActivityRecommendCaffeineBinding by lazy {
-        ActivityRecommendCaffeineBinding.inflate(
+class SurveyResultActivity : AppCompatActivity() {
+    private val binding: ActivitySurveyResultBinding by lazy {
+        ActivitySurveyResultBinding.inflate(
             layoutInflater
         )
     }

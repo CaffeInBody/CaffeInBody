@@ -34,7 +34,7 @@
         <activity android:name=".Survey2Activity" />
         <activity android:name=".Survey3Activity" />
         <activity android:name=".RecommendActivity" />
-        <activity android:name=".RecommendCaffeineActivity" />
+        <activity android:name=".SurveyResultActivity" />
         <activity android:name=".SearchDrinksActivity"/>
     </application>
 
