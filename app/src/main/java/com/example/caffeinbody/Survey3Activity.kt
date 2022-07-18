@@ -1,20 +1,11 @@
 package com.example.caffeinbody
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import com.example.caffeinbody.databinding.FragmentSettingBinding
-import com.example.caffeinbody.databinding.FragmentSurvey1Binding
 import com.example.caffeinbody.databinding.FragmentSurvey3Binding
 
 class Survey3Activity  : AppCompatActivity() {
@@ -50,7 +41,7 @@ class Survey3Activity  : AppCompatActivity() {
             App.prefs.heartbeat = heartbeat
             App.prefs.headache = headache
 
-            val selectActivity = RecommendCaffeineActivity()
+            val selectActivity = SurveyResultActivity()
             val intent = Intent(this, selectActivity::class.java)
             intent.putExtra("caffeine", caffeine)
             startActivity(intent)
@@ -58,7 +49,7 @@ class Survey3Activity  : AppCompatActivity() {
         }
 
         binding.button5.setOnClickListener{
-            val selectActivity = RecommendCaffeineActivity()
+            val selectActivity = SurveyResultActivity()
             val intent = Intent(this, selectActivity::class.java)
             intent.putExtra("caffeine",caffeine)
             startActivity(intent)
