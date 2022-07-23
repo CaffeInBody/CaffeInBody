@@ -37,6 +37,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        Log.e("detail", "아하")
 
         setSupportActionBar(binding.toolbar)
         //    supportActionBar!!.setDisplayShowTitleEnabled(false)
