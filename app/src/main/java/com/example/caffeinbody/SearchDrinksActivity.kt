@@ -3,10 +3,8 @@ package com.example.caffeinbody
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.caffeinbody.database.CafeDatas
 import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.ActivitySearchBinding

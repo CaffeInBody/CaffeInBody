@@ -1,27 +1,20 @@
 package com.example.caffeinbody
 
-import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
-import com.example.caffeinbody.database.CafeDatas
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.ActivityDetailBinding
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
-import org.json.JSONArray
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.pow
-import kotlin.math.sqrt
+
 class DetailActivity : AppCompatActivity() {
     private lateinit var db: DrinksDatabase
     val multiply = App.prefs.multiply//평균 반감기 시간에 곱하는 값
