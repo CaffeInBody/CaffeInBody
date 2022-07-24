@@ -28,8 +28,6 @@ class ClientDataViewModel :
     MessageClient.OnMessageReceivedListener,
     CapabilityClient.OnCapabilityChangedListener {
 
-    lateinit var mainActivity: MainActivity
-
     private var _events = mutableStateListOf<Event>()
     /**The list of events from the clients.**/
     val events: List<Event> = _events

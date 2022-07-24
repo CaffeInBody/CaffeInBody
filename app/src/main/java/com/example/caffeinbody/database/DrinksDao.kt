@@ -36,4 +36,12 @@ interface DrinksDao {
 
     @Query("select * from Drinks where caffeine BETWEEN 0 AND :something")
     fun recommendcaffeine(something: Double): List<Drinks>
+
+    @Query("select * from Drinks where favorite = :something")//favorite 항목만 반환(true/false)
+    fun selectFavorite(something: Boolean): List<Drinks>
+
+    @Query("update Drinks set favorite = :something where drinkName = :name")//favorite 항목만 변경(true/false)
+    fun updateFavorite(something: Boolean, name: String)
+
+    //favorite update 함수
 }

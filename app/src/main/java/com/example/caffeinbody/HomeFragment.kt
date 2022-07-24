@@ -43,14 +43,10 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setUI()
+        //setUI()
         arguments?.let {
 
         }
-
-        lateinit var mainActivity: MainActivity
-        mainActivity = context as MainActivity
-        clientDataViewModel.mainActivity = mainActivity
     }
 
     private val binding: FragmentHomeBinding by lazy {
@@ -66,6 +62,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         //   initRecycler()
         setUI()
+        Log.e("home", "onCreateView")
 
         binding.addBeverageBtn.setOnClickListener{
             sendFavorite()
@@ -91,6 +88,12 @@ class HomeFragment : Fragment() {
             Log.e("폰에서 워치앱 열기 on HomeFrag", "하자!!!")
         }
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setUI()
+        Log.e("home", "resume")
     }
 
 ////////////////워치로 열기 버튼 누르면 워치로 메시지 보내서 앱 열게 함
@@ -149,7 +152,7 @@ class HomeFragment : Fragment() {
         var registeredTime = App.prefs.registeredTime//가장 최근 카페인 섭취한 시간
         var halfTime =
             DetailActivity.calHalfTime(getString(R.string.basicTime).toInt(), App.prefs.multiply!!)//-> 민감도 반영 반감기 시간
-        Log.e("home", getString(R.string.basicTime).toInt().toString())
+        //Log.e("home", getString(R.string.basicTime).toInt().toString())
         var leftCaffeine = calculateCaffeinLeft(todayCaf!!.toFloat(), nowTime- registeredTime!!, halfTime, 0.5f)
         putCurrentCaffeine(leftCaffeine)
         val servingsize = App.prefs.currentcaffeine//체내 남은 카페인량 sensitivity와 currentcaffeine의 용도 차이
@@ -173,6 +176,7 @@ class HomeFragment : Fragment() {
         //---------------섭취권고량 설정-----------------
         //TODO 소현
         var servingsize = App.prefs.sensetivity?.toDouble()//나의 적정하루 섭취권고량
+        Log.e("home", "caffeineLeft: $caffeineLeft, servingSize: $servingsize")
         if (servingsize != null) {
             if((servingsize - caffeineLeft!!) > 0 ) {
                 var current = servingsize - caffeineLeft

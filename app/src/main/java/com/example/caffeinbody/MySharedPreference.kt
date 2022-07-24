@@ -16,19 +16,7 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getInt(prefsKeyCaf, 0 )
         set(value) = prefs.edit().putInt(prefsKeyCaf, value!!).apply()
 
-    /*var todayDrink: String?
-        get() = prefs.getString(prefsKeyDrink, "" )
-        set(value) = prefs.edit().putString(prefsKeyDrink, value).apply()
-
-    var date: String?
-        get() = prefs.getString("drinkTime", null)
-        set(value) = prefs.edit().putString("drinkTime", value).apply()
-
-    var todayCafJson: String?
-        get() = prefs.getString("drinkCafJson", null)
-        set(value) = prefs.edit().putString("drinkCafJson", value).apply()*/
-
-    var sensetivity: String?//1회섭취량
+    var sensetivity: String?//1회 카페인 섭취 권고량
         get() = prefs.getString("sensitivity", null)
         set(value) = prefs.edit().putString("sensitivity", value!!).apply()
 
@@ -53,11 +41,7 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getString("currentCaf", null)
         set(value) = prefs.edit().putString("currentCaf", value!!).apply()
 
-    /*var oncecaffeine: String?
-        get() = prefs.getString("oncecaffeine", null)
-        set(value) = prefs.edit().putString("oncecaffeine", value!!).apply()*/
-
-    var dayCaffeine: String?
+    var dayCaffeine: String?//하루 카페인 섭취 권고량
         get() = prefs.getString("dayCaffeine", null)
         set(value) = prefs.edit().putString("dayCaffeine", value!!).apply()
 
