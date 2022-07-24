@@ -56,10 +56,10 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
             txt.text = article.drinkName
             caf.text = article.caffeine.toString() +"mg"
 
-            if(article.imgurl==null || article.imgurl == "" )
+            if(article.imgurl == "")
                 Glide.with(itemView).load(R.drawable.coffee_sample).into(img)
             else if ( article.imgurl == "url") Glide.with(itemView).load(R.drawable.cola_sample).into(img)
-            else Glide.with(itemView).load(article.imgurl).centerCrop().into(img)
+            else Glide.with(itemView).load(article.imgurl).override(500,).into(img)
 
         }
 

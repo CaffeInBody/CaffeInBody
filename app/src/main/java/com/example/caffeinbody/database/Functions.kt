@@ -104,39 +104,39 @@ class Functions() {
         }
     }
 
-    fun addDrinksDatabaseHalis(db: DrinksDatabase){
+    fun addDrinksDatabaseHollys(db: DrinksDatabase){
         CoroutineScope(Dispatchers.IO).launch{
             db.drinksDao().insertAll(
                 Drinks("디카페인 아메리카노", 354, 7, 0, "커피", "할리스", "", true, true, false),
                 Drinks("디카페인 카페라떼", 354, 7, 0, "커피", "할리스", "", true, true, false),
-                Drinks("디카페인 바닐라 딜라이트", 354, 20, 0, "커피", "할리스", "", true, true, false),
-                Drinks("프리미엄 블렌드 아메리카노", 354, 233, 0, "커피", "할리스", "", true, true, false),
-                Drinks("콜드브루 딜라이트", 354, 148, 0, "커피", "할리스", "", true, true, false),
+                Drinks("디카페인 바닐라 딜라이트", 354, 20, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490731/hollys/hol_double_shot_vanilla_delight_onyp8w.png", true, true, false),
+                Drinks("프리미엄 블렌드 아메리카노", 354, 233, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490730/hollys/hol_premium_blend_americano_iqadb4.png", true, true, false),
+                Drinks("콜드브루 딜라이트", 354, 148, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490729/hollys/hol_cold_brew_delight_kanedm.png", true, true, false),
                 Drinks("더블샷 바닐라 딜라이트", 354, 169, 0, "커피", "할리스", "", true, true, false),
-                Drinks("프리미엄 블렌드 딥라떼", 354, 111, 0, "커피", "할리스", "", true, true, false),
-                Drinks("바닐라 딜라이트", 354, 80, 0, "커피", "할리스", "", true, true, false),
-                Drinks("리스트레또 딜라이트", 354, 93, 0, "커피", "할리스", "", true, true, false),
-                Drinks("콜드브루 라떼", 354, 148, 0, "커피", "할리스", "", true, true, false),
-                Drinks("콜드브루", 354, 137, 0, "커피", "할리스", "", true, true, false),
-                Drinks("카라멜 마키아또", 354, 127, 0, "커피", "할리스", "", true, true, false),
-                Drinks("카페모카", 354, 132, 0, "커피", "할리스", "", true, true, false),
-                Drinks("카푸치노", 354, 127, 0, "커피", "할리스", "", true, true, false),
-                Drinks("카페라떼", 354, 127, 0, "커피", "할리스", "", true, true, false),
-                Drinks("아메리카노", 354, 114, 0, "커피", "할리스", "", true, true, false),
-                Drinks("아포가토", 150, 93, 0, "커피", "할리스", "", true, true, false),
+                Drinks("프리미엄 블렌드 딥라떼", 354, 111, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490729/hollys/hol_premium_blend_deep_latte_xh21gy.png", true, true, false),
+                Drinks("바닐라 딜라이트", 354, 80, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490729/hollys/hol_vanilla_delight_gkrpvp.png", true, true, false),
+                Drinks("리스트레또 딜라이트", 354, 93, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490731/hollys/hol_ristretto_delight_yctszo.png", true, true, false),
+                Drinks("콜드브루 라떼", 354, 148, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490732/hollys/hol_cold_brew_latte_x7ada1.png", true, true, false),
+                Drinks("콜드브루", 354, 137, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490729/hollys/hol_cold_brew_nzbip7.png", true, true, false),
+                Drinks("카라멜 마키아또", 354, 127, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490729/hollys/hol_caramel_macchiato_wt6v8k.png", true, true, false),
+                Drinks("카페모카", 354, 132, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490730/hollys/hol_caffe_mocha_avgbnp.png", true, true, false),
+                Drinks("카푸치노", 354, 127, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490734/hollys/hol_cappuccino_yflwry.png", true, true, false),
+                Drinks("카페라떼", 354, 127, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490730/hollys/hol_caffe_latte_rhz4ou.png", true, true, false),
+                Drinks("아메리카노", 354, 114, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490729/hollys/hol_caffe_americano_adu1re.png", true, true, false),
+                Drinks("아포가토", 150, 93, 0, "커피", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490728/hollys/hol_affogato_cqgtlz.png", true, true, false),
                 Drinks("에스프레소", 25, 61, 0, "커피", "할리스", "", true, true, false),
-                Drinks("민트초코", 354, 1, 0, "라떼·초콜릿·티", "할리스", "", false, true, false),
-                Drinks("그린티라떼", 354, 50, 0, "라떼·초콜릿·티", "할리스", "", false, true, false),
-                Drinks("밀크티라떼", 354, 72, 0, "라떼·초콜릿·티", "할리스", "", false, true, false),
-                Drinks("핫초코", 354, 8, 0, "라떼·초콜릿·티", "할리스", "", false, true, false),
-                Drinks("화이트초코", 354, 23, 0, "라떼·초콜릿·티", "할리스", "", false, true, false),
-                Drinks("복숭아 얼그레이", 354, 33, 0, "라떼·초콜릿·티", "할리스", "", false, true, false),
+                Drinks("민트초코", 354, 1, 0, "라떼·초콜릿·티", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490733/hollys/hol_mint_chocolate_pn9bhm.png", false, true, false),
+                Drinks("그린티라떼", 354, 50, 0, "라떼·초콜릿·티", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490732/hollys/hol_green_tea_latte_vhbnkg.png", false, true, false),
+                Drinks("밀크티라떼", 354, 72, 0, "라떼·초콜릿·티", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490730/hollys/hol_milk_tea_latte_zhcvu4.png", false, true, false),
+                Drinks("핫초코", 354, 8, 0, "라떼·초콜릿·티", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490729/hollys/hol_hot_chocolate_uchrum.png", false, true, false),
+                Drinks("화이트초코", 354, 23, 0, "라떼·초콜릿·티", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490732/hollys/hol_white_chocolate_ewrzuq.png", false, true, false),
+                Drinks("복숭아 얼그레이", 354, 33, 0, "라떼·초콜릿·티", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490728/hollys/hol_peach_earl_grey_oiia95.png", false, true, false),
                 Drinks("해남 녹차", 354, 25, 0, "라떼·초콜릿·티", "할리스", "", false, true, false),
-                Drinks("얼그레이", 354, 17, 0, "라떼·초콜릿·티", "할리스", "", false, true, false),
-                Drinks("민트 초코칩 할리치노", 354, 1, 0, "할리치노·빙수", "할리스", "", false, true, false),
-                Drinks("그린티 할리치노", 354, 99, 0, "할리치노·빙수", "할리스", "", false, true, false),
+                Drinks("얼그레이", 354, 17, 0, "라떼·초콜릿·티", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490728/hollys/hol_earl_grey_btwrmg.png", false, true, false),
+                Drinks("민트 초코칩 할리치노", 354, 1, 0, "할리치노·빙수", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490731/hollys/hol_mint_chocochip_hollyccino_qxbunq.png", false, true, false),
+                Drinks("그린티 할리치노", 354, 99, 0, "할리치노·빙수", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490728/hollys/hol_green_tea_hollyccino_xcjdgv.png", false, true, false),
                 Drinks("다크초코칩 할리치노", 354, 59, 0, "할리치노·빙수", "할리스", "", false, true, false),
-                Drinks("콜드브루 할리치노", 354, 74, 0, "할리치노·빙수", "할리스", "", false, true, false),
+                Drinks("콜드브루 할리치노", 354, 74, 0, "할리치노·빙수", "할리스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490730/hollys/hol_coldbrew_hollyccino_pgk8gc.png", false, true, false),
                 Drinks("데이드림 HOT", 283, 235, 0, "MD식품", "할리스", "", false, true, false),
                 Drinks("데이드림 ICED", 340, 177, 0, "MD식품", "할리스", "", false, true, false),
                 Drinks("이클립스 HOT", 283, 235, 0, "MD식품", "할리스", "", false, true, false),
@@ -144,6 +144,7 @@ class Functions() {
                 Drinks("과테말라 싱글오리진 HOT", 283, 237, 0, "MD식품", "할리스", "", false, true, false),
                 Drinks("과테말라 싱글오리진 ICED", 340, 151, 0, "MD식품", "할리스", "", false, true, false),
             )
+
         }
     }
 

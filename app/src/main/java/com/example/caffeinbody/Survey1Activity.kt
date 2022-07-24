@@ -46,7 +46,7 @@ class Survey1Activity  : AppCompatActivity() {
         var funcs = Functions()
 
         funcs.addDrinksDatabaseStarbucks(db)
-        funcs.addDrinksDatabaseHalis(db)
+        funcs.addDrinksDatabaseHollys(db)
         funcs.addDrinksDatabaseTwosome(db)
         funcs.addDrinksDatabaseEdiya(db)
         funcs.addDrinksDatabasePaiks(db)
