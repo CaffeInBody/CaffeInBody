@@ -21,11 +21,10 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.pow
-
-//라인차트 그리기
+import kotlin.math.sqrt
 class DetailActivity : AppCompatActivity() {
-    val basicTime = 5
     private lateinit var db: DrinksDatabase
+    val multiply = App.prefs.multiply//평균 반감기 시간에 곱하는 값
 
     private val lineChartData = ArrayList<Entry>()
     private val binding: ActivityDetailBinding by lazy {
@@ -37,26 +36,21 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        Log.e("detail", "아하")
 
         setSupportActionBar(binding.toolbar)
         //    supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
 
-        val multiply = App.prefs.multiply
         if (multiply != 0.0f) {
-            calculateHalfLife(multiply!!.toDouble())
+            drawGraph(multiply!!.toDouble())
         }else{
-            calculateHalfLife(1.0)
+            drawGraph(1.0)
         }
-        Log.e("DetailActivity", multiply.toString())
-
 
         var chartWeekLine = binding.linechart
         setWeekLine(chartWeekLine)
 
-     //   binding.textView11.setText(App.prefs.todayCaf.toString() + "mg")
         if (App.prefs.currentcaffeine == null){
             binding.textView11.setText("0mg")
         }else{
@@ -65,70 +59,75 @@ class DetailActivity : AppCompatActivity() {
 
 
     }
+    companion object{
+        fun calculateCaffeinLeft(volume: Float, time: Float, halfTime: Float, half: Float): Float{
+            var t = time/halfTime
+            var leftCafffeine = volume * (half).pow(t)//지수함수 기준 반감기 계산식
+
+            Log.e("detail", "$volume $time $halfTime $half $t" )
+            //Log.e("leftCafffeine", leftCafffeine.toString())
+            return leftCafffeine
+        }
+
+        fun getTime():Float {
+            val calendar = Calendar.getInstance()
+            val date = Date()
+            calendar.setTime(date)
+            var time = (calendar.time.hours*60 + calendar.time.minutes)/60.toFloat()
+
+            return time
+        }
+
+        fun getDate():Int {
+            val calendar = Calendar.getInstance()
+            val date = Date()
+            calendar.setTime(date)
+            var dateToday = calendar.time.date
+            Log.e("detail", "todayDate: $dateToday")
+
+            return dateToday
+        }
+
+        fun calHalfTime(basicTime: Int, multiply: Float): Float{
+            Log.e("detail", "multiply: $multiply, basicTime: $basicTime etc: " + basicTime * (2 - multiply))
+            return basicTime * (2 - multiply)
+        }
+    }
+
     //새 카페인이 추가되면 총 마신 카페인량이 저장됨
-    fun calculateHalfLife(sensitivity: Double){
+    fun drawGraph(sensitivity: Double){
         binding.textView11.setText(App.prefs.currentcaffeine + "mg")
         var caffeineVolume = App.prefs.todayCaf
-        var halfTime = basicTime * (2 - sensitivity)//-> 민감도 반영 반감기 시간
-        var timeI = 0
-        //var nowTime = getTime()
+        var halfTime = calHalfTime( getString(R.string.basicTime).toInt(), sensitivity.toFloat())//-> 민감도 반영 반감기 시간
+        var nowTime = getTime()
+        var nowDate = getDate()
 
-        if (caffeineVolume != 0) {
-            var blank = App.prefs.date
-            var a = JSONArray(blank)
-            var times = ArrayList<Float>()
-
-            var blank2 = App.prefs.todayCafJson
-            var a2 = JSONArray(blank2)
-            var caffeines = ArrayList<Float>()
-
-            var count = 0
-            var currentTime = 0f
-
-            for (i in 0 .. a.length() - 1){//원래는 -1 해야 함
-                times.add(a.optString(i).toFloat()/60)
-                caffeines.add(a2.optString(i).toFloat())
-                Log.e("time", "저장된 카페인 데이터 times: " + times[i]+ " Caffeines: " + caffeines[i] + " " + i + "번째")
-            }//여기까지가 입력한 시간과 양 어레이로 가져오기
-            times.add(0f)//공백 넣어줌
-
-
-            //첫번째 점 그려줌
-            var caffeineRemain = caffeines[timeI]!!
-            //putCurrentCaffeine(caffeineRemain)
-            currentTime = times[timeI] + (halfTime * count++).toFloat()
-            lineChartData.add(Entry(currentTime, caffeineRemain))
-
-            while (caffeineRemain!! >= 10){
-                Log.e("time", "남은 카페인 : $caffeineRemain")
-                if (times[timeI + 1] != 0f){//더 추가된 카페인 데이터가 있으면
-                    if (currentTime+ halfTime < times[timeI + 1]){//5시간 뒤보다 후에 추가됐으면
-                        currentTime = times[timeI] + (halfTime * count).toFloat()
-                        caffeineRemain = caffeineRemain!!/(2.0).toFloat()
-                        lineChartData.add(Entry(currentTime, caffeineRemain))
-                        Log.e("time", "one")
-                    }else{//그래프 중간에 끼워야 할 때
-                        val timeGap = times[timeI + 1] - currentTime//일수도 있고(-일경우)
-                        currentTime = times[timeI + 1]
-                        caffeineRemain = caffeineRemain - caffeineRemain/2*(timeGap/halfTime.toFloat()) + caffeines[timeI + 1]//시간이 흘러 줄어든 후 남은 카페인 양
-                        lineChartData.add(Entry(currentTime, caffeineRemain))
-
-                        timeI++
-                        count = 0
-                        Log.e("time", "two")
-
-                    }
-                }else{//이게 끝일 때
-                    currentTime = times[timeI] + (halfTime * count).toFloat()
-                    caffeineRemain = caffeineRemain!!/(2.0).toFloat()
-                    lineChartData.add(Entry(currentTime, caffeineRemain))
-                    Log.e("time", "three")
+        if (caffeineVolume != 0) {//오늘마신카페인이 있으면
+            //timeGap이 마이너스가 될 경우
+            var registeredT = App.prefs.registeredTime
+            if (nowDate - App.prefs.registeredDate!!>=1){//registered 23시, nowTime 1시
+                var leftCaffeine = calculateCaffeinLeft(caffeineVolume!!.toFloat(), nowTime + 24*(nowDate - App.prefs.registeredDate!!)- registeredT!!, halfTime, 0.5f)
+                Log.e("detail nowT", "$nowTime registeredT: $registeredT")
+                var i = 0
+                var leftCaffeineStable = leftCaffeine
+                while (leftCaffeineStable!! >= 10){
+                    leftCaffeineStable =leftCaffeine/(2.0).pow(i).toFloat()
+                    lineChartData.add(Entry((nowTime + halfTime*i++), leftCaffeineStable))
                 }
-                count++
-
-
-            }/////여기까지만
-
+                Log.e("detail", "nowtime1")
+            }else if(nowTime- registeredT!!>0){//registered 13시, nowtime 20시
+                var leftCaffeine = calculateCaffeinLeft(caffeineVolume!!.toFloat(), nowTime- registeredT!!, halfTime, 0.5f)
+                //Log.e("detail nowT", "$nowTime registeredT: $registeredT")
+                var i = 0
+                var leftCaffeineStable = leftCaffeine
+                while (leftCaffeineStable!! >= 10){
+                    leftCaffeineStable =leftCaffeine/(2.0).pow(i).toFloat()
+                    lineChartData.add(Entry((nowTime + halfTime*i++), leftCaffeineStable))
+                }
+                Log.e("detail", "nowtime2")
+            } else{
+                Log.e("detail", "알 수 없는 에러")
+            }
         } else{
             lineChartData.add(Entry(0.toFloat(), 0.toFloat()))
         }

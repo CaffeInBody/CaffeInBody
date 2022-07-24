@@ -105,8 +105,8 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         // 저장
         binding.save.setOnClickListener {
-            addTimeJson()//카페인 등록 시간을 jsonArray로
-            addCaffeineJson(resultInt)//각각의 카페인 양을 jsonArray로
+            addTime()//카페인 등록 시간을 jsonArray로
+            //addCaffeineJson(resultInt)//각각의 카페인 양을 jsonArray로
 
             val msg = App.prefs.todayCaf
             if (msg != null) {
@@ -146,13 +146,13 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         }
     }
 
-    fun addTimeJson(){
+    fun addTime(){
         //시간을 json으로 저장
         val calendar = Calendar.getInstance()
         val date = Date()
         calendar.setTime(date)
 
-        var blank = App.prefs.date
+        /*var blank = App.prefs.date
         if (blank != null){
             var a = JSONArray(blank)
             a.put(calendar.time.hours*60 + calendar.time.minutes)
@@ -162,10 +162,15 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             var a = JSONArray()
             a.put(calendar.time.hours*60 + calendar.time.minutes)
             App.prefs.date = a.toString()
-        }
+        }*/
+
+        App.prefs.registeredDate = calendar.time.date
+
+        App.prefs.registeredTime = (calendar.time.hours*60 + calendar.time.minutes)/60.toFloat()
+        Log.e("DrinkCaffeineActivity", App.prefs.registeredDate.toString())
     }
 
-    fun addCaffeineJson(caffeine: Int){
+    /*fun addCaffeineJson(caffeine: Int){
         var blank = App.prefs.todayCafJson
         if (blank != null){
             var a = JSONArray(blank)
@@ -178,7 +183,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             App.prefs.todayCafJson = a.toString()
             Log.e("json caffeine", " // $caffeine" + " " + a.length())
         }
-    }
+    }*/
 
     //뒤로가기 버튼
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {

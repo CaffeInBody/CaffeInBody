@@ -72,7 +72,7 @@ class ReportFragment : Fragment() {
         }
     }
 
-    fun initWeekJson(){//room과 함께 처음 실행할 때만 생성하기
+    /*fun initWeekJson(){//room과 함께 처음 실행할 때만 생성하기
         var blank = App.prefs.weekCafJson
         if (blank != null){
             var a = JSONArray(blank)
@@ -84,7 +84,7 @@ class ReportFragment : Fragment() {
         }else{
             Log.e("initWeekJson", "error")
         }
-    }
+    }*/
 
 
 

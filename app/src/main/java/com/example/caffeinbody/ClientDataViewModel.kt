@@ -59,7 +59,7 @@ class ClientDataViewModel :
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
         //_events = mutableStateListOf<Event>()//초기화 필요한가 안필요한가 음
-        _events.add(
+        /*_events.add(
             Event(
                 title = R.string.message_from_watch,
                 //text = messageEvent.toString()
@@ -68,8 +68,10 @@ class ClientDataViewModel :
         )
         events.forEach {
                 event -> Log.e("메시지 왔음: ", event.text)
-        }
-        Log.e("메시지 왔음: ", messageEvent.data.decodeToString() )
+                App.prefs.heartrateAvg = event.text
+        }*/
+        App.prefs.heartrateAvg = messageEvent.data.decodeToString()
+        Log.e("메시지 왔음: ", App.prefs.heartrateAvg.toString())
 
     }
 

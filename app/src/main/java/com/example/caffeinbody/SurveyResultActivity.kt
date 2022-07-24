@@ -42,7 +42,7 @@ class SurveyResultActivity : AppCompatActivity() {
 
         if (caffeine >= recommendDayCaffeine)
             caffeine = recommendDayCaffeine
-
+//sensetivity/dayCaffeine/onceCaffeine
         //민감도 곱하는 수치 저장!
         App.prefs.sensetivity = caffeine.toString()
 
@@ -50,7 +50,7 @@ class SurveyResultActivity : AppCompatActivity() {
         binding.tvRecommendDayCaffeine.text = recommendDayCaffeine.toString() + "mg"
 
         App.prefs.dayCaffeine = recommendDayCaffeine.toString()
-        App.prefs.oncecaffeine = caffeine.toString()
+        //App.prefs.oncecaffeine = caffeine.toString()
 
 
         binding.buttonCheck.setOnClickListener {

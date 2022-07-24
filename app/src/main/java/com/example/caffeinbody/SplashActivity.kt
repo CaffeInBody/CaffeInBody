@@ -11,7 +11,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         val mainintent: Intent
-        if (App.prefs.oncecaffeine != null && App.prefs.dayCaffeine != null) {
+        if (App.prefs.sensetivity != null && App.prefs.dayCaffeine != null) {
             mainintent = Intent(this@SplashActivity, MainActivity::class.java)
         } //자동 로그인
         else {
