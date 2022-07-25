@@ -56,7 +56,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         if(image == null || image == "" )
             Glide.with(this).load(R.drawable.coffee_sample).into(binding.imageViewDrink)
         else if ( image == "url") Glide.with(this).load(R.drawable.cola_sample).into(binding.imageViewDrink)
-        else Glide.with(this).load(image).centerCrop().into(binding.imageViewDrink)
+        else Glide.with(this).load(image).override(800,).into(binding.imageViewDrink)
 
 
         val display = windowManager.defaultDisplay // in case of Activity
