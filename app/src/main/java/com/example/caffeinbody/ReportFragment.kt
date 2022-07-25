@@ -216,7 +216,7 @@ class ReportFragment : Fragment() {
 
 
         //fit the data into a bar
-        for (i in 1 until valueList.size) {
+        for (i in 1 until valueList.size + 1) {
             Log.e("size", valueList.size.toString())
             val barEntry = BarEntry(i.toFloat(), valueList[i - 1]!!.toFloat())//월화수목금토일
             entries.add(barEntry)
