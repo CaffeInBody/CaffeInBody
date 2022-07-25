@@ -1,5 +1,9 @@
 package com.example.caffeinbody
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +20,7 @@ import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import org.json.JSONArray
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -27,6 +32,13 @@ class ReportFragment : Fragment() {
         )
     }
 
+    private var weekCafArray : ArrayList<Int?> = arrayListOf(0,0,0,0,0,0,0)
+    private val nowTime = Calendar.getInstance().getTime()
+    private val weekdayFormat = SimpleDateFormat("EE", Locale.getDefault())
+    private val weekDay = weekdayFormat.format(nowTime)
+    private val curTimeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+    private val curTime = curTimeFormat.format(nowTime)
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,39 +48,107 @@ class ReportFragment : Fragment() {
         return binding.root
     }
 
-    fun setWeek(){
-        val nowTime = Calendar.getInstance().getTime()
-        val weekdayFormat = SimpleDateFormat("EE", Locale.getDefault())
-        val weekDay = weekdayFormat.format(nowTime)
+    fun resetAlarm() {
+        val resetAlarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val resetIntent = Intent(context, ResetTodayCaf::class.java)
+        val resetSender = PendingIntent.getBroadcast(context, 0, resetIntent, PendingIntent.FLAG_IMMUTABLE)
+
+        // 자정 시간
+        val resetCal = Calendar.getInstance()
+        resetCal.timeInMillis = System.currentTimeMillis()
+        resetCal[Calendar.HOUR_OF_DAY] = 0
+        resetCal[Calendar.MINUTE] = 0
+        resetCal[Calendar.SECOND] = 0
+
+        //다음날 0시에 맞추기 위해 24시간을 뜻하는 상수인 AlarmManager.INTERVAL_DAY를 더해줌.
+        resetAlarmManager.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP, resetCal.timeInMillis
+                    + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, resetSender
+        )
+        val format = SimpleDateFormat("MM/dd kk:mm:ss")
+        val setResetTime = format.format(Date(resetCal.timeInMillis + AlarmManager.INTERVAL_DAY))
+        Log.d("resetAlarm", "ResetHour : $setResetTime")
+    }
+
+    fun setWeeks(){
+
         Log.e("time: 요일", weekDay)
+        Log.e("curTime: 시간", curTime)
 
-        var blank = App.prefs.weekCafJson
-        var a = JSONArray(blank)
-
-        when (weekDay){
+        when(weekDay){
             "월" -> {
-                a.optString(0)
+                if (curTime <= "23:59:50") {
+                    //App.prefs.weekCafJson.set(0,App.prefs.todayCaf.toString())
+                    weekCafArray.set(0, App.prefs.todayCaf)
+                    Log.e("mon", App.prefs.weekCafJson.toString())
+                }
+                else {
+                    App.prefs.weekCafJson= arrayListOf(weekCafArray.toString())
+                    Log.e("weekCafJson", App.prefs.weekCafJson.toString())
+                    App.prefs.todayCaf = 0
+                }
+                App.prefs.weekCafJson
             }
             "화" -> {
-                a.optString(1)
+                if (curTime <= "23:59:30") {
+                    weekCafArray.set(1, App.prefs.todayCaf)
+                    Log.e("tue", weekCafArray.toString())
+                }
+                else {
+                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
+                    App.prefs.todayCaf = 0
+                }
             }
             "수" -> {
-                a.optString(2)
+                if (curTime <= "23:59:30") {
+                    weekCafArray.set(2, App.prefs.todayCaf)
+                    Log.e("wed", weekCafArray.toString())
+                }
+                else {
+                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
+                    App.prefs.todayCaf = 0
+                }
             }
             "목" -> {
-                a.optString(3)
+                if (curTime <= "23:59:30") {
+                    weekCafArray.set(3, App.prefs.todayCaf)
+                    Log.e("thu", weekCafArray.toString())
+                }
+                else {
+                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
+                   App.prefs.todayCaf = 0
+                }
             }
             "금" -> {
-                a.optString(4)
+                if (curTime <= "23:59:30") {
+                    weekCafArray.set(4, App.prefs.todayCaf)
+                    Log.e("fri", weekCafArray.toString())
+                }
+                else {
+                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
+                    App.prefs.todayCaf = 0
+                }
             }
             "토" -> {
-                a.optString(5)
+                if (curTime <= "23:59:30") {
+                    weekCafArray.set(5, App.prefs.todayCaf)
+                    Log.e("sat", weekCafArray.toString())
+                }
+                else {
+                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
+                    App.prefs.todayCaf = 0
+                }
             }
             "일" -> {
-                a.optString(6)
+                if (curTime <= "23:59:30") {
+                    weekCafArray.set(6, App.prefs.todayCaf)
+                    Log.e("sun", weekCafArray.toString())
+                }
+                else {
+                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
+                    App.prefs.todayCaf = 0
+                }
             }
-        //요일에 해당하는 누적 카페인양}
-            //저장을 어찌할까!!
         }
     }
 
@@ -107,22 +187,38 @@ class ReportFragment : Fragment() {
     }
 
     private fun setWeek(barChart: BarChart) {
+//        for (i in 0..6) {
+//            weekCafArray.add(0)
+//        }
+        setWeeks()
+        resetAlarm()
         initBarChart(barChart)
 
         barChart.setScaleEnabled(false) //Zoom In/Out
 
-        val valueList = ArrayList<Double>()
+        val valueList = ArrayList<Int?>()
         val entries: ArrayList<BarEntry> = ArrayList()
         val title = "요일별 카페인 섭취량"
 
-        for (i in 1..8) {
-            valueList.add(i * 100.1)//여기에 요일별 카페인 수치 들어감
+        for (i in 0..6) {
+            //여기에 요일별 카페인 수치 들어감
+            valueList.add(weekCafArray.get(i))
+            Log.e("weekCafArray", weekCafArray.toString())
+            Log.e("weekCafJson", App.prefs.weekCafJson.toString())
+            Log.e("dayCaffeine", App.prefs.todayCaf.toString())
+//            if (App.prefs.todayCaf==null){
+//                valueList.add(0)
+//            }
+//            else {
+//                valueList.add(App.prefs.todayCaf)
+//            }
         }
+
 
         //fit the data into a bar
         for (i in 1 until valueList.size) {
             Log.e("size", valueList.size.toString())
-            val barEntry = BarEntry(i.toFloat(), valueList[i - 1].toFloat())//월화수목금토일
+            val barEntry = BarEntry(i.toFloat(), valueList[i - 1]!!.toFloat())//월화수목금토일
             entries.add(barEntry)
         }
         val barDataSet = BarDataSet(entries, title)

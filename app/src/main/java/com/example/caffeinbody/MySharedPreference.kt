@@ -3,6 +3,7 @@ package com.example.caffeinbody
 import android.content.Context
 import android.content.SharedPreferences
 import org.json.JSONArray
+import org.json.JSONException
 import java.util.Arrays.toString
 
 class MySharedPreferences(context: Context) {
@@ -45,9 +46,33 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getString("dayCaffeine", null)
         set(value) = prefs.edit().putString("dayCaffeine", value!!).apply()
 
-    var weekCafJson: String?//요일별 카페인 섭취 수치
-        get() = prefs.getString("drinkCafJson", null)
-        set(value) = prefs.edit().putString("drinkCafJson", value).apply()
+    var weekCafJson: ArrayList<String>//요일별 카페인 섭취 수치
+        get() {
+            val json = prefs.getString("weekCafJson", null)
+            val weekCaf = ArrayList<String>()
+            if (json != null) {
+                try {
+                    val jsonArray = JSONArray(json)
+                    for (i in 0 until jsonArray.length()) weekCaf.add(jsonArray.optString(i))
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+            }
+            return weekCaf
+        }
+        set(values) {
+            val editor = prefs.edit()
+            val jsonArray = JSONArray()
+            for (value in values) {
+                jsonArray.put(value)
+            }
+            if (values.isNotEmpty()) {
+                editor.putString("weekCafJson", jsonArray.toString())
+            } else {
+                editor.putString("weekCafJson", null)
+            }
+            editor.apply()
+        }
 
     var multiply: Float? //민감도 곱하는 수치
         get() = prefs.getFloat("multiply", 0.0f)

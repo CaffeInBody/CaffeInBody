@@ -36,6 +36,7 @@
         <activity android:name=".RecommendActivity" />
         <activity android:name=".SurveyResultActivity" />
         <activity android:name=".SearchDrinksActivity"/>
+        <receiver android:name=".ResetTodayCaf"/>
     </application>
 
 </manifest>
