@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.ActivityRecommendBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.*
 
 class RecommendActivity : AppCompatActivity() {
@@ -35,8 +38,9 @@ class RecommendActivity : AppCompatActivity() {
 
         //    caffeineadapter.type = CaffeinCase.SMALL
 
-        val r = Runnable {
-            try {
+    //    val r = Runnable {
+      //      try {
+        CoroutineScope(Dispatchers.IO).launch {
 
                 db = DrinksDatabase.getInstance(applicationContext)!!
                 var datas = caffeine?.let { db.drinksDao().recommendcaffeine(it) }
@@ -58,12 +62,12 @@ class RecommendActivity : AppCompatActivity() {
                 }
                 //  Log.d("tag", "Error - "+ db.drinksDao().getAll().toString())
 
-            } catch (e: Exception) {
-                Log.d("tag", "Error - $e")
-            }
+     //       } catch (e: Exception) {
+      //          Log.d("tag", "Error - $e")
+     //       }
         }
-        val thread = Thread(r)
-        thread.start()
+      //  val thread = Thread(r)
+     //   thread.start()
 
         binding.recyclerView.adapter = caffeineadapter
         caffeineadapter.notifyDataSetChanged()
