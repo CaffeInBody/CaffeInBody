@@ -16,7 +16,6 @@ import kotlin.collections.ArrayList
 import kotlin.math.pow
 
 class DetailActivity : AppCompatActivity() {
-    private lateinit var db: DrinksDatabase
     val multiply = App.prefs.multiply//평균 반감기 시간에 곱하는 값
 
     private val lineChartData = ArrayList<Entry>()
@@ -96,10 +95,9 @@ class DetailActivity : AppCompatActivity() {
         var nowDate = getDate()
 
         if (caffeineVolume != 0) {//오늘마신카페인이 있으면
-            //timeGap이 마이너스가 될 경우
             var registeredT = App.prefs.registeredTime
-            if (nowDate - App.prefs.registeredDate!!>=1){//registered 23시, nowTime 1시
-                var leftCaffeine = calculateCaffeinLeft(caffeineVolume!!.toFloat(), nowTime + 24*(nowDate - App.prefs.registeredDate!!)- registeredT!!, halfTime, 0.5f)
+            if (nowDate - App.prefs.registeredDate!!>=0){//registered 23시, nowTime 1시
+                var leftCaffeine = calculateCaffeinLeft(caffeineVolume!!.toFloat(), nowTime + 24*(nowDate - App.prefs.registeredDate!!) - registeredT!!, halfTime, 0.5f)
                 Log.e("detail nowT", "$nowTime registeredT: $registeredT")
                 var i = 0
                 var leftCaffeineStable = leftCaffeine
@@ -108,17 +106,7 @@ class DetailActivity : AppCompatActivity() {
                     lineChartData.add(Entry((nowTime + halfTime*i++), leftCaffeineStable))
                 }
                 Log.e("detail", "nowtime1")
-            }else if(nowTime- registeredT!!>0){//registered 13시, nowtime 20시
-                var leftCaffeine = calculateCaffeinLeft(caffeineVolume!!.toFloat(), nowTime- registeredT!!, halfTime, 0.5f)
-                //Log.e("detail nowT", "$nowTime registeredT: $registeredT")
-                var i = 0
-                var leftCaffeineStable = leftCaffeine
-                while (leftCaffeineStable!! >= 10){
-                    leftCaffeineStable =leftCaffeine/(2.0).pow(i).toFloat()
-                    lineChartData.add(Entry((nowTime + halfTime*i++), leftCaffeineStable))
-                }
-                Log.e("detail", "nowtime2")
-            } else{
+            }else{
                 Log.e("detail", "알 수 없는 에러")
             }
         } else{

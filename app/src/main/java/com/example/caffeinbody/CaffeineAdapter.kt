@@ -42,7 +42,7 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
             //서버있으면지워도됨
             intent.putExtra("name",article.drinkName)
             intent.putExtra("img", article.imgurl)
-            intent.putExtra("caffeine", article.caffeine)
+            intent.putExtra("caffeine", article.caffeine?.caffeine1)
             ContextCompat.startActivity(holder.itemView.context, intent, null)
             //카페인 마시기로 이동
         }}
@@ -54,7 +54,7 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
 
         fun bind(article: Drinks){
             txt.text = article.drinkName
-            caf.text = article.caffeine.toString() +"mg"
+            caf.text = article.caffeine?.caffeine1.toString() +"mg"
 
             if(article.imgurl == "")
                 Glide.with(itemView).load(R.drawable.coffee_sample).into(img)

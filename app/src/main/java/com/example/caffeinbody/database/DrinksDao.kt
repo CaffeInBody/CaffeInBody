@@ -34,7 +34,7 @@ interface DrinksDao {
     @Query("select * from Drinks where iscafe like :something")
     fun selectiscafe(something: Boolean): List<Drinks>
 
-    @Query("select * from Drinks where caffeine BETWEEN 0 AND :something")
+    @Query("select * from Drinks where caffeine_caffeine1 BETWEEN 0 AND :something")
     fun recommendcaffeine(something: Double): List<Drinks>
 
     @Query("select * from Drinks where favorite = :something")//favorite 항목만 반환(true/false)
