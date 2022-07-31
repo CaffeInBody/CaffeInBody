@@ -92,6 +92,14 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getInt("todaydate", 0 )
         set(value) = prefs.edit().putInt("todaydate", value!!).apply()
 
+    var registeredMonth: Int?//카페인 등록 월
+        get() = prefs.getInt("registeredMonth", 0 )
+        set(value) = prefs.edit().putInt("registeredMonth", value!!).apply()
+
+    var registeredYear: Int?//카페인 등록 일
+    get() = prefs.getInt("registeredYear", 0 )
+        set(value) = prefs.edit().putInt("registeredYear", value!!).apply()
+
     var registeredTime: Float?//카페인 등록 시간
         get() = prefs.getFloat("registeredTime", 0.0f)
         set(value) = prefs.edit().putFloat("registeredTime", value!!).apply()

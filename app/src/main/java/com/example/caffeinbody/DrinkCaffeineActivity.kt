@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.caffeinbody.DetailActivity.Companion.getDate
 import com.example.caffeinbody.DetailActivity.Companion.getMonth
 import com.example.caffeinbody.DetailActivity.Companion.getTime
+import com.example.caffeinbody.DetailActivity.Companion.getYear
 import com.example.caffeinbody.ReportFragment.Companion.calMonthCaffeineColor
 import com.example.caffeinbody.ReportFragment.Companion.saveMonthCafJson
 import com.example.caffeinbody.databinding.ActivityDrinkCaffeineBinding
@@ -157,6 +158,8 @@ class DrinkCaffeineActivity : AppCompatActivity() {
     }
 
     fun saveTime(){
+        App.prefs.registeredYear = getYear()
+        App.prefs.registeredMonth = getMonth()
         App.prefs.registeredDate = getDate()
         App.prefs.registeredTime = getTime()
         Log.e("DrinkCaffeineActivity", App.prefs.registeredDate.toString())

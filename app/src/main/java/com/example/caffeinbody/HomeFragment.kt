@@ -154,7 +154,7 @@ class HomeFragment : Fragment() {
         var halfTime =
             DetailActivity.calHalfTime(getString(R.string.basicTime).toInt(), App.prefs.multiply!!)//-> 민감도 반영 반감기 시간
         //Log.e("home", getString(R.string.basicTime).toInt().toString())
-        var leftCaffeine = calculateCaffeinLeft(remainCaf!!.toFloat(), nowTime- registeredTime!!, halfTime, 0.5f)
+        var leftCaffeine = calculateCaffeinLeft(remainCaf!!.toFloat(), nowTime + 24* DetailActivity.minusDays() - registeredTime!!, halfTime, 0.5f)
         putCurrentCaffeine(leftCaffeine)
         val servingsize = App.prefs.currentcaffeine
 

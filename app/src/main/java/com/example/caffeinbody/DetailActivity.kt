@@ -1,18 +1,17 @@
 package com.example.caffeinbody
 
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import com.example.caffeinbody.database.DrinksDatabase
+import androidx.appcompat.app.AppCompatActivity
 import com.example.caffeinbody.databinding.ActivityDetailBinding
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import org.threeten.bp.LocalDate
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.math.pow
 
 class DetailActivity : AppCompatActivity() {
@@ -73,7 +72,7 @@ class DetailActivity : AppCompatActivity() {
         fun getDate():Int {
             var startTimeCalendar = Calendar.getInstance()
             val currentDate = startTimeCalendar.get(Calendar.DATE)
-            Log.e("detail", "todayDate: $currentDate")
+            //Log.e("detail", "todayDate: $currentDate")
 
             return currentDate
         }
@@ -81,7 +80,7 @@ class DetailActivity : AppCompatActivity() {
         fun getMonth():Int {
             var startTimeCalendar = Calendar.getInstance()
             val currentMonth = startTimeCalendar.get(Calendar.MONTH) + 1
-            Log.e("detail", "todayDate: $currentMonth")
+            //Log.e("detail", "todayDate: $currentMonth")
 
             return currentMonth
         }
@@ -93,35 +92,56 @@ class DetailActivity : AppCompatActivity() {
             return currentYear
         }
 
+        fun minusDays(): Int{//카페인 등록 날짜와 현재 날짜 차 계산
+            var registered_y = App.prefs.registeredYear
+            var registered_M = App.prefs.registeredMonth
+            var registered_D = App.prefs.registeredDate
+            Log.e("detail: y", registered_y.toString())
+            if (registered_y !== 0){
+                val today = LocalDate.now()
+
+                Log.e("detail", "hey $registered_y $registered_M $registered_D")
+                val registeredDate = LocalDate.of(registered_y!!, registered_M!!, registered_D!!)
+                val period = registeredDate.until(today)
+                Log.e("detail",period.days.toString())
+                return period.days
+            }else{
+                return 0
+            }
+        }
+
         fun calHalfTime(basicTime: Int, multiply: Float): Float{//민감도에 따른 반감기 시간 계산
-            Log.e("detail", "multiply: $multiply, basicTime: $basicTime etc: " + basicTime * (2 - multiply))
+            //Log.e("detail", "multiply: $multiply, basicTime: $basicTime etc: " + basicTime * (2 - multiply))
             return basicTime * (2 - multiply)
         }
     }
 
     //새 카페인이 추가되면 총 마신 카페인량이 저장됨
     fun drawGraph(sensitivity: Double){
-        var caffeineVolume = App.prefs.todayCaf//초기화됨
+        //var caffeineVolume = App.prefs.todayCaf//초기화됨
         var remainCaf = App.prefs.remainCaf
         var halfTime = calHalfTime( getString(R.string.basicTime).toInt(), sensitivity.toFloat())//-> 민감도 반영 반감기 시간
         var nowTime = getTime()
         var nowDate = getDate()
-        //currentCaffeine오류??
+
         binding.textView11.setText(App.prefs.currentcaffeine + "mg")//얘도 같이 초기화됨
-        if (caffeineVolume != 0) {//오늘마신카페인이 있으면
+        if (remainCaf != 0) {
+            //Log.e("detail", "remainCaf: $remainCaf, nowdate: $nowDate, registeredDate: " + App.prefs.registeredDate)
             var registeredT = App.prefs.registeredTime
-            if (nowDate - App.prefs.registeredDate!!>=0){//registered 23시, nowTime 1시
-                var leftCaffeine = calculateCaffeinLeft(remainCaf!!.toFloat(), nowTime + 24*(nowDate - App.prefs.registeredDate!!) - registeredT!!, halfTime, 0.5f)
-                Log.e("detail nowT", "$nowTime registeredT: $registeredT")
+            if (minusDays()>=0){//registered 23시, nowTime 1시
+                var leftCaffeine = calculateCaffeinLeft(remainCaf!!.toFloat(), nowTime + 24*minusDays() - registeredT!!, halfTime, 0.5f)
+                //Log.e("detail nowT", "$nowTime registeredT: $registeredT")
                 var i = 0
                 var leftCaffeineStable = leftCaffeine
+                Log.e("detail", "leftStabled: $leftCaffeineStable")
                 while (leftCaffeineStable!! >= 10){
                     leftCaffeineStable =leftCaffeine/(2.0).pow(i).toFloat()
                     lineChartData.add(Entry((nowTime + halfTime*i++), leftCaffeineStable))
+                    Log.e("detail hahah", "entry1: " + (nowTime + halfTime*i) + " entry2: " + leftCaffeineStable)
                 }
-                Log.e("detail", "nowtime1")
+                //Log.e("detail", "nowtime1")
             }else{
-                Log.e("detail", "알 수 없는 에러")
+                Log.e("detail", "알 수 없는 에러")//7월 31일/8월 1일 7월 28일/8월4일
             }
         } else{
             lineChartData.add(Entry(0.toFloat(), 0.toFloat()))
