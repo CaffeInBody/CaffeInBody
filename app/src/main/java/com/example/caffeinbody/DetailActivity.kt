@@ -71,16 +71,29 @@ class DetailActivity : AppCompatActivity() {
         }
 
         fun getDate():Int {
-            val calendar = Calendar.getInstance()
-            val date = Date()
-            calendar.setTime(date)
-            var dateToday = calendar.time.date
-            Log.e("detail", "todayDate: $dateToday")
+            var startTimeCalendar = Calendar.getInstance()
+            val currentDate = startTimeCalendar.get(Calendar.DATE)
+            Log.e("detail", "todayDate: $currentDate")
 
-            return dateToday
+            return currentDate
         }
 
-        fun calHalfTime(basicTime: Int, multiply: Float): Float{
+        fun getMonth():Int {
+            var startTimeCalendar = Calendar.getInstance()
+            val currentMonth = startTimeCalendar.get(Calendar.MONTH) + 1
+            Log.e("detail", "todayDate: $currentMonth")
+
+            return currentMonth
+        }
+
+        fun getYear():Int {
+            var startTimeCalendar = Calendar.getInstance()
+            val currentYear = startTimeCalendar.get(Calendar.YEAR)
+
+            return currentYear
+        }
+
+        fun calHalfTime(basicTime: Int, multiply: Float): Float{//민감도에 따른 반감기 시간 계산
             Log.e("detail", "multiply: $multiply, basicTime: $basicTime etc: " + basicTime * (2 - multiply))
             return basicTime * (2 - multiply)
         }
@@ -88,16 +101,17 @@ class DetailActivity : AppCompatActivity() {
 
     //새 카페인이 추가되면 총 마신 카페인량이 저장됨
     fun drawGraph(sensitivity: Double){
-        binding.textView11.setText(App.prefs.currentcaffeine + "mg")
-        var caffeineVolume = App.prefs.todayCaf
+        var caffeineVolume = App.prefs.todayCaf//초기화됨
+        var remainCaf = App.prefs.remainCaf
         var halfTime = calHalfTime( getString(R.string.basicTime).toInt(), sensitivity.toFloat())//-> 민감도 반영 반감기 시간
         var nowTime = getTime()
         var nowDate = getDate()
-
+        //currentCaffeine오류??
+        binding.textView11.setText(App.prefs.currentcaffeine + "mg")//얘도 같이 초기화됨
         if (caffeineVolume != 0) {//오늘마신카페인이 있으면
             var registeredT = App.prefs.registeredTime
             if (nowDate - App.prefs.registeredDate!!>=0){//registered 23시, nowTime 1시
-                var leftCaffeine = calculateCaffeinLeft(caffeineVolume!!.toFloat(), nowTime + 24*(nowDate - App.prefs.registeredDate!!) - registeredT!!, halfTime, 0.5f)
+                var leftCaffeine = calculateCaffeinLeft(remainCaf!!.toFloat(), nowTime + 24*(nowDate - App.prefs.registeredDate!!) - registeredT!!, halfTime, 0.5f)
                 Log.e("detail nowT", "$nowTime registeredT: $registeredT")
                 var i = 0
                 var leftCaffeineStable = leftCaffeine

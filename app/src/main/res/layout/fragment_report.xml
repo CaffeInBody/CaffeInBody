@@ -101,10 +101,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView9">
 
-                <CalendarView
-                    android:id="@+id/calendarView"
-                    android:layout_width="293dp"
-                    android:layout_height="326dp" />
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                    android:id="@+id/calendarview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:mcv_selectionMode="range" />
             </androidx.cardview.widget.CardView>
 
 

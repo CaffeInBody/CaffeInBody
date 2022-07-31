@@ -10,6 +10,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.example.caffeinbody.DetailActivity.Companion.getDate
+import com.example.caffeinbody.DetailActivity.Companion.getMonth
+import com.example.caffeinbody.DetailActivity.Companion.getTime
+import com.example.caffeinbody.ReportFragment.Companion.calMonthCaffeineColor
+import com.example.caffeinbody.ReportFragment.Companion.saveMonthCafJson
 import com.example.caffeinbody.databinding.ActivityDrinkCaffeineBinding
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
@@ -105,15 +110,20 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         // 저장
         binding.save.setOnClickListener {
-            addTime()//카페인 등록 시간을 jsonArray로
-            //addCaffeineJson(resultInt)//각각의 카페인 양을 jsonArray로
+            saveTime()//카페인 등록 시간 저장
 
             val msg = App.prefs.todayCaf
             if (msg != null) {
                 resultInt = msg + resultInt
             }
             App.prefs.todayCaf = resultInt
+            App.prefs.remainCaf = resultInt
             sendFavorite(resultInt)
+
+            var todayCaf = App.prefs.todayCaf
+            var caffeineColor = calMonthCaffeineColor(todayCaf!!)
+
+            saveMonthCafJson(getDate(), caffeineColor, getMonth())
 
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -146,44 +156,11 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         }
     }
 
-    fun addTime(){
-        //시간을 json으로 저장
-        val calendar = Calendar.getInstance()
-        val date = Date()
-        calendar.setTime(date)
-
-        /*var blank = App.prefs.date
-        if (blank != null){
-            var a = JSONArray(blank)
-            a.put(calendar.time.hours*60 + calendar.time.minutes)
-            App.prefs.date = a.toString()
-            Log.e("json length", " // " + calendar.time.seconds)
-        }else{
-            var a = JSONArray()
-            a.put(calendar.time.hours*60 + calendar.time.minutes)
-            App.prefs.date = a.toString()
-        }*/
-
-        App.prefs.registeredDate = calendar.time.date
-
-        App.prefs.registeredTime = (calendar.time.hours*60 + calendar.time.minutes)/60.toFloat()
+    fun saveTime(){
+        App.prefs.registeredDate = getDate()
+        App.prefs.registeredTime = getTime()
         Log.e("DrinkCaffeineActivity", App.prefs.registeredDate.toString())
     }
-
-    /*fun addCaffeineJson(caffeine: Int){
-        var blank = App.prefs.todayCafJson
-        if (blank != null){
-            var a = JSONArray(blank)
-            a.put(caffeine)
-            App.prefs.todayCafJson = a.toString()
-            Log.e("json caffeine", " // $caffeine" + " " + a.length())
-        }else{
-            var a = JSONArray()
-            a.put(caffeine)
-            App.prefs.todayCafJson = a.toString()
-            Log.e("json caffeine", " // $caffeine" + " " + a.length())
-        }
-    }*/
 
     //뒤로가기 버튼
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {

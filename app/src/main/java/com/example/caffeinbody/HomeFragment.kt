@@ -145,6 +145,7 @@ class HomeFragment : Fragment() {
 
     private fun setUI(){
         val todayCaf = App.prefs.todayCaf
+        val remainCaf = App.prefs.remainCaf
         binding.intakenCaffeineText.setText(todayCaf.toString())
         App.prefs.dayCaffeine?.let { binding.maximumADayText.setText(it) }
 
@@ -153,9 +154,9 @@ class HomeFragment : Fragment() {
         var halfTime =
             DetailActivity.calHalfTime(getString(R.string.basicTime).toInt(), App.prefs.multiply!!)//-> 민감도 반영 반감기 시간
         //Log.e("home", getString(R.string.basicTime).toInt().toString())
-        var leftCaffeine = calculateCaffeinLeft(todayCaf!!.toFloat(), nowTime- registeredTime!!, halfTime, 0.5f)
+        var leftCaffeine = calculateCaffeinLeft(remainCaf!!.toFloat(), nowTime- registeredTime!!, halfTime, 0.5f)
         putCurrentCaffeine(leftCaffeine)
-        val servingsize = App.prefs.currentcaffeine//체내 남은 카페인량 sensitivity와 currentcaffeine의 용도 차이
+        val servingsize = App.prefs.currentcaffeine
 
         var percent = 1.0
 

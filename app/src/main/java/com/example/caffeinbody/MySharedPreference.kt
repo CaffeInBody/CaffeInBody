@@ -16,7 +16,9 @@ class MySharedPreferences(context: Context) {
     var todayCaf: Int?//섭취한 카페인 누계
         get() = prefs.getInt(prefsKeyCaf, 0 )
         set(value) = prefs.edit().putInt(prefsKeyCaf, value!!).apply()
-
+    var remainCaf: Int?//todayCaf 하루 지날 시 초기화 방지를 위한 체내 남은 카페인량 저장
+        get() = prefs.getInt("remainCaf", 0 )
+        set(value) = prefs.edit().putInt("remainCaf", value!!).apply()
     var sensetivity: String?//1회 카페인 섭취 권고량
         get() = prefs.getString("sensitivity", null)
         set(value) = prefs.edit().putString("sensitivity", value!!).apply()
@@ -73,6 +75,10 @@ class MySharedPreferences(context: Context) {
             }
             editor.apply()
         }
+
+    var monthCafJson: String?//월별 카페인 섭취 수치
+        get() = prefs.getString("monthCafJson", null)
+        set(value) = prefs.edit().putString("monthCafJson", value!!).apply()
 
     var multiply: Float? //민감도 곱하는 수치
         get() = prefs.getFloat("multiply", 0.0f)

@@ -5,33 +5,41 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.graphics.Color.Companion.Red
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import com.example.caffeinbody.DetailActivity.Companion.getMonth
+import com.example.caffeinbody.DetailActivity.Companion.getYear
 import com.example.caffeinbody.databinding.FragmentReportBinding
 import com.github.mikephil.charting.charts.BarChart
-import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.*
-import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.CalendarMode
+import com.prolificinteractive.materialcalendarview.DayViewDecorator
+import com.prolificinteractive.materialcalendarview.DayViewFacade
+import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
+import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import org.json.JSONArray
 import org.json.JSONObject
+import org.threeten.bp.DayOfWeek
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
-class ReportFragment : Fragment() {
+class ReportFragment:Fragment() {
     private val binding: FragmentReportBinding by lazy {
         FragmentReportBinding.inflate(
             layoutInflater
         )
     }
-
     private var weekCafArray : ArrayList<Int?> = arrayListOf(0,0,0,0,0,0,0)
     private val nowTime = Calendar.getInstance().getTime()
     private val weekdayFormat = SimpleDateFormat("EE", Locale.getDefault())
@@ -45,6 +53,9 @@ class ReportFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         setChartView(binding.root)
+        initCalendarView()
+        setCaffeineColorsDates(getMonth(), getYear())
+
         return binding.root
     }
 
@@ -116,7 +127,7 @@ class ReportFragment : Fragment() {
                 }
                 else {
                     App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                   App.prefs.todayCaf = 0
+                    App.prefs.todayCaf = 0
                 }
             }
             "금" -> {
@@ -151,22 +162,6 @@ class ReportFragment : Fragment() {
             }
         }
     }
-
-    /*fun initWeekJson(){//room과 함께 처음 실행할 때만 생성하기
-        var blank = App.prefs.weekCafJson
-        if (blank != null){
-            var a = JSONArray(blank)
-            for (i in 0..7){
-                a.put("")
-            }
-            App.prefs.date = a.toString()
-            Log.e("json length", " // " + a.length())
-        }else{
-            Log.e("initWeekJson", "error")
-        }
-    }*/
-
-
 
     private fun setChartView(view: View) {
         var chartWeek = binding.barchart
@@ -217,7 +212,6 @@ class ReportFragment : Fragment() {
 
         //fit the data into a bar
         for (i in 1 until valueList.size + 1) {
-            Log.e("size", valueList.size.toString())
             val barEntry = BarEntry(i.toFloat(), valueList[i - 1]!!.toFloat())//월화수목금토일
             entries.add(barEntry)
         }
@@ -268,8 +262,8 @@ class ReportFragment : Fragment() {
 
         //우측 값 hiding the right y-axis line, default true if not set
         val rightAxis: YAxis = barChart.getAxisRight()
-       // rightAxis.setDrawAxisLine(false)
-       // rightAxis.set
+        // rightAxis.setDrawAxisLine(false)
+        // rightAxis.set
         rightAxis.isEnabled = false
 
         //바차트의 타이틀
@@ -294,4 +288,193 @@ class ReportFragment : Fragment() {
             return days.getOrNull(value.toInt()-1) ?: value.toString()
         }
     }
+
+    fun initCalendarView(){
+        var test = App.prefs.monthCafJson
+        Log.e("report", "year "+ getYear() + "month" + getMonth() + test.toString())
+         binding.calendarview.state().edit()
+            //.setMinimumDate(CalendarDay.from(getYear(), getMonth(), 1))
+             //.setMaximumDate(CalendarDay.from(getYear(), getMonth(), 31))
+            //.setFirstDayOfWeek(DayOfWeek.of(Calendar.SUNDAY))
+            .commit()
+
+        //캘린더 헤더, 날짜, 요일 부분 디자인 설정
+        binding.calendarview.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
+        binding.calendarview.setDateTextAppearance(R.style.CalenderViewDateCustomText)
+        binding.calendarview.setWeekDayTextAppearance(R.style.CalenderViewWeekCustomText)
+        //binding.calendarview.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.custom_weekdays)))
+        //binding.calendarview.setTitleFormatter(MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)))
+        //binding.calendarview.setWeekDayFormatter(ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)))
+
+
+        // 요일 선택 시 내가 정의한 드로어블이 적용되도록 함
+        binding.calendarview.setOnRangeSelectedListener({
+                widget, dates ->
+                val startDay = dates[0].date.toString()
+                val endDay = dates[dates.size - 1].date.toString()
+                Log.e("Calendar", "시작일 : $startDay, 종료일 : $endDay")
+        })
+
+        binding.calendarview.setOnMonthChangedListener { widget, date ->
+            //Log.e("ReportFragment", "현재 캘린더의 month: " + date.month + " year: "+ date.year)
+            setCaffeineColorsDates(date.month, date.year)
+        }
+
+        /*binding.calendarview.addDecorators(DayDecoratorGreen(context, CalendarDay.from(2022, 7, 20)))
+        binding.calendarview.addDecorators(DayDecoratorRed(context, CalendarDay.from(2022, 7, 23)))*/
+    }
+
+    /* 선택된 요일의 background를 설정하는 Decorator 클래스 */
+    private class DayDecoratorGreen(context: Context?, currentDay: CalendarDay) : DayViewDecorator {
+        private val drawable: Drawable?
+        private var myDay = currentDay
+        override fun shouldDecorate(day: CalendarDay): Boolean {
+            return myDay == day
+        }
+
+        override fun decorate(view: DayViewFacade) {
+            view.setSelectionDrawable(drawable!!)
+        }
+
+        init {
+            drawable = ContextCompat.getDrawable(context!!, R.drawable.calendar_caffeine_color1)
+        }
+    }
+
+    private class DayDecoratorYellow(context: Context?, currentDay: CalendarDay) : DayViewDecorator {
+        private val drawable: Drawable?
+        private var myDay = currentDay
+        override fun shouldDecorate(day: CalendarDay): Boolean {
+            return myDay == day
+        }
+
+        override fun decorate(view: DayViewFacade) {
+            view.setSelectionDrawable(drawable!!)
+        }
+
+        init {
+            drawable = ContextCompat.getDrawable(context!!, R.drawable.calendar_caffeine_color2)
+        }
+    }
+
+    private class DayDecoratorRed(context: Context?, currentDay: CalendarDay) : DayViewDecorator {
+        private val drawable: Drawable?
+        private var myDay = currentDay
+        override fun shouldDecorate(day: CalendarDay): Boolean {
+            return myDay == day
+        }
+
+        override fun decorate(view: DayViewFacade) {
+            view.setSelectionDrawable(drawable!!)
+        }
+
+        init {
+            drawable = ContextCompat.getDrawable(context!!, R.drawable.calendar_caffeine_color3)
+        }
+    }
+
+    fun setCaffeineColorsDates(month: Int, year: Int){//날짜별 저장된 카페인 색상 정보 가져와 달력에 표시하기
+        if (getMonthCafJson(1, month, year) == "error"){
+            return
+        }
+        for (i in 1.. 31){
+            if (getMonthCafJson(i, month, year).toInt() == 1){
+                binding.calendarview.addDecorators(DayDecoratorGreen(context, (CalendarDay.from(year, month, i))))
+                Log.e("ReportFragment", "green $i")
+            }else if (getMonthCafJson(i, month, year).toInt() == 2){
+                binding.calendarview.addDecorators(DayDecoratorYellow(context, (CalendarDay.from(year, month, i))))
+                Log.e("ReportFragment", "yellow $i")
+            }else if(getMonthCafJson(i, month, year).toInt() == 3){
+                binding.calendarview.addDecorators(DayDecoratorRed(context, (CalendarDay.from(year, month, i))))
+                Log.e("ReportFragment", "red $i")
+            }else//아직 저장 안된 값
+                Log.e("ReportFragment", "monthCafJson에 아직 값이 저장 안됨 $i")
+        }
+    }
+
+
+    companion object{
+        fun saveMonthCafJson(date: Int, color: Int, month: Int){//특정 날짜에 해당하는 색상 저장하기
+            //val caffeineColors: MutableList<Int> = mutableListOf<Int>(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
+            val prefs = App.prefs.monthCafJson
+            var tmpJsonRead = JSONArray()
+
+            if (prefs == null){//아예 처음 저장
+                val tmpJsonObjectSave = JSONObject()
+                for (i in 0.. 30) {
+                    if (date - 1 == i)
+                        tmpJsonRead.put(color)
+                    else
+                        tmpJsonRead.put(0)
+                }
+                tmpJsonObjectSave.put(getYear().toString()+"_"+getMonth().toString(), tmpJsonRead)
+                App.prefs.monthCafJson = tmpJsonObjectSave.toString()
+                Log.e("ReportFragment", "monthCafJson비어있음")
+            }else{
+                val tmpJsonObjectRead = JSONObject(prefs)
+                var tmpJsonArray2 = tmpJsonObjectRead.optString(getYear().toString()+"_"+getMonth().toString())
+                var tmpJsonArraySave = JSONArray()//저장용
+                if (tmpJsonArray2 == ""){//새로운 달에 저장
+                    for (i in 0.. 30) {
+                        if (date - 1 == i)
+                            tmpJsonRead.put(color)
+                        else
+                            tmpJsonRead.put(0)
+                    }
+                    tmpJsonObjectRead.put(getYear().toString()+"_"+getMonth().toString(), tmpJsonRead)
+                    App.prefs.monthCafJson = tmpJsonObjectRead.toString()
+                    Log.e("ReportFragment", "새로운 달 저장")
+                }else {//기존 달 데이터에 저장
+                    tmpJsonRead = JSONArray(tmpJsonArray2)//참고용
+                    for( i in 0 .. tmpJsonRead.length() -1){
+                        //caffeineColors[i] = tmpJsonArray1.optString(i).toInt()////////
+                        if(date - 1 == i){//오늘날짜에 해당하는 값 저장
+                            tmpJsonArraySave.put(color)
+                        }else
+                            tmpJsonArraySave.put(tmpJsonRead.optString(i).toInt())
+
+                    }
+                    tmpJsonObjectRead.put(getYear().toString()+"_"+getMonth().toString(), tmpJsonArraySave)
+                    App.prefs.monthCafJson = tmpJsonObjectRead.toString()
+                    Log.e("report", "기존 달")
+                }
+                Log.e("ReportFragment", tmpJsonObjectRead.toString())
+            }
+        }
+
+        fun getMonthCafJson(date: Int, month: Int, year:Int): String{//특정 날짜의 색상 정보 가져오기
+            //Log.e("report", "month: $month, date: $date, year: $year")
+            val prefsArray = App.prefs.monthCafJson
+            if (prefsArray == null) {
+                Log.e("ReportFragment", "아직 저장되지 않음")
+                return "error"
+            }else{
+                val tmpJsonObject = JSONObject(prefsArray)
+                var tmpJsonArray1 = tmpJsonObject.optString(year.toString()+"_"+month.toString())
+                if (tmpJsonArray1 == ""){//아직 데이터가 저장되지 않은 달이면(optString()은 값이 없을 시 ""를 반환한다)
+                    Log.e("ReportFragment", "저장되지 않은 달의 데이터")
+                    return "error"//0이면 아무것도 못하게
+                }else{
+                    return JSONArray(tmpJsonArray1).optString(date -1 )
+                }
+            }
+        }
+
+        fun calMonthCaffeineColor(todayCaf: Int): Int{
+            val dayCaffeine = App.prefs.dayCaffeine?.toFloat()
+            if (todayCaf.toFloat() > dayCaffeine!!){
+                return 3 //빨강(권장량 이상)
+            }else if(todayCaf.toFloat() > dayCaffeine!!/2){
+                return 2//노랑(권장량의 반 이상)
+            }else{
+                return 1//초록(권장량의 반 이하)
+            }
+        }
+    }
+    //object로 바꾸기
+
+
 }
+
+
+
