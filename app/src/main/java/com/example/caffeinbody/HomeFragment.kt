@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.caffeinbody.DetailActivity.Companion.calculateCaffeinLeft
+import com.example.caffeinbody.DetailActivity.Companion.minusDays
 import com.example.caffeinbody.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.data.Entry
 import com.google.android.gms.wearable.CapabilityClient
@@ -144,6 +145,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUI(){
+        //App.prefs.todayCaf = 0f
         val todayCaf = App.prefs.todayCaf
         val remainCaf = App.prefs.remainCaf
         binding.intakenCaffeineText.setText(todayCaf.toString())
@@ -151,10 +153,13 @@ class HomeFragment : Fragment() {
 
         var nowTime = DetailActivity.getTime()
         var registeredTime = App.prefs.registeredTime//가장 최근 카페인 섭취한 시간
-        var halfTime =
-            DetailActivity.calHalfTime(getString(R.string.basicTime).toInt(), App.prefs.multiply!!)//-> 민감도 반영 반감기 시간
+        var halfTime = DetailActivity.calHalfTime(getString(R.string.basicTime).toInt(), App.prefs.multiply!!)//-> 민감도 반영 반감기 시간
         //Log.e("home", getString(R.string.basicTime).toInt().toString())
-        var leftCaffeine = calculateCaffeinLeft(remainCaf!!.toFloat(), nowTime + 24* DetailActivity.minusDays() - registeredTime!!, halfTime, 0.5f)
+
+        var leftCaffeine = calculateCaffeinLeft(remainCaf!!, nowTime + 24* minusDays() - registeredTime!!, halfTime, 0.5f)
+        App.prefs.remainCafTmp = "%.1f".format(leftCaffeine).toFloat()
+        //remainCaf는 체내 잔여 카페인 계산 위해 카페인 등록 이외에 가공되지 않은 값/remainCafTmp는 시간별 계산된 값
+        //leftCaffeine == remainCaf
         putCurrentCaffeine(leftCaffeine)
         val servingsize = App.prefs.currentcaffeine
 
@@ -181,7 +186,7 @@ class HomeFragment : Fragment() {
         if (servingsize != null) {
             if((servingsize - caffeineLeft!!) > 0 ) {
                 var current = servingsize - caffeineLeft
-                App.prefs.currentcaffeine = "%.2f".format(current)
+                App.prefs.currentcaffeine = "%.1f".format(current)
             }
             else App.prefs.currentcaffeine = "0"
         }

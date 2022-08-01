@@ -90,74 +90,74 @@ class ReportFragment:Fragment() {
             "월" -> {
                 if (curTime <= "23:59:50") {
                     //App.prefs.weekCafJson.set(0,App.prefs.todayCaf.toString())
-                    weekCafArray.set(0, App.prefs.todayCaf)
+                    weekCafArray.set(0, App.prefs.todayCaf?.toInt())
                     Log.e("mon", App.prefs.weekCafJson.toString())
                 }
                 else {
                     App.prefs.weekCafJson= arrayListOf(weekCafArray.toString())
                     Log.e("weekCafJson", App.prefs.weekCafJson.toString())
-                    App.prefs.todayCaf = 0
+                    App.prefs.todayCaf = 0f
                 }
                 App.prefs.weekCafJson
             }
             "화" -> {
                 if (curTime <= "23:59:30") {
-                    weekCafArray.set(1, App.prefs.todayCaf)
+                    weekCafArray.set(1, App.prefs.todayCaf?.toInt())
                     Log.e("tue", weekCafArray.toString())
                 }
                 else {
                     App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0
+                    App.prefs.todayCaf = 0f
                 }
             }
             "수" -> {
                 if (curTime <= "23:59:30") {
-                    weekCafArray.set(2, App.prefs.todayCaf)
+                    weekCafArray.set(2, App.prefs.todayCaf?.toInt())
                     Log.e("wed", weekCafArray.toString())
                 }
                 else {
                     App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0
+                    App.prefs.todayCaf = 0f
                 }
             }
             "목" -> {
                 if (curTime <= "23:59:30") {
-                    weekCafArray.set(3, App.prefs.todayCaf)
+                    weekCafArray.set(3, App.prefs.todayCaf?.toInt())
                     Log.e("thu", weekCafArray.toString())
                 }
                 else {
                     App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0
+                    App.prefs.todayCaf = 0f
                 }
             }
             "금" -> {
                 if (curTime <= "23:59:30") {
-                    weekCafArray.set(4, App.prefs.todayCaf)
+                    weekCafArray.set(4, App.prefs.todayCaf?.toInt())
                     Log.e("fri", weekCafArray.toString())
                 }
                 else {
                     App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0
+                    App.prefs.todayCaf = 0f
                 }
             }
             "토" -> {
                 if (curTime <= "23:59:30") {
-                    weekCafArray.set(5, App.prefs.todayCaf)
+                    weekCafArray.set(5, App.prefs.todayCaf?.toInt())
                     Log.e("sat", weekCafArray.toString())
                 }
                 else {
                     App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0
+                    App.prefs.todayCaf = 0f
                 }
             }
             "일" -> {
                 if (curTime <= "23:59:30") {
-                    weekCafArray.set(6, App.prefs.todayCaf)
+                    weekCafArray.set(6, App.prefs.todayCaf?.toInt())
                     Log.e("sun", weekCafArray.toString())
                 }
                 else {
                     App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0
+                    App.prefs.todayCaf = 0f
                 }
             }
         }
@@ -460,11 +460,11 @@ class ReportFragment:Fragment() {
             }
         }
 
-        fun calMonthCaffeineColor(todayCaf: Int): Int{
+        fun calMonthCaffeineColor(todayCaf: Float): Int{
             val dayCaffeine = App.prefs.dayCaffeine?.toFloat()
-            if (todayCaf.toFloat() > dayCaffeine!!){
+            if (todayCaf > dayCaffeine!!){
                 return 3 //빨강(권장량 이상)
-            }else if(todayCaf.toFloat() > dayCaffeine!!/2){
+            }else if(todayCaf > dayCaffeine!!/2){
                 return 2//노랑(권장량의 반 이상)
             }else{
                 return 1//초록(권장량의 반 이하)

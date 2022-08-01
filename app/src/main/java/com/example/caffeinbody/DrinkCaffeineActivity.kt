@@ -27,7 +27,7 @@ import java.util.*
 
 
 var arraySize = arrayOf<Int>(1,2,3)
-var resultInt:Int = 100
+var resultInt = 100f
 
 var caffeine:Int = 100 //샷
 var rangevalue:Int = 100 //샷
@@ -73,19 +73,19 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         //음료 사이즈 선택
         binding.size1.setOnClickListener {
-            resultInt = arraySize[0] * caffeine * rangevalue /100
+            resultInt = arraySize[0] * caffeine * rangevalue /100f
             size = 0
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size2.setOnClickListener {
-            resultInt = arraySize[1] * caffeine * rangevalue /100
+            resultInt = arraySize[1] * caffeine * rangevalue /100f
             size = 1
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size3.setOnClickListener {
-            resultInt = arraySize[2] * caffeine * rangevalue /100
+            resultInt = arraySize[2] * caffeine * rangevalue /100f
             size = 2
             binding.result.setText(resultInt.toString()+"mg")
         }
@@ -95,7 +95,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             override fun onPointsChanged(boxedPoints: BoxedVertical, value: Int) {
                 println(value)
                 rangevalue = value
-                resultInt = caffeine * value * arraySize[size] / 100
+                resultInt = caffeine * value * arraySize[size] / 100f
                 binding.textView7.setText((value.toDouble() / 100).toString()+"잔")
                 binding.result.setText(resultInt.toString()+"mg")
             }
@@ -113,13 +113,20 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         binding.save.setOnClickListener {
             saveTime()//카페인 등록 시간 저장
 
-            val msg = App.prefs.todayCaf
-            if (msg != null) {
+            val msg = App.prefs.todayCaf//하루섭취카페인
+            var msg2 = App.prefs.remainCafTmp//체내남은카페인(날짜변경시초기화안됨+시간별계산된버전)
+            if (msg != null) {//msg2를 시간별로 계속 업데이트 해야만 가능하다
+                msg2= msg2!! + resultInt
+                App.prefs.remainCafTmp = msg2
                 resultInt = msg + resultInt
+            }else{
+                App.prefs.remainCafTmp = resultInt
             }
+            Log.e("DrinkCaffeine", "msg2!: $msg2 resultInt: $resultInt")
             App.prefs.todayCaf = resultInt
-            App.prefs.remainCaf = resultInt
-            sendFavorite(resultInt)
+            App.prefs.remainCaf = App.prefs.remainCafTmp
+            Log.e("drink: ", "remainCafReal: " + App.prefs.remainCafTmp)
+            sendCaffeineDatas(resultInt)
 
             var todayCaf = App.prefs.todayCaf
             var caffeineColor = calMonthCaffeineColor(todayCaf!!)
@@ -134,7 +141,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         }
     }
 
-    private fun sendFavorite(msg: Int) {
+    private fun sendCaffeineDatas(msg: Float) {
         Log.e("보내짐", "")
         lifecycleScope.launch {
             Log.e("TAG", "안녕")

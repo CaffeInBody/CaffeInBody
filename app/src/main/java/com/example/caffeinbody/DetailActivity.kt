@@ -11,6 +11,7 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import org.threeten.bp.LocalDate
+import org.threeten.bp.temporal.ChronoUnit
 import java.util.*
 import kotlin.math.pow
 
@@ -100,11 +101,11 @@ class DetailActivity : AppCompatActivity() {
             if (registered_y !== 0){
                 val today = LocalDate.now()
 
-                Log.e("detail", "hey $registered_y $registered_M $registered_D")
+                Log.e("detail", "registered date:  $registered_y $registered_M $registered_D")
                 val registeredDate = LocalDate.of(registered_y!!, registered_M!!, registered_D!!)
-                val period = registeredDate.until(today)
-                Log.e("detail",period.days.toString())
-                return period.days
+                val gap = ChronoUnit.DAYS.between(registeredDate, today)
+                Log.e("detail daysgap",gap.toString())
+                return gap.toInt()
             }else{
                 return 0
             }
@@ -119,23 +120,22 @@ class DetailActivity : AppCompatActivity() {
     //새 카페인이 추가되면 총 마신 카페인량이 저장됨
     fun drawGraph(sensitivity: Double){
         //var caffeineVolume = App.prefs.todayCaf//초기화됨
-        var remainCaf = App.prefs.remainCaf
+        var remainCaf = App.prefs.remainCafTmp
         var halfTime = calHalfTime( getString(R.string.basicTime).toInt(), sensitivity.toFloat())//-> 민감도 반영 반감기 시간
         var nowTime = getTime()
-        var nowDate = getDate()
 
         binding.textView11.setText(App.prefs.currentcaffeine + "mg")//얘도 같이 초기화됨
-        if (remainCaf != 0) {
+        if (remainCaf != 0f) {
             //Log.e("detail", "remainCaf: $remainCaf, nowdate: $nowDate, registeredDate: " + App.prefs.registeredDate)
-            var registeredT = App.prefs.registeredTime
+            //var registeredT = App.prefs.registeredTime
             if (minusDays()>=0){//registered 23시, nowTime 1시
-                var leftCaffeine = calculateCaffeinLeft(remainCaf!!.toFloat(), nowTime + 24*minusDays() - registeredT!!, halfTime, 0.5f)
+                //var leftCaffeine = calculateCaffeinLeft(remainCaf!!.toFloat(), nowTime + 24*minusDays() - registeredT!!, halfTime, 0.5f)
                 //Log.e("detail nowT", "$nowTime registeredT: $registeredT")
                 var i = 0
-                var leftCaffeineStable = leftCaffeine
+                var leftCaffeineStable = remainCaf
                 Log.e("detail", "leftStabled: $leftCaffeineStable")
                 while (leftCaffeineStable!! >= 10){
-                    leftCaffeineStable =leftCaffeine/(2.0).pow(i).toFloat()
+                    leftCaffeineStable =remainCaf!!/(2.0).pow(i).toFloat()
                     lineChartData.add(Entry((nowTime + halfTime*i++), leftCaffeineStable))
                     Log.e("detail hahah", "entry1: " + (nowTime + halfTime*i) + " entry2: " + leftCaffeineStable)
                 }

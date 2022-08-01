@@ -8,7 +8,7 @@ import android.util.Log
 class ResetTodayCaf : BroadcastReceiver() {
     override fun onReceive(p0: Context?, p1: Intent?) {
         App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-        App.prefs.todayCaf = 0
+        App.prefs.todayCaf = 0f
         Log.e("AlarmCheck", "리셋완료"+App.prefs.todayCaf)
     }
 

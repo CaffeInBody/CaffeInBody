@@ -13,12 +13,15 @@ class MySharedPreferences(context: Context) {
     private val prefsKeyDrink = "mydrink"
     private val prefs: SharedPreferences = context.getSharedPreferences(prefsFilename, 0)
 
-    var todayCaf: Int?//섭취한 카페인 누계
-        get() = prefs.getInt(prefsKeyCaf, 0 )
-        set(value) = prefs.edit().putInt(prefsKeyCaf, value!!).apply()
-    var remainCaf: Int?//todayCaf 하루 지날 시 초기화 방지를 위한 체내 남은 카페인량 저장
-        get() = prefs.getInt("remainCaf", 0 )
-        set(value) = prefs.edit().putInt("remainCaf", value!!).apply()
+    var todayCaf: Float?//섭취한 카페인 누계
+        get() = prefs.getFloat(prefsKeyCaf, 0.0f )
+        set(value) = prefs.edit().putFloat(prefsKeyCaf, value!!).apply()
+    var remainCaf: Float?//todayCaf 하루 지날 시 초기화 방지를 위한 카페인 누적 값(카페인 등록 이외에 변하지 않는 값)
+        get() = prefs.getFloat("remainCaf", 0.0f )
+        set(value) = prefs.edit().putFloat("remainCaf", value!!).apply()
+    var remainCafTmp: Float?//remainCafTmp는 시간별 계산된 체내 카페인(변화되는 값)
+    get() = prefs.getFloat("remainCafTmp", 0.0f )
+        set(value) = prefs.edit().putFloat("remainCafTmp", value!!).apply()
     var sensetivity: String?//1회 카페인 섭취 권고량
         get() = prefs.getString("sensitivity", null)
         set(value) = prefs.edit().putString("sensitivity", value!!).apply()
