@@ -19,6 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
+
             <ImageView
                 android:id="@+id/img_caffeine"
                 android:layout_width="wrap_content"
@@ -26,6 +27,20 @@
                 android:src="@drawable/coffee_sample"
                 android:layout_gravity="center"
          />
+        <TextView
+            android:id="@+id/caf_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100mg"
+            android:gravity="center"
+            style="@style/bold_12dp"
+            android:background="@color/brown"
+            android:textColor="@color/white"
+            android:padding="4dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_caffeine" />
 
     </androidx.cardview.widget.CardView>
 
@@ -35,7 +50,8 @@
             android:layout_height="wrap_content"
             android:text="아메리카노"
             android:gravity="center"
-            android:layout_marginTop="5dp"
+            android:textColor="#666666"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_caffeine" />
@@ -47,7 +63,7 @@
             android:gravity="center"
             android:text="100mg"
             style="@style/bold_14dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_name" />

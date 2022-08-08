@@ -50,11 +50,16 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val txt: TextView = itemView.findViewById(R.id.txt_name)
         private val img: ImageView = itemView.findViewById(R.id.img_caffeine)
-        private val caf: TextView = itemView.findViewById(R.id.txt_caffeine)
+     //   private val caf: TextView = itemView.findViewById(R.id.txt_caffeine)
+        private val caf: TextView = itemView.findViewById(R.id.caf_name)
+        private val drink: TextView = itemView.findViewById(R.id.txt_caffeine)
 
         fun bind(article: Drinks){
-            txt.text = article.drinkName
-            caf.text = article.caffeine?.caffeine1.toString() +"mg"
+           // txt.text = article.drinkName
+          //  caf.text = article.caffeine?.caffeine1.toString() +"mg"
+            txt.text = article.madeBy
+            drink.text = article.drinkName
+            caf.text= article.caffeine?.caffeine1.toString() +"mg"
 
             if(article.imgurl == "")
                 Glide.with(itemView).load(R.drawable.coffee_sample).into(img)
