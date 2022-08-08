@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CaffeineListActivity"
 >
 
@@ -18,19 +19,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/coffee_brand"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:padding="10dp"
+        >
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/coffee_brand_btn"
+            android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/starbucks"
+            android:layout_marginHorizontal="6dp"
+            android:background="@drawable/starbucks_logo"/>
+        <RadioButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/ediya"
+            android:layout_marginHorizontal="6dp"
+            android:background="@drawable/ediya_logo"/>
+        <RadioButton
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:id="@+id/twosome"
+            android:layout_marginHorizontal="6dp"
+            android:background="@drawable/twosome_logo"/></RadioGroup>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/caffein_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="10dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="10dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:spanCount="2"
         tools:listitem="@layout/item_caffeine" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
