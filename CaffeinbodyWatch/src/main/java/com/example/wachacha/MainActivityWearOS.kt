@@ -1,23 +1,25 @@
 package com.example.wachacha
 
-import android.app.Activity
+import android.bluetooth.BluetoothAdapter
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
-import android.widget.Toast
+import android.view.View
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.wachacha.databinding.ActivityMainWearOsBinding
+import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.CapabilityClient
-import com.google.android.gms.wearable.Node
 import com.google.android.gms.wearable.Wearable
-import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
+
 
 class MainActivityWearOS : ComponentActivity() {
     private val dataClient by lazy { Wearable.getDataClient(this) }
@@ -33,25 +35,15 @@ class MainActivityWearOS : ComponentActivity() {
         binding = ActivityMainWearOsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*binding.sendMessage.setOnClickListener{
-            Log.e("btn pressed", "버튼 눌림")
-            val a = HeartRateActivity()
-            a.onQueryOtherDevicesClicked("hello")
-            Log.e("MAin", "message sent")
-        }*/
-        binding.button2.setOnClickListener{//열기를 누르면?
-            val selectActivity = MainActivityWearOS()
+        binding.heartActivityBtn.setOnClickListener{//열기를 누르면?
             val heartRateActivity = HeartRateActivity()
             val intent = Intent(this, heartRateActivity::class.java)
             startActivity(intent)
-
-            //finish()
         }
 
-        binding.button3.setOnClickListener {
+        binding.caffeineDataBtn.setOnClickListener {
             val intent = Intent(this, DrinkActivity::class.java)
             startActivity(intent)
-            //finish()
         }
     }
 
@@ -73,14 +65,5 @@ class MainActivityWearOS : ComponentActivity() {
         dataClient.removeListener(clientDataViewModel)
         messageClient.removeListener(clientDataViewModel)
         capabilityClient.removeListener(clientDataViewModel)
-    }
-
-
-    companion object {
-        private const val TAG = "MainActivity"
-
-        private const val CAMERA_CAPABILITY = "camera"
-        private const val WEAR_CAPABILITY = "wear"
-        private const val MOBILE_CAPABILITY = "mobile"
     }
 }

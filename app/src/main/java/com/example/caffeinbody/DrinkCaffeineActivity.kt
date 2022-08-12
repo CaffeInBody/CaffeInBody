@@ -39,7 +39,6 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             layoutInflater
         )
     }
-    private val dataClient by lazy { Wearable.getDataClient(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -126,7 +125,6 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             App.prefs.todayCaf = resultInt
             App.prefs.remainCaf = App.prefs.remainCafTmp
             Log.e("drink: ", "remainCafReal: " + App.prefs.remainCafTmp)
-            sendCaffeineDatas(resultInt)
 
             var todayCaf = App.prefs.todayCaf
             var caffeineColor = calMonthCaffeineColor(todayCaf!!)
@@ -138,29 +136,6 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
             finish()
-        }
-    }
-
-    private fun sendCaffeineDatas(msg: Float) {
-        Log.e("보내짐", "")
-        lifecycleScope.launch {
-            Log.e("TAG", "안녕")
-            try {
-                val request = PutDataMapRequest.create("/favorite").apply {
-                    dataMap.putString("favorite", "누적 카페인: $msg")
-                    //dataMap.putString(FAVORITE_KEY, (++count).toString())//메시지가 변경돼야 전송됨.
-                    //dataMap.putStringArrayList(FAVORITE_KEY, 리스트)//즐겨찾기 리스트
-                }
-                    .asPutDataRequest()
-                    .setUrgent()
-
-                val result = dataClient.putDataItem(request).await()
-                Log.e("DrinkCaffeineActivity", "DataItem saved: $result")
-            } catch (cancellationException: CancellationException) {
-                Log.e("DrinkCaffeineActivity", "캔슬됨")
-            } catch (exception: Exception) {
-                Log.d("DrinkCaffeineActivity", "Saving DataItem failed: $exception")
-            }
         }
     }
 

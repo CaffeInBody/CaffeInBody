@@ -3,6 +3,8 @@
     package="com.example.wachacha">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
 
     <uses-feature android:name="android.hardware.type.watch" />
 
@@ -41,6 +43,10 @@
                 <data
                     android:host="*"
                     android:pathPrefix="/favorite"
+                    android:scheme="wear" />
+                <data
+                    android:host="*"
+                    android:pathPrefix="/currentInfos"
                     android:scheme="wear" />
             </intent-filter>
             <intent-filter>

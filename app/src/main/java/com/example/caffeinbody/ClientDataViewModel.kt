@@ -10,14 +10,14 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.wearable.CapabilityClient
-import com.google.android.gms.wearable.CapabilityInfo
-import com.google.android.gms.wearable.DataClient
-import com.google.android.gms.wearable.DataEvent
-import com.google.android.gms.wearable.DataEventBuffer
-import com.google.android.gms.wearable.MessageClient
-import com.google.android.gms.wearable.MessageEvent
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
+import com.google.android.gms.wearable.*
 import com.google.android.material.internal.ContextUtils.getActivity
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
+import org.json.JSONObject
+import java.util.jar.Manifest
 
 /**
  * A state holder for the client data.
@@ -32,9 +32,6 @@ class ClientDataViewModel :
     /**The list of events from the clients.**/
     val events: List<Event> = _events
 
-    /***The currently captured image (if any), available to send to the wearable devices.*/
-    var image by mutableStateOf<Bitmap?>(null)
-        private set
 
     override fun onDataChanged(dataEvents: DataEventBuffer) {
         Log.e("데이터 추가됨", "-------------------------------")
@@ -56,20 +53,29 @@ class ClientDataViewModel :
     }
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
-        //_events = mutableStateListOf<Event>()//초기화 필요한가 안필요한가 음
-        /*_events.add(
-            Event(
-                title = R.string.message_from_watch,
-                //text = messageEvent.toString()
-                text = messageEvent.data.decodeToString()//bytearray를 디코드하기
-            )
-        )
-        events.forEach {
-                event -> Log.e("메시지 왔음: ", event.text)
-                App.prefs.heartrateAvg = event.text
-        }*/
-        App.prefs.heartrateAvg = messageEvent.data.decodeToString()
-        Log.e("메시지 왔음: ", App.prefs.heartrateAvg.toString())
+        val uri = messageEvent.path
+        //Log.e("ClientDataViewModel", "uri: $uri")
+        when (uri) {
+            "/heartrate" -> {
+                App.prefs.heartrateAvg = messageEvent.data.decodeToString()
+                Log.e("ClientDataViewModel", "메시지 왔음: " + App.prefs.heartrateAvg.toString())
+            }
+
+            "/currentInfos" -> {
+                var jsonObject = JSONObject()
+                jsonObject.put("onceRecommended", App.prefs.sensetivity!!)
+                jsonObject.put("onceDrinkable", App.prefs.currentcaffeine!!)
+                jsonObject.put("dayRecommended", App.prefs.dayCaffeine!!)
+                jsonObject.put("dayDrinked", App.prefs.todayCaf!!.toString())
+                Log.e("ClientDataViewModel", jsonObject.toString())
+                sendCaffeineDatas(jsonObject.toString())
+            }
+            else ->{
+                Log.e("ClientDataViewModel", "none, path: " + uri)
+            }
+        }
+
+
 
     }
 
@@ -82,8 +88,26 @@ class ClientDataViewModel :
         )
     }
 
-    fun onPictureTaken(bitmap: Bitmap?) {
-        image = bitmap ?: return
+    private fun sendCaffeineDatas(msg: String) {
+        Log.e("CDVM", "hi")
+        viewModelScope.launch{
+            Log.e("CDVM", "hi2")
+            val dataClient  = Wearable.getDataClient(App.context())
+            try {
+                val request = PutDataMapRequest.create("/currentInfos").apply {
+                    dataMap.putString("caffeineDatas", msg)
+                }
+                    .asPutDataRequest()
+                    .setUrgent()
+
+                val result = dataClient.putDataItem(request).await()
+                Log.e("ClientDataViewModel", "DataItem saved: $result")
+            } catch (cancellationException: CancellationException) {
+                Log.e("ClientDataViewModel", "캔슬됨")
+            } catch (exception: Exception) {
+                Log.d("ClientDataViewModel", "Saving DataItem failed: $exception")
+            }
+        }
     }
 }
 

@@ -4,29 +4,24 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:paddingTop="30dp">
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:id="@+id/heartActivityBtn"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="심박수 측정" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
+        android:id="@+id/caffeineDataBtn"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="카페인 추가" />
-
-    <EditText
-        android:id="@+id/testMessageEdit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="보내는 메시지"/>
+        android:text="카페인 보기" />
 
     <Button
         android:id="@+id/sendMessage"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="데이터 전송 테스트 버튼" />
 </LinearLayout>

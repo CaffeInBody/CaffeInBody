@@ -1,22 +1,11 @@
 package com.example.wachacha
-
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.util.Log
-import android.widget.Toast
-import com.example.wachacha.databaseWatch.FavFunctions.Companion.addFav
-import com.example.wachacha.databaseWatch.FavFunctions.Companion.selectFav
-import com.example.wachacha.databaseWatch.Favorites
-import com.example.wachacha.databaseWatch.FavoritesDatabase
 import com.google.android.gms.wearable.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.await
+import org.json.JSONObject
 
 class DataLayerListenerService : WearableListenerService() {//wear에서 데이터 영역 이벤트 처리
-    private var favorite: String = ""
-    private val messageClient by lazy { Wearable.getMessageClient(this) }
-    private lateinit var db: FavoritesDatabase
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main.immediate)
 
@@ -26,18 +15,19 @@ class DataLayerListenerService : WearableListenerService() {//wear에서 데이�
             val uri = dataEvent.dataItem.uri
             Log.e("DLLS", "data changed")
             when (uri.path) {
-                FAVORITE_PATH -> {
-                    Log.e("favorite: ", "this is favorite" + uri.toString())
-                    favorite = DataMapItem.fromDataItem(dataEvent.dataItem)
+                "/currentInfos"->{
+                    var tmp = DataMapItem.fromDataItem(dataEvent.dataItem)
                         .dataMap
-                        .getString(DataLayerListenerService.FAVORITE_KEY)
-                    Log.e("스마트폰에서 온 favorite", favorite)
-
-                    db = FavoritesDatabase.getInstance(applicationContext)!!
-                    addFav(db, favorite)
+                        .getString("caffeineDatas")
+                    var jsonObject = JSONObject(tmp)
+                    Log.e("DataLayerListnerService", "recieved json: " + jsonObject.toString())
+                    MainApplication.prefs.drinkedCaffeine_day = jsonObject.optString("dayDrinked")
+                    MainApplication.prefs.recommendedCaffeine_day = jsonObject.optString("dayRecommended")
+                    MainApplication.prefs.drinkedCaffeine_once = jsonObject.optString("onceDrinkable")
+                    MainApplication.prefs.recommendedCaffeine_once = jsonObject.optString("onceRecommended")
                 }
                 else ->{
-                    Log.e("DLLS", "none")
+                    Log.e("DLLS", "none, path: " + uri.path)
                 }
             }
         }
@@ -45,10 +35,10 @@ class DataLayerListenerService : WearableListenerService() {//wear에서 데이�
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
         super.onMessageReceived(messageEvent)
-        Log.e("메시지옴", "1")
+        val uriHost = messageEvent.sourceNodeId//데이터베이스에 데이터가 없으면 이 uri를 저장하고 받아서 이 nodeid로 메시지 보내기
         when (messageEvent.path) {
             START_ACTIVITY_PATH -> {
-                Log.e("메시지옴", "2")
+                Log.e("DLLS", "액티비티 열기")
                 startActivity(
                     Intent(this, HeartRateActivity::class.java)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

@@ -35,16 +35,11 @@ class HomeFragment : Fragment() {
     var count = 1
 
     // TODO: Rename and change types of parameters
-    private val dataClient by lazy { Wearable.getDataClient(activity) }
     private val messageClient by lazy { Wearable.getMessageClient(getActivity()) }
-    private val capabilityClient by lazy { Wearable.getCapabilityClient(getActivity()) }
     private val nodeClient by lazy { Wearable.getNodeClient(getActivity()) }
-    private val clientDataViewModel by viewModels<ClientDataViewModel>()
-    //getActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setUI()
         arguments?.let {
 
         }
@@ -66,7 +61,6 @@ class HomeFragment : Fragment() {
         Log.e("home", "onCreateView")
 
         binding.addBeverageBtn.setOnClickListener{
-            sendFavorite()
             activity?.let{
             val selectActivity =  DrinkTypeActivity()
             val intent = Intent(context, selectActivity::class.java)
@@ -120,32 +114,8 @@ class HomeFragment : Fragment() {
             }
         }
     }
-    ///////////////즐겨찾기 데이터 보내기(동기화 시점은...?)
-    private fun sendFavorite() {
-        Log.e("보내짐", "")
-        lifecycleScope.launch {
-            Log.e("TAG", "안녕")
-            try {
-                val request = PutDataMapRequest.create(FAVORITE_PATH).apply {
-                    dataMap.putString(FAVORITE_KEY, "받은 메시지: " + (++count).toString())
-                    //dataMap.putString(FAVORITE_KEY, (++count).toString())//메시지가 변경돼야 전송됨.
-                    //dataMap.putStringArrayList(FAVORITE_KEY, 리스트)//즐겨찾기 리스트
-                }
-                    .asPutDataRequest()
-                    .setUrgent()
-
-                val result = dataClient.putDataItem(request).await()
-                Log.e(TAG, "DataItem saved: $result")
-            } catch (cancellationException: CancellationException) {
-                Log.e(TAG, "캔슬됨")
-            } catch (exception: Exception) {
-                Log.d(TAG, "Saving DataItem failed: $exception")
-            }
-        }
-    }
 
     private fun setUI(){
-        //App.prefs.todayCaf = 0f
         val todayCaf = App.prefs.todayCaf
         val remainCaf = App.prefs.remainCaf
         binding.intakenCaffeineText.setText(todayCaf.toString())
@@ -154,12 +124,10 @@ class HomeFragment : Fragment() {
         var nowTime = DetailActivity.getTime()
         var registeredTime = App.prefs.registeredTime//가장 최근 카페인 섭취한 시간
         var halfTime = DetailActivity.calHalfTime(getString(R.string.basicTime).toInt(), App.prefs.multiply!!)//-> 민감도 반영 반감기 시간
-        //Log.e("home", getString(R.string.basicTime).toInt().toString())
 
         var leftCaffeine = calculateCaffeinLeft(remainCaf!!, nowTime + 24* minusDays() - registeredTime!!, halfTime, 0.5f)
         App.prefs.remainCafTmp = "%.1f".format(leftCaffeine).toFloat()
         //remainCaf는 체내 잔여 카페인 계산 위해 카페인 등록 이외에 가공되지 않은 값/remainCafTmp는 시간별 계산된 값
-        //leftCaffeine == remainCaf
         putCurrentCaffeine(leftCaffeine)
         val servingsize = App.prefs.currentcaffeine
 
@@ -174,7 +142,6 @@ class HomeFragment : Fragment() {
         }
         binding.heart.start()
         binding.heart.waveHeightPercent = (percent)!!.toFloat()
-    //  percent?.let { binding.heart.setProgress(it.toInt()) }
     }
 
 

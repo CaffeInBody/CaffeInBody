@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     private val dataClient by lazy { Wearable.getDataClient(this) }
     private val messageClient by lazy { Wearable.getMessageClient(this) }
     private val capabilityClient by lazy { Wearable.getCapabilityClient(this) }
-    private val nodeClient by lazy { Wearable.getNodeClient(this) }
     private val clientDataViewModel by viewModels<ClientDataViewModel>()
 
     private val binding: ActivityMainBinding by lazy {
@@ -93,11 +92,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
-    override fun onPause() {
+    /*override fun onPause() {
         super.onPause()
         dataClient.removeListener(clientDataViewModel)
         messageClient.removeListener(clientDataViewModel)
         capabilityClient.removeListener(clientDataViewModel)
+        Log.e("MainActivity", "리스너 제거됨")
 
         lifecycleScope.launch {
             // This is a judicious use of NonCancellable.
@@ -112,6 +112,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 }
             }
         }
-    }
+    }*/
 
 }
