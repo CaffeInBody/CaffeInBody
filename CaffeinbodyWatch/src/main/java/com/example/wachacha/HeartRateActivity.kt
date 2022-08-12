@@ -28,12 +28,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.example.wachacha.databinding.ActivityHeartrateBinding
+import com.google.android.gms.tasks.Tasks
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.Node
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
@@ -45,10 +47,7 @@ import kotlinx.coroutines.tasks.await
 @AndroidEntryPoint
 class HeartRateActivity : AppCompatActivity() {
     private val messageClient by lazy { Wearable.getMessageClient(this) }
-    private val capabilityClient by lazy { Wearable.getCapabilityClient(this) }
-    private val dataClient by lazy { Wearable.getDataClient(this) }
     var average = 0f
-    var count = 0
 
     private lateinit var binding: ActivityHeartrateBinding
     private lateinit var permissionLauncher: ActivityResultLauncher<String>
@@ -61,7 +60,6 @@ class HeartRateActivity : AppCompatActivity() {
         binding = ActivityHeartrateBinding.inflate(layoutInflater)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(binding.root)
-        onQueryOtherDevicesClicked("hey: " + count++)
 
         permissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
@@ -78,7 +76,7 @@ class HeartRateActivity : AppCompatActivity() {
                             viewModel.measureHeartRate()
                             average = String.format("%.1f", viewModel.average/30).toFloat()
                             binding.statusText.setText("측정완료 : " + average)
-                            onQueryOtherDevicesClicked(average.toString())
+                            sendHeartRate(average.toString())
                         }
                     }
                     false -> Log.i(TAG, "Body sensors permission not granted")
@@ -103,34 +101,21 @@ class HeartRateActivity : AppCompatActivity() {
         }
     }
 
-    //전송 버튼 전체적인 작업 실행
-    fun onQueryOtherDevicesClicked(watchMessage: String) {
-        lifecycleScope.launch {
-            var nodeId: String = ""
-            try {
-                val nodes = getCapabilitiesForReachableNodes()
-                    /*.filterValues { "mobile" in it || "wear" in it }*/.keys
-                displayNodes(nodes)
-                nodes.map { node ->
-                    nodeId = node.id
-                }
-                Log.e("nodeid2222222222: ", nodeId)//노드 아이디 구했다!
-                sendHeartRate(nodeId, watchMessage)
-            } catch (cancellationException: CancellationException) {
-                throw cancellationException
-            } catch (exception: Exception) {
-                Log.e("HeartRateActivity", "Querying nodes failed: $exception")
-            }
-        }
+
+
+    private fun getNodes(): Collection<String> {
+        return Tasks.await(Wearable.getNodeClient(this).connectedNodes).map { it.id }
     }
+
     //심박수 보내기
-    fun sendHeartRate(nodeId: String, watchMessage: String){
-        lifecycleScope.launch {
+    fun sendHeartRate(watchMessage: String){
+        lifecycleScope.launch(Dispatchers.IO) {
+            Log.e("노드", getNodes().first())
             try {
                 val payload = watchMessage.toByteArray()
                 messageClient.sendMessage(
-                    nodeId,
-                    DataLayerListenerService.DATA_ITEM_RECEIVED_PATH,
+                    getNodes().first(),
+                    "/heartrate",
                     payload
                 )
                     .await()
@@ -142,37 +127,10 @@ class HeartRateActivity : AppCompatActivity() {
             }
         }
     }
-    //사용가능한 노드 찾기
-    suspend fun getCapabilitiesForReachableNodes(): Map<Node, Set<String>> =
-        capabilityClient.getAllCapabilities(CapabilityClient.FILTER_REACHABLE)
-            .await()
-            // Pair the list of all reachable nodes with their capabilities 노드들과 가능한 기능을 매칭하는것
-            .flatMap { (capability, capabilityInfo) ->
-                capabilityInfo.nodes.map { it to capability }
-            }
-            // Group the pairs by the nodes
-            .groupBy(
-                keySelector = { it.first },
-                valueTransform = { it.second }
-            )
-            // Transform the capability list for each node into a set
-            .mapValues { it.value.toSet() }
-
-    //스마트폰 노드 찾았는지 확인하고 토스트 띄움
-    fun displayNodes(nodes: Set<Node>) {
-        val message = if (nodes.isEmpty()) {
-            getString(R.string.no_device)
-        } else {
-            getString(R.string.connected_nodes, nodes.joinToString(", ") { it.displayName }) + "전송 완료"
-        }
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
 
     override fun onStart() {
         super.onStart()
         permissionLauncher.launch(android.Manifest.permission.BODY_SENSORS)
-        Log.e("tlwkr","dkldk")
     }
 
     private fun updateViewVisiblity(uiState: UiState) {
