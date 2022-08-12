@@ -18,10 +18,4 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="카페인 보기" />
-
-    <Button
-        android:id="@+id/sendMessage"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="데이터 전송 테스트 버튼" />
 </LinearLayout>

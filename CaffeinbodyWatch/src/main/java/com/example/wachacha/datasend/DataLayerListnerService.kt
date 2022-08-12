@@ -22,9 +22,10 @@ class DataLayerListenerService : WearableListenerService() {//wear에서 데이�
                     var jsonObject = JSONObject(tmp)
                     Log.e("DataLayerListnerService", "recieved json: " + jsonObject.toString())
                     MainApplication.prefs.drinkedCaffeine_day = jsonObject.optString("dayDrinked")
-                    MainApplication.prefs.recommendedCaffeine_day = jsonObject.optString("dayRecommended")
+                    MainApplication.prefs.recommendedCaffeine_day = jsonObject.optString("dayRecommended") + "mg"
                     MainApplication.prefs.drinkedCaffeine_once = jsonObject.optString("onceDrinkable")
-                    MainApplication.prefs.recommendedCaffeine_once = jsonObject.optString("onceRecommended")
+                    MainApplication.prefs.recommendedCaffeine_once = jsonObject.optString("onceRecommended") + "mg"
+                    MainApplication.prefs.leftCaffeinInBody = jsonObject.optString("remainCaffineInBody") + "mg"
                 }
                 else ->{
                     Log.e("DLLS", "none, path: " + uri.path)

@@ -67,6 +67,7 @@ class ClientDataViewModel :
                 jsonObject.put("onceDrinkable", App.prefs.currentcaffeine!!)
                 jsonObject.put("dayRecommended", App.prefs.dayCaffeine!!)
                 jsonObject.put("dayDrinked", App.prefs.todayCaf!!.toString())
+                jsonObject.put("remainCaffineInBody", App.prefs.remainCafTmp.toString())
                 Log.e("ClientDataViewModel", jsonObject.toString())
                 sendCaffeineDatas(jsonObject.toString())
             }

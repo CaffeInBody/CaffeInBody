@@ -53,6 +53,11 @@ class DrinkActivity: AppCompatActivity() {
                 binding.recommendedCaffeineOnce.text = result
             })
 
+        liveSharedPreference.getString("leftCaffeinInBody", "")
+            .observe(this, Observer<String>{result->
+                binding.leftCaffeine.text = result
+            })
+
 
         var favorite = ""
     }
