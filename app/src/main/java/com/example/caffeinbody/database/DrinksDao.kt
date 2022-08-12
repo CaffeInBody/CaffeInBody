@@ -1,5 +1,6 @@
 package com.example.caffeinbody.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -17,7 +18,7 @@ interface DrinksDao {
     fun delete(drink: Drinks)
 
     @Query("SELECT * FROM Drinks")
-    fun getAll(): List<Drinks>
+    fun getAll(): LiveData<List<Drinks>>
 
     @Query("select * from Drinks where madeBy like :something")
     fun selectDrinkMadeBy(something: String): List<Drinks>
@@ -32,13 +33,13 @@ interface DrinksDao {
     fun selectDrinkCategory(something: String): List<Drinks>
 
     @Query("select * from Drinks where iscafe like :something")
-    fun selectiscafe(something: Boolean): List<Drinks>
+    fun selectiscafe(something: Boolean): LiveData<List<Drinks>>
 
     @Query("select * from Drinks where caffeine_caffeine1 BETWEEN 0 AND :something")
     fun recommendcaffeine(something: Double): List<Drinks>
 
     @Query("select * from Drinks where favorite = :something")//favorite 항목만 반환(true/false)
-    fun selectFavorite(something: Boolean): List<Drinks>
+    fun selectFavorite(something: Boolean): LiveData<List<Drinks>>
 
     @Query("update Drinks set favorite = :something where drinkName = :name")//favorite 항목만 변경(true/false)
     fun updateFavorite(something: Boolean, name: String)

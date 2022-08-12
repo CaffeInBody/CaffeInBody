@@ -8,6 +8,8 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet.GONE
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
@@ -46,17 +48,15 @@ class CaffeineListActivity : AppCompatActivity() {
         category = num==0
         val layoutManager = GridLayoutManager(this,2)
 
-        CoroutineScope(Dispatchers.IO).launch {
+        db = DrinksDatabase.getInstance(applicationContext)!!
+        db.drinksDao().selectiscafe(category).observe(this, Observer {
+            binding.caffeinList.adapter = caffeineadapter
+            caffeineadapter.datas.addAll(it)
+        })
 
-                db = DrinksDatabase.getInstance(applicationContext)!!
-                caffeineadapter.datas.addAll(db.drinksDao().selectiscafe(category))
-                //  Log.d("tag", "Error - "+ db.drinksDao().getAll().toString())
 
-
-            }
-        binding.caffeinList.adapter = caffeineadapter
-        caffeineadapter.notifyDataSetChanged()
         binding.caffeinList.layoutManager = layoutManager
+        caffeineadapter.notifyDataSetChanged()
 
         binding.coffeeBrandBtn.setOnCheckedChangeListener{ group, checkedId ->
             when(checkedId) {
@@ -66,8 +66,8 @@ class CaffeineListActivity : AppCompatActivity() {
             }
         }
 
-
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(com.example.caffeinbody.R.menu.menu_search,menu)
