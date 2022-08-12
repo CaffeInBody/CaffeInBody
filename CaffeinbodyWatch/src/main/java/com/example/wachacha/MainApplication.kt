@@ -23,6 +23,15 @@ import dagger.hilt.android.HiltAndroidApp
  * Application class, needed to enable dependency injection with Hilt.
  */
 @HiltAndroidApp
-class MainApplication : Application()
+class MainApplication : Application(){
+    companion object{
+        lateinit var prefs : MySharedPreferences
+    }
+
+    override fun onCreate() {
+        prefs = MySharedPreferences(applicationContext)
+        super.onCreate()
+    }
+}
 
 const val TAG = "Measuring Data Sample"
