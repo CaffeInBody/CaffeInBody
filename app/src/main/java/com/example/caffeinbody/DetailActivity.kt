@@ -54,11 +54,14 @@ class DetailActivity : AppCompatActivity() {
     companion object{
         fun calculateCaffeinLeft(volume: Float, time: Float, halfTime: Float, half: Float): Float{
             var t = time/halfTime
-            var leftCafffeine = volume * (half).pow(t)//지수함수 기준 반감기 계산식
+            var leftCaffeine = volume * (half).pow(t)//지수함수 기준 반감기 계산식
+            if (leftCaffeine<1){//1 이하면 초기화
+                leftCaffeine = 0f
+            }
 
             Log.e("detail", "$volume $time $halfTime $half $t" )
             //Log.e("leftCafffeine", leftCafffeine.toString())
-            return leftCafffeine
+            return leftCaffeine
         }
 
         fun getTime():Float {
@@ -134,7 +137,7 @@ class DetailActivity : AppCompatActivity() {
                 var i = 0
                 var leftCaffeineStable = remainCaf
                 Log.e("detail", "leftStabled: $leftCaffeineStable")
-                while (leftCaffeineStable!! >= 10){
+                while (leftCaffeineStable!! >= 1){
                     leftCaffeineStable =remainCaf!!/(2.0).pow(i).toFloat()
                     lineChartData.add(Entry((nowTime + halfTime*i++), leftCaffeineStable))
                     Log.e("detail hahah", "entry1: " + (nowTime + halfTime*i) + " entry2: " + leftCaffeineStable)
