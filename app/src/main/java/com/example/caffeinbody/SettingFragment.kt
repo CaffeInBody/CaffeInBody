@@ -1,5 +1,6 @@
 package com.example.caffeinbody
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,6 +19,14 @@ class SettingFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding.textView4.setOnClickListener {
+            startActivity(
+                Intent(activity, Survey1Activity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
+        }
+
         arguments?.let {
         }
     }
