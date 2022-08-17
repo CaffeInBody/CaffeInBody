@@ -106,4 +106,9 @@ class MySharedPreferences(context: Context) {
     var registeredTime: Float?//카페인 등록 시간
         get() = prefs.getFloat("registeredTime", 0.0f)
         set(value) = prefs.edit().putFloat("registeredTime", value!!).apply()
+
+    var normalHeartRate: Float?
+        get() = prefs.getFloat("normalHeartRate", 0f)
+        set(value) = prefs.edit().putFloat("normalHeartRate", value!!).apply()
+
 }

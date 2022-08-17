@@ -27,6 +27,13 @@ class SettingFragment : Fragment() {
             )
         }
 
+        binding.textView5.setOnClickListener {
+            startActivity(
+                Intent(activity, HeartrateCalculation::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
+        }
+
         arguments?.let {
         }
     }

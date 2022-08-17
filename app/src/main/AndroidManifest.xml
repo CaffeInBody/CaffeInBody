@@ -37,6 +37,7 @@
         <activity android:name=".SurveyResultActivity" />
         <activity android:name=".SearchDrinksActivity"/>
         <receiver android:name=".ResetTodayCaf"/>
+        <activity android:name=".HeartrateCalculation"/>
     </application>
 
 </manifest>
