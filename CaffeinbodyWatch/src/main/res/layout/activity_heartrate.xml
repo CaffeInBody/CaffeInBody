@@ -23,6 +23,7 @@
     android:padding="24dp"
     tools:context=".HeartRateActivity"
     tools:deviceIds="wear"
+    android:id="@+id/contraint"
     android:keepScreenOn="true">
 
     <!-- Shown at startup. -->

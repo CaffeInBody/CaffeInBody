@@ -77,6 +77,7 @@ class HeartRateActivity : AppCompatActivity() {
                             average = String.format("%.1f", viewModel.average/30).toFloat()
                             binding.statusText.setText("측정완료 : " + average)
                             sendHeartRate(average.toString())
+                            binding.contraint.keepScreenOn=false
                         }
                     }
                     false -> Log.i(TAG, "Body sensors permission not granted")
