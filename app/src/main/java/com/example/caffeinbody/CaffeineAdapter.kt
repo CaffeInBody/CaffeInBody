@@ -61,10 +61,15 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
             drink.text = article.drinkName
             caf.text= article.caffeine?.caffeine1.toString() +"mg"
 
-            if(article.imgurl == "")
+            if(article.iscafe ==true) {
                 Glide.with(itemView).load(R.drawable.coffee_sample).into(img)
-            else if ( article.imgurl == "url") Glide.with(itemView).load(R.drawable.cola_sample).into(img)
-            else Glide.with(itemView).load(article.imgurl).override(500,).into(img)
+                if(article.madeBy == "스타벅스") Glide.with(itemView).load(article.imgurl).placeholder(R.drawable.starbucks_logo).override(500,).into(img)
+                else if(article.madeBy == "이디야") Glide.with(itemView).load(article.imgurl).placeholder(R.drawable.ediya_logo).override(500,).into(img)
+
+            }
+            else if ( article.iscafe ==false) Glide.with(itemView).load(R.drawable.cola_sample).into(img)
+            else Glide.with(itemView).load(article.imgurl).placeholder(R.drawable.starbucks_logo).override(500,).into(img)
+
 
         }
 

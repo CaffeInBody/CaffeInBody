@@ -60,7 +60,7 @@
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/fragment_report.xml" value="0.264" />
         <entry key="CaffeinbodyWatch/src/main/res/drawable/ic_broken_heart.xml" value="0.121" />
         <entry key="CaffeinbodyWatch/src/main/res/drawable/ic_heart.xml" value="0.141" />
-        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_drinkregister.xml" value="0.49476987447698745" />
+        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_drinkregister.xml" value="0.5355648535564853" />
         <entry key="CaffeinbodyWatch/src/main/res/layout/activity_heartrate.xml" value="0.1500453309156845" />
         <entry key="CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.25" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.141" />
@@ -69,6 +69,8 @@
         <entry key="app/src/main/res/drawable/icon_home.xml" value="0.133" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.138" />
         <entry key="app/src/main/res/drawable/selected.xml" value="0.1455" />
+        <entry key="app/src/main/res/drawable/stats_full.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/stats_progress.xml" value="0.1245" />
         <entry key="app/src/main/res/font/font_custom.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/activity_caffeine_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1726027397260274" />

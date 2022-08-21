@@ -10,7 +10,7 @@ android {
     defaultConfig {
         applicationId "com.example.caffeinbody"
         minSdk 27
-        targetSdk 32
+        targetSdk 27
         versionCode 1
         versionName "1.0"
 
@@ -38,7 +38,9 @@ android {
 dependencies {
 
     def nav_version = "2.4.2"
+    //noinspection GradleDependency
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    //noinspection GradleDependency
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     implementation 'com.github.alpbak:BoxedVerticalSeekBar:1.1.1'
