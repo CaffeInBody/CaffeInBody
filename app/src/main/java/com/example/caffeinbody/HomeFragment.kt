@@ -4,6 +4,8 @@ package com.example.caffeinbody
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -17,11 +19,19 @@ import androidx.lifecycle.lifecycleScope
 import com.example.caffeinbody.DetailActivity.Companion.calculateCaffeinLeft
 import com.example.caffeinbody.DetailActivity.Companion.minusDays
 import com.example.caffeinbody.databinding.FragmentHomeBinding
+import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.PieData
+import com.github.mikephil.charting.data.PieDataSet
+import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.formatter.PercentFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
+import com.github.mikephil.charting.utils.MPPointF
 import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.NodeClient
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import org.json.JSONArray
@@ -59,6 +69,9 @@ class HomeFragment : Fragment() {
         //   initRecycler()
         setUI()
         Log.e("home", "onCreateView")
+
+        //binding.piechart.add
+
 
         binding.addBeverageBtn.setOnClickListener{
             activity?.let{
@@ -135,13 +148,15 @@ class HomeFragment : Fragment() {
 
         if(servingsize!= null) {
             binding.AvailableCaffeineText.setText(servingsize)
-            percent = servingsize!!.toDouble() / App.prefs.sensetivity!!.toDouble()
+            percent = servingsize.toDouble() / App.prefs.sensetivity!!.toDouble()
         }else{
             binding.AvailableCaffeineText.setText(App.prefs.sensetivity)
             App.prefs.currentcaffeine = App.prefs.sensetivity
         }
         binding.heart.start()
-        binding.heart.waveHeightPercent = (percent)!!.toFloat()
+        binding.heart.waveHeightPercent = (percent).toFloat()
+
+        binding.sensitivity.text = App.prefs.sensetivity
     }
 
 
@@ -151,13 +166,14 @@ class HomeFragment : Fragment() {
         var servingsize = App.prefs.sensetivity?.toDouble()//나의 적정하루 섭취권고량
         Log.e("home", "caffeineLeft: $caffeineLeft, servingSize: $servingsize")
         if (servingsize != null) {
-            if((servingsize - caffeineLeft!!) > 0 ) {
+            if((servingsize - caffeineLeft) > 0 ) {
                 var current = servingsize - caffeineLeft
                 App.prefs.currentcaffeine = "%.1f".format(current)
             }
             else App.prefs.currentcaffeine = "0"
         }
         //----------------------------------------
+
     }
 
 
