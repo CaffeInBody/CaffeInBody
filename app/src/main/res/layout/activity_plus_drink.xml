@@ -31,10 +31,10 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:src="@drawable/icon_plus"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintBottom_toBottomOf="@+id/drink_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintTop_toTopOf="@+id/drink_img" />
 
     <TextView
         android:id="@+id/textView_survey1_4"
@@ -46,7 +46,7 @@
 
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/drink_img" />
 
     <EditText
         android:id="@+id/editText_survey1_weight"
