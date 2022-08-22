@@ -1,5 +1,9 @@
 package com.example.caffeinbody
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,6 +33,16 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         ActivityMainBinding.inflate(
             layoutInflater
         )
+    }
+
+    private val receiver = object: BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            if (Intent.ACTION_DATE_CHANGED == intent!!.action) {
+                App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
+                App.prefs.todayCaf = 0f
+                Log.e("AlarmCheck", "리셋완료"+App.prefs.todayCaf+" "+App.prefs.weekCafJson)
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,6 +104,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 Log.e("MainActivity", "Could not add capability: $exception")
             }
         }
+        var filter = IntentFilter()
+        filter.addAction(Intent.ACTION_DATE_CHANGED)
+        registerReceiver(receiver, filter)
+        Log.e("receiver", "자정 receiver")
     }
 
     /*override fun onPause() {
