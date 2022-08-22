@@ -32,24 +32,37 @@
             android:orientation="horizontal"
             android:id="@+id/coffee_brand_btn"
             android:layout_height="wrap_content">
-        <RadioButton
+
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
+            app:civ_border_color="#F8786F"
             android:id="@+id/starbucks"
             android:layout_marginHorizontal="6dp"
-            android:background="@drawable/starbucks_logo"/>
-        <RadioButton
+            android:src="@drawable/starbucks_logo"/>
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
+            app:civ_border_color="#F8786F"
             android:id="@+id/ediya"
             android:layout_marginHorizontal="6dp"
-            android:background="@drawable/ediya_logo"/>
-        <RadioButton
+            android:src="@drawable/ediya_logo"/>
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:id="@+id/twosome"
+            app:civ_border_color="#F8786F"
             android:layout_marginHorizontal="6dp"
-            android:background="@drawable/twosome_logo"/></RadioGroup>
+            android:src="@drawable/twosome_logo"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:civ_border_color="#F8786F"
+            android:id="@+id/hollys"
+            android:layout_marginHorizontal="6dp"
+            android:src="@drawable/hollys_logo"
+                />
+        </RadioGroup>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -1,6 +1,7 @@
 package com.example.caffeinbody
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -20,7 +21,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 
-class CaffeineListActivity : AppCompatActivity() {
+class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
     var arrayString = arrayOf<String>("카페음료","일반음료","기타")
     lateinit var caffeineadapter: CaffeineAdapter
     private lateinit var db: DrinksDatabase
@@ -57,14 +58,47 @@ class CaffeineListActivity : AppCompatActivity() {
 
         binding.caffeinList.layoutManager = layoutManager
         caffeineadapter.notifyDataSetChanged()
+        binding.starbucks.setOnClickListener(this)
+        binding.ediya.setOnClickListener(this)
+        binding.twosome.setOnClickListener(this)
+        binding.hollys.setOnClickListener(this)
 
-        binding.coffeeBrandBtn.setOnCheckedChangeListener{ group, checkedId ->
-            when(checkedId) {
-                R.id.starbucks -> selectDrinkMadeBy(db,"스타벅스")
-                R.id.ediya -> selectDrinkMadeBy(db,"이디야")
-                R.id.twosome -> selectDrinkMadeBy(db,"투썸플레이스")
+
+
+    }
+    override fun onClick(v: View?) {
+        var checked=0
+        when(v?.id){
+            binding.starbucks.id -> {
+                if(checked != 1) {
+                    binding.starbucks.borderWidth = 4
+                    selectDrinkMadeBy(db, "스타벅스")
+                    checked=1
+                } else checked = 0
             }
-        }
+            binding.ediya.id -> {
+                if(checked != 2) {
+                    binding.ediya.borderWidth = 4
+                    selectDrinkMadeBy(db, "이디야")
+                    checked=2
+                } else checked = 0
+
+            }
+            binding.twosome.id -> {
+                if(checked != 3) {
+                    binding.twosome.borderWidth = 4
+                    selectDrinkMadeBy(db, "투썸플레이스")
+                    checked=3
+                } else checked = 0
+            }
+            binding.hollys.id -> {
+                if(checked != 4) {
+                    binding.hollys.borderWidth = 4
+                    selectDrinkMadeBy(db, "할리스")
+                    checked=4
+                } else checked = 0
+            }
+      }
 
     }
 
@@ -85,9 +119,9 @@ class CaffeineListActivity : AppCompatActivity() {
             true
         }
         R.id.home-> {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            val intent = Intent(this, PlusDrinkActivity::class.java)
+           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+           // intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
             finish()
             true
