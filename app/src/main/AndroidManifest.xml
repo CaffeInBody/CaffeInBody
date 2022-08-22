@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CaffeInBody">
         <activity
+            android:name=".PlusDrinkActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
@@ -35,9 +38,11 @@
         <activity android:name=".Survey3Activity" />
         <activity android:name=".RecommendActivity" />
         <activity android:name=".SurveyResultActivity" />
-        <activity android:name=".SearchDrinksActivity"/>
-        <receiver android:name=".ResetTodayCaf"/>
-        <activity android:name=".HeartrateCalculation"/>
+        <activity android:name=".SearchDrinksActivity" />
+
+        <receiver android:name=".ResetTodayCaf" />
+
+        <activity android:name=".HeartrateCalculation" />
     </application>
 
 </manifest>
