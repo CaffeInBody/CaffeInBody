@@ -56,6 +56,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/linearLayout4">
 
+        <TextView
+            android:id="@+id/condition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="오늘 섭취량"
+            android:layout_gravity="center|top"
+            android:textAlignment="center"
+            android:textColor="@color/brown"
+            android:layout_marginTop="50dp"
+            android:textSize="20dp"
+            android:textStyle="bold" />
         <ProgressBar
             android:id="@+id/background_progressbar"
             style="?android:attr/progressBarStyleHorizontal"
@@ -63,6 +74,7 @@
             android:layout_height="380dp"
             android:layout_gravity="center"
             android:indeterminate="false"
+            android:layout_marginTop="40dp"
             android:max="100"
             android:progress="100"
             android:progressDrawable="@drawable/stats_full"
@@ -77,6 +89,7 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="380dp"
             android:layout_height="380dp"
+            android:layout_marginTop="40dp"
             android:layout_gravity="center"
             android:indeterminate="false"
             android:max="100"
@@ -88,6 +101,7 @@
             android:layout_width="230dp"
             android:layout_height="230dp"
             android:layout_gravity="center"
+            android:layout_marginTop="40dp"
             app:isCircle="true"
             app:period="3"
             app:wave1Color="#D5F8786F"
@@ -102,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-
+            android:layout_marginTop="40dp"
             android:orientation="vertical">
 
             <TextView
@@ -161,7 +175,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:layout_marginHorizontal="60dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="parent">
@@ -213,7 +227,7 @@
         android:layout_width="0.5dp"
         android:layout_height="18dp"
         android:background="#DDD5D5"
-        android:layout_marginBottom="55dp"
+        android:layout_marginBottom="35dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout8"
         app:layout_constraintStart_toEndOf="@+id/linearLayout7" />
@@ -223,7 +237,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent">
