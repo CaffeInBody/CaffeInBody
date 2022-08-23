@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
+import com.example.caffeinbody.HomeFragment.Companion.putCurrentCaffeine
 import com.google.android.gms.wearable.*
 import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.coroutines.*
@@ -23,10 +24,10 @@ import java.util.jar.Manifest
  * A state holder for the client data.
  */
 class ClientDataViewModel :
-    ViewModel(),
     DataClient.OnDataChangedListener,
     MessageClient.OnMessageReceivedListener,
     CapabilityClient.OnCapabilityChangedListener {
+    val tag = "ClientDataViewModel"
 
     private var _events = mutableStateListOf<Event>()
     /**The list of events from the clients.**/
@@ -49,30 +50,31 @@ class ClientDataViewModel :
                 )
             }
         )
-        Log.e("ClientDataViewModel", "뭔가가 추가됐음")
+        Log.e(tag, "뭔가가 추가됐음")
     }
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
         val uri = messageEvent.path
-        //Log.e("ClientDataViewModel", "uri: $uri")
+        Log.e(tag, "메시지옴 foreground 확인")
         when (uri) {
             "/heartrate" -> {
                 App.prefs.heartrateAvg = messageEvent.data.decodeToString()
-                Log.e("ClientDataViewModel", "메시지 왔음: " + App.prefs.heartrateAvg.toString())
+                Log.e(tag, "메시지 왔음: " + App.prefs.heartrateAvg.toString())
             }
 
             "/currentInfos" -> {
+                putCurrentCaffeine()
                 var jsonObject = JSONObject()
-                jsonObject.put("onceRecommended", App.prefs.sensetivity!!)
-                jsonObject.put("onceDrinkable", App.prefs.currentcaffeine!!)
-                jsonObject.put("dayRecommended", App.prefs.dayCaffeine!!)
-                jsonObject.put("dayDrinked", App.prefs.todayCaf!!.toString())
+                jsonObject.put("onceRecommended", App.prefs.sensetivity!!)//1회 권고량
+                jsonObject.put("onceDrinkable", App.prefs.currentcaffeine!!)//현재 기준 섭취 가능양
+                jsonObject.put("dayRecommended", App.prefs.dayCaffeine!!)//하루 권고량
+                jsonObject.put("dayDrinked", App.prefs.todayCaf!!.toString())//남은 카페인 양
                 jsonObject.put("remainCaffineInBody", App.prefs.remainCafTmp.toString())
                 Log.e("ClientDataViewModel", jsonObject.toString())
                 sendCaffeineDatas(jsonObject.toString())
             }
             else ->{
-                Log.e("ClientDataViewModel", "none, path: " + uri)
+                Log.e(tag, "none, path: " + uri)
             }
         }
 
@@ -91,7 +93,7 @@ class ClientDataViewModel :
 
     private fun sendCaffeineDatas(msg: String) {
         Log.e("CDVM", "hi")
-        viewModelScope.launch{
+        CoroutineScope(Dispatchers.Main).launch{
             Log.e("CDVM", "hi2")
             val dataClient  = Wearable.getDataClient(App.context())
             try {

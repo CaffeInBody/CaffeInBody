@@ -37,7 +37,7 @@ class SurveyResultActivity : AppCompatActivity() {
         }else
             App.prefs.multiply = 1f
 
-        Log.e("detailActivity", App.prefs.multiply.toString())
+        Log.e("SurveyResultActivity", App.prefs.multiply.toString())
 
         if (caffeine >= recommendDayCaffeine)
             caffeine = recommendDayCaffeine
@@ -49,7 +49,10 @@ class SurveyResultActivity : AppCompatActivity() {
         binding.tvRecommendDayCaffeine.text = recommendDayCaffeine.toString() + "mg"
 
         App.prefs.dayCaffeine = recommendDayCaffeine.toString()
-        //App.prefs.oncecaffeine = caffeine.toString()
+        //개인별 반감기 시간 구하기
+        var halftime = calHalfTime()
+        Log.e("SurveyResultActivity", "halftime: $halftime")
+        App.prefs.halftime = calHalfTime()
 
 
         binding.buttonCheck.setOnClickListener {
@@ -58,6 +61,12 @@ class SurveyResultActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    fun calHalfTime(): Float{//민감도에 따른 반감기 시간 계산
+        val multiply = App.prefs.multiply
+        val basicTime = getString(R.string.basicTime).toInt()
+        return basicTime * (2 - multiply!!)
     }
 
     companion object{

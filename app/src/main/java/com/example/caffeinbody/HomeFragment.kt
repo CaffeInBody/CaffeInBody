@@ -113,7 +113,7 @@ class HomeFragment : Fragment() {
                 // Send a message to all nodes in parallel
                 nodes.map { node ->//워치에서 메시지 받게
                     async {
-                        messageClient.sendMessage(node.id, START_ACTIVITY_PATH, byteArrayOf())
+                        messageClient.sendMessage(node.id, "/start-activity3", byteArrayOf())
                             .await()
                     }
                 }.awaitAll()
@@ -130,18 +130,10 @@ class HomeFragment : Fragment() {
 
     private fun setUI(){
         val todayCaf = App.prefs.todayCaf
-        val remainCaf = App.prefs.remainCaf
         binding.intakenCaffeineText.setText(todayCaf.toString())
         App.prefs.dayCaffeine?.let { binding.maximumADayText.setText(it) }
 
-        var nowTime = DetailActivity.getTime()
-        var registeredTime = App.prefs.registeredTime//가장 최근 카페인 섭취한 시간
-        var halfTime = DetailActivity.calHalfTime(getString(R.string.basicTime).toInt(), App.prefs.multiply!!)//-> 민감도 반영 반감기 시간
-
-        var leftCaffeine = calculateCaffeinLeft(remainCaf!!, nowTime + 24* minusDays() - registeredTime!!, halfTime, 0.5f)
-        App.prefs.remainCafTmp = "%.1f".format(leftCaffeine).toFloat()
-        //remainCaf는 체내 잔여 카페인 계산 위해 카페인 등록 이외에 가공되지 않은 값/remainCafTmp는 시간별 계산된 값
-        putCurrentCaffeine(leftCaffeine)
+        putCurrentCaffeine()
         val servingsize = App.prefs.currentcaffeine
 
         var percent = 1.0
@@ -159,31 +151,41 @@ class HomeFragment : Fragment() {
         binding.sensitivity.text = App.prefs.sensetivity
     }
 
+    companion object{
+        fun putCurrentCaffeine(){
+            val remainCaf = App.prefs.remainCaf
+            var nowTime = DetailActivity.getTime()
+            var registeredTime = App.prefs.registeredTime//가장 최근 카페인 섭취한 시간
+            var halfTime = App.prefs.halftime
+            //remainCaf는 체내 잔여 카페인 계산 위해 카페인 등록 이외에 가공되지 않은 값/remainCafTmp는 시간별 계산된 값
 
-    fun putCurrentCaffeine(caffeineLeft: Float){
-        //---------------섭취권고량 설정-----------------
-        //TODO 소현
-        var servingsize = App.prefs.sensetivity?.toDouble()//나의 적정하루 섭취권고량
-        Log.e("home", "caffeineLeft: $caffeineLeft, servingSize: $servingsize")
-        if (servingsize != null) {
-            if((servingsize - caffeineLeft) > 0 ) {
-                var current = servingsize - caffeineLeft
-                App.prefs.currentcaffeine = "%.1f".format(current)
+            var leftCaffeine = calculateCaffeinLeft(remainCaf!!, nowTime + 24* minusDays() - registeredTime!!, halfTime, 0.5f)
+            App.prefs.remainCafTmp = "%.1f".format(leftCaffeine).toFloat()
+            //---------------섭취권고량 설정-----------------
+            //TODO 소현
+            var servingsize = App.prefs.sensetivity?.toDouble()//나의 적정하루 섭취권고량
+            Log.e("home", "caffeineLeft: $leftCaffeine, servingSize: $servingsize")
+            if (servingsize != null) {
+                if((servingsize - leftCaffeine) > 0 ) {
+                    var current = servingsize - leftCaffeine
+                    App.prefs.currentcaffeine = "%.1f".format(current)
+                }
+                else App.prefs.currentcaffeine = "0"
             }
-            else App.prefs.currentcaffeine = "0"
-        }
-        //----------------------------------------
+            //----------------------------------------
 
+        }
     }
 
 
 
-    companion object {
+
+    /*companion object {
         private const val TAG = "HomeFragment"
 
         private const val START_ACTIVITY_PATH = "/start-activity3"
         private const val FAVORITE_PATH = "/favorite"
         private const val FAVORITE_KEY = "favorite"
-    }
+    }*/
 
 }

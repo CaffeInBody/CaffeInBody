@@ -118,18 +118,13 @@ class DetailActivity : AppCompatActivity() {
                 return 0
             }
         }
-
-        fun calHalfTime(basicTime: Int, multiply: Float): Float{//민감도에 따른 반감기 시간 계산
-            //Log.e("detail", "multiply: $multiply, basicTime: $basicTime etc: " + basicTime * (2 - multiply))
-            return basicTime * (2 - multiply)
-        }
     }
 
     //새 카페인이 추가되면 총 마신 카페인량이 저장됨
     fun drawGraph(sensitivity: Double){
         //var caffeineVolume = App.prefs.todayCaf//초기화됨
         var remainCaf = App.prefs.remainCafTmp
-        var halfTime = calHalfTime( getString(R.string.basicTime).toInt(), sensitivity.toFloat())//-> 민감도 반영 반감기 시간
+        var halfTime = App.prefs.halftime
         var nowTime = getTime()
 
         binding.textView11.setText(App.prefs.currentcaffeine + "mg")//얘도 같이 초기화됨

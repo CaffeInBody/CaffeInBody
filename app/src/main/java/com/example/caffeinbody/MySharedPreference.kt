@@ -107,8 +107,12 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getFloat("registeredTime", 0.0f)
         set(value) = prefs.edit().putFloat("registeredTime", value!!).apply()
 
-    var normalHeartRate: Float?
+    var normalHeartRate: Float?//평소 심장 박동
         get() = prefs.getFloat("normalHeartRate", 0f)
         set(value) = prefs.edit().putFloat("normalHeartRate", value!!).apply()
+
+    var halftime: Float//개인별 계산된 반감기 시간
+        get() = prefs.getFloat("halftime", 0f )
+        set(value) = prefs.edit().putFloat("halftime", value!!).apply()
 
 }

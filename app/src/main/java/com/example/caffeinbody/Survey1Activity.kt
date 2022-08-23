@@ -1,23 +1,20 @@
 package com.example.caffeinbody
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import com.example.caffeinbody.database.Drinks
-import com.example.caffeinbody.database.DrinksDatabase
-import com.example.caffeinbody.database.Functions
 //import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseEdiya
 //import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseGongCha
 //import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabasePaiks
 //import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseTheVenti
 //import com.example.caffeinbody.database.CafeDatas.Companion.addDrinksDatabaseTwosome
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.example.caffeinbody.database.DrinksDatabase
+import com.example.caffeinbody.database.Functions
 import com.example.caffeinbody.databinding.FragmentSurvey1Binding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+
 
 class Survey1Activity  : AppCompatActivity() {
     /*lateinit */var gender: String = "female"
@@ -42,19 +39,9 @@ class Survey1Activity  : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        db = DrinksDatabase.getInstance(applicationContext)!!
-        var funcs = Functions()
-
-        funcs.addDrinksDatabaseStarbucks(db)
-        funcs.addDrinksDatabaseHollys(db)
-        funcs.addDrinksDatabaseTwosome(db)
-        funcs.addDrinksDatabaseEdiya(db)
-        funcs.addDrinksDatabasePaiks(db)
-        funcs.addDrinksDatabaseTheVenti(db)
-        funcs.addDrinksDatabaseGongCha(db)
-        funcs.addEtc(db)/**/
-        Log.e("survey1", "끝남 한글임")
-
+        if (App.prefs.sensetivity != null && App.prefs.dayCaffeine != null) else{
+            initialDataSet()
+        }
 
         binding.btnAgeLayout.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId) {
@@ -110,6 +97,21 @@ class Survey1Activity  : AppCompatActivity() {
         }
 
         Log.e("id: ", binding.btnGenderLayout.getId().toString())
+    }
+
+    fun initialDataSet(){
+        db = DrinksDatabase.getInstance(applicationContext)!!
+        var funcs = Functions()
+
+        funcs.addDrinksDatabaseStarbucks(db)
+        funcs.addDrinksDatabaseHollys(db)
+        funcs.addDrinksDatabaseTwosome(db)
+        funcs.addDrinksDatabaseEdiya(db)
+        funcs.addDrinksDatabasePaiks(db)
+        funcs.addDrinksDatabaseTheVenti(db)
+        funcs.addDrinksDatabaseGongCha(db)
+        funcs.addEtc(db)/**/
+        Log.e("survey1", "끝남 한글임")
     }
 
 
