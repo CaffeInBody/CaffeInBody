@@ -4,30 +4,24 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
+import android.os.PowerManager
 import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.example.caffeinbody.databinding.ActivityMainBinding
-import com.google.android.gms.wearable.CapabilityClient
 import com.google.android.gms.wearable.Wearable
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.NonCancellable
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
+
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener  {
     private val dataClient by lazy { Wearable.getDataClient(this) }
     private val messageClient by lazy { Wearable.getMessageClient(this) }
     private val capabilityClient by lazy { Wearable.getCapabilityClient(this) }
-    private val clientDataViewModel by viewModels<ClientDataViewModel>()
+    //private val clientDataViewModel by viewModels<ClientDataViewModel>()
 
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(
@@ -58,6 +52,18 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             HomeFragment(),"home"
         ).commit()
         // Launch app with HOME selected as default start tab
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val powerManager = getSystemService(POWER_SERVICE) as PowerManager
+            if (powerManager.isIgnoringBatteryOptimizations(packageName) == false) {
+                val dialog = PhBatteryDialog()
+                dialog.show(supportFragmentManager, "dialog")
+            }
+        }
+
+        val it = Intent(this, ForegroundService::class.java)
+        startForegroundService(it)
+        Log.e("Main", "서비스 생성됨")
     }
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
@@ -83,9 +89,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         transaction.commit()
 
         return true
-    }
+    }}
     ///////////리스너 등록/제거 부분
-    override fun onResume() {
+    /*override fun onResume() {
         super.onResume()
         dataClient.addListener(clientDataViewModel)
         messageClient.addListener(clientDataViewModel)
@@ -110,7 +116,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         Log.e("receiver", "자정 receiver")
     }
 
-    /*override fun onPause() {
+    override fun onPause() {
         super.onPause()
         dataClient.removeListener(clientDataViewModel)
         messageClient.removeListener(clientDataViewModel)
@@ -131,5 +137,3 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
         }
     }*/
-
-}
