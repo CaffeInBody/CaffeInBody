@@ -45,12 +45,12 @@ class RecommendActivity : AppCompatActivity() {
                 db = DrinksDatabase.getInstance(applicationContext)!!
                 var datas = caffeine?.let { db.drinksDao().recommendcaffeine(it) }
                 //Log.e("data",db.drinksDao().recommendcaffeine(100.0).toString())
-                if(datas != null ) {
+                if(datas?.size != 0 && datas != null) {
                     datas?.let {
                         //데이터가 많아서 랜덤으로 6개만 뽑아서 보여줌
                         it.shuffled() //데이터 섞기
                         for (i in 0 until 6){ //6개만 뽑아서 넣음
-                            if(it[i]==null) break
+                            if(it.size <= i ) break
                             caffeineadapter.datas.add(it[i])
                         }
                         //caffeineadapter.datas.addAll(it)
