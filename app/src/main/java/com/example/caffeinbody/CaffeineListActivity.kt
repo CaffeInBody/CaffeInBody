@@ -62,6 +62,10 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         binding.ediya.setOnClickListener(this)
         binding.twosome.setOnClickListener(this)
         binding.hollys.setOnClickListener(this)
+        binding.hollys.setOnClickListener(this)
+        binding.paiks.setOnClickListener(this)
+        binding.theventi.setOnClickListener(this)
+        binding.gongcha.setOnClickListener(this)
 
 
 
@@ -96,6 +100,27 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
                     binding.hollys.borderWidth = 4
                     selectDrinkMadeBy(db, "할리스")
                     checked=4
+                } else checked = 0
+            }
+            binding.paiks.id -> {
+                if(checked != 5) {
+                    binding.hollys.borderWidth = 4
+                    selectDrinkMadeBy(db, "빽다방")
+                    checked=5
+                } else checked = 0
+            }
+            binding.theventi.id -> {
+                if(checked != 6) {
+                    binding.hollys.borderWidth = 4
+                    selectDrinkMadeBy(db, "더벤티")
+                    checked=6
+                } else checked = 0
+            }
+            binding.gongcha.id -> {
+                if(checked != 7) {
+                    binding.hollys.borderWidth = 4
+                    selectDrinkMadeBy(db, "공차")
+                    checked=7
                 } else checked = 0
             }
       }
