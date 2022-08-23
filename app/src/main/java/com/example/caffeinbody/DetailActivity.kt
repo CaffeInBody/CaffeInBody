@@ -9,16 +9,21 @@ import com.example.caffeinbody.databinding.ActivityDetailBinding
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
+import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.utils.ViewPortHandler
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
+import java.text.DecimalFormat
 import java.util.*
 import kotlin.math.pow
+
 
 class DetailActivity : AppCompatActivity() {
     val multiply = App.prefs.multiply//평균 반감기 시간에 곱하는 값
 
-    private val lineChartData = ArrayList<Entry>()
+    private val lineChartData = mutableListOf<Entry>()
     private val binding: ActivityDetailBinding by lazy {
         ActivityDetailBinding.inflate(
             layoutInflater
@@ -138,7 +143,8 @@ class DetailActivity : AppCompatActivity() {
                 var leftCaffeineStable = remainCaf
                 Log.e("detail", "leftStabled: $leftCaffeineStable")
                 while (leftCaffeineStable!! >= 1){
-                    leftCaffeineStable =remainCaf!!/(2.0).pow(i).toFloat()
+                    leftCaffeineStable =String.format("%.1f",(remainCaf!!/(2.0).pow(i).toFloat())).toFloat()
+                    Log.e("detail", "더블 확인$leftCaffeineStable")
                     lineChartData.add(Entry((nowTime + halfTime*i++), leftCaffeineStable))
                     Log.e("detail hahah", "entry1: " + (nowTime + halfTime*i) + " entry2: " + leftCaffeineStable)
                 }
@@ -163,6 +169,7 @@ class DetailActivity : AppCompatActivity() {
         val xAxis = lineChart.xAxis
         xAxis.setDrawLabels(true)
 
+        lineData.setValueFormatter(MyValueFormatter())
         //xAxis.labelCount = 60
         //제일 처음 마신 시간을 그래프의 가장 앞쪽에
         val xAxisVals = ArrayList<String>(Arrays.asList("0시", "1시", "2시", "3시", "4시", "5시", "6시", "7시", "8시", "9시", "10시", "11시", "12시", "13시", "14시", "15시", "16시", "17시", "18시", "19시", "20시", "21시", "22시", "23시", "다음날", "1시", "2시", "3시", "4시", "5시", "6시", "7시", "8시", "9시", "10시", "11시", "12시", "13시", "14시", "15시", "16시"))
@@ -198,6 +205,23 @@ class DetailActivity : AppCompatActivity() {
             // If we got here, the user's action was not recognized.
             // Invoke the superclass to handle it.
             super.onOptionsItemSelected(item)
+        }
+    }
+
+    inner class MyValueFormatter : ValueFormatter() {
+        private val mFormat: DecimalFormat
+        fun getFormattedValue(
+            value: Float,
+            entry: Map.Entry<*, *>?,
+            dataSetIndex: Int,
+            viewPortHandler: ViewPortHandler?
+        ): String {
+            // write your logic here
+            return mFormat.format(value).toString() + " $" // e.g. append a dollar-sign
+        }
+
+        init {
+            mFormat = DecimalFormat("###,###,##0.0") // use one decimal
         }
     }
 }
