@@ -56,13 +56,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         ).commit()
         // Launch app with HOME selected as default start tab
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val powerManager = getSystemService(POWER_SERVICE) as PowerManager
             if (powerManager.isIgnoringBatteryOptimizations(packageName) == false) {
                 val dialog = PhBatteryDialog()
                 dialog.show(supportFragmentManager, "dialog")
             }
-        }
+        }*/
         val serviceClass = ForegroundService::class.java
         val it = Intent(this, serviceClass)
 
