@@ -1,5 +1,6 @@
 package com.example.caffeinbody
 
+import android.app.ActivityManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -43,6 +44,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        Log.e("test", "1: " + Build.VERSION.SDK_INT + " 2: " + Build.VERSION_CODES.O)
+
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(this)
         binding.bottomNavigationView.selectedItemId = R.id.menu_name
 
@@ -60,10 +63,26 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 dialog.show(supportFragmentManager, "dialog")
             }
         }
+        val serviceClass = ForegroundService::class.java
+        val it = Intent(this, serviceClass)
 
-        val it = Intent(this, ForegroundService::class.java)
-        startForegroundService(it)
-        Log.e("Main", "서비스 생성됨")
+        if (!this.isServiceRunning(serviceClass)) {
+            Log.e("MainActivity", "Service is not running - START SERVICE")
+            startService(it)
+            Log.e("MainActivity", "서비스 생성됨")
+        }
+
+    }
+    fun Context.isServiceRunning(serviceClass: Class<*>): Boolean {
+        val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+
+        for (service in activityManager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.name == service.service.className) {
+                Log.e("isServiceRunning", "Service is running")
+                return true
+            }
+        }
+        return false
     }
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()

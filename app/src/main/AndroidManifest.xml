@@ -16,6 +16,10 @@
             android:name=".ForegroundService"
             android:enabled="true"
             android:exported="true"></service>
+        <service android:name=".RestartService"/>
+
+        <receiver android:name=".ResetTodayCaf" />
+        <receiver android:name=".AlarmReceiver"/>
 
         <activity
             android:name=".PlusDrinkActivity"
@@ -46,8 +50,6 @@
         <activity android:name=".RecommendActivity" />
         <activity android:name=".SurveyResultActivity" />
         <activity android:name=".SearchDrinksActivity" />
-
-        <receiver android:name=".ResetTodayCaf" />
 
         <activity android:name=".HeartrateCalculation" />
     </application>

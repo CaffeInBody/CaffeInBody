@@ -64,7 +64,7 @@ class DetailActivity : AppCompatActivity() {
                 leftCaffeine = 0f
             }
 
-            Log.e("detail", "$volume $time $halfTime $half $t" )
+            //Log.e("detail", "$volume $time $halfTime $half $t" )
             //Log.e("leftCafffeine", leftCafffeine.toString())
             return leftCaffeine
         }
@@ -105,14 +105,14 @@ class DetailActivity : AppCompatActivity() {
             var registered_y = App.prefs.registeredYear
             var registered_M = App.prefs.registeredMonth
             var registered_D = App.prefs.registeredDate
-            Log.e("detail: y", registered_y.toString())
+            // Log.e("detail: y", registered_y.toString())
             if (registered_y !== 0){
                 val today = LocalDate.now()
 
-                Log.e("detail", "registered date:  $registered_y $registered_M $registered_D")
+                //Log.e("detail", "registered date:  $registered_y $registered_M $registered_D")
                 val registeredDate = LocalDate.of(registered_y!!, registered_M!!, registered_D!!)
                 val gap = ChronoUnit.DAYS.between(registeredDate, today)
-                Log.e("detail daysgap",gap.toString())
+                //Log.e("detail daysgap",gap.toString())
                 return gap.toInt()
             }else{
                 return 0

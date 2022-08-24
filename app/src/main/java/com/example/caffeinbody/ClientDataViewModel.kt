@@ -50,7 +50,6 @@ class ClientDataViewModel :
                 )
             }
         )
-        Log.e(tag, "뭔가가 추가됐음")
     }
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
@@ -70,7 +69,7 @@ class ClientDataViewModel :
                 jsonObject.put("dayRecommended", App.prefs.dayCaffeine!!)//하루 권고량
                 jsonObject.put("dayDrinked", App.prefs.todayCaf!!.toString())//남은 카페인 양
                 jsonObject.put("remainCaffineInBody", App.prefs.remainCafTmp.toString())
-                Log.e("ClientDataViewModel", jsonObject.toString())
+                //Log.e("ClientDataViewModel", jsonObject.toString())
                 sendCaffeineDatas(jsonObject.toString())
             }
             else ->{
@@ -92,9 +91,7 @@ class ClientDataViewModel :
     }
 
     private fun sendCaffeineDatas(msg: String) {
-        Log.e("CDVM", "hi")
         CoroutineScope(Dispatchers.Main).launch{
-            Log.e("CDVM", "hi2")
             val dataClient  = Wearable.getDataClient(App.context())
             try {
                 val request = PutDataMapRequest.create("/currentInfos").apply {
