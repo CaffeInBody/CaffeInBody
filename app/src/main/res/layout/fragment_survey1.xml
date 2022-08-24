@@ -157,6 +157,13 @@
             android:height="35dp"
             android:background="@drawable/roundcorner_rectangle2"
             android:ems="15" />
+        <TextView
+            android:id="@+id/weightTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="체중을 입력해주세요"
+            android:textColor="@color/brown"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/textView_survey1_5"

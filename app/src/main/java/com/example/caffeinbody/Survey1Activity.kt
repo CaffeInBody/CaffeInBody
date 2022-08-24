@@ -66,34 +66,39 @@ class Survey1Activity  : AppCompatActivity() {
         }
 
         binding.buttonNext.setOnClickListener {
-            val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
-            val editor = shared.edit()//sharedpreferences 값 확인해보기
+            if (binding.editTextSurvey1Weight.text.toString() != ""){
+                val shared = getSharedPreferences("result_survey", Context.MODE_PRIVATE)
+                val editor = shared.edit()//sharedpreferences 값 확인해보기
 
-            weight = binding.editTextSurvey1Weight.text.toString().toDouble()
+                weight = binding.editTextSurvey1Weight.text.toString().toDouble()
 
-            when(age){
-                "minor" -> coefficient = 2.5
-                "adult" -> coefficient = 3.0
-                "senior" -> coefficient = 2.5
+                when(age){
+                    "minor" -> coefficient = 2.5
+                    "adult" -> coefficient = 3.0
+                    "senior" -> coefficient = 2.5
+                }
+
+                caffeine = weight * coefficient
+
+                editor.putString("age", age)
+                editor.putString("weight", weight.toString())
+                editor.putString("gender", gender)
+                editor.putBoolean("ispregnant", ispregnant)
+                //editor.apply()
+
+                App.prefs.age = age
+                App.prefs.isPregnant = ispregnant
+
+                val selectActivity = Survey2Activity()
+                val intent = Intent(this, selectActivity::class.java)
+                intent.putExtra("caffeine", caffeine)
+                startActivity(intent)
+
+                Log.e("tag", "나이: $age, 무게: $weight, 성별: $gender, 임신여부: $ispregnant, 추천카페인: $caffeine")
+            }else{
+                Log.e("Survey1", "체중 없음")
+                binding.weightTV.visibility = 1
             }
-
-            caffeine = weight * coefficient
-
-            editor.putString("age", age)
-            editor.putString("weight", weight.toString())
-            editor.putString("gender", gender)
-            editor.putBoolean("ispregnant", ispregnant)
-            //editor.apply()
-
-            App.prefs.age = age
-            App.prefs.isPregnant = ispregnant
-
-            val selectActivity = Survey2Activity()
-            val intent = Intent(this, selectActivity::class.java)
-            intent.putExtra("caffeine", caffeine)
-            startActivity(intent)
-
-            Log.e("tag", "나이: $age, 무게: $weight, 성별: $gender, 임신여부: $ispregnant, 추천카페인: $caffeine")
         }
 
         Log.e("id: ", binding.btnGenderLayout.getId().toString())
