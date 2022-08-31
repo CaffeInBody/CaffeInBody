@@ -44,5 +44,6 @@ interface DrinksDao {
     @Query("update Drinks set favorite = :something where drinkName = :name")//favorite 항목만 변경(true/false)
     fun updateFavorite(something: Boolean, name: String)
 
-    //favorite update 함수
+    @Query("select * from Drinks where drinkName like :name and madeBy like :made and category like :cat")
+    fun selectIntersect(name: String, made: String, cat: String): List<Drinks>
 }

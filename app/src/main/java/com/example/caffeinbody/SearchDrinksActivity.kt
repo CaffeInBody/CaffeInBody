@@ -3,6 +3,9 @@ package com.example.caffeinbody
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.caffeinbody.database.Drinks
@@ -12,12 +15,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.selects.select
 
 class SearchDrinksActivity: AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private lateinit var db: DrinksDatabase
     lateinit var caffeineadapter: CaffeineAdapter
     var datas = mutableListOf<Drinks>()
+    var madeby = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,81 +33,65 @@ class SearchDrinksActivity: AppCompatActivity() {
         caffeineadapter = CaffeineAdapter(this)
         binding.caffeinList.adapter = caffeineadapter
 
-        binding.resultText.setMovementMethod(ScrollingMovementMethod())
+        val itemList = listOf("제조사를 선택하세요", "스타벅스", "이디야", "투썸플레이스", "할리스", "빽다방", "더벤티", "공차")
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, itemList)
+        binding.spinner1.adapter = adapter
+        binding.spinner1.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when(position){
+                    0->{
+                        madeby = ""
+                    }
+                    1->{
+                        madeby = "스타벅스"
+                    }
+                    2->{
+                        madeby = "이디야"
+                    }
+                    3->{
+                        madeby = "투썸플레이스"
+                    }
+                    4->{
+                        madeby = "할리스"
+                    }
+                    5->{
+                        madeby = "빽다방"
+                    }
+                    6->{
+                        madeby = "더벤티"
+                    }
+                    7->{
+                        madeby = "공차"
+                    }
+                    else-> Log.e("SearchDrinksActivity", "error")
+                }
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {            }        }
 
         binding.searchBtn.setOnClickListener {
-            var find = binding.editText2.text.toString()
-            binding.resultText.setText(null)
+            var name = binding.editText2.text.toString()
+            var cat = binding.editText4.text.toString()
             db = DrinksDatabase.getInstance(applicationContext)!!
-            selectDrinkName(db, find)
-        }
-
-        binding.searchBtn2.setOnClickListener {
-            var find = binding.editText3.text.toString()
-            binding.resultText.setText(null)
-            db = DrinksDatabase.getInstance(applicationContext)!!
-            selectDrinkMadeBy(db, find)
-        }
-
-        binding.searchBtn3.setOnClickListener {
-            var find = binding.editText4.text.toString()
-            binding.resultText.setText(null)
-            db = DrinksDatabase.getInstance(applicationContext)!!
-            selectDrinkCategory(db, find)
+            selectIntersect(db, name, madeby, cat)
         }
 
         val layoutManager = GridLayoutManager(this,2)
         binding.caffeinList.layoutManager = layoutManager
     }
 
-    fun selectDrinkName(db: DrinksDatabase, find: String){
+    fun selectIntersect(db: DrinksDatabase, name: String, madeby: String, category: String){
         CoroutineScope(Dispatchers.Main).launch {
             val drinkNames = CoroutineScope(Dispatchers.IO).async {
-                db.drinksDao().selectDrinkName("%$find%")
+                db.drinksDao().selectIntersect("%$name%","%$madeby%","%$category%")
             }.await()
-            var count = 0
-            drinkNames.count()
+
             for (names in drinkNames){
                 Log.e("NameNew", "selectDrinkName: " + names)
               //  datas.add(CaffeineData(1, names.id, names.drinkName, 0) )
                 datas.add(names)
-                binding.resultText.append((++count).toString() + ")" + names.toString() + "\n")
             }
             Log.e("datas", datas.count().toString())
-            initRecycler()
-            datas.clear()
-        }
-    }
-
-    fun selectDrinkMadeBy(db: DrinksDatabase, find: String){
-        CoroutineScope(Dispatchers.Main).launch {
-            val makers = CoroutineScope(Dispatchers.IO).async {
-                db.drinksDao().selectDrinkMadeBy("%$find%")
-            }.await()
-            var count = 0
-            for (maker in makers){
-                Log.e("maker", "selectDrinkName: " + maker)
-             //   datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
-                datas.add(maker)
-                binding.resultText.append((++count).toString() + ")" + maker.toString() + "\n")
-            }
-            initRecycler()
-            datas.clear()
-        }
-    }
-
-    fun selectDrinkCategory(db: DrinksDatabase, find: String){
-        CoroutineScope(Dispatchers.Main).launch {
-            val categories = CoroutineScope(Dispatchers.IO).async {
-                db.drinksDao().selectDrinkCategory("%$find%")
-            }.await()
-            var count = 0
-            for (category in categories){
-                Log.e("maker", "selectDrinkName: " + category)
-              //  datas.add(CaffeineData(1, category.id, category.drinkName, 0) )
-                datas.add(category)
-                binding.resultText.append((++count).toString() + ")" + category.toString() + "\n")
-            }
             initRecycler()
             datas.clear()
         }
