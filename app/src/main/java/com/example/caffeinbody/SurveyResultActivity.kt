@@ -50,9 +50,9 @@ class SurveyResultActivity : AppCompatActivity() {
 
         App.prefs.dayCaffeine = recommendDayCaffeine.toString()
         //개인별 반감기 시간 구하기
-        var halftime = calHalfTime()
+        var halftime = calHalfTime(isPregnant)
         Log.e("SurveyResultActivity", "halftime: $halftime")
-        App.prefs.halftime = calHalfTime()
+        App.prefs.halftime = halftime
 
 
         binding.buttonCheck.setOnClickListener {
@@ -63,10 +63,14 @@ class SurveyResultActivity : AppCompatActivity() {
         }
     }
 
-    fun calHalfTime(): Float{//민감도에 따른 반감기 시간 계산
+    fun calHalfTime(preg: Boolean): Float{//민감도에 따른 반감기 시간 계산
         val multiply = App.prefs.multiply
         val basicTime = getString(R.string.basicTime).toInt()
-        return basicTime * (2 - multiply!!)
+        if (preg == true){
+            return 10f
+        }else{
+            return basicTime * (2 - multiply!!)
+        }
     }
 
     companion object{

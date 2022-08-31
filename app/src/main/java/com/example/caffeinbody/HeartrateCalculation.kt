@@ -65,21 +65,24 @@ class HeartrateCalculation : AppCompatActivity() {
             var heartrateGap = heartrate - normalHeartrate!!
 
             if (heartrateGap>0){
-                heartrateGap = heartrateGap/100//ex 0.08 올랐으면 0.92 곱하기, 0.1 올랐으면 0.9곱하기-> 곱하는 값이 민감도 곱하기 전 원래 값이어야 한다
                 Log.e(tag, "heartrateGap: $heartrateGap")
-
                 var recommendDayCaffeine = setRecommendDayCaffeine(App.prefs.age!!, App.prefs.isPregnant)
 
-                val dayCaffeine = (1- heartrateGap)* recommendDayCaffeine
-                binding.tvRecommendDayCaffeine.setText(dayCaffeine.toString())
+                if (heartrateGap>=10){
+                    val dayCaffeine = recommendDayCaffeine * 0.7
+                    App.prefs.dayCaffeine = dayCaffeine.toString()
+                }else{
+                    val dayCaffeine = recommendDayCaffeine
+                    App.prefs.dayCaffeine = dayCaffeine.toString()
+                }
+                binding.tvRecommendDayCaffeine.setText(App.prefs.dayCaffeine)
                 binding.tvRecommendOnceCaffeine.setText(App.prefs.sensetivity)
                 binding.resultLayout.visibility = View.VISIBLE
-                App.prefs.dayCaffeine = dayCaffeine.toString()
+
             }else{
                 val textView = TextView(this)
                 textView.text = "평온한 상태에서 심박수 측정을 다시 진행해 주세요"
                 binding.linearLayout6.addView(textView)
-                //심박수 측정을 다시 진행해 주세요(동적으로 추가/보이게 할지/setText할지)
             }
         }
     }
