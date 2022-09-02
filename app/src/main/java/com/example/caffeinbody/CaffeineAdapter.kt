@@ -64,11 +64,14 @@ class CaffeineAdapter (private val context: Context) : RecyclerView.Adapter<Caff
             if(article.iscafe == true) {
                 if(article.imgurl.startsWith("https")  ){Glide.with(itemView).load(article.imgurl).override(500,).into(img)
                 }
-                else if(article.madeBy == "스타벅스"){ Glide.with(itemView).load(R.drawable.starbucks_logo).override(300,).into(img)
+                else if(article.madeBy == "스타벅스"){ Glide.with(itemView).load(R.drawable.starbucks_logo).override(250,).into(img)
                 }
-                else if(article.madeBy == "이디야") Glide.with(itemView).load(R.drawable.ediya_logo).override(300,).into(img)
-                else if(article.madeBy == "투썸플레이스") Glide.with(itemView).load(R.drawable.twosome_logo).override(300,).into(img)
-                else if(article.madeBy == "할리스") Glide.with(itemView).load(R.drawable.hollys_logo).override(300,).into(img)
+                else if(article.madeBy == "이디야") Glide.with(itemView).load(R.drawable.ediya_logo).override(250,).into(img)
+                else if(article.madeBy == "투썸플레이스") Glide.with(itemView).load(R.drawable.twosome_logo).override(250,).into(img)
+                else if(article.madeBy == "할리스") Glide.with(itemView).load(R.drawable.hollys_logo).override(250,).into(img)
+                else if(article.madeBy == "빽다방") Glide.with(itemView).load(R.drawable.paiks_logo).override(250,).into(img)
+                else if(article.madeBy == "더벤티") Glide.with(itemView).load(R.drawable.theventi_logo).override(250,).into(img)
+                else if(article.madeBy == "공차") Glide.with(itemView).load(R.drawable.gongcha_logo).override(250,).into(img)
                 else  Glide.with(itemView).load(R.drawable.coffee_sample).into(img)
             }
             else if ( article.iscafe == false) Glide.with(itemView).load(R.drawable.cola_sample).into(img)

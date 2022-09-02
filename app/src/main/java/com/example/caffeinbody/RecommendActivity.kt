@@ -1,12 +1,10 @@
 package com.example.caffeinbody
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
-import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.ActivityRecommendBinding
 import kotlinx.coroutines.CoroutineScope
@@ -54,9 +52,12 @@ class RecommendActivity : AppCompatActivity() {
                             caffeineadapter.datas.add(it[i])
                         }
                         //caffeineadapter.datas.addAll(it)
-                        binding.nonetext.visibility = GONE //데이터 없을때 나오는 텍스트
-                        binding.recyclerView.visibility = VISIBLE
 
+                        runOnUiThread {
+                            binding.nonetext.visibility = GONE //데이터 없을때 나오는 텍스트
+                            binding.recyclerView.visibility = VISIBLE
+                            // call the invalidate()
+                        }
                     }
 
                 }

@@ -20,14 +20,18 @@
         app:layout_constraintTop_toTopOf="parent" />
     <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+>
         <LinearLayout
             android:id="@+id/coffee_brand"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/toolbar"
-            android:padding="10dp"
+
+            android:clipToPadding="false"
+            android:padding="20dp"
             >
             <RadioGroup
                 android:layout_width="wrap_content"
@@ -35,56 +39,56 @@
                 android:id="@+id/coffee_brand_btn"
                 android:layout_height="wrap_content">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <RadioButton
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     app:civ_border_color="#F8786F"
                     android:id="@+id/starbucks"
                     android:layout_marginHorizontal="6dp"
-                    android:src="@drawable/starbucks_logo"/>
-                <de.hdodenhof.circleimageview.CircleImageView
+                    android:background="@drawable/starbucks_logo"/>
+                <RadioButton
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     app:civ_border_color="#F8786F"
                     android:id="@+id/ediya"
                     android:layout_marginHorizontal="6dp"
-                    android:src="@drawable/ediya_logo"/>
-                <de.hdodenhof.circleimageview.CircleImageView
+                    android:background="@drawable/ediya_logo"/>
+                <RadioButton
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/twosome"
                     app:civ_border_color="#F8786F"
                     android:layout_marginHorizontal="6dp"
-                    android:src="@drawable/twosome_logo"/>
-                <de.hdodenhof.circleimageview.CircleImageView
+                    android:background="@drawable/twosome_logo"/>
+                <RadioButton
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     app:civ_border_color="#F8786F"
                     android:id="@+id/hollys"
                     android:layout_marginHorizontal="6dp"
-                    android:src="@drawable/hollys_logo"
+                    android:background="@drawable/hollys_logo"
                     />
-                <de.hdodenhof.circleimageview.CircleImageView
+                <RadioButton
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/paiks"
                     app:civ_border_color="#F8786F"
                     android:layout_marginHorizontal="6dp"
-                    android:src="@drawable/paiks_logo"/>
-                <de.hdodenhof.circleimageview.CircleImageView
+                    android:background="@drawable/paiks_logo"/>
+                <RadioButton
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/theventi"
                     app:civ_border_color="#F8786F"
                     android:layout_marginHorizontal="6dp"
-                    android:src="@drawable/theventi_logo"/>
-                <de.hdodenhof.circleimageview.CircleImageView
+                    android:background="@drawable/theventi_logo"/>
+                <RadioButton
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:id="@+id/gongcha"
                     app:civ_border_color="#F8786F"
                     android:layout_marginHorizontal="6dp"
-                    android:src="@drawable/gongcha_logo"/>
+                    android:background="@drawable/gongcha_logo"/>
             </RadioGroup>
         </LinearLayout>
     </HorizontalScrollView>
@@ -94,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingHorizontal="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
         tools:listitem="@layout/item_caffeine" />

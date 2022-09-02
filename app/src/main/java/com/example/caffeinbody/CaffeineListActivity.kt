@@ -75,14 +75,14 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         when(v?.id){
             binding.starbucks.id -> {
                 if(checked != 1) {
-                    binding.starbucks.borderWidth = 4
+                 //   binding.starbucks.borderWidth = 4
                     selectDrinkMadeBy(db, "스타벅스")
                     checked=1
                 } else checked = 0
             }
             binding.ediya.id -> {
                 if(checked != 2) {
-                    binding.ediya.borderWidth = 4
+                   // binding.ediya.borderWidth = 4
                     selectDrinkMadeBy(db, "이디야")
                     checked=2
                 } else checked = 0
@@ -90,35 +90,35 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             }
             binding.twosome.id -> {
                 if(checked != 3) {
-                    binding.twosome.borderWidth = 4
+                //    binding.twosome.borderWidth = 4
                     selectDrinkMadeBy(db, "투썸플레이스")
                     checked=3
                 } else checked = 0
             }
             binding.hollys.id -> {
                 if(checked != 4) {
-                    binding.hollys.borderWidth = 4
+                 //   binding.hollys.borderWidth = 4
                     selectDrinkMadeBy(db, "할리스")
                     checked=4
                 } else checked = 0
             }
             binding.paiks.id -> {
                 if(checked != 5) {
-                    binding.hollys.borderWidth = 4
+              //      binding.hollys.borderWidth = 4
                     selectDrinkMadeBy(db, "빽다방")
                     checked=5
                 } else checked = 0
             }
             binding.theventi.id -> {
                 if(checked != 6) {
-                    binding.hollys.borderWidth = 4
+               //     binding.hollys.borderWidth = 4
                     selectDrinkMadeBy(db, "더벤티")
                     checked=6
                 } else checked = 0
             }
             binding.gongcha.id -> {
                 if(checked != 7) {
-                    binding.hollys.borderWidth = 4
+             //       binding.hollys.borderWidth = 4
                     selectDrinkMadeBy(db, "공차")
                     checked=7
                 } else checked = 0
