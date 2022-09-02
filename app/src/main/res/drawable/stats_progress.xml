@@ -5,7 +5,7 @@
             <shape
                 android:innerRadiusRatio="3"
                 android:shape="ring"
-                android:thickness="15dp"
+                android:thickness="12dp"
                 android:useLevel="true">
                 <solid android:color="#D7FBC7C3" />
             </shape>
@@ -15,7 +15,7 @@
         <shape
             android:innerRadiusRatio="1200"
             android:shape="ring"
-            android:thickness="7dp"
+            android:thickness="5dp"
             android:useLevel="false">
             <solid android:color="#D7FBC7C3" />
         </shape>
@@ -26,7 +26,7 @@
                 <shape
                     android:innerRadiusRatio="1200"
                     android:shape="ring"
-                    android:thickness="7dp"
+                    android:thickness="5dp"
                     android:useLevel="false">
                     <solid android:color="#D7FBC7C3" />
                 </shape>

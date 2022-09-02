@@ -36,97 +36,102 @@
     </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:tint="#FBF5F5"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
-
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/linearLayout4">
 
-        <TextView
-            android:id="@+id/condition"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center|top"
+            android:layout_marginHorizontal="30dp"
+
+            app:cardCornerRadius="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="적절한 카페인 섭취는 도움이 됩니다"
+                android:textAlignment="center"
+                android:textColor="@color/pink"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:id="@+id/frameLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="오늘 섭취량"
-            android:layout_gravity="center|top"
-            android:textAlignment="center"
-            android:textColor="@color/brown"
-            android:layout_marginTop="50dp"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-        <ProgressBar
-            android:id="@+id/background_progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="380dp"
-            android:layout_height="380dp"
-            android:layout_gravity="center"
-            android:indeterminate="false"
-            android:layout_marginTop="40dp"
-            android:max="100"
-            android:progress="100"
-            android:progressDrawable="@drawable/stats_full"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="-20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/card">
 
-        <ProgressBar
-            android:id="@+id/stats_progressbar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="380dp"
-            android:layout_height="380dp"
-            android:layout_marginTop="40dp"
-            android:layout_gravity="center"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="40"
-            android:progressDrawable="@drawable/stats_progress" />
+            <ProgressBar
+                android:id="@+id/background_progressbar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="380dp"
+                android:layout_height="380dp"
+                android:layout_gravity="center"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="100"
+                android:progressDrawable="@drawable/stats_full" />
 
-        <com.github.onlynight.waveview.WaveView
-            android:id="@+id/heart"
-            android:layout_width="230dp"
-            android:layout_height="230dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            app:isCircle="true"
-            app:period="3"
-            app:wave1Color="#D5F8786F"
-            app:wave2Color="#D7FBC7C3"
-            app:waveHeightPercent="0.9"
-            app:waveRange="15dp"
-            app:waveSpeed="5"
-            app:waveStrokeWidth="3dp" />
+            <ProgressBar
+                android:id="@+id/stats_progressbar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="380dp"
+                android:layout_height="380dp"
+                android:layout_gravity="center"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="40"
+                android:progressDrawable="@drawable/stats_progress" />
 
+            <com.github.onlynight.waveview.WaveView
+                android:id="@+id/heart"
+                android:layout_width="230dp"
+                android:layout_height="230dp"
+                android:layout_gravity="center"
+                app:isCircle="true"
+                app:period="3"
+                app:wave1Color="#D5F8786F"
+                app:wave2Color="#D7FBC7C3"
+                app:waveHeightPercent="0.9"
+                app:waveRange="15dp"
+                app:waveSpeed="5"
+                app:waveStrokeWidth="3dp" />
+
+        </FrameLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/frameLayout2"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout2"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/card">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|top"
                 android:layout_marginTop="20dp"
-                android:text="현재 카페인 섭취권고량"
+                android:text="실시간 권고 섭취량"
                 android:textAlignment="center"
-                android:textSize="12dp" />
+                android:textSize="14dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -142,7 +147,7 @@
                     android:text="100"
                     android:textAlignment="center"
                     android:textColor="@color/brown"
-                    android:textSize="36dp"
+                    android:textSize="32dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -161,13 +166,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="15dp"
                 android:text="자세히 보기 >"
                 android:textAlignment="center"
-                android:textSize="14dp" />
+                android:textSize="12dp" />
         </LinearLayout>
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout7"
@@ -175,9 +181,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
         android:layout_marginHorizontal="60dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="-25dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
@@ -193,7 +199,7 @@
                 android:textAlignment="center"
                 android:textStyle="bold"
                 android:textColor="@color/brown"
-                android:textSize="20dp" />
+                android:textSize="22dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -201,7 +207,7 @@
                 android:text="/"
                 android:layout_marginHorizontal="2dp"
                 android:textAlignment="center"
-                android:textSize="14dp" />
+                android:textSize="16dp" />
 
             <TextView
                 android:id="@+id/maximumADayText"
@@ -209,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:text="400"
                 android:textAlignment="center"
-                android:textSize="14dp" />
+                android:textSize="16dp" />
         </LinearLayout>
 
         <TextView
@@ -217,7 +223,7 @@
             android:layout_height="wrap_content"
             android:text="오늘의 섭취량 "
             android:textAlignment="center"
-            android:textSize="12dp" />
+            android:textSize="14dp" />
 
 
     </LinearLayout>
@@ -227,20 +233,20 @@
         android:layout_width="0.5dp"
         android:layout_height="18dp"
         android:background="#DDD5D5"
-        android:layout_marginBottom="35dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout7"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout8"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout7" />
+        app:layout_constraintStart_toEndOf="@+id/linearLayout7"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout7" />
 
     <LinearLayout
         android:id="@+id/linearLayout8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
-        android:layout_marginBottom="20dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_marginTop="-25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -253,9 +259,9 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textAlignment="center"
-                android:textStyle="bold"
                 android:textColor="@color/brown"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -264,81 +270,78 @@
             android:layout_height="wrap_content"
             android:text="1회 권장 섭취량"
             android:textAlignment="center"
-            android:textSize="12dp" />
+            android:textSize="14dp" />
 
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingVertical="10dp"
+
+        android:padding="20dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.248"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
-        <LinearLayout
-            android:id="@+id/addBeverageBtn"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginBottom="15dp"
-            android:background="@drawable/roundcorner_rectangle"
-            android:elevation="1dp"
-            android:orientation="horizontal"
-            android:padding="25dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
-                android:text="음료 추가하기"
-                android:textSize="20dp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/icon_plus" />
-        </LinearLayout>
-
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:id="@+id/checkWatchBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="80dp"
+            android:layout_width="240dp"
+            android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="50dp"
             android:background="@drawable/roundcorner_rectangle"
-            android:elevation="1dp"
+            android:backgroundTint="@color/brown"
+            android:elevation="10dp"
             android:orientation="horizontal"
-            android:padding="25dp">
+
+            app:cardCornerRadius="50dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="40dp"
+                android:layout_gravity="center|start"
+                android:layout_marginStart="32dp"
                 android:text="워치로 검사하기"
-                android:textSize="20dp" />
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
 
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="@drawable/icon_watch" />
-        </LinearLayout>
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="32dp"
+
+                android:background="@drawable/icon_watch"
+                android:backgroundTint="@color/white"
+                android:padding="10dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/addBeverageBtn"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/roundcorner_rectangle"
+            android:elevation="10dp"
+            android:padding="10dp"
+
+            app:cardCornerRadius="40dp">
+
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:background="@drawable/icon_plus" />
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

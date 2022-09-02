@@ -149,6 +149,9 @@ class HomeFragment : Fragment() {
         binding.heart.waveHeightPercent = (percent).toFloat()
 
         binding.sensitivity.text = App.prefs.sensetivity
+        if(App.prefs.todayCaf != null && App.prefs.dayCaffeine != null)
+             binding.statsProgressbar.progress = (App.prefs.todayCaf!!.toDouble() / App.prefs.dayCaffeine!!.toDouble() * 100).toInt()
+        else binding.statsProgressbar.progress = 0
     }
 
     companion object{
