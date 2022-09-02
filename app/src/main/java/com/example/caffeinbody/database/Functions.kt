@@ -441,7 +441,7 @@ class Functions() {
         }
     }
 
-    fun addEtc(db: DrinksDatabase){
+    fun addStore(db: DrinksDatabase){
         CoroutineScope(Dispatchers.IO).launch {
             db.drinksDao().insertAll(
                 Drinks("흑당카페라떼", Size(250, 0, 0), Caffeine(75,0, 0), "커피 및 커피우유", "푸르밀", "url", false, false, false),
@@ -526,11 +526,6 @@ class Functions() {
                 Drinks("커피믹스커피", Size(1000, 0, 0), Caffeine(380,0, 0), "커피 및 커피우유", "씨유", "url", false, false, false),
                 Drinks("커피", Size(500, 0, 0), Caffeine(130,0, 0), "커피 및 커피우유", "씨유", "url", false, false, false),
                 Drinks("폴바셋돌체라떼", Size(330, 0, 0), Caffeine(185,0, 0), "커피 및 커피우유", "엠즈", "url", false, false, false),
-                Drinks("게보린정", Size(0, 0, 0), Caffeine(50,0, 0), "해열·진통제", "삼진제약", "url", false, false, false),
-                Drinks("펜잘큐정", Size(0, 0, 0), Caffeine(50,0, 0), "해열·진통제", "종근당", "url", false, false, false),
-                Drinks("그날엔정", Size(0, 0, 0), Caffeine(40,0, 0), "해열·진통제", "정동제약", "url", false, false, false),
-                Drinks("판피린큐액", Size(20, 0, 0), Caffeine(30,0, 0), "해열·진통제", "동아제약", "url", false, false, false),
-                Drinks("판콜에스내복액", Size(0, 0, 0), Caffeine(30,0, 0), "해열·진통제", "동화약품", "url", false, false, false),
                 Drinks("핫식스(오리지널, 자몽)", Size(250, 0, 0), Caffeine(60,0, 0), "에너지드링크", "롯데칠성", "url", false, false, false),
                 Drinks("핫식스(오리지널,더킹펀치, 더킹포스, 더킹파워, 더킹스톰, 더킹러쉬)", Size(355, 0, 0), Caffeine(86,0, 0), "에너지드링크", "롯데칠성", "url", false, false, false),
                 Drinks("핫식스 바이탈 에너지/무브업 에너지", Size(500, 0, 0), Caffeine(120,0, 0), "에너지드링크", "롯데칠성", "url", false, false, false),
@@ -597,4 +592,18 @@ class Functions() {
             )
         }
     }
+
+
+        fun addEtc(db: DrinksDatabase){
+            CoroutineScope(Dispatchers.IO).launch {
+                db.drinksDao().insertAll(
+                    Drinks("게보린정", Size(0, 0, 0), Caffeine(50,0, 0), "해열·진통제", "삼진제약", "url", false, false, false),
+                    Drinks("펜잘큐정", Size(0, 0, 0), Caffeine(50,0, 0), "해열·진통제", "종근당", "url", false, false, false),
+                    Drinks("그날엔정", Size(0, 0, 0), Caffeine(40,0, 0), "해열·진통제", "정동제약", "url", false, false, false),
+                    Drinks("판피린큐액", Size(20, 0, 0), Caffeine(30,0, 0), "해열·진통제", "동아제약", "url", false, false, false),
+                    Drinks("판콜에스내복액", Size(0, 0, 0), Caffeine(30,0, 0), "해열·진통제", "동화약품", "url", false, false, false),
+
+                    )
+    }
 }
+    }
