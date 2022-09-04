@@ -3,6 +3,7 @@ package com.example.caffeinbody
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -37,91 +38,95 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         var num= intent.getIntExtra("listnum",1)
-        if(num!=0) binding.coffeeBrand.visibility = View.GONE
+
 
         setSupportActionBar(binding.toolbar)
         //    supportActionBar!!.setDisplayShowTitleEnabled(false)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setTitle((arrayString[num]))
 
-        caffeineadapter = CaffeineAdapter(this)
-        var category = true
-        category = num==0
+        caffeineadapter = CaffeineAdapter(this, CaffeinCase.LARGE)
+
         val layoutManager = GridLayoutManager(this,2)
 
         db = DrinksDatabase.getInstance(applicationContext)!!
-        db.drinksDao().selectiscafe(category).observe(this, Observer {
-            binding.caffeinList.adapter = caffeineadapter
-            caffeineadapter.datas.addAll(it)
-        })
 
 
+
+        if(num==0) {
+
+            caffeineadapter.notifyDataSetChanged()
+            binding.starbucks.setOnClickListener(this)
+            binding.ediya.setOnClickListener(this)
+            binding.twosome.setOnClickListener(this)
+            binding.hollys.setOnClickListener(this)
+            binding.hollys.setOnClickListener(this)
+            binding.paiks.setOnClickListener(this)
+            binding.theventi.setOnClickListener(this)
+            binding.gongcha.setOnClickListener(this)
+
+            db.drinksDao().selectiscafe(true).observe(this, Observer {
+                binding.caffeinList.adapter = caffeineadapter
+                caffeineadapter.datas.addAll(it)
+            })
+        }
+        else if(num == 1){
+            binding.coffeeBrand.visibility = View.GONE
+            db.drinksDao().selectiscafe(false).observe(this, Observer {
+                binding.caffeinList.adapter = caffeineadapter
+                for (maker in it){
+                    //   datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
+                    if(maker.caffeine?.caffeine1 !=0) datas.add(maker) //카페인 함량이 0인것은 제외
+                    initRecycler()
+                }
+
+            })
+
+        }else {
+            var string = "해열·진통제"
+            db.drinksDao().getDrinkCategory(string).observe(this, Observer {
+                binding.caffeinList.adapter = caffeineadapter
+                caffeineadapter.datas.addAll(it)
+            })
+            binding.coffeeBrand.visibility = View.GONE
+        }
         binding.caffeinList.layoutManager = layoutManager
-        caffeineadapter.notifyDataSetChanged()
-        binding.starbucks.setOnClickListener(this)
-        binding.ediya.setOnClickListener(this)
-        binding.twosome.setOnClickListener(this)
-        binding.hollys.setOnClickListener(this)
-        binding.hollys.setOnClickListener(this)
-        binding.paiks.setOnClickListener(this)
-        binding.theventi.setOnClickListener(this)
-        binding.gongcha.setOnClickListener(this)
-
 
 
     }
     override fun onClick(v: View?) {
         var checked=0
+        datas.clear()
         when(v?.id){
             binding.starbucks.id -> {
-                if(checked != 1) {
-                 //   binding.starbucks.borderWidth = 4
+             //   if(binding.starbucks.isChecked)
                     selectDrinkMadeBy(db, "스타벅스")
-                    checked=1
-                } else checked = 0
+              //  else addAll(db)
             }
             binding.ediya.id -> {
-                if(checked != 2) {
                    // binding.ediya.borderWidth = 4
                     selectDrinkMadeBy(db, "이디야")
-                    checked=2
-                } else checked = 0
-
             }
             binding.twosome.id -> {
-                if(checked != 3) {
-                //    binding.twosome.borderWidth = 4
                     selectDrinkMadeBy(db, "투썸플레이스")
-                    checked=3
-                } else checked = 0
             }
             binding.hollys.id -> {
-                if(checked != 4) {
                  //   binding.hollys.borderWidth = 4
                     selectDrinkMadeBy(db, "할리스")
-                    checked=4
-                } else checked = 0
             }
             binding.paiks.id -> {
-                if(checked != 5) {
               //      binding.hollys.borderWidth = 4
                     selectDrinkMadeBy(db, "빽다방")
-                    checked=5
-                } else checked = 0
+
             }
             binding.theventi.id -> {
-                if(checked != 6) {
                //     binding.hollys.borderWidth = 4
                     selectDrinkMadeBy(db, "더벤티")
-                    checked=6
-                } else checked = 0
+
             }
             binding.gongcha.id -> {
-                if(checked != 7) {
-             //       binding.hollys.borderWidth = 4
                     selectDrinkMadeBy(db, "공차")
-                    checked=7
-                } else checked = 0
+
             }
       }
 
@@ -132,6 +137,40 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         menuInflater.inflate(com.example.caffeinbody.R.menu.menu_search,menu)
         return super.onCreateOptionsMenu(menu)
     }
+
+
+
+    fun selectDrinkMadeBy(db: DrinksDatabase, find: String){
+        CoroutineScope(Dispatchers.Main).launch {
+            val makers = CoroutineScope(Dispatchers.IO).async {
+                db.drinksDao().selectDrinkMadeBy(find)
+            }.await()
+            var count = 0
+            for (maker in makers){
+                Log.e("maker", "selectDrinkName: " + maker)
+                //   datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
+                if(maker.iscafe) datas.add(maker)
+                initRecycler()
+            }
+
+           datas.clear()
+        }
+    }
+    fun addAll(db: DrinksDatabase, find: Boolean){
+        db.drinksDao().selectiscafe(find).observe(this, Observer {
+            binding.caffeinList.adapter = caffeineadapter
+            caffeineadapter.datas.addAll(it)
+        })
+    }
+
+    private fun initRecycler(){
+        caffeineadapter.datas.clear()
+        caffeineadapter.datas.addAll(datas)
+        caffeineadapter.notifyDataSetChanged()
+    }
+
+
+
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         android.R.id.home -> {
@@ -145,10 +184,9 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         }
         R.id.home-> {
             val intent = Intent(this, PlusDrinkActivity::class.java)
-           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-           // intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            // intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
-            finish()
             true
         }
 
@@ -157,26 +195,5 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             // Invoke the superclass to handle it.
             super.onOptionsItemSelected(item)
         }
-    }
-    fun selectDrinkMadeBy(db: DrinksDatabase, find: String){
-        CoroutineScope(Dispatchers.Main).launch {
-            val makers = CoroutineScope(Dispatchers.IO).async {
-                db.drinksDao().selectDrinkMadeBy("%$find%")
-            }.await()
-            var count = 0
-            for (maker in makers){
-                Log.e("maker", "selectDrinkName: " + maker)
-                //   datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
-                datas.add(maker)
-            }
-            initRecycler()
-            datas.clear()
-        }
-    }
-
-    private fun initRecycler(){
-        caffeineadapter.datas.clear()
-        caffeineadapter.datas.addAll(datas)
-        caffeineadapter.notifyDataSetChanged()
     }
 }

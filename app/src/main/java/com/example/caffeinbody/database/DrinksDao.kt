@@ -32,11 +32,17 @@ interface DrinksDao {
     @Query("select * from Drinks where category like :something")
     fun selectDrinkCategory(something: String): List<Drinks>
 
+    @Query("select * from Drinks where category like :something")
+    fun getDrinkCategory(something: String): LiveData<List<Drinks>>
+
     @Query("select * from Drinks where iscafe like :something")
     fun selectiscafe(something: Boolean): LiveData<List<Drinks>>
 
-    @Query("select * from Drinks where caffeine_caffeine1 BETWEEN 0 AND :something")
+    @Query("select * from Drinks where caffeine_caffeine1 BETWEEN 1 AND :something")
     fun recommendcaffeine(something: Double): List<Drinks>
+
+    @Query("select * from Drinks where caffeine_caffeine1 == 0")
+    fun recommendnoncaffeine(): List<Drinks>
 
     @Query("select * from Drinks where favorite = :something")//favorite 항목만 반환(true/false)
     fun selectFavorite(something: Boolean): LiveData<List<Drinks>>

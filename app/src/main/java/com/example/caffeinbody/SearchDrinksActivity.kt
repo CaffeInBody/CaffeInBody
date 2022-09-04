@@ -30,7 +30,7 @@ class SearchDrinksActivity: AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        caffeineadapter = CaffeineAdapter(this)
+        caffeineadapter = CaffeineAdapter(this,CaffeinCase.LARGE)
         binding.caffeinList.adapter = caffeineadapter
 
         val itemList = listOf("제조사를 선택하세요", "스타벅스", "이디야", "투썸플레이스", "할리스", "빽다방", "더벤티", "공차")
