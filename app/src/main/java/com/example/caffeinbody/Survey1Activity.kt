@@ -117,6 +117,7 @@ class Survey1Activity  : AppCompatActivity() {
         funcs.addDrinksDatabaseGongCha(db)
         funcs.addStore(db)
         funcs.addEtc(db)/**/
+        funcs.addNonCaf(db)
         Log.e("survey1", "끝남 한글임")
     }
 

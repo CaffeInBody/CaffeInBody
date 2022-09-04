@@ -606,4 +606,20 @@ class Functions() {
                     )
     }
 }
+
+    fun addNonCaf(db: DrinksDatabase){
+        CoroutineScope(Dispatchers.IO).launch {
+            db.drinksDao().insertAll(
+                Drinks("캐모마일티", Size(0, 0, 0), Caffeine(0,0, 0), "차", "논카페인", "https://res.cloudinary.com/cafeinbody/image/upload/v1662309508/noncaffeine/camomile_rzepdz.webp", false, false, false),
+                Drinks("페퍼민트티", Size(0, 0, 0), Caffeine(0,0, 0), "차", "논카페인", "https://res.cloudinary.com/cafeinbody/image/upload/v1662309507/noncaffeine/pepperminttea_wfxexp.jpg", false, false, false),
+                Drinks("루이보스티", Size(0, 0, 0), Caffeine(0,0, 0), "차", "논카페인", "https://res.cloudinary.com/cafeinbody/image/upload/v1662311791/noncaffeine/rouibosetea_acbwqd_da1517.jpg", false, false, false),
+                Drinks("대추차", Size(0, 0, 0), Caffeine(0,0, 0), "차","논카페인", "https://res.cloudinary.com/cafeinbody/image/upload/v1662311903/noncaffeine/daechootea_g5hsga.jpg", false, false, false),
+                Drinks("생강차", Size(0, 0, 0), Caffeine(0,0, 0), "차", "논카페인", "https://res.cloudinary.com/cafeinbody/image/upload/v1662309507/noncaffeine/gingertea_qordvu.jpg", false, false, false),
+                Drinks("쌍화차", Size(0, 0, 0), Caffeine(0,0, 0), "차", "논카페인", "https://res.cloudinary.com/cafeinbody/image/upload/v1662309508/noncaffeine/ssanghwatea_hzxmus.jpg", false, false, false),
+                Drinks("오곡라떼", Size(0, 0, 0), Caffeine(0,0, 0), "차", "논카페인", "https://res.cloudinary.com/cafeinbody/image/upload/v1662309507/noncaffeine/grainlatte_omgsu5.jpg", false, false, false),
+                Drinks("고구마라떼", Size(0, 0, 0), Caffeine(0,0, 0), "차", "논카페인", "https://res.cloudinary.com/cafeinbody/image/upload/v1662312215/noncaffeine/sweetpotatolatte_fiyqz3.png", false, false, false),
+
+                )
+        }
+    }
     }
