@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 평상시 -->
+    <item android:state_checked="true"
+        android:drawable="@drawable/circle">
+
+    </item>
+
+    <!-- 클릭했을 때 -->
+    <item android:state_checked="false">
+        <shape>
+            <corners android:radius="100dp" />
+            <stroke android:width="0dp" android:color="#F8786F" />
+            <size android:height="80dp" android:width="80dp" />
+        </shape>
+    </item>
+
+
+</selector>
