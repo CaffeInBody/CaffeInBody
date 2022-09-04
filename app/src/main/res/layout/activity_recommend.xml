@@ -48,7 +48,7 @@
         android:paddingHorizontal="10dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"
-        tools:listitem="@layout/item_caffeine"
+        tools:listitem="@layout/item_rec_caffeine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -57,7 +57,7 @@
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:adjustViewBounds="true"
         android:src="@drawable/rest"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
@@ -79,7 +79,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"
         android:layout_marginHorizontal="20dp"
-        tools:listitem="@layout/item_caffeine"
+        tools:listitem="@layout/item_rec_caffeine"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
