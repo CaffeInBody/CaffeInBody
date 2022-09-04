@@ -16,7 +16,17 @@
         android:paddingEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+        <TextView
+            android:id="@+id/confirm_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:textColor="#F8786F"
+            android:textSize="18dp"
+            android:layout_marginHorizontal="30dp"
+            android:text="완료"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <ImageView
         android:id="@+id/drink_img"
@@ -49,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/drink_img" />
 
     <EditText
-        android:id="@+id/editText_survey1_weight"
+        android:id="@+id/editText_drink"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"
@@ -63,30 +73,19 @@
 
     <TextView
 
-        android:id="@+id/textView16"
+        android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_weight="0"
-        android:text="카페인"
+
+        android:text="브랜드명"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_survey1_weight" />
-    <Button
-        android:id="@+id/button_next"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#9D5812"
-        android:gravity="center"
-        android:text="등록하기"
-        style="@style/bold_16dp"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editText_drink" />
 
     <EditText
-        android:id="@+id/caffeine"
+        android:id="@+id/made_by"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginHorizontal="30dp"
@@ -95,6 +94,44 @@
         android:background="@drawable/roundcorner_rectangle2"
         android:ems="15"
         android:paddingStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+    <TextView
+
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_weight="0"
+        android:text="카페인 함량"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/made_by" />
+
+    <EditText
+        android:id="@+id/caffeine"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginStart="30dp"
+        android:height="35dp"
+        android:background="@drawable/roundcorner_rectangle2"
+        android:ems="15"
+        android:inputType="number"
+        android:paddingStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="0"
+        android:text="mg"
+        android:textStyle="bold"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/caffeine"
+        app:layout_constraintStart_toEndOf="@+id/caffeine" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
