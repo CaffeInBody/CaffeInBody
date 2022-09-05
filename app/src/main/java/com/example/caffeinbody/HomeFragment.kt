@@ -138,6 +138,11 @@ class HomeFragment : Fragment() {
 
         var percent = 1.0
 
+
+        //TODO 상태별 글자 보이게
+        binding.condition
+
+
         if(servingsize!= null) {
             binding.AvailableCaffeineText.setText(servingsize)
             percent = servingsize.toDouble() / App.prefs.sensetivity!!.toDouble()

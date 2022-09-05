@@ -67,6 +67,10 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
 
             db.drinksDao().selectiscafe(true).observe(this, Observer {
                 binding.caffeinList.adapter = caffeineadapter
+                Log.e("sortedList",it.toString())
+                //TODO 좋아요 기준 정렬
+              //  var sortedList = datas.sortedByDescending { it.favorite}.reversed()
+              ///////  Log.e("sortedList",sortedList.toString())
                 caffeineadapter.datas.addAll(it)
             })
         }
@@ -90,6 +94,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             })
             binding.coffeeBrand.visibility = View.GONE
         }
+
         binding.caffeinList.layoutManager = layoutManager
 
 

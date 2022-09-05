@@ -3,6 +3,7 @@ package com.example.caffeinbody
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -26,6 +27,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
     var datas = mutableListOf<Drinks>()
     var style: Int? = null
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if(type== CaffeinCase.SMALL) style = R.layout.item_rec_caffeine
         else if(type == CaffeinCase.LARGE) style = R.layout.item_caffeine
@@ -41,17 +43,18 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
 
         val article : Drinks = datas.get(position)
         holder.bind(article)
+        holder.star.setOnCheckedChangeListener{ buttonView, isChecked ->
+           // updateFavorite(article,article.favorite, holder.star )
+
+        }
 
 
         holder.itemView.setOnClickListener{
             if(article.caffeine?.caffeine1 != 0) {
                 val intent = Intent(holder.itemView.context, DrinkCaffeineActivity::class.java)
-                intent.putExtra("id", position)
-
                 //서버있으면지워도됨
-                intent.putExtra("name", article.drinkName)
-                intent.putExtra("img", article.imgurl)
-                intent.putExtra("caffeine", article.caffeine?.caffeine1)
+                intent.putExtra("name", article.id)
+
                 ContextCompat.startActivity(holder.itemView.context, intent, null)
                 //카페인 마시기로 이동}
         }}
@@ -64,7 +67,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
      //   private val caf: TextView = itemView.findViewById(R.id.txt_caffeine)
         private val caf: TextView = itemView.findViewById(R.id.caf_name)
         private val drink: TextView = itemView.findViewById(R.id.txt_caffeine)
-        private val star: ToggleButton = itemView.findViewById(R.id.star)
+        val star: ToggleButton = itemView.findViewById(R.id.star)
 
         private val cafcard: CardView = itemView.findViewById(R.id.caffeine)
 
@@ -75,7 +78,11 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
             drink.text = article.drinkName
             caf.text= article.caffeine?.caffeine1.toString() +"mg"
 
+
+            //TODO 좋아요버튼 왠지 작동이 안됨
             star.isChecked = article.favorite == true
+
+
 
             var cacheDir = context.cacheDir
             if(article.caffeine?.caffeine1 == 0 ){
@@ -86,13 +93,13 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
             if (article.imgurl.startsWith("https:")) {
                 Glide.with(itemView).load(article.imgurl).placeholder(R.drawable.logo)
                     .override(500).into(img)
-                logo.visibility = GONE
-                img.visibility = VISIBLE
+
             } else if(article.imgurl.startsWith("$cacheDir/")){
-                var drink = article.drinkName
+
                 val bm = BitmapFactory.decodeFile(article.imgurl)
                 Glide.with(itemView).load(bm).placeholder(R.drawable.logo)
-                    .override(500).into(img)
+                    .override(600).into(img)
+
                 }
             else {
                 if (article.madeBy == "스타벅스") Glide.with(itemView)
@@ -120,14 +127,19 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
         }
 
     }
-    fun updateFavorite(find: String, boolean: Boolean){
 
+    fun updateFavorite(article: Drinks , boolean: Boolean, star : ToggleButton){
+        //TODO 좋아요버튼
         var db = DrinksDatabase.getInstance(context)!!
 
         CoroutineScope(Dispatchers.Main).launch {
-            val makers = CoroutineScope(Dispatchers.IO).async {
-                if(boolean)db.drinksDao().updateFavorite(false,find)
-                else db.drinksDao().updateFavorite(true,find)
+            CoroutineScope(Dispatchers.IO).async {
+             if(boolean)db.drinksDao().updateFavorite(false,article.id)
+             else if(!boolean) db.drinksDao().updateFavorite(true,article.id)
+
+                var find =db.drinksDao().selectDrinkName(article.drinkName)
+                star?.isChecked = article.favorite == true
+                Log.e("dd",find[0].favorite.toString())
             }.await()
 
 
