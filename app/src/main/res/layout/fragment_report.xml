@@ -38,62 +38,105 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/layout1"
                 android:layout_width="match_parent"
-                android:layout_height="90dp"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:background="#A6A6A6"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal"
-                app:circularflow_radiusInDP="5dp"
+
+                app:cardCornerRadius="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingBottom="20dp">
 
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="20dp"
+                        android:textColor="#6E6E6E"
                         android:text="성인 / 여성 / 임신하지 않음"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-
-                    <TextView
-                        android:id="@+id/textView19"
-                        style="@style/bold_16dp"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
+                        android:orientation="horizontal"
+
                         android:layout_marginTop="5dp"
-                        android:text="습관적으로 2"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-                    <TextView
-                        android:id="@+id/textView21"
-                        style="@style/bold_16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:text="각성효과 3"
-                        app:layout_constraintStart_toEndOf="@+id/textView19"
-                        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                        <TextView
+                            android:id="@+id/textView19"
+                            style="@style/bold_14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_gravity="bottom"
+                            android:text="습관적으로"
 
 
-                    <TextView
-                        style="@style/bold_16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="5dp"
-                        android:text="맛있어서 1"
-                        app:layout_constraintStart_toEndOf="@+id/textView21"
-                        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                       />
+
+                        <TextView
+                            android:id="@+id/habitnumber"
+                            style="@style/bold_14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="2"
+                            android:textColor="@color/pink"
+ />
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            style="@style/bold_14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_gravity="bottom"
+                            android:text="각성효과"
+                         />
+
+                        <TextView
+                            android:id="@+id/awakenumber"
+                            style="@style/bold_14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+
+                            android:text="3"
+                            android:textColor="@color/pink"
+
+                  />
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            style="@style/bold_14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_gravity="bottom"
+                            android:text="맛있어서"
+             />
+
+                        <TextView
+                            style="@style/bold_14dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="1"
+                            android:textColor="@color/pink"
+
+          />
+                    </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
@@ -118,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:text="@string/emoji"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <com.github.mikephil.charting.charts.PieChart
                     android:id="@+id/piechart"
@@ -154,7 +197,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-
+                    android:textColor="#666666"
                     android:text="이번 주 카페인"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
