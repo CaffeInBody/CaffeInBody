@@ -3,10 +3,13 @@ package com.example.caffeinbody
 import abak.tr.com.boxedverticalseekbar.BoxedVertical
 import abak.tr.com.boxedverticalseekbar.BoxedVertical.OnValuesChangeListener
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
+import android.view.View.GONE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
@@ -16,24 +19,27 @@ import com.example.caffeinbody.DetailActivity.Companion.getTime
 import com.example.caffeinbody.DetailActivity.Companion.getYear
 import com.example.caffeinbody.ReportFragment.Companion.calMonthCaffeineColor
 import com.example.caffeinbody.ReportFragment.Companion.saveMonthCafJson
+import com.example.caffeinbody.database.Drinks
+import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.databinding.ActivityDrinkCaffeineBinding
 import com.google.android.gms.wearable.PutDataMapRequest
 import com.google.android.gms.wearable.Wearable
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import org.json.JSONArray
 import java.util.*
 
 
-var arraySize = arrayOf<Int>(1,2,3)
-var resultInt = 100f
-
-var caffeine:Int = 100 //샷
-var rangevalue:Int = 100 //샷
-var size:Int = 0
 
 class DrinkCaffeineActivity : AppCompatActivity() {
+    var arraySize = arrayOf<Int>(1,2,3)
+    var resultInt = 100f
+    var article : Drinks? = null
+    var caffeine:Int = 100 //샷
+    var rangevalue:Int = 100 //샷
+    var size:Int = 0
+    private lateinit var db: DrinksDatabase
+
     private val binding: ActivityDrinkCaffeineBinding by lazy{
         ActivityDrinkCaffeineBinding.inflate(
             layoutInflater
@@ -50,45 +56,58 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_drink_caffeine)
 
         val intent = getIntent()
-        val name = intent.getStringExtra("name")
-        val image= intent.getStringExtra("img")
-        caffeine = intent.getIntExtra("caffeine",100)
+        val name = intent.getIntExtra("name",0)
+        binding.shot.minValue = 0
+        binding.shot.maxValue = 12
 
-        supportActionBar!!.setTitle(name.toString())
+        db = DrinksDatabase.getInstance(applicationContext)!!
 
-        Glide.with(this).load(image).into(binding.imageViewDrink)
+        CoroutineScope(Dispatchers.Main).launch {
+            CoroutineScope(Dispatchers.IO).async {
+                article =  db.drinksDao().selectByID(name)
+                arraySize[0] = article!!.caffeine?.caffeine1?.toInt()!!
+                arraySize[1] = article!!.caffeine?.caffeine2?.toInt()!!
+                arraySize[2] = article!!.caffeine?.caffeine3?.toInt()!!
+            }.await()
+            runOnUiThread {
+                initUI(article!!)
+                if(article!!.size?.size1 == 0 || article!!.size?.size2 ==0) {
+                    binding.textView.visibility = GONE
+                    binding.radio.visibility = GONE
+                }
+                else if (article!!.size?.size3 ==0 ) binding.size3.visibility = GONE
+                if(article!!.isCoffee) binding.shot.value =2
+                else binding.shot.value =0
 
-        if(image == null || image == "" )
-            Glide.with(this).load(R.drawable.coffee_sample).into(binding.imageViewDrink)
-        else if ( image == "url") Glide.with(this).load(R.drawable.cola_sample).into(binding.imageViewDrink)
-        else Glide.with(this).load(image).override(800,).into(binding.imageViewDrink)
+                setImg(article!!)
+            }
+            binding.size1.isChecked = true
 
-
-        val display = windowManager.defaultDisplay // in case of Activity
-/* val display = activity!!.windowManaver.defaultDisplay */ // in case of Fragment
-        var devicesize = Point()
-        display.getRealSize(devicesize) // or getSize(size)
-        binding.volume.layoutParams.height=devicesize.x *355/1000
+        }
 
         //음료 사이즈 선택
         binding.size1.setOnClickListener {
-            resultInt = arraySize[0] * caffeine * rangevalue /100f
+            resultInt =  arraySize[0] * rangevalue /100f
             size = 0
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size2.setOnClickListener {
-            resultInt = arraySize[1] * caffeine * rangevalue /100f
+            resultInt = arraySize[1] * rangevalue /100f
             size = 1
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size3.setOnClickListener {
-            resultInt = arraySize[2] * caffeine * rangevalue /100f
+            resultInt = arraySize[2]* rangevalue /100f
             size = 2
             binding.result.setText(resultInt.toString()+"mg")
         }
+        binding.shot.setOnValueChangedListener { numberPicker, i, i2 ->
+            resultInt += i2 * (article?.caffeine?.caffeine1?.toInt()!! / 2)
 
+
+        }
         //용량 선택
         binding.volume.setOnBoxedPointsChangeListener(object : OnValuesChangeListener {
             override fun onPointsChanged(boxedPoints: BoxedVertical, value: Int) {
@@ -160,6 +179,61 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             super.onOptionsItemSelected(item)
         }
     }
+
+    fun setImg(article: Drinks){
+        if (article.imgurl.startsWith("https:")) {
+            Glide.with(this).load(article.imgurl).placeholder(R.drawable.logo)
+                .override(500).into(binding.imageViewDrink)
+
+        } else if(article.imgurl.startsWith("$cacheDir/")){
+
+            val bm = BitmapFactory.decodeFile(article.imgurl)
+            Glide.with(this).load(bm).placeholder(R.drawable.logo)
+                .override(600).into(binding.imageViewDrink)
+
+        }
+        else {
+            if (article.madeBy == "스타벅스") Glide.with(this)
+                .load(R.drawable.starbucks_logo).override(250).into(binding.logo)
+            else if (article.madeBy == "이디야") Glide.with(this)
+                .load(R.drawable.ediya_logo).override(250).into(binding.logo)
+            else if (article.madeBy == "투썸플레이스") Glide.with(this)
+                .load(R.drawable.twosome_logo).override(250).into(binding.logo)
+            else if (article.madeBy == "할리스") Glide.with(this)
+                .load(R.drawable.hollys_logo).override(250).into(binding.logo)
+            else if (article.madeBy == "빽다방") Glide.with(this)
+                .load(R.drawable.paiks_logo).override(250).into(binding.logo)
+            else if (article.madeBy == "더벤티") Glide.with(this)
+                .load(R.drawable.theventi_logo).override(250).into(binding.logo)
+            else if (article.madeBy == "공차") Glide.with(this)
+                .load(R.drawable.gongcha_logo).override(250).into(binding.logo)
+            else Glide.with(this).load(R.drawable.logo).into(binding.logo)
+            binding.imageViewDrink.visibility = GONE
+            binding.logo.visibility = View.VISIBLE
+        }
+
+
+    }
+    fun initUI(article: Drinks){
+        Log.e("article", article.toString())
+        supportActionBar!!.setTitle(article?.drinkName)
+
+        val display = windowManager.defaultDisplay // in case of Activity
+/* val display = activity!!.windowManaver.defaultDisplay */ // in case of Fragment
+        var devicesize = Point()
+        display.getRealSize(devicesize) // or getSize(size)
+        binding.volume.layoutParams.height=devicesize.x *355/1000
+
+    }
+    fun selectByID(db: DrinksDatabase, find: Int){
+        CoroutineScope(Dispatchers.Main).launch {
+            CoroutineScope(Dispatchers.IO).async {
+               article =  db.drinksDao().selectByID(find)
+            }.await()
+
+        }
+    }
+
 
 
 }

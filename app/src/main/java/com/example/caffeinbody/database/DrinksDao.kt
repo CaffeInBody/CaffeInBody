@@ -23,6 +23,11 @@ interface DrinksDao {
     @Query("select * from Drinks where madeBy like :something")
     fun selectDrinkMadeBy(something: String): List<Drinks>
 
+
+    @Query("select * from Drinks where id like :something")
+    fun selectByID(something: Int): Drinks
+
+
     @Query("select count(*) from Drinks")
     fun selectCount(): Int
 
@@ -47,8 +52,8 @@ interface DrinksDao {
     @Query("select * from Drinks where favorite = :something")//favorite 항목만 반환(true/false)
     fun selectFavorite(something: Boolean): LiveData<List<Drinks>>
 
-    @Query("update Drinks set favorite = :something where drinkName = :name")//favorite 항목만 변경(true/false)
-    fun updateFavorite(something: Boolean, name: String)
+    @Query("update Drinks set favorite = :something where id = :name")//favorite 항목만 변경(true/false)
+    fun updateFavorite(something: Boolean, name: Int)
 
     @Query("select * from Drinks where drinkName like :name and madeBy like :made and category like :cat")
     fun selectIntersect(name: String, made: String, cat: String): List<Drinks>
