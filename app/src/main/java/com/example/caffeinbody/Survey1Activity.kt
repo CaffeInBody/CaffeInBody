@@ -10,6 +10,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.caffeinbody.database.DrinksDatabase
 import com.example.caffeinbody.database.Functions
@@ -97,7 +98,7 @@ class Survey1Activity  : AppCompatActivity() {
                 Log.e("tag", "나이: $age, 무게: $weight, 성별: $gender, 임신여부: $ispregnant, 추천카페인: $caffeine")
             }else{
                 Log.e("Survey1", "체중 없음")
-                binding.weightTV.visibility = 1
+                binding.weightTV.visibility = View.VISIBLE
             }
         }
 
