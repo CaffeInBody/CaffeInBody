@@ -17,6 +17,7 @@ import com.example.caffeinbody.DetailActivity.Companion.getMonth
 import com.example.caffeinbody.DetailActivity.Companion.getYear
 import com.example.caffeinbody.databinding.FragmentReportBinding
 import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
@@ -54,6 +55,9 @@ class ReportFragment:Fragment() {
         // Inflate the layout for this fragment
         setChartView(binding.root)
         initCalendarView()
+
+        initPieChart(binding.piechart)
+
         setCaffeineColorsDates(getMonth(), getYear())
 
         return binding.root
@@ -221,6 +225,10 @@ class ReportFragment:Fragment() {
         barChart.invalidate()
     }
 
+
+    private fun initPieChart(pieChart: PieChart){
+
+    }
     private fun initBarChart(barChart: BarChart) {
         //hiding the grey background of the chart, default false if not set
         barChart.setDrawGridBackground(false)

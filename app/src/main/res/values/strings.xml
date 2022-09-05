@@ -15,6 +15,7 @@
     <string name="message_from_watch">Message from watch</string>
     <string name="capability_changed">Capability changed</string>
     <string name="basicTime">5</string>
+    <string name="emoji">카페인을 잘 섭취하고 있어요! &#128522;</string>
     <string-array name="custom_weekdays">
         <item>SUN</item>
         <item>MON</item>
