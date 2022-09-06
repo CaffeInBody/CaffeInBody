@@ -75,7 +75,7 @@
         <entry key="app/src/main/res/font/font_custom.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/activity_caffeine_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1726027397260274" />
-        <entry key="app/src/main/res/layout/activity_drink_caffeine.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_drink_caffeine.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_drink_type.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_heartrate.xml" value="0.21376656690893545" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />

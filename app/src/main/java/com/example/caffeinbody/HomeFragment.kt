@@ -170,7 +170,7 @@ class HomeFragment : Fragment() {
             var leftCaffeine = calculateCaffeinLeft(remainCaf!!, nowTime + 24* minusDays() - registeredTime!!, halfTime, 0.5f)
             App.prefs.remainCafTmp = "%.1f".format(leftCaffeine).toFloat()
             //---------------섭취권고량 설정-----------------
-            //TODO 소현
+
             var servingsize = App.prefs.sensetivity?.toDouble()//나의 적정하루 섭취권고량
             Log.e("home", "caffeineLeft: $leftCaffeine, servingSize: $servingsize")
             if (servingsize != null) {

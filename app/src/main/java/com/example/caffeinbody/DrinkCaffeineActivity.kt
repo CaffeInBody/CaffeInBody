@@ -35,7 +35,6 @@ class DrinkCaffeineActivity : AppCompatActivity() {
     var arraySize = arrayOf<Int>(1,2,3)
     var resultInt = 100f
     var article : Drinks? = null
-    var caffeine:Int = 100 //샷
     var rangevalue:Int = 100 //샷
     var size:Int = 0
     private lateinit var db: DrinksDatabase
@@ -113,7 +112,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             override fun onPointsChanged(boxedPoints: BoxedVertical, value: Int) {
                 println(value)
                 rangevalue = value
-                resultInt = caffeine * value * arraySize[size] / 100f
+                resultInt = value * arraySize[size] / 100f
                 binding.textView7.setText((value.toDouble() / 100).toString()+"잔")
                 binding.result.setText(resultInt.toString()+"mg")
             }

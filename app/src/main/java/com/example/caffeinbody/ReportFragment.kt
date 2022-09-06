@@ -228,11 +228,11 @@ class ReportFragment:Fragment() {
 
     private fun initPieChart(pieChart: PieChart){
         //TODO 일주일 기준
-        //적정 섭취량에 맞게 잘 마시고 있으면 카페인을 잘 섭취하고 있어요
-        // 적정 섭취량을 넘었으면 다음부터는 조금만 마셔요
-        // 파이차트 백분율 기준 잘 마셨으면 만점, 적정 섭취량을 넘었을 때마다 감점
-        //TODO 데이터가 쌓였으면 binding.piecharttext visible = GONE
-        //TODO 반대로 데이터가 없으면 binding.piechart visible = GONE
+        //  적정 섭취량에 맞게 잘 마시고 있으면 카페인을 잘 섭취하고 있어요
+        //  적정 섭취량을 넘었으면 다음부터는 조금만 마셔요
+        //  파이차트 백분율 기준 잘 마셨으면 만점, 적정 섭취량을 넘었을 때마다 감점
+        //  데이터가 쌓였으면 binding.piecharttext visible = GONE
+        //  반대로 데이터가 없으면 binding.piechart visible = GONE
 
     }
 
