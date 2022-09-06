@@ -29,7 +29,8 @@
     </androidx.appcompat.widget.Toolbar>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -189,6 +190,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/cafe_shot_layout"
         android:orientation="horizontal">
 
         <TextView
@@ -223,47 +225,58 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+</LinearLayout>
+    </ScrollView>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp"
         android:orientation="horizontal">
-
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:orientation="vertical">
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="25dp"
             android:text="카페인 함량"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_gravity="center"
+            android:textColor="#666666"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/result"
+            style="@style/bold_16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:text="100mg"
+            android:text="1000mg"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintStart_toStartOf="@+id/textView12"
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/save"
             style="@style/bold_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginStart="10dp"
+
+            android:background="@drawable/roundcorner_rectangle"
+            android:backgroundTint="@color/brown"
+            android:text="등록하기"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/textView12"
+            app:layout_constraintTop_toTopOf="parent" />  </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/save"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:text="확인"
-        style="@style/bold_16dp"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:layout_marginVertical="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:background="@color/brown"/>
-</LinearLayout>
-    </ScrollView>
 </LinearLayout>

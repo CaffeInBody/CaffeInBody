@@ -113,7 +113,9 @@ class PlusDrinkActivity : AppCompatActivity() {
                         "해열·진통제",madeby,imgpath , true,false,true))
             }
 
-
+            val intent = Intent(this, CaffeineListActivity::class.java)
+            intent.putExtra("listnum",num)
+            startActivity(intent)
             finish()
         }
 

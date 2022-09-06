@@ -78,7 +78,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
                 else if (article!!.size?.size3 ==0 ) binding.size3.visibility = GONE
                 if(article!!.isCoffee) binding.shot.value =2
                 else binding.shot.value =0
-
+                if(!article!!.iscafe) binding.cafeShotLayout.visibility =GONE
                 setImg(article!!)
             }
             binding.size1.isChecked = true
