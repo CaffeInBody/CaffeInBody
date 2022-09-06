@@ -68,7 +68,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             db.drinksDao().selectiscafe(true).observe(this, Observer {
                 binding.caffeinList.adapter = caffeineadapter
                 Log.e("sortedList",it.toString())
-                //TODO 좋아요 기준 정렬
+                //TODO 좋아요 기준 정렬 즐겨찾기가 제일 위에 오도록
               //  var sortedList = datas.sortedByDescending { it.favorite}.reversed()
               ///////  Log.e("sortedList",sortedList.toString())
                 caffeineadapter.datas.addAll(it)
@@ -101,6 +101,8 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
     }
     override fun onClick(v: View?) {
         var checked=0
+        //TODO 이부분 왠지 필터 버튼 누를 때마다 텍스트는 잘 나오는데
+        //  이미지 몇개가 바로바로 잘 안나오는데 한 번 봐주세요
         datas.clear()
         when(v?.id){
             binding.starbucks.id -> {

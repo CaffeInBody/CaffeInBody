@@ -55,7 +55,7 @@ class ReportFragment:Fragment() {
         // Inflate the layout for this fragment
         setChartView(binding.root)
         initCalendarView()
-
+        initPersonal()
         initPieChart(binding.piechart)
 
         setCaffeineColorsDates(getMonth(), getYear())
@@ -227,7 +227,21 @@ class ReportFragment:Fragment() {
 
 
     private fun initPieChart(pieChart: PieChart){
+        //TODO 일주일 기준
+        //적정 섭취량에 맞게 잘 마시고 있으면 카페인을 잘 섭취하고 있어요
+        // 적정 섭취량을 넘었으면 다음부터는 조금만 마셔요
+        // 파이차트 백분율 기준 잘 마셨으면 만점, 적정 섭취량을 넘었을 때마다 감점
+        //TODO 데이터가 쌓였으면 binding.piecharttext visible = GONE
+        //TODO 반대로 데이터가 없으면 binding.piechart visible = GONE
 
+    }
+
+    private fun initPersonal(){
+        //TODO 현재 나이,상태 등 + 섭취습관(설문조사 내용 sharedpreference에 넣고 여기에 반영
+        //binding.textView3.text = App.prefs.age + " / " + App.prefs.gender + " / " + App.prefs
+        binding.awakenumber
+        binding.habitnumber
+        binding.tastenumber
     }
     private fun initBarChart(barChart: BarChart) {
         //hiding the grey background of the chart, default false if not set

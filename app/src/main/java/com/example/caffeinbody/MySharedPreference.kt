@@ -115,4 +115,9 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getFloat("halftime", 0f )
         set(value) = prefs.edit().putFloat("halftime", value!!).apply()
 
+    var gender: String?
+        get() = prefs.getString("gender", null)
+        set(value) = prefs.edit().putString("gender", value).apply()
+
+
 }

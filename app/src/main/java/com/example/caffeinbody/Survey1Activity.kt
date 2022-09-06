@@ -88,6 +88,7 @@ class Survey1Activity  : AppCompatActivity() {
                 //editor.apply()
 
                 App.prefs.age = age
+                App.prefs.gender = gender
                 App.prefs.isPregnant = ispregnant
 
                 val selectActivity = Survey2Activity()

@@ -17,6 +17,12 @@ class Functions() {
     fun addDrinksDatabaseStarbucks(db: DrinksDatabase){
         CoroutineScope(Dispatchers.IO).launch{
             db.drinksDao().insertAll(
+
+                //TODO 처리하기 어렵지 않게 넣을 수 있는 카페인 함량은 되도록 넣어주세요
+                //      아니면 브랜드별 샷의 카페임 함량, 용량별 샷 개수을 조사해주시거나
+                //      디카페인 / 콜드브루는 용량별로 추가해야하는걸로 아는데 iscoffee가 트루로 되어있어서 두번 처리해야함일
+                //      일반음료 이미지 추가
+
                 Drinks("롤린 민트 초코 콜드 브루", Size(355, 473, 591), Caffeine(131, 0, 0), "콜드브루커피", "스타벅스", "", true, true, false),
                 Drinks("나이트로 바닐라 크림", Size(355, 473, 591), Caffeine(232, 0, 0), "콜드브루커피", "스타벅스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490737/starbucks/star_nitro_vanilla_cream_ebypst.jpg", true, true, false),
                 Drinks("나이트로 콜드 브루", Size(355, 473, 591), Caffeine(245, 0, 0), "콜드브루커피", "스타벅스", "https://res.cloudinary.com/cafeinbody/image/upload/v1658490744/starbucks/star_nitro_cold_brew_j9ucjp.jpg", true, true, false),
