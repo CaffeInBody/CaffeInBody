@@ -48,14 +48,14 @@ class PlusDrinkActivity : AppCompatActivity() {
     val PERMISSION_Album = 101 // 앨범 권한 처리
     val REQUEST_IMAGE_CAPTURE = 1
     val REQUEST_GALLERY_TAKE = 2
-
+    var num:Int ?=null
     var currentPhotoPath: String? = null
     var bitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlusDrinkBinding.inflate(layoutInflater)
-
+        num= intent.getIntExtra("name",1)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         //    supportActionBar!!.setDisplayShowTitleEnabled(false)
@@ -98,10 +98,20 @@ class PlusDrinkActivity : AppCompatActivity() {
 
             val db = DrinksDatabase.getInstance(applicationContext)!!
             CoroutineScope(Dispatchers.IO).launch{
-                db.drinksDao().insert(Drinks(drinkname,
+                if(num==0) db.drinksDao().insert(Drinks(drinkname,
                     Size(0,0,0),
                     Caffeine(caffeine,0,0),
-                    "",madeby,imgpath , true,true,true))}
+                    "",madeby,imgpath , true,true,true))
+                else if (num ==1) db.drinksDao().insert(Drinks(drinkname,
+                    Size(0,0,0),
+                    Caffeine(caffeine,0,0),
+                    "",madeby,imgpath , true,false,true))
+                else if(num == 2)
+                    db.drinksDao().insert(Drinks(drinkname,
+                        Size(0,0,0),
+                        Caffeine(caffeine,0,0),
+                        "해열·진통제",madeby,imgpath , true,false,true))
+            }
 
 
             finish()

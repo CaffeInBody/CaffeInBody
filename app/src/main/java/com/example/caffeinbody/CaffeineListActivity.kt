@@ -27,6 +27,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var caffeineadapter: CaffeineAdapter
     private lateinit var db: DrinksDatabase
     var datas = mutableListOf<Drinks>()
+    var num:Int ?=null
 
     private val binding: ActivityCaffeineListBinding by lazy {
         ActivityCaffeineListBinding.inflate(
@@ -38,7 +39,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         var num= intent.getIntExtra("listnum",1)
-
+        //TODO 필터링 누르고 다시 전체화면 볼 수 있는 기능
 
         setSupportActionBar(binding.toolbar)
         //    supportActionBar!!.setDisplayShowTitleEnabled(false)
@@ -191,6 +192,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         }
         R.id.home-> {
             val intent = Intent(this, PlusDrinkActivity::class.java)
+            intent.putExtra("name", num)
             // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             // intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
