@@ -16,10 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 class CaffeineAdapter (private val context: Context, type:CaffeinCase) : RecyclerView.Adapter<CaffeineAdapter.ViewHolder>() {
@@ -43,8 +40,21 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
 
         val article : Drinks = datas.get(position)
         holder.bind(article)
-        holder.star.setOnCheckedChangeListener{ buttonView, isChecked ->
-           // updateFavorite(article,article.favorite, holder.star )
+        holder.star.setOnCheckedChangeListener{ buttonView, _ ->
+            CoroutineScope(Dispatchers.Main).launch {
+                val temp: Deferred<Boolean> = async(Dispatchers.IO) { // async 로 결과
+                    var db = DrinksDatabase.getInstance(context)!!// 를 반환
+
+                    if (article.favorite) { // 이미 즐겨찾기 되어있으면 삭제
+                        db!!.drinksDao().updateFavorite(!article.favorite,article.id)
+                        false
+                    } else { // 없으면 즐겨찾기 저장
+                        db!!.drinksDao().updateFavorite(!article.favorite,article.id)
+                        true
+                    }
+                }
+            }
+
 
         }
 
@@ -134,6 +144,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
 
         CoroutineScope(Dispatchers.Main).launch {
             CoroutineScope(Dispatchers.IO).async {
+
              if(boolean)db.drinksDao().updateFavorite(false,article.id)
              else if(!boolean) db.drinksDao().updateFavorite(true,article.id)
 

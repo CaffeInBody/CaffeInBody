@@ -18,9 +18,7 @@ class Functions() {
         CoroutineScope(Dispatchers.IO).launch{
             db.drinksDao().insertAll(
 
-                //TODO 처리하기 어렵지 않게 넣을 수 있는 카페인 함량은 되도록 넣어주세요
-                //      공차 - 점보 사이즈 카페인 https://pjhhh.tistory.com/623
-                //      아니면 브랜드별 샷의 카페임 함량, 용량별 샷 개수을 조사해주시거나
+                //TODO
                 //      디카페인 / 콜드브루는 용량별로 추가해야하는걸로 아는데 iscoffee가 트루로 되어있어서 두번 처리해야함일
                 //      일반음료 이미지 추가
 
