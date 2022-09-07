@@ -32,11 +32,15 @@ import java.util.*
 
 
 class DrinkCaffeineActivity : AppCompatActivity() {
+    var arrayCaf = arrayOf<Int>(1,2,3)
     var arraySize = arrayOf<Int>(1,2,3)
+    val brandshot = hashMapOf( "스타벅스" to 75.0f,"할리스" to 61.0f ,"투썸플레이스" to 88.5f,"이디야" to 103.0f ,"빽다방" to 118.5f,"더벤티" to 107.5f ,"공차" to 80f)
+    var shot:Int = 0
     var resultInt = 100f
     var article : Drinks? = null
     var rangevalue:Int = 100 //샷
     var size:Int = 0
+
     private lateinit var db: DrinksDatabase
 
     private val binding: ActivityDrinkCaffeineBinding by lazy{
@@ -58,15 +62,20 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         val name = intent.getIntExtra("name",0)
         binding.shot.minValue = 0
         binding.shot.maxValue = 12
+        binding.shot.wrapSelectorWheel = false
+
 
         db = DrinksDatabase.getInstance(applicationContext)!!
 
         CoroutineScope(Dispatchers.Main).launch {
             CoroutineScope(Dispatchers.IO).async {
                 article =  db.drinksDao().selectByID(name)
-                arraySize[0] = article!!.caffeine?.caffeine1?.toInt()!!
-                arraySize[1] = article!!.caffeine?.caffeine2?.toInt()!!
-                arraySize[2] = article!!.caffeine?.caffeine3?.toInt()!!
+                arrayCaf[0] = article!!.caffeine?.caffeine1!!
+                arrayCaf[1] = article!!.caffeine?.caffeine2!!
+                arrayCaf[2] = article!!.caffeine?.caffeine3!!
+                arraySize[0] = article!!.size?.size1!!
+                arraySize[1] = article!!.size?.size2!!
+                arraySize[2] = article!!.size?.size3!!
             }.await()
             runOnUiThread {
                 initUI(article!!)
@@ -75,9 +84,8 @@ class DrinkCaffeineActivity : AppCompatActivity() {
                     binding.radio.visibility = GONE
                 }
                 else if (article!!.size?.size3 ==0 ) binding.size3.visibility = GONE
-                if(article!!.isCoffee) binding.shot.value =2
-                else binding.shot.value =0
-                if(!article!!.iscafe) binding.cafeShotLayout.visibility =GONE
+                binding.shot.value =0
+                if(!article!!.iscafe ) binding.cafeShotLayout.visibility =GONE
                 setImg(article!!)
             }
             binding.size1.isChecked = true
@@ -86,25 +94,35 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         //음료 사이즈 선택
         binding.size1.setOnClickListener {
-            resultInt =  arraySize[0] * rangevalue /100f
+            resultInt =  arrayCaf[0] * rangevalue /100f
             size = 0
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size2.setOnClickListener {
-            resultInt = arraySize[1] * rangevalue /100f
+            if(arrayCaf[1] == 0) arrayCaf[1] = arrayCaf[0] * arraySize[1] / arraySize[0]
+            resultInt = arrayCaf[1] * rangevalue /100f
             size = 1
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size3.setOnClickListener {
-            resultInt = arraySize[2]* rangevalue /100f
+            if(arrayCaf[2] == 0) arrayCaf[2] = arrayCaf[1] * arraySize[2] / arraySize[1]
+            resultInt = arrayCaf[2] * rangevalue /100f
             size = 2
             binding.result.setText(resultInt.toString()+"mg")
         }
-        binding.shot.setOnValueChangedListener { numberPicker, i, i2 ->
-            resultInt += i2 * (article?.caffeine?.caffeine1?.toInt()!! / 2)
 
+
+        binding.shot.setOnValueChangedListener { numberPicker, i, i2 ->
+            shot = i
+            var shot = brandshot.getOrDefault(article?.madeBy, 75.0f)
+            Log.e("iiiii",i.toString()+i2)
+            if(i - i2 <= 0)
+                resultInt += shot
+            else resultInt -= shot
+
+            binding.result.setText(resultInt.toString()+"mg")
 
         }
         //용량 선택
@@ -112,7 +130,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             override fun onPointsChanged(boxedPoints: BoxedVertical, value: Int) {
                 println(value)
                 rangevalue = value
-                resultInt = value * arraySize[size] / 100f
+                resultInt = value * arrayCaf[size] / 100f
                 binding.textView7.setText((value.toDouble() / 100).toString()+"잔")
                 binding.result.setText(resultInt.toString()+"mg")
             }
@@ -236,3 +254,4 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
 
 }
+
