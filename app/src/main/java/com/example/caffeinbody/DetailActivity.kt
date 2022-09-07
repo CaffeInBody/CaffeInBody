@@ -5,13 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.caffeinbody.databinding.ActivityDetailBinding
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.*
-import com.github.mikephil.charting.formatter.IValueFormatter
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.utils.Utils
 import com.github.mikephil.charting.utils.ViewPortHandler
 import org.threeten.bp.LocalDate
 import org.threeten.bp.temporal.ChronoUnit
@@ -128,6 +129,7 @@ class DetailActivity : AppCompatActivity() {
         var nowTime = getTime()
 
         binding.textView11.setText(App.prefs.currentcaffeine + "mg")//얘도 같이 초기화됨
+        binding.textView2.setText(remainCaf.toString() + "mg")//얘도 같이 초기화됨
         if (remainCaf != 0f) {
             //Log.e("detail", "remainCaf: $remainCaf, nowdate: $nowDate, registeredDate: " + App.prefs.registeredDate)
             //var registeredT = App.prefs.registeredTime
@@ -158,6 +160,20 @@ class DetailActivity : AppCompatActivity() {
     private fun setWeekLine(lineChart: LineChart) {
         val lineData = LineData()
         val set1 = LineDataSet(lineChartData, "체내 남은 카페인 양")
+        set1.setDrawFilled(true)
+        set1.setColor(ContextCompat.getColor(this, R.color.brown))
+        set1.valueTextSize = 8f
+        set1.setCircleColor(ContextCompat.getColor(this, R.color.brown))
+        set1.setDrawCircleHole(false)
+        set1.circleSize = 2F
+        if (Utils.getSDKInt() >= 18) {
+            // fill drawable only supported on api level 18 and above
+            val drawable = ContextCompat.getDrawable(this, R.drawable.fade_all)
+            set1.fillDrawable = drawable
+        } else {
+            set1.fillColor = R.color.pink
+        }
+
         lineData.addDataSet(set1)
         lineChart.setData(lineData)
 

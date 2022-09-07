@@ -66,15 +66,19 @@
         <entry key="CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.25" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/btn_select.xml" value="0.1455" />
+        <entry key="app/src/main/res/drawable/fade.xml" value="0.121" />
+        <entry key="app/src/main/res/drawable/fade_all.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/home_back.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/icon_home.xml" value="0.133" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.138" />
+        <entry key="app/src/main/res/drawable/roundcorner_rectangle.xml" value="0.121" />
+        <entry key="app/src/main/res/drawable/roundcorner_rectangle2.xml" value="0.121" />
         <entry key="app/src/main/res/drawable/selected.xml" value="0.1455" />
         <entry key="app/src/main/res/drawable/stats_full.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/stats_progress.xml" value="0.1245" />
         <entry key="app/src/main/res/font/font_custom.xml" value="0.23854166666666668" />
         <entry key="app/src/main/res/layout/activity_caffeine_list.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.1726027397260274" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_drink_caffeine.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_drink_type.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_heartrate.xml" value="0.21376656690893545" />
