@@ -16,9 +16,10 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.caffeinbody.databinding.ActivityMainBinding
 import com.google.android.gms.wearable.Wearable
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import java.util.*
 
 
-class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener  {
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private val dataClient by lazy { Wearable.getDataClient(this) }
     private val messageClient by lazy { Wearable.getMessageClient(this) }
     private val capabilityClient by lazy { Wearable.getCapabilityClient(this) }
@@ -30,12 +31,34 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         )
     }
 
-    private val receiver = object: BroadcastReceiver() {
+    private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             if (Intent.ACTION_DATE_CHANGED == intent!!.action) {
-                App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
+                val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+//                App.prefs.weekCafJson += App.prefs.todayCaf.toString()
+                if (dayOfWeek == 1) {  // 일요일
+                    App.prefs.weekCafJson =
+                        App.prefs.weekCafJson + ",\"Sat\":" + "\"" + App.prefs.todayCaf.toString() + "\""
+                } else if (dayOfWeek == 2) {
+                    App.prefs.weekCafJson =
+                        App.prefs.weekCafJson + ",\"Sun\":" + "\"" + App.prefs.todayCaf.toString() + "\""
+                } else if (dayOfWeek == 3) {
+                    App.prefs.weekCafJson = "\"Mon\":" + "\"" + App.prefs.todayCaf.toString() + "\""
+                } else if (dayOfWeek == 4) {
+                    App.prefs.weekCafJson =
+                        App.prefs.weekCafJson + ",\"Tue\":" + "\"" + App.prefs.todayCaf.toString() + "\""
+                } else if (dayOfWeek == 5) {
+                    App.prefs.weekCafJson =
+                        App.prefs.weekCafJson + ",\"Wed\":" + "\"" + App.prefs.todayCaf.toString() + "\""
+                } else if (dayOfWeek == 6) {
+                    App.prefs.weekCafJson =
+                        App.prefs.weekCafJson + ",\"Thu\":" + "\"" + App.prefs.todayCaf.toString() + "\""
+                } else if (dayOfWeek == 7) {
+                    App.prefs.weekCafJson =
+                        App.prefs.weekCafJson + ",\"Fri\":" + "\"" + App.prefs.todayCaf.toString() + "\""
+                }
                 App.prefs.todayCaf = 0f
-                Log.e("AlarmCheck", "리셋완료"+App.prefs.todayCaf+" "+App.prefs.weekCafJson)
+                Log.e("AlarmCheck", "리셋완료" + App.prefs.todayCaf + " " + App.prefs.weekCafJson)
             }
         }
     }
@@ -52,7 +75,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         // HOME as default tab
         supportFragmentManager.beginTransaction().add(
             R.id.frame_layout,
-            HomeFragment(),"home"
+            HomeFragment(), "home"
         ).commit()
         // Launch app with HOME selected as default start tab
 
@@ -73,6 +96,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
 
     }
+
     fun Context.isServiceRunning(serviceClass: Class<*>): Boolean {
         val activityManager = getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
 
@@ -84,21 +108,22 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
         return false
     }
+
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
 
-        when(p0.itemId){
-            R.id.menu_name ->{
+        when (p0.itemId) {
+            R.id.menu_name -> {
                 val fragmentA = HomeFragment()
-                transaction.replace(R.id.frame_layout,fragmentA, "HOME")
+                transaction.replace(R.id.frame_layout, fragmentA, "HOME")
             }
             R.id.menu_decaf -> {
                 val fragmentB = SettingFragment()
-                transaction.replace(R.id.frame_layout,fragmentB, "CHAT")
+                transaction.replace(R.id.frame_layout, fragmentB, "CHAT")
             }
             R.id.menu_report -> {
                 val fragmentC = ReportFragment()
-                transaction.replace(R.id.frame_layout,fragmentC, "MY")
+                transaction.replace(R.id.frame_layout, fragmentC, "MY")
             }
 
 
@@ -108,11 +133,21 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         transaction.commit()
 
         return true
-    }}
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        var filter = IntentFilter()
+        filter.addAction(Intent.ACTION_DATE_CHANGED)
+        registerReceiver(receiver, filter)
+        Log.e("receiver", "자정 receiver")
+    }
+}
     ///////////리스너 등록/제거 부분
     /*override fun onResume() {
         super.onResume()
-        dataClient.addListener(clientDataViewModel)
+        /*dataClient.addListener(clientDataViewModel)
         messageClient.addListener(clientDataViewModel)
         capabilityClient.addListener(
             clientDataViewModel,
@@ -129,13 +164,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 Log.e("MainActivity", "Could not add capability: $exception")
             }
         }
-        var filter = IntentFilter()
-        filter.addAction(Intent.ACTION_DATE_CHANGED)
-        registerReceiver(receiver, filter)
-        Log.e("receiver", "자정 receiver")
-    }
+    }*/
 
-    override fun onPause() {
+    /*override fun onPause() {
         super.onPause()
         dataClient.removeListener(clientDataViewModel)
         messageClient.removeListener(clientDataViewModel)

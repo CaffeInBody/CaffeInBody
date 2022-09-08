@@ -89,81 +89,21 @@ class ReportFragment:Fragment() {
 
         Log.e("time: 요일", weekDay)
         Log.e("curTime: 시간", curTime)
+    }
 
-        when(weekDay){
-            "월" -> {
-                if (curTime <= "23:59:50") {
-                    //App.prefs.weekCafJson.set(0,App.prefs.todayCaf.toString())
-                    weekCafArray.set(0, App.prefs.todayCaf?.toInt())
-                    Log.e("mon", App.prefs.weekCafJson.toString())
-                }
-                else {
-                    App.prefs.weekCafJson= arrayListOf(weekCafArray.toString())
-                    Log.e("weekCafJson", App.prefs.weekCafJson.toString())
-                    App.prefs.todayCaf = 0f
-                }
-                App.prefs.weekCafJson
+    fun saveWeekCafJson(date: Int, caffeine: Float, week: Int){
+        val prefs = App.prefs.weekCafJson
+        var tmpJsonRead = JSONArray()
+
+        if (prefs == null){
+            val tmpJsonObjectSave = JSONObject()
+            for (i in 0..6){
+                if (date - 1==i)
+                    tmpJsonRead.put(caffeine)
+                else
+                    tmpJsonRead.put(0)
             }
-            "화" -> {
-                if (curTime <= "23:59:30") {
-                    weekCafArray.set(1, App.prefs.todayCaf?.toInt())
-                    Log.e("tue", weekCafArray.toString())
-                }
-                else {
-                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0f
-                }
-            }
-            "수" -> {
-                if (curTime <= "23:59:30") {
-                    weekCafArray.set(2, App.prefs.todayCaf?.toInt())
-                    Log.e("wed", weekCafArray.toString())
-                }
-                else {
-                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0f
-                }
-            }
-            "목" -> {
-                if (curTime <= "23:59:30") {
-                    weekCafArray.set(3, App.prefs.todayCaf?.toInt())
-                    Log.e("thu", weekCafArray.toString())
-                }
-                else {
-                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0f
-                }
-            }
-            "금" -> {
-                if (curTime <= "23:59:30") {
-                    weekCafArray.set(4, App.prefs.todayCaf?.toInt())
-                    Log.e("fri", weekCafArray.toString())
-                }
-                else {
-                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0f
-                }
-            }
-            "토" -> {
-                if (curTime <= "23:59:30") {
-                    weekCafArray.set(5, App.prefs.todayCaf?.toInt())
-                    Log.e("sat", weekCafArray.toString())
-                }
-                else {
-                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0f
-                }
-            }
-            "일" -> {
-                if (curTime <= "23:59:30") {
-                    weekCafArray.set(6, App.prefs.todayCaf?.toInt())
-                    Log.e("sun", weekCafArray.toString())
-                }
-                else {
-                    App.prefs.weekCafJson.add(App.prefs.todayCaf.toString())
-                    App.prefs.todayCaf = 0f
-                }
-            }
+            tmpJsonObjectSave.put(getMonth().toString(), tmpJsonRead)
         }
     }
 

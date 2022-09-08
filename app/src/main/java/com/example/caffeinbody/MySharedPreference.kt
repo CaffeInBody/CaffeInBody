@@ -51,33 +51,37 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getString("dayCaffeine", null)
         set(value) = prefs.edit().putString("dayCaffeine", value!!).apply()
 
-    var weekCafJson: ArrayList<String>//요일별 카페인 섭취 수치
-        get() {
-            val json = prefs.getString("weekCafJson", null)
-            val weekCaf = ArrayList<String>()
-            if (json != null) {
-                try {
-                    val jsonArray = JSONArray(json)
-                    for (i in 0 until jsonArray.length()) weekCaf.add(jsonArray.optString(i))
-                } catch (e: JSONException) {
-                    e.printStackTrace()
-                }
-            }
-            return weekCaf
-        }
-        set(values) {
-            val editor = prefs.edit()
-            val jsonArray = JSONArray()
-            for (value in values) {
-                jsonArray.put(value)
-            }
-            if (values.isNotEmpty()) {
-                editor.putString("weekCafJson", jsonArray.toString())
-            } else {
-                editor.putString("weekCafJson", null)
-            }
-            editor.apply()
-        }
+//    var weekCafJson: ArrayList<String>//요일별 카페인 섭취 수치
+//        get() {
+//            val json = prefs.getString("weekCafJson", null)
+//            val weekCaf = ArrayList<String>()
+//            if (json != null) {
+//                try {
+//                    val jsonArray = JSONArray(json)
+//                    for (i in 0 until jsonArray.length()) weekCaf.add(jsonArray.optString(i))
+//                } catch (e: JSONException) {
+//                    e.printStackTrace()
+//                }
+//            }
+//            return weekCaf
+//        }
+//        set(values) {
+//            val editor = prefs.edit()
+//            val jsonArray = JSONArray()
+//            for (value in values) {
+//                jsonArray.put(value)
+//            }
+//            if (values.isNotEmpty()) {
+//                editor.putString("weekCafJson", jsonArray.toString())
+//            } else {
+//                editor.putString("weekCafJson", null)
+//            }
+//            editor.apply()
+//        }
+
+    var weekCafJson: String?//월별 카페인 섭취 수치
+    get() = prefs.getString("weekCafJson", null)
+        set(value) = prefs.edit().putString("weekCafJson", value!!).apply()
 
     var monthCafJson: String?//월별 카페인 섭취 수치
         get() = prefs.getString("monthCafJson", null)
