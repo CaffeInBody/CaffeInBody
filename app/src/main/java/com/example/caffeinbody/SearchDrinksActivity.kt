@@ -3,6 +3,7 @@ package com.example.caffeinbody
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -31,6 +32,9 @@ class SearchDrinksActivity: AppCompatActivity() {
 
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
 
         caffeineadapter = CaffeineAdapter(this,CaffeinCase.LARGE)
         binding.caffeinList.adapter = caffeineadapter
@@ -103,5 +107,18 @@ class SearchDrinksActivity: AppCompatActivity() {
         caffeineadapter.datas.clear()
         caffeineadapter.datas.addAll(datas)
         caffeineadapter.notifyDataSetChanged()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        android.R.id.home -> {
+            finish()
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
     }
 }
