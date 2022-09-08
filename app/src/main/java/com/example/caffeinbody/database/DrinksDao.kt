@@ -17,10 +17,10 @@ interface DrinksDao {
     @Delete
     fun delete(drink: Drinks)
 
-    @Query("SELECT * FROM Drinks")
+    @Query("SELECT * FROM Drinks order by favorite desc, madeBy asc, drinkName asc")
     fun getAll(): LiveData<List<Drinks>>
 
-    @Query("select * from Drinks where madeBy like :something")
+    @Query("select * from Drinks where madeBy like :something order by favorite desc, madeBy asc, drinkName asc")
     fun selectDrinkMadeBy(something: String): List<Drinks>
 
 
@@ -31,13 +31,13 @@ interface DrinksDao {
     @Query("select count(*) from Drinks")
     fun selectCount(): Int
 
-    @Query("select * from Drinks where drinkName like :something")
+    @Query("select * from Drinks where drinkName like :something order by favorite desc, madeBy asc, drinkName asc")
     fun selectDrinkName(something: String): List<Drinks>
 
-    @Query("select * from Drinks where category like :something")
+    @Query("select * from Drinks where category like :something order by favorite desc, madeBy asc, drinkName asc")
     fun selectDrinkCategory(something: String): List<Drinks>
 
-    @Query("select * from Drinks where category like :something")
+    @Query("select * from Drinks where category like :something order by favorite desc, madeBy asc, drinkName asc")
     fun getDrinkCategory(something: String): LiveData<List<Drinks>>
 
     @Query("select * from Drinks where iscafe like :something")
