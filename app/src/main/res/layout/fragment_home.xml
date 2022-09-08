@@ -62,7 +62,7 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"
                 android:textColor="@color/pink"
-                android:textSize="16dp"
+                android:textSize="15dp"
                 android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
 
@@ -280,7 +280,7 @@
         android:layout_height="wrap_content"
         android:clipToPadding="false"
 
-        android:padding="20dp"
+        android:padding="30dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -290,20 +290,21 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/checkWatchBtn"
-            android:layout_width="240dp"
+            android:layout_width="230dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:background="@drawable/roundcorner_rectangle"
             android:backgroundTint="@color/brown"
 
-            android:orientation="horizontal"
-
             app:cardCornerRadius="50dp">
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
                 android:layout_marginStart="32dp"
                 android:text="워치로 검사하기"
                 android:textColor="@color/white"
@@ -314,12 +315,12 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_gravity="center|end"
+                android:layout_gravity="center"
                 android:layout_marginEnd="32dp"
-
+                android:layout_marginStart="12dp"
                 android:background="@drawable/icon_watch"
                 android:backgroundTint="@color/white"
-                android:padding="10dp" />
+                android:padding="10dp" /></LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -327,7 +328,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="15dp"
             android:background="@drawable/roundcorner_rectangle"
 
             android:padding="10dp"

@@ -86,6 +86,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
                 else if (article!!.size?.size3 ==0 ) binding.size3.visibility = GONE
                 binding.shot.value =0
                 if(!article!!.iscafe ) binding.cafeShotLayout.visibility =GONE
+                if(article!!.category == "해열·진통제") binding.mountlayout.visibility = GONE
                 setImg(article!!)
             }
             binding.size1.isChecked = true

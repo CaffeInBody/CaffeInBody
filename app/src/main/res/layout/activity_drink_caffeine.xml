@@ -122,6 +122,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/mountlayout"
         android:layout_height="wrap_content">
 
         <TextView
@@ -231,7 +232,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
         android:orientation="horizontal">
