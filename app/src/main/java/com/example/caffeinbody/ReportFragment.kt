@@ -189,6 +189,8 @@ class ReportFragment:Fragment() {
         //  데이터가 쌓였으면 binding.piecharttext visible = GONE
         //  반대로 데이터가 없으면 binding.piechart visible = GONE
 
+        if(App.prefs.moreThanSensitivity==null) App.prefs.moreThanSensitivity="1"
+
         if(App.prefs.moreThanSensitivity!=null) {
             for (i in weekCafArray) { // 1일 최대 섭취권고량 이상 마신 경우 10점 감점
                 if (i >= App.prefs.dayCaffeine!!.toFloat())
@@ -196,7 +198,7 @@ class ReportFragment:Fragment() {
             }
             Log.e("subPoint", subPoint.toString())
 
-            subPoint += 2 * (App.prefs.moreThanSensitivity!!.length)// 1회 권고량 or 현재기준 섭취가능 카페인량 이상 마신 경우 2점씩 감점
+            subPoint += 2 * (App.prefs.moreThanSensitivity!!.length-1)// 1회 권고량 or 현재기준 섭취가능 카페인량 이상 마신 경우 2점씩 감점
             Log.e("subPoint2", subPoint.toString())
 
             val score = 100-subPoint
@@ -235,15 +237,16 @@ class ReportFragment:Fragment() {
             else if(score in 70..89) binding.textView7.text = "조금만 더 노력해볼까요? 😉"
             else if(score in 50..69) binding.textView7.text = "다음 주에는 건강한 섭취습관을 갖도록 해봐요.😐"
             else if(score in 0..49) binding.textView7.text = "이대로는 건강에 위협이 될 수 있어요.😯"
-
-            if (weekCafArray == { 0 }) {
-                binding.piecharttext.visibility = View.VISIBLE
-                binding.piechart.visibility = View.INVISIBLE
-            } else {
-                binding.piecharttext.visibility = View.INVISIBLE
-                binding.piechart.visibility = View.VISIBLE
-            }
         }
+
+        if (weekCafArray == { 0 }) {
+            binding.piecharttext.visibility = View.VISIBLE
+            binding.piechart.visibility = View.INVISIBLE
+        } else {
+            binding.piecharttext.visibility = View.INVISIBLE
+            binding.piechart.visibility = View.VISIBLE
+        }
+
 
     }
 
