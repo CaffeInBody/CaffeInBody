@@ -39,6 +39,9 @@ class Survey2Activity  : AppCompatActivity() {
             layoutInflater
         )
     }
+    var habitnumber = 0
+    var awakenumber = 0
+    var tastenumber = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +61,42 @@ class Survey2Activity  : AppCompatActivity() {
 
         binding.progressBar.incrementProgressBy(33)
 
+        binding.checkBox.setOnCheckedChangeListener{compoundButton, b ->
+            if(binding.checkBox.isChecked) question[0]=1
+            else question[0]=0
+            Log.e("ch1","ch1")
+        }
+        binding.checkBox2.setOnCheckedChangeListener{compoundButton, b ->
+            if(binding.checkBox2.isChecked) question[1]=1
+            else question[1]=0
+        }
+        binding.checkBox3.setOnCheckedChangeListener{compoundButton, b ->
+            if(binding.checkBox3.isChecked) question[2]=1
+            else question[2]=0
+        }
+        binding.checkBox4.setOnCheckedChangeListener{compoundButton, b ->
+            if(binding.checkBox4.isChecked) question[3]=1
+            else question[3]=0
+        }
+        binding.checkBox5.setOnCheckedChangeListener{compoundButton, b ->
+            if(binding.checkBox5.isChecked) question[4]=1
+            else question[4]=0
+        }
+        binding.checkBox6.setOnCheckedChangeListener{compoundButton, b ->
+            if(binding.checkBox6.isChecked) question[5]=1
+            else question[5]=0
+        }
+
 
         binding.buttonNext.setOnClickListener {
+            awakenumber = question[1]+question[3]+question[4]
+            habitnumber = question[0]+question[5]
+            tastenumber = question[2]
+
+            App.prefs.awakenumber = awakenumber
+            App.prefs.habitnumber = habitnumber
+            App.prefs.tastenumber = tastenumber
+
             val selectActivity =  Survey3Activity()
             val intent = Intent(this, selectActivity::class.java)
             intent.putExtra("caffeine", caffeine)
@@ -77,8 +114,10 @@ class Survey2Activity  : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    inner class CheckBoxListener: View.OnClickListener {
+
+    /*inner class CheckBoxListener: View.OnClickListener {
         override fun onClick(v:View?){
+
             when(v?.id){
                 binding.checkBox.getId() -> {
                     if(binding.checkBox.isChecked){
@@ -114,9 +153,8 @@ class Survey2Activity  : AppCompatActivity() {
                 else ->
                 Log.e("none", "")
             }
-
         }
-    }
+    }*/
 
 
 

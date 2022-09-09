@@ -156,11 +156,7 @@ class HomeFragment : Fragment() {
                 binding.condition.setText("더 이상은 위험해요!\n카페인 부작용이 건강을 위협하고 있어요.")
             }
         }
-        else{
-            binding.condition.setText("오늘도 건강한 카페인 섭취를 실천해봐요.")
-        }
-
-        if(todayCaf!!>=App.prefs.dayCaffeine!!.toFloat()*0.9 &&
+        else if(todayCaf!!>=App.prefs.dayCaffeine!!.toFloat()*0.9 &&
             todayCaf!!<App.prefs.dayCaffeine!!.toFloat()){
             binding.condition.setText("이 정도가 적당해요!\n오늘은 여기까지 마시고 건강을 지키세요")
         }

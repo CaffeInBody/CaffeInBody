@@ -41,7 +41,7 @@ class ReportFragment:Fragment() {
             layoutInflater
         )
     }
-    private var weekCafArray : ArrayList<Int?> = arrayListOf(0,0,0,0,0,0,0)
+    private var weekCafArray : Array<Float> = Array(7){0f}
     private val nowTime = Calendar.getInstance().getTime()
     private val weekdayFormat = SimpleDateFormat("EE", Locale.getDefault())
     private val weekDay = weekdayFormat.format(nowTime)
@@ -135,9 +135,28 @@ class ReportFragment:Fragment() {
 
         barChart.setScaleEnabled(false) //Zoom In/Out
 
-        val valueList = ArrayList<Int?>()
+        val valueList = ArrayList<Float?>()
         val entries: ArrayList<BarEntry> = ArrayList()
         val title = "요일별 카페인 섭취량"
+        val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+
+        if(App.prefs.monCaf!=0f) weekCafArray[0] = App.prefs.monCaf!!
+        if(App.prefs.tueCaf!=0f) weekCafArray[1] = App.prefs.tueCaf!!
+        if(App.prefs.wedCaf!=0f) weekCafArray[2] = App.prefs.wedCaf!!
+        if(App.prefs.thuCaf!=0f) weekCafArray[3] = App.prefs.thuCaf!!
+        if(App.prefs.friCaf!=0f) weekCafArray[4] = App.prefs.friCaf!!
+        if(App.prefs.satCaf!=0f) weekCafArray[5] = App.prefs.satCaf!!
+        if(App.prefs.sunCaf!=0f) weekCafArray[6] = App.prefs.sunCaf!!
+
+        when(dayOfWeek) {
+            2 -> weekCafArray[0] = App.prefs.todayCaf!!
+            3 -> weekCafArray[1] = App.prefs.todayCaf!!
+            4 -> weekCafArray[2] = App.prefs.todayCaf!!
+            5 -> weekCafArray[3] = App.prefs.todayCaf!!
+            6 -> weekCafArray[4] = App.prefs.todayCaf!!
+            7 -> weekCafArray[5] = App.prefs.todayCaf!!
+            1 -> weekCafArray[6] = App.prefs.todayCaf!!
+        }
 
         for (i in 0..6) {
             //여기에 요일별 카페인 수치 들어감
@@ -145,12 +164,6 @@ class ReportFragment:Fragment() {
             Log.e("weekCafArray", weekCafArray.toString())
             Log.e("weekCafJson", App.prefs.weekCafJson.toString())
             Log.e("dayCaffeine", App.prefs.todayCaf.toString())
-//            if (App.prefs.todayCaf==null){
-//                valueList.add(0)
-//            }
-//            else {
-//                valueList.add(App.prefs.todayCaf)
-//            }
         }
 
 
@@ -177,11 +190,27 @@ class ReportFragment:Fragment() {
     }
 
     private fun initPersonal(){
+        var age = "나이"
+        var gender = "성별"
+        var isPregnant = "임신여부"
         //TODO 현재 나이,상태 등 + 섭취습관(설문조사 내용 sharedpreference에 넣고 여기에 반영
-        //binding.textView3.text = App.prefs.age + " / " + App.prefs.gender + " / " + App.prefs
-        binding.awakenumber
-        binding.habitnumber
-        binding.tastenumber
+        when(App.prefs.age){
+            "minor" -> age = "미성년자"
+            "adult" -> age = "성인"
+            "senior" -> age = "노인"
+        }
+        when(App.prefs.gender){
+            "male" -> gender = "남성"
+            "female" -> gender = "여성"
+        }
+        when(App.prefs.isPregnant){
+            true -> isPregnant = "임신 중"
+            false -> isPregnant = "임신하지 않음"
+        }
+        binding.textView3.text = age + " / " + gender + " / " + isPregnant
+        binding.awakenumber.text = App.prefs.awakenumber.toString()
+        binding.habitnumber.text = App.prefs.habitnumber.toString()
+        binding.tastenumber.text = App.prefs.tastenumber.toString()
     }
     private fun initBarChart(barChart: BarChart) {
         //hiding the grey background of the chart, default false if not set

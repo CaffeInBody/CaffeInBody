@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.caffeinbody.databinding.ActivityMainBinding
 import com.google.android.gms.wearable.Wearable
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.json.JSONArray
+import org.json.JSONObject
 import java.util.*
 
 
@@ -33,31 +35,32 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            if (Intent.ACTION_DATE_CHANGED == intent!!.action) {
+            val jsonObject = JSONObject()
+            if (Intent.ACTION_DATE_CHANGED == intent!!.action) {    // 날짜가 바뀌면 todayCaf를 weekCafJson에 붙여주고 0으로 초기화한다.
                 val dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-//                App.prefs.weekCafJson += App.prefs.todayCaf.toString()
                 if (dayOfWeek == 1) {  // 일요일
-                    App.prefs.weekCafJson =
-                        App.prefs.weekCafJson + ",\"Sat\":" + "\"" + App.prefs.todayCaf.toString() + "\""
-                } else if (dayOfWeek == 2) {
-                    App.prefs.weekCafJson =
-                        App.prefs.weekCafJson + ",\"Sun\":" + "\"" + App.prefs.todayCaf.toString() + "\""
-                } else if (dayOfWeek == 3) {
-                    App.prefs.weekCafJson = "\"Mon\":" + "\"" + App.prefs.todayCaf.toString() + "\""
-                } else if (dayOfWeek == 4) {
-                    App.prefs.weekCafJson =
-                        App.prefs.weekCafJson + ",\"Tue\":" + "\"" + App.prefs.todayCaf.toString() + "\""
-                } else if (dayOfWeek == 5) {
-                    App.prefs.weekCafJson =
-                        App.prefs.weekCafJson + ",\"Wed\":" + "\"" + App.prefs.todayCaf.toString() + "\""
-                } else if (dayOfWeek == 6) {
-                    App.prefs.weekCafJson =
-                        App.prefs.weekCafJson + ",\"Thu\":" + "\"" + App.prefs.todayCaf.toString() + "\""
-                } else if (dayOfWeek == 7) {
-                    App.prefs.weekCafJson =
-                        App.prefs.weekCafJson + ",\"Fri\":" + "\"" + App.prefs.todayCaf.toString() + "\""
+                    App.prefs.satCaf = App.prefs.todayCaf
+                } else if (dayOfWeek == 2) { // 월요일
+                    App.prefs.sunCaf = App.prefs.todayCaf
+                    App.prefs.monCaf = 0f
+                    App.prefs.tueCaf = 0f
+                    App.prefs.wedCaf = 0f
+                    App.prefs.thuCaf = 0f
+                    App.prefs.friCaf = 0f
+                    App.prefs.satCaf = 0f
+                } else if (dayOfWeek == 3) { // 화요일
+                    App.prefs.monCaf = App.prefs.todayCaf
+                } else if (dayOfWeek == 4) { // 수요일
+                    App.prefs.tueCaf = App.prefs.todayCaf
+                } else if (dayOfWeek == 5) { // 목요일
+                    App.prefs.wedCaf = App.prefs.todayCaf
+                } else if (dayOfWeek == 6) { // 금요일
+                    App.prefs.thuCaf = App.prefs.todayCaf
+                } else if (dayOfWeek == 7) { // 토요일
+                    App.prefs.friCaf = App.prefs.todayCaf
                 }
                 App.prefs.todayCaf = 0f
+//                App.prefs.weekCafJson = "{\"weekCaf\":"+jsonObject.toString()+"}"
                 Log.e("AlarmCheck", "리셋완료" + App.prefs.todayCaf + " " + App.prefs.weekCafJson)
             }
         }
