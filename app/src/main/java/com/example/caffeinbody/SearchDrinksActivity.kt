@@ -27,9 +27,6 @@ class SearchDrinksActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //TODO 다른 페이지들처럼 툴바 만들어서, 뒤로가기 버튼 추가하기
-        //TODO ui 부분 margin 좀 양옆으로 20dp씩이라도 띄워주세요 edittext랑 textview 글자 높이 통일시키기
-
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)

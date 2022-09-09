@@ -23,6 +23,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
     var type: CaffeinCase? = type
     var datas = mutableListOf<Drinks>()
     var style: Int? = null
+    lateinit var contextParent: Context
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,22 +39,33 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val article : Drinks = datas.get(position)
+        val article : Drinks = datas.get(position)//한 번에 6개씩 가져오는거였어
+        Log.e("반복", "$position" + article.madeBy)
         holder.bind(article)
-        holder.star.setOnCheckedChangeListener{ buttonView, _ ->
+
+        holder.star.setOnClickListener{
             CoroutineScope(Dispatchers.Main).launch {
                 val temp: Deferred<Boolean> = async(Dispatchers.IO) { // async 로 결과
+                    var int = 0
                     var db = DrinksDatabase.getInstance(context)!!// 를 반환
 
+                    Log.e("da", article.favorite.toString() + article.toString())
                     if (article.favorite) { // 이미 즐겨찾기 되어있으면 삭제
                         db!!.drinksDao().updateFavorite(!article.favorite,article.id)
+                        val result = db.drinksDao().selectOne(article.drinkName)
+                        Log.e("CaffeineAdapter2", result.favorite.toString() + result.toString())
+                        //sortDb(article.madeBy)
                         false
                     } else { // 없으면 즐겨찾기 저장
                         db!!.drinksDao().updateFavorite(!article.favorite,article.id)
+                        val result = db.drinksDao().selectOne(article.drinkName)
+                        Log.e("CaffeineAdapter3", result.favorite.toString() + result.toString())
+                        //sortDb(article.madeBy)
                         true
                     }
                 }
             }
+            //notifyDataSetChanged()
 
 
         }
@@ -101,17 +113,19 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
             }
 
             if (article.imgurl.startsWith("https:")) {
+                //Log.e("CaffeineAdapter", "1" + article.toString())
                 Glide.with(itemView).load(article.imgurl).placeholder(R.drawable.logo)
                     .override(500).into(img)
 
             } else if(article.imgurl.startsWith("$cacheDir/")){
-
+                //Log.e("CaffeineAdapter", "2" + article.toString())
                 val bm = BitmapFactory.decodeFile(article.imgurl)
                 Glide.with(itemView).load(bm).placeholder(R.drawable.logo)
                     .override(600).into(img)
 
-                }
+            }
             else {
+                //Log.e("CaffeineAdapter", "3" + article.toString())
                 if (article.madeBy == "스타벅스") Glide.with(itemView)
                     .load(R.drawable.starbucks_logo).override(250).into(logo)
                 else if (article.madeBy == "이디야") Glide.with(itemView)
@@ -138,25 +152,27 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
 
     }
 
-    fun updateFavorite(article: Drinks , boolean: Boolean, star : ToggleButton){
-        //TODO 좋아요버튼
-        var db = DrinksDatabase.getInstance(context)!!
+    /*fun sortDb(madeby: String){
+        val db = DrinksDatabase.getInstance(context)!!
 
         CoroutineScope(Dispatchers.Main).launch {
-            CoroutineScope(Dispatchers.IO).async {
-
-             if(boolean)db.drinksDao().updateFavorite(false,article.id)
-             else if(!boolean) db.drinksDao().updateFavorite(true,article.id)
-
-                var find =db.drinksDao().selectDrinkName(article.drinkName)
-                star?.isChecked = article.favorite == true
-                Log.e("dd",find[0].favorite.toString())
+            val makers = CoroutineScope(Dispatchers.IO).async {
+                db.drinksDao().selectDrinkMadeBy(madeby)
             }.await()
 
+            for (maker in makers){
+                Log.e("maker", "selectDrinkName: " + maker)
+                //   datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
+                if(maker.iscafe) datas.add(maker)
 
             }
+            Log.e("ba", datas[0].madeBy)
 
-        }
+            datas.clear()
+            datas.addAll(datas)
+            Log.e("sorted", datas.toString())
+            notifyDataSetChanged()
+        }*/
 
 
 }

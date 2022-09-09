@@ -20,7 +20,8 @@ interface DrinksDao {
     @Query("SELECT * FROM Drinks order by favorite desc, madeBy asc, drinkName asc")
     fun getAll(): LiveData<List<Drinks>>
 
-    @Query("select * from Drinks where madeBy like :something order by favorite desc, madeBy asc, drinkName asc")
+    /////////////////////////
+    @Query("select * from Drinks where madeBy like :something order by favorite desc, drinkName asc")
     fun selectDrinkMadeBy(something: String): List<Drinks>
 
 
@@ -39,9 +40,9 @@ interface DrinksDao {
 
     @Query("select * from Drinks where category like :something order by favorite desc, madeBy asc, drinkName asc")
     fun getDrinkCategory(something: String): LiveData<List<Drinks>>
-
-    @Query("select * from Drinks where iscafe like :something")
-    fun selectiscafe(something: Boolean): LiveData<List<Drinks>>
+//////////////
+    @Query("select * from Drinks where iscafe like :something order by favorite desc, madeBy asc, drinkName asc")
+    fun selectiscafe(something: Boolean): List<Drinks>
 
     @Query("select * from Drinks where caffeine_caffeine1 BETWEEN 1 AND :something")
     fun recommendcaffeine(something: Double): List<Drinks>
@@ -50,11 +51,24 @@ interface DrinksDao {
     fun recommendnoncaffeine(): List<Drinks>
 
     @Query("select * from Drinks where favorite = :something")//favorite 항목만 반환(true/false)
-    fun selectFavorite(something: Boolean): LiveData<List<Drinks>>
+    fun selectFavorite(something: Boolean): List<Drinks>
 
+
+
+
+    //*************************
     @Query("update Drinks set favorite = :something where id = :name")//favorite 항목만 변경(true/false)
     fun updateFavorite(something: Boolean, name: Int)
 
+
     @Query("select * from Drinks where drinkName like :name and madeBy like :made and category like :cat")
     fun selectIntersect(name: String, made: String, cat: String): List<Drinks>
+
+    @Query("select * from Drinks where drinkName = :something")
+    fun selectOne(something: String): Drinks
+
+
+    @Query("select * from Drinks where iscafe like :iscaf and madeBy like :made order by favorite desc, madeBy asc, drinkName asc")
+    fun selectAllConditions(iscaf: Boolean, made: String): LiveData<List<Drinks>>
+
 }
