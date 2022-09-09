@@ -97,8 +97,6 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
             drink.text = article.drinkName
             caf.text= article.caffeine?.caffeine1.toString() +"mg"
 
-
-            //TODO 좋아요버튼 왠지 작동이 안됨
             star.isChecked = article.favorite == true
 
 

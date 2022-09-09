@@ -43,8 +43,6 @@ import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
     var count = 1
-
-    // TODO: Rename and change types of parameters
     private val messageClient by lazy { Wearable.getMessageClient(getActivity()) }
     private val nodeClient by lazy { Wearable.getNodeClient(getActivity()) }
 

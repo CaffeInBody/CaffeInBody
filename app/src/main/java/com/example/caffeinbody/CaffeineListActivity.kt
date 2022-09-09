@@ -190,7 +190,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         if (first == true){
         db = DrinksDatabase.getInstance(applicationContext)!!
             db.drinksDao().selectAllConditions(iscafe, madeby).observe(this, Observer {
-                Log.e("ba1", it[0].madeBy)//todo 계속 하다 보면 호출 횟/ 점점 늘어남(카테고리 별로 star 누를 때마다 늘어나서 꼬임)
+                Log.e("ba1", it[0].madeBy)
                 caffeineadapter = CaffeineAdapter(this, CaffeinCase.LARGE)
                 binding.caffeinList.adapter = caffeineadapter
                 caffeineadapter.datas.clear()
