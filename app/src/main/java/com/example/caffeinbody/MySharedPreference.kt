@@ -79,7 +79,7 @@ class MySharedPreferences(context: Context) {
 //            editor.apply()
 //        }
 
-    var weekCafJson: String?//월별 카페인 섭취 수치
+    var weekCafJson: String?//주별 카페인 섭취 수치
     get() = prefs.getString("weekCafJson", null)
         set(value) = prefs.edit().putString("weekCafJson", value!!).apply()
 
@@ -123,5 +123,37 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getString("gender", null)
         set(value) = prefs.edit().putString("gender", value).apply()
 
+    var awakenumber: Int?
+        get() = prefs.getInt("awakenumber", 0)
+        set(value) = prefs.edit().putInt("awakenumber", value!!).apply()
 
+    var habitnumber: Int?
+        get() = prefs.getInt("habitnumber", 0)
+        set(value) = prefs.edit().putInt("habitnumber", value!!).apply()
+
+    var tastenumber: Int?
+        get() = prefs.getInt("tastenumber", 0)
+        set(value) = prefs.edit().putInt("tastenumber", value!!).apply()
+
+    var monCaf: Float?
+        get() = prefs.getFloat("monCaf",0f)
+        set(value) = prefs.edit().putFloat("monCaf", value!!).apply()
+    var tueCaf: Float?
+        get() = prefs.getFloat("tueCaf",0f)
+        set(value) = prefs.edit().putFloat("tueCaf", value!!).apply()
+    var wedCaf: Float?
+        get() = prefs.getFloat("wedCaf",0f)
+        set(value) = prefs.edit().putFloat("wedCaf", value!!).apply()
+    var thuCaf: Float?
+        get() = prefs.getFloat("thuCaf",0f)
+        set(value) = prefs.edit().putFloat("thuCaf", value!!).apply()
+    var friCaf: Float?
+        get() = prefs.getFloat("friCaf",0f)
+        set(value) = prefs.edit().putFloat("friCaf", value!!).apply()
+    var satCaf: Float?
+        get() = prefs.getFloat("satCaf",0f)
+        set(value) = prefs.edit().putFloat("satCaf", value!!).apply()
+    var sunCaf: Float?
+        get() = prefs.getFloat("sunCaf",0f)
+        set(value) = prefs.edit().putFloat("sunCaf", value!!).apply()
 }
