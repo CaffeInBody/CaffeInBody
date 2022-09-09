@@ -14,8 +14,12 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
+import com.google.android.gms.common.api.Api
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 
@@ -108,10 +112,15 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
             }
 
             if (article.imgurl.startsWith("https:")) {
-                //Log.e("CaffeineAdapter", "1" + article.toString())
-                Glide.with(itemView).load(article.imgurl).placeholder(R.drawable.logo)
-                    .override(500).into(img)
-
+                img.setImageResource(0)
+                Log.e("오류해결", article.drinkName + " " + article.madeBy + article.imgurl)
+                Glide.with(itemView)
+                    .load(article.imgurl) //TODO 인터넷 이미지 주소
+                    .diskCacheStrategy(DiskCacheStrategy.NONE) //TODO 캐시 삭제
+                    .skipMemoryCache(true) //TODO 캐시 삭제
+                    .placeholder(R.drawable.logo) //TODO 이미지 로딩중 표시되는 파일
+                    .error(R.drawable.logo) //TODO 이미지 로드 실패시 표시되는 파일
+                    .into(img); //TODO 표시할 이미지 뷰 지정
             } else if(article.imgurl.startsWith("$cacheDir/")){
                 //Log.e("CaffeineAdapter", "2" + article.toString())
                 val bm = BitmapFactory.decodeFile(article.imgurl)
@@ -121,23 +130,35 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
             }
             else {
                 //Log.e("CaffeineAdapter", "3" + article.toString())
-                if (article.madeBy == "스타벅스") Glide.with(itemView)
-                    .load(R.drawable.starbucks_logo).override(250).into(logo)
-                else if (article.madeBy == "이디야") Glide.with(itemView)
-                    .load(R.drawable.ediya_logo).override(250).into(logo)
-                else if (article.madeBy == "투썸플레이스") Glide.with(itemView)
-                    .load(R.drawable.twosome_logo).override(250).into(logo)
-                else if (article.madeBy == "할리스") Glide.with(itemView)
-                    .load(R.drawable.hollys_logo).override(250).into(logo)
-                else if (article.madeBy == "빽다방") Glide.with(itemView)
-                    .load(R.drawable.paiks_logo).override(250).into(logo)
-                else if (article.madeBy == "더벤티") Glide.with(itemView)
-                    .load(R.drawable.theventi_logo).override(250).into(logo)
-                else if (article.madeBy == "공차") Glide.with(itemView)
-                    .load(R.drawable.gongcha_logo).override(250).into(logo)
-                else Glide.with(itemView).load(R.drawable.logo).into(logo)
-                img.visibility = GONE
-                logo.visibility = VISIBLE
+                when(article.madeBy){
+                    "스타벅스"->{Glide.with(itemView)
+                        .load(R.drawable.starbucks_logo).override(250).into(logo)
+                        Log.e("오류해결", "스 " + article.drinkName + article.madeBy)}
+                    "할리스"->{Glide.with(itemView)
+                        .load(R.drawable.hollys_logo).override(250).into(logo)
+                        Log.e("오류해결", "할 " + article.drinkName + article.madeBy)}
+                    "투썸플레이스"->{Glide.with(itemView)
+                        .load(R.drawable.twosome_logo).override(250).into(logo)
+                        Log.e("오류해결", "투 " + article.drinkName + article.madeBy)}
+                    "이디야" -> { Glide.with(itemView)
+                        .load(R.drawable.ediya_logo).override(250).into(logo)
+                        Log.e("오류해결", "이 " + article.drinkName + article.madeBy)}
+                    "빽다방"-> {Glide.with(itemView)
+                        .load(R.drawable.paiks_logo).override(250).into(logo)
+                        Log.e("오류해결", "빽 " + article.drinkName + article.madeBy)}
+                    "더벤티" -> {Glide.with(itemView)
+                        .load(R.drawable.theventi_logo).override(250).into(logo)
+                        Log.e("오류해결", "더 " + article.drinkName + article.madeBy)}
+
+                    "공차"->{Glide.with(itemView)
+                        .load(R.drawable.gongcha_logo).override(250).into(logo)
+                        Log.e("오류해결", "공 " + article.drinkName + article.madeBy)}
+                    else->{Glide.with(itemView).load(R.drawable.logo).into(logo)
+                        Log.e("오류해결", "그외 " + article.drinkName + article.madeBy)}
+
+                }
+                img.visibility = VISIBLE
+                logo.visibility = GONE
             }
 
 
