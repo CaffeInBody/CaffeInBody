@@ -16,13 +16,13 @@ import androidx.fragment.app.Fragment
 import com.example.caffeinbody.DetailActivity.Companion.getMonth
 import com.example.caffeinbody.DetailActivity.Companion.getYear
 import com.example.caffeinbody.databinding.FragmentReportBinding
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.*
-import com.github.mikephil.charting.data.BarData
-import com.github.mikephil.charting.data.BarDataSet
-import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
@@ -34,6 +34,7 @@ import org.json.JSONObject
 import org.threeten.bp.DayOfWeek
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ReportFragment:Fragment() {
     private val binding: FragmentReportBinding by lazy {
@@ -47,6 +48,7 @@ class ReportFragment:Fragment() {
     private val weekDay = weekdayFormat.format(nowTime)
     private val curTimeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
     private val curTime = curTimeFormat.format(nowTime)
+    private var subPoint = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -180,12 +182,68 @@ class ReportFragment:Fragment() {
 
 
     private fun initPieChart(pieChart: PieChart){
-        //TODO 일주일 기준
+        // 일주일 기준
         //  적정 섭취량에 맞게 잘 마시고 있으면 카페인을 잘 섭취하고 있어요
         //  적정 섭취량을 넘었으면 다음부터는 조금만 마셔요
         //  파이차트 백분율 기준 잘 마셨으면 만점, 적정 섭취량을 넘었을 때마다 감점
         //  데이터가 쌓였으면 binding.piecharttext visible = GONE
         //  반대로 데이터가 없으면 binding.piechart visible = GONE
+
+        if(App.prefs.moreThanSensitivity!=null) {
+            for (i in weekCafArray) { // 1일 최대 섭취권고량 이상 마신 경우 10점 감점
+                if (i >= App.prefs.dayCaffeine!!.toFloat())
+                    subPoint += 10
+            }
+            Log.e("subPoint", subPoint.toString())
+
+            subPoint += 2 * (App.prefs.moreThanSensitivity!!.length)// 1회 권고량 or 현재기준 섭취가능 카페인량 이상 마신 경우 2점씩 감점
+            Log.e("subPoint2", subPoint.toString())
+
+            val score = 100-subPoint
+
+            binding.piechart.setUsePercentValues(true)
+
+            val entries = ArrayList<PieEntry>()
+            entries.add(PieEntry(score.toFloat(),""))
+            entries.add(PieEntry(subPoint.toFloat(),""))
+            Log.e("score",score.toString())
+            Log.e("entries",entries.toString())
+
+            val colorItems = ArrayList<Int>()
+            colorItems.add(Color.parseColor("#f87e76"))
+            colorItems.add(Color.WHITE)
+
+            val pieDataSet = PieDataSet(entries, "")
+            pieDataSet.apply{
+                colors = colorItems
+                valueTextSize = 0f
+            }
+            pieDataSet.setDrawValues(false)
+
+            val pieData = PieData(pieDataSet)
+            binding.piechart.apply {
+                data = pieData
+                description.isEnabled = false
+                isRotationEnabled = false
+                centerText = score.toString() + "점"
+                setEntryLabelColor(Color.BLACK)
+                animateY(1400, Easing.EaseInOutQuad)
+                animate()
+            }
+
+            if(score in 90..100) binding.textView7.text = "카페인을 잘 섭취하고 있어요! 😊"
+            else if(score in 70..89) binding.textView7.text = "조금만 더 노력해볼까요? 😉"
+            else if(score in 50..69) binding.textView7.text = "다음 주에는 건강한 섭취습관을 갖도록 해봐요.😐"
+            else if(score in 0..49) binding.textView7.text = "이대로는 건강에 위협이 될 수 있어요.😯"
+
+            if (weekCafArray == { 0 }) {
+                binding.piecharttext.visibility = View.VISIBLE
+                binding.piechart.visibility = View.INVISIBLE
+            } else {
+                binding.piecharttext.visibility = View.INVISIBLE
+                binding.piechart.visibility = View.VISIBLE
+            }
+        }
 
     }
 
@@ -193,7 +251,7 @@ class ReportFragment:Fragment() {
         var age = "나이"
         var gender = "성별"
         var isPregnant = "임신여부"
-        //TODO 현재 나이,상태 등 + 섭취습관(설문조사 내용 sharedpreference에 넣고 여기에 반영
+        // 현재 나이,상태 등 + 섭취습관(설문조사 내용 sharedpreference에 넣고 여기에 반영
         when(App.prefs.age){
             "minor" -> age = "미성년자"
             "adult" -> age = "성인"

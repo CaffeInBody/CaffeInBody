@@ -170,6 +170,10 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
             saveMonthCafJson(getDate(), caffeineColor, getMonth())
 
+            if(resultInt>=App.prefs.sensetivity!!.toFloat() || resultInt>=App.prefs.currentcaffeine!!.toFloat()){ // 1회 권장량 이상 섭취하는지 체크
+                App.prefs.moreThanSensitivity += "1"
+            }
+
             val intent = Intent(this, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)

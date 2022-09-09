@@ -156,4 +156,8 @@ class MySharedPreferences(context: Context) {
     var sunCaf: Float?
         get() = prefs.getFloat("sunCaf",0f)
         set(value) = prefs.edit().putFloat("sunCaf", value!!).apply()
+
+    var moreThanSensitivity: String?
+        get() = prefs.getString("moreThanSensitivity",null)
+        set(value) = prefs.edit().putString("moreThanSensitivity", value!!).apply()
 }

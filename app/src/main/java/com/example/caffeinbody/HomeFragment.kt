@@ -148,7 +148,7 @@ class HomeFragment : Fragment() {
         var percent = 1.0
 
 
-        //TODO 상태별 글자 보이게
+        // 상태별 글자 보이게
         if(todayCaf==0f){
             binding.condition.setText("적절한 카페인 섭취는 도움이 됩니다")
             if(App.prefs.remainCafTmp!! >= App.prefs.currentcaffeine!!.toFloat()*0.9){
