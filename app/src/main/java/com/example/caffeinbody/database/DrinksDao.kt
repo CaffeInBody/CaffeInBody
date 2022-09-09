@@ -28,7 +28,6 @@ interface DrinksDao {
     @Query("select * from Drinks where id like :something")
     fun selectByID(something: Int): Drinks
 
-
     /*@Query("select count(*) from Drinks")
     fun selectCount(): Int*/
 
@@ -44,15 +43,16 @@ interface DrinksDao {
     @Query("select * from Drinks where iscafe like :something order by favorite desc, madeBy asc, drinkName asc")
     fun selectiscafe(something: Boolean): List<Drinks>
 
+
     @Query("select * from Drinks where caffeine_caffeine1 BETWEEN 1 AND :something")
     fun recommendcaffeine(something: Double): List<Drinks>
 
-    @Query("select * from Drinks where caffeine_caffeine1 == 0")
-    fun recommendnoncaffeine(): List<Drinks>
+    @Query("select * from Drinks where madeBy like :something")
+    fun recommendnoncaffeine(something: String):  List<Drinks>
+
 
     @Query("select * from Drinks where favorite = :something")//favorite 항목만 반환(true/false)
     fun selectFavorite(something: Boolean): List<Drinks>
-
 
 
 

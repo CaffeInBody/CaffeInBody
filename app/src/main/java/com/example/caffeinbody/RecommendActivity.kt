@@ -64,9 +64,9 @@ class RecommendActivity : AppCompatActivity() {
 
             db = DrinksDatabase.getInstance(applicationContext)!!
 
-            var nondatas = db.drinksDao().recommendnoncaffeine()
+            var nondatas = db.drinksDao().recommendnoncaffeine("논카페인")
             var datas = caffeine?.let { db.drinksDao().recommendcaffeine(it) }
-            Log.e("data",db.drinksDao().recommendnoncaffeine().toString())
+         //   Log.e("data",db.drinksDao().recommendnoncaffeine().toString())
             caffeineadapter.datas.clear()
             caffeineadapternon.datas.clear()
             if (datas?.size != 0 && datas != null) {

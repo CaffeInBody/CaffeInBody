@@ -36,7 +36,8 @@ class DrinkCaffeineActivity : AppCompatActivity() {
     var arrayCaf = arrayOf<Int>(1,2,3)
     var arraySize = arrayOf<Int>(1,2,3)
     val brandshot = hashMapOf( "스타벅스" to 75.0f,"할리스" to 61.0f ,"투썸플레이스" to 88.5f,"이디야" to 103.0f ,"빽다방" to 118.5f,"더벤티" to 107.5f ,"공차" to 80f)
-    var shot:Int = 0
+    var shotnum:Int = 0
+    var shot = 75.0f
     var resultInt = 100f
     var article : Drinks? = null
     var rangevalue:Int = 100 //샷
@@ -89,6 +90,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
                 if(!article!!.iscafe ) binding.cafeShotLayout.visibility =GONE
                 if(article!!.category == "해열·진통제") binding.mountlayout.visibility = GONE
                 setImg(article!!)
+                shot = brandshot.getOrDefault(article?.madeBy, 75.0f)
             }
             binding.size1.isChecked = true
 
@@ -96,28 +98,29 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         //음료 사이즈 선택
         binding.size1.setOnClickListener {
-            resultInt =  arrayCaf[0] * rangevalue /100f
+            resultInt =  arrayCaf[0] * rangevalue /100f + shot*shotnum
             size = 0
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size2.setOnClickListener {
             if(arrayCaf[1] == 0) arrayCaf[1] = arrayCaf[0] * arraySize[1] / arraySize[0]
-            resultInt = arrayCaf[1] * rangevalue /100f
+            resultInt = arrayCaf[1] * rangevalue /100f+ shot*shotnum + shot*shotnum
             size = 1
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size3.setOnClickListener {
             if(arrayCaf[2] == 0) arrayCaf[2] = arrayCaf[1] * arraySize[2] / arraySize[1]
-            resultInt = arrayCaf[2] * rangevalue /100f
+            resultInt = arrayCaf[2] * rangevalue /100f + shot*shotnum
             size = 2
             binding.result.setText(resultInt.toString()+"mg")
         }
 
 
         binding.shot.setOnValueChangedListener { numberPicker, i, i2 ->
-            var shot = brandshot.getOrDefault(article?.madeBy, 75.0f)
+            shotnum = i2
+
             Log.e("iiiii",i.toString()+i2)
             if(i - i2 <= 0)
                 resultInt += shot
@@ -130,7 +133,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             override fun onPointsChanged(boxedPoints: BoxedVertical, value: Int) {
                 println(value)
                 rangevalue = value
-                resultInt = value * arrayCaf[size] / 100f
+                resultInt = value * arrayCaf[size] / 100f + shot * shotnum
                 binding.textView7.setText((value.toDouble() / 100).toString()+"잔")
                 binding.result.setText(resultInt.toString()+"mg")
             }
