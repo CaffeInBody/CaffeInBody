@@ -73,7 +73,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
 
 
         holder.itemView.setOnClickListener{
-            if(article.caffeine?.caffeine1 != 0) {
+            if(article.madeBy != "논카페인") {
                 val intent = Intent(holder.itemView.context, DrinkCaffeineActivity::class.java)
                 //서버있으면지워도됨
                 intent.putExtra("name", article.id)
@@ -99,14 +99,15 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
           //  caf.text = article.caffeine?.caffeine1.toString() +"mg"
             txt.text = article.madeBy
             drink.text = article.drinkName
-            caf.text= article.caffeine?.caffeine1.toString() +"mg"
+            if(article.caffeine?.caffeine1 !=0 )  caf.text= article.caffeine?.caffeine1.toString() +"mg"
+            else caf.text= article.caffeine?.caffeine2.toString() +"mg"
 
             star.isChecked = article.favorite == true
 
 
 
             var cacheDir = context.cacheDir
-            if(article.caffeine?.caffeine1 == 0 ){
+            if(article.madeBy == "논카페인" ){
                 star.visibility = GONE
                 cafcard.visibility = GONE
             }

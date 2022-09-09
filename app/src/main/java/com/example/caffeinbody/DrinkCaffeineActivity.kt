@@ -81,7 +81,12 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             }.await()
             runOnUiThread {
                 initUI(article!!)
-                if(article!!.size?.size1 == 0 || article!!.size?.size2 ==0) {
+                //사이즈별 visibility 수정
+                if (article!!.size?.size1 == 0) {
+                    binding.textView.visibility = GONE
+                    binding.radio.visibility = GONE
+                }
+                else if(article!!.size?.size1 == 0 || article!!.size?.size2 ==0) {
                     binding.textView.visibility = GONE
                     binding.radio.visibility = GONE
                 }
