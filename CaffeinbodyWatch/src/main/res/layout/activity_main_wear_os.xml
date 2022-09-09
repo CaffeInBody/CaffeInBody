@@ -1,21 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
     android:gravity="center_horizontal"
-    android:paddingTop="30dp">
+    android:background="#FFFFFF"
+   >
 
-    <Button
-        android:id="@+id/heartActivityBtn"
-        android:layout_width="100dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="심박수 측정" />
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/caffeineDataBtn"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="카페인 보기" />
-</LinearLayout>
+        <Button
+            android:id="@+id/heartActivityBtn"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#9D5812"
+            android:text="심박수 측정" />
+
+        <Button
+            android:id="@+id/caffeineDataBtn"
+            android:layout_width="100dp"
+            android:backgroundTint="#9D5812"
+            android:layout_height="wrap_content"
+
+            android:text="카페인 보기" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
