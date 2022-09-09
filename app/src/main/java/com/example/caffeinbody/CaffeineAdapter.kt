@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
 import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.Main
 
 
 class CaffeineAdapter (private val context: Context, type:CaffeinCase) : RecyclerView.Adapter<CaffeineAdapter.ViewHolder>() {
@@ -40,29 +41,25 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val article : Drinks = datas.get(position)//한 번에 6개씩 가져오는거였어
-        Log.e("반복", "$position" + article.madeBy)
+        //Log.e("반복", "$position" + article.madeBy)
         holder.bind(article)
 
         holder.star.setOnClickListener{
-            CoroutineScope(Dispatchers.Main).launch {
-                val temp: Deferred<Boolean> = async(Dispatchers.IO) { // async 로 결과
-                    var int = 0
-                    var db = DrinksDatabase.getInstance(context)!!// 를 반환
+            Log.e("CaffeineAdapter2 sorted?", datas.toString())
+            CoroutineScope(Dispatchers.IO).launch {var int = 0
+                var db = DrinksDatabase.getInstance(context)!!// 를 반환
 
-                    Log.e("da", article.favorite.toString() + article.toString())
-                    if (article.favorite) { // 이미 즐겨찾기 되어있으면 삭제
-                        db!!.drinksDao().updateFavorite(!article.favorite,article.id)
-                        val result = db.drinksDao().selectOne(article.drinkName)
-                        Log.e("CaffeineAdapter2", result.favorite.toString() + result.toString())
-                        //sortDb(article.madeBy)
-                        false
-                    } else { // 없으면 즐겨찾기 저장
-                        db!!.drinksDao().updateFavorite(!article.favorite,article.id)
-                        val result = db.drinksDao().selectOne(article.drinkName)
-                        Log.e("CaffeineAdapter3", result.favorite.toString() + result.toString())
-                        //sortDb(article.madeBy)
-                        true
-                    }
+                Log.e("CaffeineAdapter2b", article.favorite.toString() + article.toString())
+                db!!.drinksDao().updateFavorite(!article.favorite,article.id)
+                //val result = db.drinksDao().selectOne(article.drinkName)
+                //Log.e("CaffeineAdapter3", result.favorite.toString() + result.toString())
+
+                val result2 = db.drinksDao().selectAllConditionsNoLive(article.iscafe, article.madeBy)
+                datas.clear()
+                datas.addAll(result2)
+                CoroutineScope(Main).launch{
+                    Log.e("CaffeineAdapter23", "hi")
+                    notifyDataSetChanged()
                 }
             }
             //notifyDataSetChanged()

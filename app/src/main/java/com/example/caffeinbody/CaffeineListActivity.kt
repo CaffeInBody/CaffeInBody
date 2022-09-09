@@ -33,6 +33,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
     var num:Int ?=null
     var isitcafe =true
     var first = true
+    var activity = this
 
     private val binding: ActivityCaffeineListBinding by lazy {
         ActivityCaffeineListBinding.inflate(
@@ -53,6 +54,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar!!.setTitle((arrayString[num]))
 
         caffeineadapter = CaffeineAdapter(this, CaffeinCase.LARGE)
+        caffeineadapter.contextParent = activity
         binding.caffeinList.adapter = caffeineadapter
         val layoutManager = GridLayoutManager(this,2)
 
@@ -86,7 +88,9 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             binding.theventi.setOnClickListener(this)
             binding.gongcha.setOnClickListener(this)
 
-            //selectEverything(isitcafe, "%%",)//이거 지우면 적어도 필터에 전체 값이 나오진 않음
+            first = false
+           selectEverything(isitcafe, "%%",)//이거 지우면 적어도 필터에 전체 값이 나오진 않음
+            first = true
         }
         else if(num == 1){
             isitcafe = false
@@ -182,17 +186,18 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun selectEverything(iscafe: Boolean, madeby: String){
-        //if (first == true){
+    fun selectEverything(iscafe: Boolean, madeby: String){//왜 필터링 할 때마다 늘엉나지
+        if (first == true){
+        db = DrinksDatabase.getInstance(applicationContext)!!
             db.drinksDao().selectAllConditions(iscafe, madeby).observe(this, Observer {
-                Log.e("ba", it[0].madeBy)//todo 계속 하다 보면 ba 값이 점점 늘어남(카테고리 별로 star 누를 때마다 늘어나서 꼬임)
+                Log.e("ba1", it[0].madeBy)//todo 계속 하다 보면 호출 횟/ 점점 늘어남(카테고리 별로 star 누를 때마다 늘어나서 꼬임)
                 caffeineadapter = CaffeineAdapter(this, CaffeinCase.LARGE)
                 binding.caffeinList.adapter = caffeineadapter
                 caffeineadapter.datas.clear()
                 caffeineadapter.datas.addAll(it)
                 caffeineadapter.notifyDataSetChanged()
             })
-        }/* else{
+        } else{
         CoroutineScope(Dispatchers.Main).launch {
             val makers = CoroutineScope(Dispatchers.IO).async {
                 db.drinksDao().selectDrinkMadeBy(madeby)
@@ -204,7 +209,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
                 if(maker.iscafe) datas.add(maker)
 
             }
-            Log.e("ba", datas[0].madeBy)
+            Log.e("ba2", datas[0].madeBy)
 
             caffeineadapter.datas.clear()
             caffeineadapter.datas.addAll(datas)
@@ -212,11 +217,5 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             caffeineadapter.notifyDataSetChanged()
             datas.clear()
     }}
-        }*/
-
-/*private fun initRecycler(){
-caffeineadapter.datas.clear()
-caffeineadapter.datas.addAll(datas)
-caffeineadapter.notifyDataSetChanged()
-}*/
+        }
 }
