@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     App.prefs.thuCaf = 0f
                     App.prefs.friCaf = 0f
                     App.prefs.satCaf = 0f
+                    App.prefs.moreThanSensitivity=""
                 } else if (dayOfWeek == 3) { // 화요일
                     App.prefs.monCaf = App.prefs.todayCaf
                 } else if (dayOfWeek == 4) { // 수요일
