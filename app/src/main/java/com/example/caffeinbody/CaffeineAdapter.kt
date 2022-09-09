@@ -115,13 +115,14 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                 img.setImageResource(0)
                 Log.e("오류해결", article.drinkName + " " + article.madeBy + article.imgurl)
                 Glide.with(itemView)
-                    .load(article.imgurl) //TODO 인터넷 이미지 주소
-                    .diskCacheStrategy(DiskCacheStrategy.NONE) //TODO 캐시 삭제
-                    .skipMemoryCache(true) //TODO 캐시 삭제
-                    .placeholder(R.drawable.logo) //TODO 이미지 로딩중 표시되는 파일
-                    .error(R.drawable.logo) //TODO 이미지 로드 실패시 표시되는 파일
-                    .into(img); //TODO 표시할 이미지 뷰 지정
+                    .load(article.imgurl)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .placeholder(R.drawable.logo)
+                    .error(R.drawable.logo)
+                    .into(img)
             } else if(article.imgurl.startsWith("$cacheDir/")){
+                img.setImageResource(0)
                 //Log.e("CaffeineAdapter", "2" + article.toString())
                 val bm = BitmapFactory.decodeFile(article.imgurl)
                 Glide.with(itemView).load(bm).placeholder(R.drawable.logo)
@@ -129,6 +130,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
 
             }
             else {
+                img.setImageResource(0)
                 //Log.e("CaffeineAdapter", "3" + article.toString())
                 when(article.madeBy){
                     "스타벅스"->{Glide.with(itemView)
