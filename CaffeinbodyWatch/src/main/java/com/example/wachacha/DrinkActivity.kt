@@ -3,6 +3,7 @@ package com.example.wachacha
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -12,7 +13,7 @@ import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 
-class DrinkActivity: AppCompatActivity() {
+class DrinkActivity: ComponentActivity() {
     private val messageClient by lazy { Wearable.getMessageClient(this) }
 
     private val binding: ActivityDrinkregisterBinding by lazy {

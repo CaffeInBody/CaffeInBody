@@ -1,7 +1,9 @@
 
 package com.example.caffeinbody
 
+import android.app.AlertDialog
 import android.content.ContentValues.TAG
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -90,6 +92,15 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
         binding.checkWatchBtn.setOnClickListener{
+            var builder = AlertDialog.Builder(context, android.R.style.Theme_DeviceDefault_Light_Dialog_NoActionBar_MinWidth)
+            builder.setTitle("워치에 연동된 앱을 실행합니다")
+            builder.setMessage("카페인 섭취 10분 후\n안정된 상태에서 측정해주세요")
+
+            // 버튼 클릭시에 무슨 작업을 할 것인가!
+            builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
+            })
+
+            builder.show()
             startWearableActivity()
             Log.e("폰에서 워치앱 열기 on HomeFrag", "하자!!!")
         }

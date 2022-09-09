@@ -18,9 +18,12 @@ package com.example.wachacha
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -45,7 +48,7 @@ import kotlinx.coroutines.tasks.await
  * and performs the permission check when enabling measure data.
  */
 @AndroidEntryPoint
-class HeartRateActivity : AppCompatActivity() {
+class HeartRateActivity : ComponentActivity() {
     private val messageClient by lazy { Wearable.getMessageClient(this) }
     var average = 0f
 
@@ -56,11 +59,11 @@ class HeartRateActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityHeartrateBinding.inflate(layoutInflater)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(binding.root)
 
+
+     //   supportActionBar!!.set
         permissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
                 when (result) {
