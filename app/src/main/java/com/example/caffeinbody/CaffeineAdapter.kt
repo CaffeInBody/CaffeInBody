@@ -58,13 +58,13 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                 //val result = db.drinksDao().selectOne(article.drinkName)
                 //Log.e("CaffeineAdapter3", result.favorite.toString() + result.toString())
 
-                val result2 = db.drinksDao().selectAllConditionsNoLive(article.iscafe, article.madeBy)
+               /* val result2 = db.drinksDao().selectAllConditionsNoLive(article.iscafe, article.madeBy)
                 datas.clear()
                 datas.addAll(result2)
                 CoroutineScope(Main).launch{
                     Log.e("CaffeineAdapter23", "hi")
                     notifyDataSetChanged()
-                }
+                }*/
             }
             //notifyDataSetChanged()
 
@@ -121,13 +121,17 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                     .placeholder(R.drawable.logo)
                     .error(R.drawable.logo)
                     .into(img)
+                img.visibility = VISIBLE
+                logo.visibility = GONE
+
             } else if(article.imgurl.startsWith("$cacheDir/")){
                 img.setImageResource(0)
                 //Log.e("CaffeineAdapter", "2" + article.toString())
                 val bm = BitmapFactory.decodeFile(article.imgurl)
                 Glide.with(itemView).load(bm).placeholder(R.drawable.logo)
                     .override(600).into(img)
-
+                img.visibility = VISIBLE
+                logo.visibility = GONE
             }
             else {
                 img.setImageResource(0)
@@ -158,9 +162,10 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                     else->{Glide.with(itemView).load(R.drawable.logo).into(logo)
                         Log.e("오류해결", "그외 " + article.drinkName + article.madeBy)}
 
+
                 }
-                img.visibility = VISIBLE
-                logo.visibility = GONE
+                img.visibility = GONE
+                logo.visibility = VISIBLE
             }
 
 
