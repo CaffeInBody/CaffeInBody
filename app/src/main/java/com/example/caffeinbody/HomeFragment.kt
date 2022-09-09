@@ -141,7 +141,7 @@ class HomeFragment : Fragment() {
 
         //TODO 상태별 글자 보이게
         if(todayCaf==0f){
-            binding.condition.setText("적절한 카페인 섭취는 도움이 됩니다.")
+            binding.condition.setText("적절한 카페인 섭취는 도움이 됩니다")
             if(App.prefs.remainCafTmp!! >= App.prefs.currentcaffeine!!.toFloat()*0.9){
                 binding.condition.setText("잠시 쉬었다 마시는 게 어때요?")
             }
@@ -153,7 +153,7 @@ class HomeFragment : Fragment() {
                 binding.condition.setText("이 정도가 적당해요!\n오늘은 여기까지 마시고 건강을 지키세요")
             }
             else if(todayCaf!!>App.prefs.dayCaffeine!!.toFloat()){
-                binding.condition.setText("더 이상은 위험해요!\n카페인 부작용이 건강을 위협하고 있어요.")
+                binding.condition.setText("더 이상은 위험해요!\n카페인 부작용이 건강을 위협하고 있어요")
             }
         }
         else if(todayCaf!!>=App.prefs.dayCaffeine!!.toFloat()*0.9 &&
@@ -161,7 +161,7 @@ class HomeFragment : Fragment() {
             binding.condition.setText("이 정도가 적당해요!\n오늘은 여기까지 마시고 건강을 지키세요")
         }
         else if(todayCaf!!>App.prefs.dayCaffeine!!.toFloat()){
-            binding.condition.setText("더 이상은 위험해요!\n카페인 부작용이 건강을 위협하고 있어요.")
+            binding.condition.setText("더 이상은 위험해요!\n카페인 부작용이 건강을 위협하고 있어요")
         }
         else{
             binding.condition.setText("오늘도 건강한 카페인 섭취를 실천해봐요.")

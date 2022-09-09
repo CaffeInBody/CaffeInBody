@@ -59,11 +59,12 @@
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/drawable/roundcorner_rectangle.xml" value="0.1205" />
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/fragment_home.xml" value="0.152" />
         <entry key="..\:/yoogus/smu4/project/caffeinbody_git/CaffeInBody/app/src/main/res/layout/fragment_report.xml" value="0.264" />
+        <entry key="CaffeinbodyWatch/src/main/res/drawable/btn_select.xml" value="0.1185" />
         <entry key="CaffeinbodyWatch/src/main/res/drawable/ic_broken_heart.xml" value="0.121" />
         <entry key="CaffeinbodyWatch/src/main/res/drawable/ic_heart.xml" value="0.141" />
-        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_drinkregister.xml" value="0.5355648535564853" />
-        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_heartrate.xml" value="0.1500453309156845" />
-        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.25" />
+        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_drinkregister.xml" value="0.6267772511848341" />
+        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_heartrate.xml" value="0.5" />
+        <entry key="CaffeinbodyWatch/src/main/res/layout/activity_main_wear_os.xml" value="0.5202156334231806" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.141" />
         <entry key="app/src/main/res/drawable/btn_select.xml" value="0.1455" />
         <entry key="app/src/main/res/drawable/home_back.xml" value="0.1" />
@@ -81,10 +82,14 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_plus_drink.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_recommend.xml" value="0.14375" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1625" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.24262295081967214" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1625" />
         <entry key="app/src/main/res/layout/activity_survey.xml" value="0.1496030087755955" />
         <entry key="app/src/main/res/layout/fragment_decaf.xml" value="0.20833333333333334" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/fragment_report.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_report.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/fragment_survey1.xml" value="0.21851851851851853" />

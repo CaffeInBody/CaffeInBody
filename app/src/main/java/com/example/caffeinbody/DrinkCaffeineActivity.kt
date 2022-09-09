@@ -27,6 +27,7 @@ import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import org.json.JSONArray
+import java.lang.Math.round
 import java.util.*
 
 
@@ -116,13 +117,11 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
 
         binding.shot.setOnValueChangedListener { numberPicker, i, i2 ->
-            shot = i
             var shot = brandshot.getOrDefault(article?.madeBy, 75.0f)
             Log.e("iiiii",i.toString()+i2)
             if(i - i2 <= 0)
                 resultInt += shot
             else resultInt -= shot
-
             binding.result.setText(resultInt.toString()+"mg")
 
         }
