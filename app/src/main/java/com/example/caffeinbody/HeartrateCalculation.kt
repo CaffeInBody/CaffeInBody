@@ -81,7 +81,7 @@ class HeartrateCalculation : AppCompatActivity() {
 
             }else{
                 val textView = TextView(this)
-                textView.text = "평온한 상태에서 심박수 측정을 다시 진행해 주세요"
+                textView.text = "현재 평온한 상태로 평소와 같이 카페인을 섭취하세요"
                 binding.linearLayout6.addView(textView)
             }
         }
