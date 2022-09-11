@@ -26,4 +26,7 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getString("leftCaffeinInBody", "mg" )
         set(value) = prefs.edit().putString("leftCaffeinInBody", value!!).apply()
 
+    var updatedTime: String?
+        get() = prefs.getString("updatedTime", "mg" )
+        set(value) = prefs.edit().putString("updatedTime", value!!).apply()
 }

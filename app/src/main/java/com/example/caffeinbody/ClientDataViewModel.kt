@@ -1,24 +1,15 @@
 package com.example.caffeinbody
 
-import android.content.Context
-import android.graphics.Bitmap
 import android.util.Log
-import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import com.example.caffeinbody.HomeFragment.Companion.putCurrentCaffeine
 import com.google.android.gms.wearable.*
-import com.google.android.material.internal.ContextUtils.getActivity
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 import org.json.JSONObject
-import java.util.jar.Manifest
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * A state holder for the client data.
@@ -54,7 +45,6 @@ class ClientDataViewModel :
 
     override fun onMessageReceived(messageEvent: MessageEvent) {
         val uri = messageEvent.path
-        Log.e(tag, "메시지옴 foreground 확인")
         when (uri) {
             "/heartrate" -> {
                 App.prefs.heartrateAvg = messageEvent.data.decodeToString()
@@ -69,6 +59,7 @@ class ClientDataViewModel :
                 jsonObject.put("dayRecommended", App.prefs.dayCaffeine!!)//하루 권고량
                 jsonObject.put("dayDrinked", App.prefs.todayCaf!!.toString())//남은 카페인 양
                 jsonObject.put("remainCaffineInBody", App.prefs.remainCafTmp.toString())
+                jsonObject.put("updatedtime", "updated: " + getCurrentTime())
                 //Log.e("ClientDataViewModel", jsonObject.toString())
                 sendCaffeineDatas(jsonObject.toString())
             }
@@ -108,6 +99,14 @@ class ClientDataViewModel :
                 Log.d("ClientDataViewModel", "Saving DataItem failed: $exception")
             }
         }
+    }
+
+    fun getCurrentTime(): String{
+        val currentTime = Calendar.getInstance().getTime()
+        val format = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        val current: String = format.format(currentTime)
+
+        return current
     }
 }
 

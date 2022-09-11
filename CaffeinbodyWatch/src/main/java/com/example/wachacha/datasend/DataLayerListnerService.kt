@@ -26,6 +26,7 @@ class DataLayerListenerService : WearableListenerService() {//wear에서 데이�
                     MainApplication.prefs.drinkedCaffeine_once = jsonObject.optString("onceDrinkable")
                     MainApplication.prefs.recommendedCaffeine_once = jsonObject.optString("onceRecommended") + "mg"
                     MainApplication.prefs.leftCaffeinInBody = jsonObject.optString("remainCaffineInBody") + "mg"
+                    MainApplication.prefs.updatedTime = jsonObject.optString("updatedtime")
                 }
                 else ->{
                     Log.e("DLLS", "none, path: " + uri.path)

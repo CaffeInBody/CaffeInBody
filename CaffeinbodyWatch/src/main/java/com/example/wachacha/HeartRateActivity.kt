@@ -69,10 +69,6 @@ class HeartRateActivity : ComponentActivity() {
                 when (result) {
                     true -> {
                         Log.i(TAG, "Body sensors permission granted")
-                        // Only measure while the activity is at least in STARTED state.
-                        // MeasureClient provides frequent updates, which requires increasing the
-                        // sampling rate of device sensors, so we must be careful not to remain
-                        // registered any longer than necessary.
                         lifecycleScope.launchWhenStarted {
                             Log.e("heartrate2", "heartrateactivity")
                             binding.statusText.setText("측정 시작")
@@ -114,7 +110,6 @@ class HeartRateActivity : ComponentActivity() {
     //심박수 보내기
     fun sendHeartRate(watchMessage: String){
         lifecycleScope.launch(Dispatchers.IO) {
-            Log.e("노드", getNodes().first())
             try {
                 val payload = watchMessage.toByteArray()
                 messageClient.sendMessage(
