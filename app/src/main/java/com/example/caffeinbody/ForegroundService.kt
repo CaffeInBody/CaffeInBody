@@ -3,24 +3,23 @@ package com.example.caffeinbody
 import android.app.*
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.wearable.CapabilityClient
+import androidx.lifecycle.LifecycleCoroutineScope
 import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.*
 
 //한 번만 실행하게 하기
 
 class ForegroundService : Service() {
     val tag = "ForegroundService"
+    val CHANNEL_ID2 = "caffeine alarm channel"
 
     override fun onCreate() {
         Log.e(tag, "foregroundservice created")
@@ -34,6 +33,19 @@ class ForegroundService : Service() {
             messageClient.addListener(ClientDataViewModel())
             Log.e(tag, "foreground에 리스너 등록")
         }
+        CoroutineScope(Dispatchers.Main).launch{
+            while (true){
+                var rec = App.prefs.sensetivity!!.toFloat()//1회 권장 섭취량
+                var cur = App.prefs.currentcaffeine!!.toFloat()//실시간 체내 카페인
+                if (cur >rec - 1){//158.1>159 - 1 체내 남은 카페인이 1 미만이면 0으로 초기화 시켜서
+                    //foreground에 알람 띄우기/알림 보내기
+                    createNotification()
+                }
+                Log.e(tag, "반복")
+                delay(600000)//1시간마다 반복해서
+            }
+        }
+
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -64,6 +76,40 @@ class ForegroundService : Service() {
 
         val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
         alarmManager.set(AlarmManager.RTC_WAKEUP, c.timeInMillis, sender)
+
+
+    }
+
+    fun createNotification(){
+        //클릭 시 이동
+        val notificationIntent = Intent(this, MainActivity::class.java)
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        val pendingIntent = PendingIntent.getActivity(
+            this, 0, notificationIntent,
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        //builder
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID2)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle("Cafeinbody 카페인 섭취 알람")
+            .setContentText("카페인 등록을 해보세요!")
+            .setContentIntent(pendingIntent)
+
+        //채널 생성
+        val notificationManager = this.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val serviceChannel = NotificationChannel(
+                CHANNEL_ID2,
+                "카페인 마시기 알림",
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            notificationManager.createNotificationChannel(serviceChannel)
+        }
+
+        val notification = builder.build()
+        notificationManager.notify(1, notification)
+
     }
 
     override fun onBind(intent: Intent): IBinder? {

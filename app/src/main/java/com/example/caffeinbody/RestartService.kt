@@ -53,6 +53,7 @@ class RestartService: Service() {
         //왜 NOTIFICATION이 안나오지
         startService(Intent(this, ForegroundService::class.java))
         notificationManager.notify(1, notification)
+        notificationManager.cancel(1)
 
 
         stopForeground(true)
