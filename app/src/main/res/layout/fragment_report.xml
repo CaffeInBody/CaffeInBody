@@ -240,11 +240,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/card_view">
          <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-                    android:id="@+id/calendarview"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:mcv_selectionMode="range" />
+                android:id="@+id/calendarview"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:mcv_selectionMode="none"
+             app:mcv_selectionColor="@color/transparent"/>
             </LinearLayout>
 
 

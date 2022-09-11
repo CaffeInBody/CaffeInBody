@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -22,19 +23,14 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
-import com.github.mikephil.charting.utils.ColorTemplate
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
-import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
-import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import org.json.JSONArray
 import org.json.JSONObject
-import org.threeten.bp.DayOfWeek
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class ReportFragment:Fragment() {
     private val binding: FragmentReportBinding by lazy {
@@ -341,6 +337,12 @@ class ReportFragment:Fragment() {
         }
     }
 
+    fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
+        // Decide if to intercept or not
+        return true
+    }
+
+
     fun initCalendarView(){
         var test = App.prefs.monthCafJson
         Log.e("report", "year "+ getYear() + "month" + getMonth() + test.toString())
@@ -354,26 +356,24 @@ class ReportFragment:Fragment() {
         binding.calendarview.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
         binding.calendarview.setDateTextAppearance(R.style.CalenderViewDateCustomText)
         binding.calendarview.setWeekDayTextAppearance(R.style.CalenderViewWeekCustomText)
+
         //binding.calendarview.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.custom_weekdays)))
         //binding.calendarview.setTitleFormatter(MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)))
         //binding.calendarview.setWeekDayFormatter(ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)))
 
 
         // 요일 선택 시 내가 정의한 드로어블이 적용되도록 함
-        binding.calendarview.setOnRangeSelectedListener({
+        /*binding.calendarview.setOnRangeSelectedListener({
                 widget, dates ->
                 val startDay = dates[0].date.toString()
                 val endDay = dates[dates.size - 1].date.toString()
                 Log.e("Calendar", "시작일 : $startDay, 종료일 : $endDay")
-        })
+        })*/
 
         binding.calendarview.setOnMonthChangedListener { widget, date ->
             //Log.e("ReportFragment", "현재 캘린더의 month: " + date.month + " year: "+ date.year)
             setCaffeineColorsDates(date.month, date.year)
         }
-
-        /*binding.calendarview.addDecorators(DayDecoratorGreen(context, CalendarDay.from(2022, 7, 20)))
-        binding.calendarview.addDecorators(DayDecoratorRed(context, CalendarDay.from(2022, 7, 23)))*/
     }
 
     /* 선택된 요일의 background를 설정하는 Decorator 클래스 */
