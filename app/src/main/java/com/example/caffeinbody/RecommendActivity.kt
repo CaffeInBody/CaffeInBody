@@ -35,6 +35,8 @@ class RecommendActivity : AppCompatActivity() {
 
         caffeineadapter = CaffeineAdapter(this, CaffeinCase.SMALL)
         caffeineadapternon = CaffeineAdapter(this, CaffeinCase.SMALL)
+        caffeineadapter.owner = this
+        caffeineadapternon.owner = this
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)

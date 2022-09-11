@@ -108,7 +108,7 @@ class Survey1Activity  : AppCompatActivity() {
 
     fun initialDataSet(){
         db = DrinksDatabase.getInstance(applicationContext)!!
-        var funcs = Functions()
+        var funcs = Functions(application)
 
         funcs.addDrinksDatabaseStarbucks(db)
         funcs.addDrinksDatabaseHollys(db)

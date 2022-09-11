@@ -1,17 +1,63 @@
 package com.example.caffeinbody.database
 
+import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.example.caffeinbody.CaffeineAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class Functions() {
-    fun insert1(db: DrinksDatabase){
+class Functions(application: Application) {
+    var drinks: LiveData<List<Drinks>> = MutableLiveData()
+    var drinksNoLive : List<Drinks> = ArrayList()
+    var db: DrinksDatabase
+    var tag = "Functions"
+
+    init {
+        db = DrinksDatabase.getInstance(application)!!
+    }
+
+    fun selectAll(iscafe: Boolean): LiveData<List<Drinks>>{//왜 필터링 할 때마다 늘엉나지
+        drinks = db.drinksDao().selectiscafe(iscafe)
+        Log.e(tag, drinks.toString())
+        return drinks
+    }
+
+    fun selectAll2(iscafe: Boolean, adapter: CaffeineAdapter): List<Drinks>{//왜 필터링 할 때마다 늘엉나지
         CoroutineScope(Dispatchers.IO).launch{
-            //db.drinksDao().insert(Drinks("아", 100, 200, 300, "b", "c", "", true, true, true))
-            Log.e("funcs1", "한글1")
+            drinksNoLive = db.drinksDao().selectiscafeNoLive(iscafe)
+            Log.e(tag, drinksNoLive.toString())
+            CoroutineScope(Dispatchers.Main).launch{
+                adapter.datas.clear()
+                adapter.datas.addAll(drinksNoLive)
+                adapter.notifyDataSetChanged()
+            }
         }
-        Log.e("funcs2", "한글2")
+        return drinksNoLive
+    }
+//livedata 버전
+    fun getFilteredMadeby(iscafe: Boolean, madeby: String, adapter: CaffeineAdapter): LiveData<List<Drinks>>{
+        CoroutineScope(Dispatchers.IO).launch{
+            drinks = db.drinksDao().selectAllConditions(iscafe, madeby)
+            Log.e(tag, drinks.toString())
+        }
+        return drinks
+    }
+    //livedata 없는 버전
+    fun getFilteredMadeby2(iscafe: Boolean, madeby: String, adapter: CaffeineAdapter): List<Drinks>{
+        CoroutineScope(Dispatchers.IO).launch{
+            drinksNoLive = db.drinksDao().selectAllConditionsNoLive(iscafe, madeby)
+            Log.e(tag, drinksNoLive.toString())
+            CoroutineScope(Dispatchers.Main).launch{
+                adapter.datas.clear()
+                adapter.datas.addAll(drinksNoLive)
+                adapter.notifyDataSetChanged()
+            }
+        }
+        return drinksNoLive
     }
 
     fun addDrinksDatabaseStarbucks(db: DrinksDatabase){

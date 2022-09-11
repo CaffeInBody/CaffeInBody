@@ -10,8 +10,11 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.viewModels
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -28,8 +31,12 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
     var type: CaffeinCase? = type
     var datas = mutableListOf<Drinks>()
     var style: Int? = null
-    lateinit var contextParent: Context
 
+    var home = false
+    var madeby = false
+    var recommend = true
+
+    lateinit var owner: ViewModelStoreOwner
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         if(type== CaffeinCase.SMALL) style = R.layout.item_rec_caffeine
@@ -45,7 +52,6 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         val article : Drinks = datas.get(position)//한 번에 6개씩 가져오는거였어
-        //Log.e("반복", "$position" + article.madeBy)
         holder.bind(article)
 
         holder.star.setOnClickListener{
@@ -53,18 +59,18 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
             CoroutineScope(Dispatchers.IO).launch {var int = 0
                 var db = DrinksDatabase.getInstance(context)!!// 를 반환
 
-                Log.e("CaffeineAdapter2b", article.favorite.toString() + article.toString())
-                db!!.drinksDao().updateFavorite(!article.favorite,article.id)
-                //val result = db.drinksDao().selectOne(article.drinkName)
-                //Log.e("CaffeineAdapter3", result.favorite.toString() + result.toString())
-
-               /* val result2 = db.drinksDao().selectAllConditionsNoLive(article.iscafe, article.madeBy)
-                datas.clear()
-                datas.addAll(result2)
-                CoroutineScope(Main).launch{
-                    Log.e("CaffeineAdapter23", "hi")
-                    notifyDataSetChanged()
-                }*/
+                //Log.e("CaffeineAdapter2b", article.favorite.toString() + article.toString())
+                db!!.drinksDao().updateFavorite(!article.favorite, article.id)
+                CoroutineScope(Main).launch {
+                    val viewModel = ViewModelProvider(owner).get(CaffeineViewModel::class.java)
+                    val iscafe = article.iscafe
+                    val madefrom = article.madeBy
+                    if (home == true){
+                        val result2 = viewModel.getAll2(iscafe, this@CaffeineAdapter)
+                    }else if (madeby == true){
+                        val result = viewModel.getFilteredMadeby2(iscafe, madefrom, this@CaffeineAdapter)
+                    }
+                }
             }
             //notifyDataSetChanged()
 
@@ -97,6 +103,8 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
         fun bind(article: Drinks){
            // txt.text = article.drinkName
           //  caf.text = article.caffeine?.caffeine1.toString() +"mg"
+
+           // Log.e("CaffeineAdapter", "binding ")
             txt.text = article.madeBy
             drink.text = article.drinkName
             if(article.caffeine?.caffeine1 !=0 )  caf.text= article.caffeine?.caffeine1.toString() +"mg"
@@ -114,7 +122,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
 
             if (article.imgurl.startsWith("https:")) {
                 img.setImageResource(0)
-                Log.e("오류해결", article.drinkName + " " + article.madeBy + article.imgurl)
+                //Log.e("오류해결", article.drinkName + " " + article.madeBy + article.imgurl)
                 Glide.with(itemView)
                     .load(article.imgurl)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -139,27 +147,27 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                 //Log.e("CaffeineAdapter", "3" + article.toString())
                 when(article.madeBy){
                     "스타벅스"->{Glide.with(itemView)
-                        .load(R.drawable.starbucks_logo).override(250).into(logo)
-                        Log.e("오류해결", "스 " + article.drinkName + article.madeBy)}
+                        .load(R.drawable.starbucks_logo).override(250).into(logo)}
+                        //Log.e("오류해결", "스 " + article.drinkName + article.madeBy)}
                     "할리스"->{Glide.with(itemView)
-                        .load(R.drawable.hollys_logo).override(250).into(logo)
-                        Log.e("오류해결", "할 " + article.drinkName + article.madeBy)}
+                        .load(R.drawable.hollys_logo).override(250).into(logo)}
+                        //Log.e("오류해결", "할 " + article.drinkName + article.madeBy)}
                     "투썸플레이스"->{Glide.with(itemView)
-                        .load(R.drawable.twosome_logo).override(250).into(logo)
-                        Log.e("오류해결", "투 " + article.drinkName + article.madeBy)}
+                        .load(R.drawable.twosome_logo).override(250).into(logo)}
+                        //Log.e("오류해결", "투 " + article.drinkName + article.madeBy)}
                     "이디야" -> { Glide.with(itemView)
-                        .load(R.drawable.ediya_logo).override(250).into(logo)
-                        Log.e("오류해결", "이 " + article.drinkName + article.madeBy)}
+                        .load(R.drawable.ediya_logo).override(250).into(logo)}
+                        //Log.e("오류해결", "이 " + article.drinkName + article.madeBy)}
                     "빽다방"-> {Glide.with(itemView)
-                        .load(R.drawable.paiks_logo).override(250).into(logo)
-                        Log.e("오류해결", "빽 " + article.drinkName + article.madeBy)}
+                        .load(R.drawable.paiks_logo).override(250).into(logo)}
+                        //Log.e("오류해결", "빽 " + article.drinkName + article.madeBy)}
                     "더벤티" -> {Glide.with(itemView)
-                        .load(R.drawable.theventi_logo).override(250).into(logo)
-                        Log.e("오류해결", "더 " + article.drinkName + article.madeBy)}
+                        .load(R.drawable.theventi_logo).override(250).into(logo)}
+                        //Log.e("오류해결", "더 " + article.drinkName + article.madeBy)}
 
                     "공차"->{Glide.with(itemView)
-                        .load(R.drawable.gongcha_logo).override(250).into(logo)
-                        Log.e("오류해결", "공 " + article.drinkName + article.madeBy)}
+                        .load(R.drawable.gongcha_logo).override(250).into(logo)}
+                        //Log.e("오류해결", "공 " + article.drinkName + article.madeBy)}
                     else->{Glide.with(itemView).load(R.drawable.logo).into(logo)
                         Log.e("오류해결", "그외 " + article.drinkName + article.madeBy)}
 

@@ -51,11 +51,13 @@ class PlusDrinkActivity : AppCompatActivity() {
     var num:Int ?=null
     var currentPhotoPath: String? = null
     var bitmap: Bitmap? = null
+    var tag = "PlusDrinkActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlusDrinkBinding.inflate(layoutInflater)
-        num= intent.getIntExtra("name",1)
+        num= intent.getIntExtra("name", 2)
+        Log.e(tag, "num: $num")
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         //    supportActionBar!!.setDisplayShowTitleEnabled(false)

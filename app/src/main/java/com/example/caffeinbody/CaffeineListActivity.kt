@@ -11,11 +11,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ToggleButton
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet.GONE
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.caffeinbody.database.Drinks
 import com.example.caffeinbody.database.DrinksDatabase
@@ -34,6 +33,9 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
     var isitcafe =true
     var first = true
     var activity = this
+    val clientDataViewModel by viewModels<CaffeineViewModel>()
+
+    //livedata는 데이터의 조작이 많은 경우만
 
     private val binding: ActivityCaffeineListBinding by lazy {
         ActivityCaffeineListBinding.inflate(
@@ -54,29 +56,16 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar!!.setTitle((arrayString[num]))
 
         caffeineadapter = CaffeineAdapter(this, CaffeinCase.LARGE)
-        caffeineadapter.contextParent = activity
+        //caffeineadapter.contextParent = activity
         binding.caffeinList.adapter = caffeineadapter
         val layoutManager = GridLayoutManager(this,2)
 
         db = DrinksDatabase.getInstance(applicationContext)!!
 
-        caffeineadapter.contextParent= applicationContext
+        //caffeineadapter.contextParent= applicationContext
 
-        /*CoroutineScope(Dispatchers.Main).launch {
-            val cafes = CoroutineScope(Dispatchers.IO).async {
-                db.drinksDao().selectFavorite(true)
-            }.await()
+        caffeineadapter.owner = this
 
-            for (cafe in cafes) {
-                //Log.e("maker", "selectDrinkName: " + cafe)
-                //   datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
-                if (cafe.iscafe) datas.add(cafe)
-
-            }
-            caffeineadapter.datas.addAll(datas)
-            caffeineadapter.notifyDataSetChanged()
-            datas.clear()
-        }*/
         if(num==0) {
             isitcafe= true
             binding.starbucks.setOnClickListener(this)
@@ -88,14 +77,16 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             binding.theventi.setOnClickListener(this)
             binding.gongcha.setOnClickListener(this)
 
-            first = false
-           selectEverything(isitcafe, "%%",)//이거 지우면 적어도 필터에 전체 값이 나오진 않음
-            first = true
+            clientDataViewModel.getAll2(true, caffeineadapter)
+            caffeineadapter.home = true
+            caffeineadapter.madeby = false
+
         }
         else if(num == 1){
             isitcafe = false
+            caffeineadapter.home = true
             binding.coffeeBrand.visibility = View.GONE
-            selectEverything(isitcafe, "%%",)
+            clientDataViewModel.getAll2(false, caffeineadapter)
         }else {
             isitcafe = false
             var string = "해열·진통제"
@@ -112,42 +103,40 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
 
 
     }
-    override fun onClick(v: View?) {
-        first = false
-        Log.e("CaffeineListActivity", "!" +v.toString())
-        var checked=0
-        //TODO 이부분 왠지 필터 버튼 누를 때마다 텍스트는 잘 나오는데
-        //  이미지 몇개가 바로바로 잘 안나오는데 한 번 봐주세요
+    override fun onClick(v: View?) {//observer
+        //first = true
+        caffeineadapter.home = false
+        caffeineadapter.madeby = true
+
         when(v?.id){
             binding.starbucks.id -> {Log.e("ba", "!!!스")
              //   if(binding.starbucks.isChecked)
-                selectEverything(isitcafe, "스타벅스")
-
-              //  else addAll(db)
+                clientDataViewModel.getFilteredMadeby2(isitcafe, "스타벅스", caffeineadapter).toMutableList()
+                /*clientDataViewModel.getFilteredMadeby(isitcafe, "스타벅스", caffeineadapter).observe(this, Observer{
+                    caffeineadapter.datas.clear()
+                    caffeineadapter.datas.addAll(it)
+                    caffeineadapter.notifyDataSetChanged()
+                    Log.e("hi", it.toString())
+                })*/
             }
             binding.ediya.id -> {Log.e("ba", "!!!이")
-                   // binding.ediya.borderWidth = 4
-                selectEverything(isitcafe, "이디야")
+
+                clientDataViewModel.getFilteredMadeby2(isitcafe, "이디야", caffeineadapter).toMutableList()
             }
             binding.twosome.id -> {Log.e("ba", "!!!튜")
-                selectEverything(isitcafe, "투썸플레이스")
+                clientDataViewModel.getFilteredMadeby2(isitcafe, "투썸플레이스", caffeineadapter).toMutableList()
             }
             binding.hollys.id -> {Log.e("ba", "!!!할")
-                 //   binding.hollys.borderWidth = 4
-                selectEverything(isitcafe, "할리스")
+                clientDataViewModel.getFilteredMadeby2(isitcafe, "할리스", caffeineadapter).toMutableList()
             }
             binding.paiks.id -> {Log.e("ba", "!!!빽")
-              //      binding.hollys.borderWidth = 4
-                selectEverything(isitcafe, "빽다방")
-
+                clientDataViewModel.getFilteredMadeby2(isitcafe, "빽다방", caffeineadapter).toMutableList()
             }
             binding.theventi.id -> {Log.e("ba", "!!!더")
-               //     binding.hollys.borderWidth = 4
-                selectEverything(isitcafe, "더벤티")
+                clientDataViewModel.getFilteredMadeby2(isitcafe, "더벤티", caffeineadapter).toMutableList()
             }
             binding.gongcha.id -> {
-                selectEverything(isitcafe, "공차")
-
+                clientDataViewModel.getFilteredMadeby2(isitcafe, "공차", caffeineadapter).toMutableList()
             }
       }
 
@@ -185,37 +174,4 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             super.onOptionsItemSelected(item)
         }
     }
-
-    fun selectEverything(iscafe: Boolean, madeby: String){//왜 필터링 할 때마다 늘엉나지
-        if (first == true){
-        db = DrinksDatabase.getInstance(applicationContext)!!
-            db.drinksDao().selectAllConditions(iscafe, madeby).observe(this, Observer {
-                Log.e("ba1", it[0].madeBy)
-                caffeineadapter = CaffeineAdapter(this, CaffeinCase.LARGE)
-                binding.caffeinList.adapter = caffeineadapter
-                caffeineadapter.datas.clear()
-                caffeineadapter.datas.addAll(it)
-                caffeineadapter.notifyDataSetChanged()
-            })
-        } else{
-        CoroutineScope(Dispatchers.Main).launch {
-            val makers = CoroutineScope(Dispatchers.IO).async {
-                db.drinksDao().selectDrinkMadeBy(madeby)
-            }.await()
-
-            for (maker in makers){
-                Log.e("maker", "selectDrinkName: " + maker)
-                //   datas.add(CaffeineData(1, maker.id, maker.drinkName, 0) )
-                if(maker.iscafe) datas.add(maker)
-
-            }
-            Log.e("ba2", datas[0].madeBy)
-
-            caffeineadapter.datas.clear()
-            caffeineadapter.datas.addAll(datas)
-            Log.e("sorted", datas.toString())
-            caffeineadapter.notifyDataSetChanged()
-            datas.clear()
-    }}
-        }
 }
