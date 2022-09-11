@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
@@ -23,11 +24,16 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.*
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.utils.ColorTemplate
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
+import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
+import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import org.json.JSONArray
 import org.json.JSONObject
+import org.threeten.bp.DayOfWeek
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -171,6 +177,14 @@ class ReportFragment:Fragment() {
             entries.add(barEntry)
         }
         val barDataSet = BarDataSet(entries, title)
+        var colorList = listOf(
+            Color.parseColor("#9D5812"),
+            Color.parseColor("#B17941"),
+            Color.parseColor("#C49B71"),
+
+
+        )
+        barDataSet.setColors(colorList)
         val data = BarData(barDataSet)
         barChart.data = data
         barChart.invalidate()
@@ -200,6 +214,7 @@ class ReportFragment:Fragment() {
             val score = 100-subPoint
 
             binding.piechart.setUsePercentValues(true)
+            binding.piechart.legend.isEnabled = false
 
             val entries = ArrayList<PieEntry>()
             entries.add(PieEntry(score.toFloat(),""))
@@ -224,6 +239,8 @@ class ReportFragment:Fragment() {
                 description.isEnabled = false
                 isRotationEnabled = false
                 centerText = score.toString() + "점"
+                setCenterTextSize(14f)
+                setCenterTextTypeface(Typeface.DEFAULT_BOLD)
                 setEntryLabelColor(Color.BLACK)
                 animateY(1400, Easing.EaseInOutQuad)
                 animate()
@@ -236,10 +253,10 @@ class ReportFragment:Fragment() {
         }
 
         if (weekCafArray == { 0 }) {
-            binding.piecharttext.visibility = View.VISIBLE
+            binding.piecharttext.visibility = View.GONE
             binding.piechart.visibility = View.INVISIBLE
         } else {
-            binding.piecharttext.visibility = View.INVISIBLE
+            binding.piecharttext.visibility = View.GONE
             binding.piechart.visibility = View.VISIBLE
         }
 
@@ -272,6 +289,8 @@ class ReportFragment:Fragment() {
     private fun initBarChart(barChart: BarChart) {
         //hiding the grey background of the chart, default false if not set
         barChart.setDrawGridBackground(false)
+
+        barChart.legend.isEnabled = false
         //remove the bar shadow, default false if not set
         barChart.setDrawBarShadow(false)
         //remove border of the chart, default false if not set
@@ -356,13 +375,17 @@ class ReportFragment:Fragment() {
         binding.calendarview.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
         binding.calendarview.setDateTextAppearance(R.style.CalenderViewDateCustomText)
         binding.calendarview.setWeekDayTextAppearance(R.style.CalenderViewWeekCustomText)
-
         //binding.calendarview.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.custom_weekdays)))
         //binding.calendarview.setTitleFormatter(MonthArrayTitleFormatter(getResources().getTextArray(R.array.custom_months)))
         //binding.calendarview.setWeekDayFormatter(ArrayWeekDayFormatter(getResources().getTextArray(R.array.custom_weekdays)))
 
 
         // 요일 선택 시 내가 정의한 드로어블이 적용되도록 함
+        binding.calendarview.setOnRangeSelectedListener { widget, dates ->
+            val startDay = dates[0].date.toString()
+            val endDay = dates[dates.size - 1].date.toString()
+            Log.e("Calendar", "시작일 : $startDay, 종료일 : $endDay")
+        }
         /*binding.calendarview.setOnRangeSelectedListener({
                 widget, dates ->
                 val startDay = dates[0].date.toString()
