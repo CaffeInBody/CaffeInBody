@@ -28,12 +28,11 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
     var arrayString = arrayOf<String>("카페음료","일반음료","기타")
     lateinit var caffeineadapter: CaffeineAdapter
     private lateinit var db: DrinksDatabase
-    var datas = mutableListOf<Drinks>()
-    var num:Int ?=null
+    //var datas = mutableListOf<Drinks>()
+    var num2:Int ?=null
     var isitcafe =true
-    var first = true
-    var activity = this
     val clientDataViewModel by viewModels<CaffeineViewModel>()
+    val tag = "CaffeineListActivity"
 
     //livedata는 데이터의 조작이 많은 경우만
 
@@ -48,6 +47,8 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(binding.root)
 
         var num= intent.getIntExtra("listnum",1)
+        num2 = intent.getIntExtra("listnum",1)
+        Log.e(tag, "윗쪽 num: $num")
         //TODO 필터링 누르고 다시 전체화면 볼 수 있는 기능
 
         setSupportActionBar(binding.toolbar)
@@ -160,7 +161,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
         }
         R.id.home-> {
             val intent = Intent(this, PlusDrinkActivity::class.java)
-            intent.putExtra("name", num)
+            intent.putExtra("name", num2)
             // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             // intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
