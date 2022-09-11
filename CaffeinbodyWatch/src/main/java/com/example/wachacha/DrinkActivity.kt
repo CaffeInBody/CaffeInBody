@@ -61,7 +61,7 @@ class DrinkActivity: ComponentActivity() {
 
         liveSharedPreference.getString("updatedTime", "")
             .observe(this, Observer<String>{result->
-                binding.leftCaffeine.text = result
+                binding.time.text = result
             })
 
 

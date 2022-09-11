@@ -7,16 +7,13 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
-import android.os.PowerManager
 import android.util.Log
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.caffeinbody.databinding.ActivityMainBinding
 import com.google.android.gms.wearable.Wearable
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*
 
