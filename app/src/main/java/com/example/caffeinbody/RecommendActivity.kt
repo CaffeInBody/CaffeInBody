@@ -78,22 +78,25 @@ class RecommendActivity : AppCompatActivity() {
                         caffeineadapter.datas.add(uilist[i])
                     }}
                     //caffeineadapter.datas.addAll(it)
-                    nondatas.let {
-                        var reclist = it.shuffled() //데이터 섞기
-                        for (i in 0 until 3) { //6개만 뽑아서 넣음
-                            if (reclist.size <= i) break
+                  }
+            nondatas.let {
+                var reclist = it.shuffled() //데이터 섞기
+                for (i in 0 until 3) { //6개만 뽑아서 넣음
+                    if (reclist.size <= i) break
 
-                            caffeineadapternon.datas.add(reclist[i])
+                    caffeineadapternon.datas.add(reclist[i])
 
-                        }
-                        //caffeineadapter.datas.addAll(it)
+                }
+                //caffeineadapter.datas.addAll(it)
 
-                    }}
+            }
                     runOnUiThread {
                         caffeineadapter.notifyDataSetChanged()
                         caffeineadapternon.notifyDataSetChanged()
-                        binding.nonetext.visibility = GONE //데이터 없을때 나오는 텍스트
-                        binding.recyclerView.visibility = VISIBLE
+                        if (caffeine != 0.0){
+                            binding.nonetext.visibility = GONE //데이터 없을때 나오는 텍스트
+                            binding.recyclerView.visibility = VISIBLE
+                        }
                         // call the invalidate()
                     }
                 }
