@@ -160,4 +160,8 @@ class MySharedPreferences(context: Context) {
     var moreThanSensitivity: String?
         get() = prefs.getString("moreThanSensitivity",null)
         set(value) = prefs.edit().putString("moreThanSensitivity", value!!).apply()
+
+    var isAlarmTrue: Boolean?
+        get() = prefs.getBoolean("isAlarmTrue",true)
+        set(value) = prefs.edit().putBoolean("isAlarmTrue", value!!).apply()
 }

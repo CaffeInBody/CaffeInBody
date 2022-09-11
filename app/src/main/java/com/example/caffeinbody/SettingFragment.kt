@@ -20,6 +20,16 @@ class SettingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding.switch1.setOnCheckedChangeListener{_, ischecked->
+            if (ischecked){
+                App.prefs.isAlarmTrue = true
+            }else{
+                App.prefs.isAlarmTrue = false
+            }
+        }
+
+
+
         binding.textView4.setOnClickListener {
             startActivity(
                 Intent(activity, Survey1Activity::class.java)
