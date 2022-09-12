@@ -62,11 +62,14 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         val intent = getIntent()
         val name = intent.getIntExtra("name",0)
+        val star = intent.getBooleanExtra("star", false)
+
         binding.shot.minValue = 0
         binding.shot.maxValue = 12
         binding.shot.wrapSelectorWheel = false
+        binding.star.isChecked = star
 
-
+//todo 카페인마시기 별 표시 db update
         db = DrinksDatabase.getInstance(applicationContext)!!
 
         CoroutineScope(Dispatchers.Main).launch {
