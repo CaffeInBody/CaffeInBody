@@ -239,7 +239,7 @@ class ReportFragment:Fragment() {
                 description.isEnabled = false
                 isRotationEnabled = false
                 centerText = score.toString() + "점"
-                setCenterTextSize(14f)
+                setCenterTextSize(20f)
                 setCenterTextTypeface(Typeface.DEFAULT_BOLD)
                 setEntryLabelColor(Color.BLACK)
                 animateY(1400, Easing.EaseInOutQuad)
