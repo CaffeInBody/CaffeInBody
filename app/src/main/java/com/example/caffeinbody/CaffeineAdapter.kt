@@ -58,10 +58,8 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
             Log.e("CaffeineAdapter2 sorted?", datas.toString())
             CoroutineScope(Dispatchers.IO).launch {var int = 0
                 var db = DrinksDatabase.getInstance(context)!!// 를 반환
-
-                //Log.e("CaffeineAdapter2b", article.favorite.toString() + article.toString())
                 db!!.drinksDao().updateFavorite(!article.favorite, article.id)
-                CoroutineScope(Main).launch {
+                /*CoroutineScope(Main).launch {
                     val viewModel = ViewModelProvider(owner).get(CaffeineViewModel::class.java)
                     val iscafe = article.iscafe
                     val madefrom = article.madeBy
@@ -70,7 +68,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                     }else if (madeby == true){
                         val result = viewModel.getFilteredMadeby2(iscafe, madefrom, this@CaffeineAdapter)
                     }
-                }
+                }*/
             }
             //notifyDataSetChanged()
 
@@ -83,6 +81,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                 val intent = Intent(holder.itemView.context, DrinkCaffeineActivity::class.java)
                 //서버있으면지워도됨
                 intent.putExtra("name", article.id)
+                intent.putExtra("star", article.favorite)
 
                 ContextCompat.startActivity(holder.itemView.context, intent, null)
                 //카페인 마시기로 이동}
