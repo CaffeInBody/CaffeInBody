@@ -40,11 +40,11 @@ interface DrinksDao {
     @Query("select * from Drinks where category like :something order by favorite desc, madeBy asc, drinkName asc")
     fun getDrinkCategory(something: String): LiveData<List<Drinks>>
 //////////////
-    @Query("select * from Drinks where iscafe like :something order by favorite desc, madeBy asc, drinkName asc")
+    @Query("select * from Drinks where iscafe like :something  order by favorite desc, madeBy asc, drinkName asc")
     fun selectiscafe(something: Boolean): LiveData<List<Drinks>>
 
 
-    @Query("select * from Drinks where iscafe like :something order by favorite desc, madeBy asc, drinkName asc")
+    @Query("select * from Drinks where iscafe like :something and madeBy not like \"논카페인\" order by favorite desc, madeBy asc, drinkName asc ")
     fun selectiscafeNoLive(something: Boolean): List<Drinks>
 
 
