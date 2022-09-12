@@ -60,9 +60,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="사이즈"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_gravity="start"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,8 +73,7 @@
         android:layout_height="140dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:layout_marginHorizontal="30dp"
-
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="30dp"
         android:orientation="horizontal">
 
@@ -86,6 +86,7 @@
             android:button="@null"
             android:drawableBottom="@drawable/icon_coffee"
             android:gravity="center"
+            android:layout_marginHorizontal="5dp"
             android:layout_weight="1"
             android:paddingBottom="30dp"
             android:text="Regular" />
@@ -94,12 +95,11 @@
             android:id="@+id/size2"
             android:layout_width="wrap_content"
             android:layout_height="120dp"
-            android:layout_marginHorizontal="15dp"
+            android:layout_marginHorizontal="5dp"
             android:background="@drawable/btn_select"
             android:button="@null"
             android:drawableBottom="@drawable/icon_coffee"
             android:gravity="center"
-
             android:layout_weight="1"
             android:paddingBottom="30dp"
             android:text="Grande" />
@@ -110,6 +110,7 @@
             android:layout_height="120dp"
             android:background="@drawable/btn_select"
             android:button="@null"
+            android:layout_marginHorizontal="5dp"
             android:drawableBottom="@drawable/icon_coffee"
             android:gravity="center"
             android:layout_weight="1"

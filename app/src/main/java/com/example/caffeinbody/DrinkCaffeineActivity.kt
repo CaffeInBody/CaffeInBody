@@ -82,27 +82,35 @@ class DrinkCaffeineActivity : AppCompatActivity() {
             runOnUiThread {
                 initUI(article!!)
                 //사이즈별 visibility 수정
-                if (article!!.size?.size1 == 0) {
+                if(article!!.size?.size3 == 0 && (article!!.size?.size1 == 0 || article!!.size?.size2 ==0)) {
                     binding.textView.visibility = GONE
                     binding.radio.visibility = GONE
                 }
-                else if(article!!.size?.size1 == 0 || article!!.size?.size2 ==0) {
-                    binding.textView.visibility = GONE
-                    binding.radio.visibility = GONE
-                }
+                else if(article!!.size?.size1 ==0 && article!!.size?.size2 !=0) binding.size1.visibility = GONE
                 else if (article!!.size?.size3 ==0 ) binding.size3.visibility = GONE
+
+
                 binding.shot.value =0
+
                 if(!article!!.iscafe ) binding.cafeShotLayout.visibility =GONE
                 if(article!!.category == "해열·진통제") binding.mountlayout.visibility = GONE
                 setImg(article!!)
                 shot = brandshot.getOrDefault(article?.madeBy, 75.0f)
+
+                if(article!!.caffeine?.caffeine1 != 0)binding.size1.isChecked = true
+                else {
+                    binding.size2.isChecked = true
+                    size =1
+                    Log.e("msg", arrayCaf[1].toString()+ "mg")
+                }
             }
-            binding.size1.isChecked = true
+
 
         }
 
         //음료 사이즈 선택
         binding.size1.setOnClickListener {
+            if(arrayCaf[0] == 0) arrayCaf[0] = arrayCaf[1] * arraySize[0] / arraySize[1]
             resultInt =  arrayCaf[0] * rangevalue /100f + shot*shotnum
             size = 0
             binding.result.setText(resultInt.toString()+"mg")
@@ -110,13 +118,14 @@ class DrinkCaffeineActivity : AppCompatActivity() {
 
         binding.size2.setOnClickListener {
             if(arrayCaf[1] == 0) arrayCaf[1] = arrayCaf[0] * arraySize[1] / arraySize[0]
-            resultInt = arrayCaf[1] * rangevalue /100f+ shot*shotnum + shot*shotnum
+            resultInt = arrayCaf[1] * rangevalue /100f+ shot*shotnum
             size = 1
             binding.result.setText(resultInt.toString()+"mg")
         }
 
         binding.size3.setOnClickListener {
-            if(arrayCaf[2] == 0) arrayCaf[2] = arrayCaf[1] * arraySize[2] / arraySize[1]
+            if(arrayCaf[2] == 0 && arrayCaf[1] == 0) arrayCaf[2] = arrayCaf[0] * arraySize[2] / arraySize[0]
+            else if (arrayCaf[2] == 0) arrayCaf[2] = arrayCaf[1] * arraySize[2] / arraySize[1]
             resultInt = arrayCaf[2] * rangevalue /100f + shot*shotnum
             size = 2
             binding.result.setText(resultInt.toString()+"mg")
