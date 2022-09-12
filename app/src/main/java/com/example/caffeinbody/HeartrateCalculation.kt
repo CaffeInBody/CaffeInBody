@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.View.GONE
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.caffeinbody.SurveyResultActivity.Companion.setRecommendDayCaffeine
@@ -49,6 +50,7 @@ class HeartrateCalculation : AppCompatActivity() {
         Log.e(tag, "hi")
         if (heartrate !== null){
             binding.heartrateTV.setText(heartrate)
+            binding.currentTxt.visibility = GONE
         }
         if (normalHeartrate !== null){
             binding.normalHeartrateEditText.setText(normalHeartrate)
@@ -81,7 +83,7 @@ class HeartrateCalculation : AppCompatActivity() {
 
             }else{
                 val textView = TextView(this)
-                textView.text = "현재 평온한 상태로 평소와 같이 카페인을 섭취하세요"
+                textView.text = "현재 평온한 상태입니다.\n기존 권장섭취량에 맞춰 카페인을 섭취하세요"
                 binding.linearLayout6.addView(textView)
             }
         }

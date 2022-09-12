@@ -20,12 +20,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
     tools:context=".HeartRateActivity"
     tools:deviceIds="wear"
+    android:background="#FFFFFF"
     android:id="@+id/contraint"
     android:keepScreenOn="true">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="false"
+        android:src="@drawable/heart"
+        android:layout_marginTop="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/wait_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="심박수 측정을 시작합니다\n잠시만 기다려주세요"/>
     <!-- Shown at startup. -->
     <ProgressBar
         android:id="@+id/progress"
@@ -38,6 +61,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+
+        android:id="@+id/measure_start"
+        android:layout_height="match_parent">
     <!-- Views to show when heart rate is available on the device. -->
     <TextView
         android:id="@+id/status_text"
@@ -45,6 +73,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
         android:visibility="gone"
+        android:layout_marginTop="25dp"
         app:layout_constraintBottom_toTopOf="@id/last_measured_label"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -78,7 +107,8 @@
         app:layout_constraintRight_toLeftOf="@id/last_measured_value"
         app:layout_constraintTop_toTopOf="@id/last_measured_value"
         app:srcCompat="@drawable/ic_heart"
-        tools:visibility="visible" />
+        tools:visibility="visible"
+        app:tint="#9D5812" />
 
     <TextView
         android:id="@+id/last_measured_value"
@@ -101,6 +131,7 @@
         android:layout_height="@dimen/icon_size"
         android:contentDescription="@null"
         android:src="@drawable/ic_broken_heart"
+        app:tint="#9D5812"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/not_available"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -118,5 +149,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/broken_heart" />
+        app:layout_constraintTop_toBottomOf="@id/broken_heart" /></androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

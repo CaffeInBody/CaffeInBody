@@ -98,11 +98,18 @@ class HomeFragment : Fragment() {
 
             // 버튼 클릭시에 무슨 작업을 할 것인가!
             builder.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
+                startActivity(
+                    Intent(activity, HeartrateCalculation::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                )
             })
 
             builder.show()
             startWearableActivity()
             Log.e("폰에서 워치앱 열기 on HomeFrag", "하자!!!")
+
+
+
         }
         return binding.root
     }
