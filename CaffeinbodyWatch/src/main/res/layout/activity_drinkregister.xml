@@ -34,8 +34,8 @@
                 android:id="@+id/leftCaffeine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="0mg" />
+                android:text="44.7mg"
+                android:textStyle="bold" />
         </LinearLayout>
 
 
@@ -48,7 +48,7 @@
                 android:id="@+id/drinkedCaffeine_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="오늘 섭취량"
+                android:text="119.2"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@+id/recommendedCaffeine_day"
                 app:layout_constraintRight_toLeftOf="@+id/slash1" />
@@ -67,7 +67,7 @@
                 android:id="@+id/recommendedCaffeine_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="하루 권장"
+                android:text="280.0mg"
 
                 app:layout_constraintLeft_toRightOf="@+id/slash1"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -76,7 +76,7 @@
                 android:id="@+id/drinkedCaffeine_once"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="한번 섭취량"
+                android:text="117.3"
                 android:textStyle="bold"
                 app:layout_constraintBaseline_toBaselineOf="@+id/slash2"
                 app:layout_constraintRight_toLeftOf="@+id/slash2" />
@@ -96,7 +96,7 @@
                 android:id="@+id/recommendedCaffeine_once"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1회 권장"
+                android:text="162.0mg"
 
                 app:layout_constraintBaseline_toBaselineOf="@+id/slash2"
                 app:layout_constraintLeft_toRightOf="@+id/slash2" />
@@ -105,7 +105,7 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="updated time "
+                android:text="updated time : 20:46:26"
                 app:layout_constraintTop_toBottomOf="@+id/slash2"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

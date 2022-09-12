@@ -23,7 +23,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-//todo 원을 클릭하면 별표
+
 class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
     var arrayString = arrayOf<String>("카페음료","일반음료","기타")
     lateinit var caffeineadapter: CaffeineAdapter

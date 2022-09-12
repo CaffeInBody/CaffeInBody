@@ -101,6 +101,11 @@ class HeartRateActivity : ComponentActivity() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        finish()
+    }
+
 
 
     private fun getNodes(): Collection<String> {

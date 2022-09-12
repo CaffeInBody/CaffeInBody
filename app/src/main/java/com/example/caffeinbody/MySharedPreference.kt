@@ -51,6 +51,8 @@ class MySharedPreferences(context: Context) {
         get() = prefs.getString("dayCaffeine", null)
         set(value) = prefs.edit().putString("dayCaffeine", value!!).apply()
 
+
+
 //    var weekCafJson: ArrayList<String>//요일별 카페인 섭취 수치
 //        get() {
 //            val json = prefs.getString("weekCafJson", null)
@@ -164,4 +166,9 @@ class MySharedPreferences(context: Context) {
     var isAlarmTrue: Boolean?
         get() = prefs.getBoolean("isAlarmTrue",true)
         set(value) = prefs.edit().putBoolean("isAlarmTrue", value!!).apply()
+
+
+    var alarmflag: Boolean?//하루 카페인 섭취 권고량
+        get() = prefs.getBoolean("alarmflag", false)
+        set(value) = prefs.edit().putBoolean("alarmflag", value!!).apply()
 }

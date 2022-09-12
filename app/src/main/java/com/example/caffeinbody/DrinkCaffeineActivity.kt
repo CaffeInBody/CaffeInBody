@@ -69,7 +69,6 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         binding.shot.wrapSelectorWheel = false
         binding.star.isChecked = star
 
-//todo 카페인마시기 별 표시 db update
         db = DrinksDatabase.getInstance(applicationContext)!!
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -167,7 +166,7 @@ class DrinkCaffeineActivity : AppCompatActivity() {
         // 저장
         binding.save.setOnClickListener {
             saveTime()//카페인 등록 시간 저장
-
+            App.prefs.alarmflag = true//타이머 카운팅 시작
             val msg = App.prefs.todayCaf//하루섭취카페인
             var msg2 = App.prefs.remainCafTmp//체내남은카페인(날짜변경시초기화안됨+시간별계산된버전)
             if (msg != null) {//msg2를 시간별로 계속 업데이트 해야만 가능하다

@@ -8,6 +8,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleCoroutineScope
+import com.example.caffeinbody.HomeFragment.Companion.putCurrentCaffeine
 import com.google.android.gms.wearable.Wearable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,14 +32,21 @@ class ApplicationBackgroundService : Service() {
         Log.e(tag, "foreground에 리스너 등록")
         CoroutineScope(Dispatchers.Main).launch{
             while (App.prefs.isAlarmTrue!!){
+                putCurrentCaffeine()
                 var rec = App.prefs.sensetivity!!.toFloat()//1회 권장 섭취량
-                var cur = App.prefs.remainCafTmp!!//실시간 체내 카페인
-                if ((cur >rec -1)&&(cur!==rec)){//158.1>159 - 1 체내 남은 카페인이 1 미만이면 0으로 초기화 시켜서
-                    //foreground에 알람 띄우기/알림 보내기
+                var cur = App.prefs.currentcaffeine!!.toFloat()!!//실시간 체내 카페인
+                var flag = App.prefs.alarmflag
+
+                Log.e(tag, "cur: $cur rec: $rec + flag : $flag")
+                if ((cur >rec -1)&&(flag == true)){//158>159 - 1 체내 남은 카페인이 1 미만이면 0으로 초기화 시켜서
+                    Log.e(tag, "notification created")
                     createNotification()
+                    App.prefs.alarmflag = false
+                    //todo notification이 닫히거나 너무 오래 남아있거나
+                    Log.e(tag, "notification false")
                 }
                 Log.e(tag, "반복")
-                delay(600000)//1시간마다 반복해서
+                delay(180000)//30분마다 반복해서
             }
         }
 
@@ -59,7 +67,7 @@ class ApplicationBackgroundService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        dataClient.removeListener(clientDataViewModel)//todo 리스너 중복 제거
+        dataClient.removeListener(clientDataViewModel)
         messageClient.removeListener(clientDataViewModel)
         Log.e(tag, "service destroyed")
         setAlarmTimer()
@@ -107,7 +115,7 @@ class ApplicationBackgroundService : Service() {
 
         val notification = builder.build()
         notificationManager.notify(1, notification)
-
+        //notification이 삭제됨
     }
 
     override fun onBind(intent: Intent): IBinder? {

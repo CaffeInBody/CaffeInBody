@@ -56,8 +56,8 @@ class RestartServiceForeground: Service() {
         notificationManager.cancel(1)
 
 
-        stopForeground(true)
-        stopSelf()
+        //stopForeground(true)
+        //stopSelf()
 
 
     }

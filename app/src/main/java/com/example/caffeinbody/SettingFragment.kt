@@ -19,7 +19,7 @@ class SettingFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        binding.switch1.isChecked = App.prefs.isAlarmTrue!!
         binding.switch1.setOnCheckedChangeListener{_, ischecked->
             if (ischecked){
                 App.prefs.isAlarmTrue = true
