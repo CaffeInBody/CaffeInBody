@@ -123,7 +123,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                 img.setImageResource(0)
                 //Log.e("오류해결", article.drinkName + " " + article.madeBy + article.imgurl)
                 Glide.with(itemView)
-                    .load(article.imgurl)
+                    .load(article.imgurl).override(450)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
                     .placeholder(R.drawable.logo)
