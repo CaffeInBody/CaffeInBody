@@ -10,7 +10,7 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         // This method is called when the BroadcastReceiver is receiving an Intent broadcast.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(Intent(context, RestartService::class.java))
+            context.startForegroundService(Intent(context, RestartServiceForeground::class.java))
             Log.e("AlarmReceiver", "foreground")
         } else {
             context.startService(Intent(context, ApplicationBackgroundService::class.java))

@@ -28,7 +28,7 @@
             android:name=".ApplicationBackgroundService"
             android:enabled="true"
             android:exported="true"></service>
-        <service android:name=".RestartService"/>
+        <service android:name=".RestartServiceForeground"/>
 
         <receiver android:name=".ResetTodayCaf" />
         <receiver android:name=".AlarmReceiver"/>

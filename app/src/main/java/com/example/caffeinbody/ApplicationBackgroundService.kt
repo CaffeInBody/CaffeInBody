@@ -89,7 +89,7 @@ class ApplicationBackgroundService : Service() {
 
         //builder
         val builder = NotificationCompat.Builder(this, CHANNEL_ID2)
-            .setSmallIcon(R.drawable.logo)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle("Cafeinbody 카페인 섭취 알람")
             .setContentText("카페인 등록을 해보세요!")
             .setContentIntent(pendingIntent)

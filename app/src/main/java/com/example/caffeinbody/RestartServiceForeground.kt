@@ -7,7 +7,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 
-class RestartService: Service() {
+class RestartServiceForeground: Service() {
     override fun onBind(p0: Intent?): IBinder? {
         TODO("Not yet implemented")
     }
@@ -31,9 +31,9 @@ class RestartService: Service() {
 
         //builder
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.logo)
-            .setContentTitle("Foreground Service")
-            .setContentText("리스너 실행중")
+            .setSmallIcon(R.mipmap.ic_launcher)
+            //
+            .setContentText("워치 통신을 위해 백그라운드 작업을 허용합니다")
             .setContentIntent(pendingIntent)
 
         //채널 생성
