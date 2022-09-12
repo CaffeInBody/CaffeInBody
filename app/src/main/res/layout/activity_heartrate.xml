@@ -120,18 +120,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:visibility="gone"
+        >
             <!--나중에 visibility 변경하기-->
             <TextView
                 android:id="@+id/tv_recommend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="20dp"
                 android:layout_weight="0"
                 android:text="당신의 심박수 기반 권장 카페인 섭취량은"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+
+ />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -202,8 +205,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="0"
                 android:text="입니다."
-                android:textSize="20dp"
-                android:textStyle="bold" />
+       />
 
         </LinearLayout>
     </LinearLayout>
