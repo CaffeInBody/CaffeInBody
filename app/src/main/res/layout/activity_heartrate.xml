@@ -22,9 +22,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="'삼성헬스>심박수>우측상단 차트버튼>최소-최대 옆 삼각형>안정 시 심박수'를 통해 평소 심박수를 확인할 수 있어요"
+        android:text="평소 심박수는 '삼성헬스>심박수>우측상단 차트버튼\n>최소-최대 옆 삼각형>안정 시 심박수'를 통해 확인할 수 있어요"
         android:layout_marginTop="10dp"
         android:textColor="#666666"
+        android:textSize="12sp"
         android:layout_marginHorizontal="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -35,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:orientation="vertical"
-        android:paddingHorizontal="50dp"
+
         android:paddingTop="20dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,6 +45,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:paddingStart="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -72,12 +74,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
+            android:textSize="12sp"
+            android:paddingStart="50dp"
             android:text="현재 심박수는 워치 검사를 통해 나타납니다"
             android:textColor="#666666" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingStart="50dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
