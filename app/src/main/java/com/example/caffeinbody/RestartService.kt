@@ -31,7 +31,7 @@ class RestartService: Service() {
 
         //builder
         val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.logo)
             .setContentTitle("Foreground Service")
             .setContentText("리스너 실행중")
             .setContentIntent(pendingIntent)
@@ -51,7 +51,7 @@ class RestartService: Service() {
         val notification = builder.build()
         startForeground(1, notification)
         //왜 NOTIFICATION이 안나오지
-        startService(Intent(this, ForegroundService::class.java))
+        startService(Intent(this, ApplicationBackgroundService::class.java))
         notificationManager.notify(1, notification)
         notificationManager.cancel(1)
 

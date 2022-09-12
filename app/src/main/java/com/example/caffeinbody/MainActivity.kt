@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 dialog.show(supportFragmentManager, "dialog")
             }
         }*/
-        val serviceClass = ForegroundService::class.java
+        val serviceClass = ApplicationBackgroundService::class.java
         val it = Intent(this, serviceClass)
 
         if (!this.isServiceRunning(serviceClass)) {

@@ -13,7 +13,7 @@ class AlarmReceiver : BroadcastReceiver() {
             context.startForegroundService(Intent(context, RestartService::class.java))
             Log.e("AlarmReceiver", "foreground")
         } else {
-            context.startService(Intent(context, ForegroundService::class.java))
+            context.startService(Intent(context, ApplicationBackgroundService::class.java))
             Log.e("AlarmReceiver", "service")
         }
     }

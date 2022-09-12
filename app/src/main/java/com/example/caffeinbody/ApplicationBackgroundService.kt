@@ -17,27 +17,23 @@ import java.util.*
 
 //한 번만 실행하게 하기
 
-class ForegroundService : Service() {
+class ApplicationBackgroundService : Service() {
     val tag = "ForegroundService"
     val CHANNEL_ID2 = "caffeine alarm channel"
+    val dataClient by lazy { Wearable.getDataClient(application) }
+    val messageClient by lazy { Wearable.getMessageClient(application) }
+    val clientDataViewModel =  ClientDataViewModel()
 
     override fun onCreate() {
         Log.e(tag, "foregroundservice created")
+        dataClient.addListener(clientDataViewModel)
+        messageClient.addListener(clientDataViewModel)
+        Log.e(tag, "foreground에 리스너 등록")
         CoroutineScope(Dispatchers.Main).launch{
-            val dataClient by lazy { Wearable.getDataClient(application) }
-            val messageClient by lazy { Wearable.getMessageClient(application) }
-            //val capabilityClient by lazy { Wearable.getCapabilityClient(application) }
-            //val clientDataViewModel by lazy { ViewModelProvider(ForegroundService()).get(ClientDataViewModel::class.java)
-
-            dataClient.addListener(ClientDataViewModel())
-            messageClient.addListener(ClientDataViewModel())
-            Log.e(tag, "foreground에 리스너 등록")
-        }
-        CoroutineScope(Dispatchers.Main).launch{
-            while (true){
+            while (App.prefs.isAlarmTrue!!){
                 var rec = App.prefs.sensetivity!!.toFloat()//1회 권장 섭취량
-                var cur = App.prefs.currentcaffeine!!.toFloat()//실시간 체내 카페인
-                if (cur >rec - 1){//158.1>159 - 1 체내 남은 카페인이 1 미만이면 0으로 초기화 시켜서
+                var cur = App.prefs.remainCafTmp!!//실시간 체내 카페인
+                if ((cur >rec -1)&&(cur!==rec)){//158.1>159 - 1 체내 남은 카페인이 1 미만이면 0으로 초기화 시켜서
                     //foreground에 알람 띄우기/알림 보내기
                     createNotification()
                 }
@@ -63,6 +59,8 @@ class ForegroundService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
+        dataClient.removeListener(clientDataViewModel)//todo 리스너 중복 제거
+        messageClient.removeListener(clientDataViewModel)
         Log.e(tag, "service destroyed")
         setAlarmTimer()
     }
@@ -91,7 +89,7 @@ class ForegroundService : Service() {
 
         //builder
         val builder = NotificationCompat.Builder(this, CHANNEL_ID2)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.logo)
             .setContentTitle("Cafeinbody 카페인 섭취 알람")
             .setContentText("카페인 등록을 해보세요!")
             .setContentIntent(pendingIntent)
