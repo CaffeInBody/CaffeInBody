@@ -38,14 +38,14 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 if (dayOfWeek == 1) {  // 일요일
                     App.prefs.satCaf = App.prefs.todayCaf
                 } else if (dayOfWeek == 2) { // 월요일
-                    App.prefs.sunCaf = App.prefs.todayCaf
+                    App.prefs.sunCaf = 0f
                     App.prefs.monCaf = 0f
                     App.prefs.tueCaf = 0f
                     App.prefs.wedCaf = 0f
                     App.prefs.thuCaf = 0f
                     App.prefs.friCaf = 0f
                     App.prefs.satCaf = 0f
-                    App.prefs.moreThanSensitivity=""
+                    App.prefs.moreThanSensitivity="1"
                 } else if (dayOfWeek == 3) { // 화요일
                     App.prefs.monCaf = App.prefs.todayCaf
                 } else if (dayOfWeek == 4) { // 수요일
