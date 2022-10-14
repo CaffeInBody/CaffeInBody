@@ -30,6 +30,7 @@
         app:pgSecondaryTextColor="@color/gray"
         app:pgBackgroundColor="@color/gray"
         app:pgRadius="9dp"
+
         app:pgStepCount="3"
         android:layout_weight="0"
         app:layout_constraintEnd_toEndOf="parent"

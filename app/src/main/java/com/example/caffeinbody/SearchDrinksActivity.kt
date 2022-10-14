@@ -74,7 +74,8 @@ class SearchDrinksActivity: AppCompatActivity() {
 
         binding.searchBtn.setOnClickListener {
             var name = binding.editText2.text.toString()
-            var cat = binding.editText4.text.toString()
+          //  var cat = binding.editText4.text.toString()
+            var cat = ""
             db = DrinksDatabase.getInstance(applicationContext)!!
             selectIntersect(db, name, madeby, cat)
         }

@@ -60,7 +60,7 @@ class Survey2Activity  : AppCompatActivity() {
         addEtc(db)*/
 
 
-
+        binding.progressBar.currentStepPosition =1
         binding.checkBox.setOnCheckedChangeListener{compoundButton, b ->
             if(binding.checkBox.isChecked) question[0]=1
             else question[0]=0

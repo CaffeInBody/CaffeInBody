@@ -41,5 +41,11 @@
         parent="Widget.Design.BottomNavigationView">
         <item name="android:textSize">11dp</item>
     </style>
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <!-- active thumb & track color (30% transparency) -->
+        <item name="colorControlActivated">@color/brown</item>
+
+    </style>
+
     <style name="SeekBarColor" parent="Widget.AppCompat.SeekBar"> <item name="colorAccent">#9D5812</item> </style>
 </resources>

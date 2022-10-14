@@ -25,62 +25,65 @@
             android:layout_weight="0"
             android:layout_marginBottom="30dp"
             android:layout_gravity="center"
-            android:text="당신의 권장 카페인 섭취량은"
+            android:text="당신의 하루 권장\n카페인 섭취량은"
             android:textSize="20dp"
             android:textStyle="bold"/>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_marginRight="10dp"
-                android:text="1회: "
-                android:textSize="25dp"/>
+                android:adjustViewBounds="true"
+                android:background="@drawable/heart"/>
 
-            <TextView
-                android:id="@+id/tv_recommendOnceCaffeine"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="25dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="center"
-                android:text="1일최대: "
-                android:textSize="25dp"/>
 
             <TextView
                 android:id="@+id/tv_recommendDayCaffeine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textColor="@color/white"
+                style="@style/bold_16dp"
+                android:text="0"
                 android:textSize="25dp"
-                android:textStyle="bold"/>
-        </LinearLayout>
 
+         />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginRight="10dp"
+                android:layout_gravity="center"
+                android:text="1회 권장 섭취량:"
+                android:textSize="18dp"
+                style="@style/basic_16dp"/>
+
+            <TextView
+                android:id="@+id/tv_recommendOnceCaffeine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0"
+                android:gravity="center"
+                android:textSize="18dp"
+                style="@style/basic_16dp"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,17 +91,19 @@
             android:layout_marginTop="10dp"
             android:textSize="10dp"
             android:textColor="#bdbdbd"
-            android:text="*아메리카노 한잔의 카페인함량은 150mg입니다(스타벅스 톨사이즈 기준)."/>
+            android:text="*아메리카노 한잔의 카페인함량은 \n스타벅스 톨사이즈 기준 150mg입니다."/>
 
         <TextView
             android:id="@+id/tv_endSentence"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:text="입니다."
             android:textSize="20dp"
             android:textStyle="bold"/>
+
 
     </LinearLayout>
 

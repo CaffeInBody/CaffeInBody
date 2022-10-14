@@ -24,7 +24,7 @@ class Survey3Activity  : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         var caffeine = intent.getDoubleExtra("caffeine", 0.0)
 
-
+        binding.progressBar.currentStepPosition =2
         binding.seekBar.setProgress(0)
 
 
