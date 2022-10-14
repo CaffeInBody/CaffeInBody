@@ -7,33 +7,48 @@
     android:layout_height="match_parent"
 
     android:orientation="vertical">
+    <TextView
+        android:id="@+id/textView_servey2_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_weight="0"
+        android:text="평소 카페인을 섭취했을 때 \n어땠는지 알려주세요"
+        style="@style/bold_16dp"
+        android:textSize="20dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <devmike.jade.com.PageStepIndicator
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="25dp"
+        android:layout_height="wrap_content"
+        app:pgTextColor="@color/pink"
+        app:pgCurrentStepColor="@color/pink"
+        app:pgStepColor="@color/pink"
+        app:pgSecondaryTextColor="@color/gray"
+        app:pgBackgroundColor="@color/gray"
+        app:pgRadius="9dp"
+        app:pgStepCount="3"
+        android:layout_weight="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_servey2_1" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
         android:orientation="vertical"
-        android:layout_margin="50dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/progressBar">
 
-        <TextView
-            android:id="@+id/textView_servey3_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="평소 카페인을 섭취했을 때 어땠는지 알려주세요"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressTint="#D5F8786F"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="40dp"
-            android:layout_weight="0" />
 
         <TextView
             android:id="@+id/textView_servey3_2"
@@ -55,23 +70,23 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:button="@null"
                 android:background="@drawable/btn_select"
+                android:button="@null"
                 android:gravity="center"
-                android:textColor="@drawable/txt_color"
-                android:text="네" />
+                android:text="네"
+                android:textColor="@drawable/txt_color" />
 
             <RadioButton
-                android:checked="true"
                 android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:button="@null"
                 android:background="@drawable/btn_select"
-                android:textColor="@drawable/txt_color"
-                android:text="아니오" />
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="아니오"
+                android:textColor="@drawable/txt_color" />
         </RadioGroup>
 
         <TextView
@@ -86,38 +101,38 @@
             android:id="@+id/headacheLayout"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:gravity="center"
             android:layout_marginVertical="10dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/button3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:button="@null"
                 android:gravity="center"
-                android:textColor="@drawable/txt_color"
-                android:text="네" />
+                android:text="네"
+                android:textColor="@drawable/txt_color" />
 
             <RadioButton
-                android:checked="true"
                 android:id="@+id/button4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:button="@null"
+                android:checked="true"
                 android:gravity="center"
-                android:textColor="@drawable/txt_color"
-                android:text="아니오" />
+                android:text="아니오"
+                android:textColor="@drawable/txt_color" />
         </RadioGroup>
 
         <TextView
             android:id="@+id/textView_servey3_4"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_weight="0"
@@ -125,10 +140,10 @@
 
         <SeekBar
             android:id="@+id/seekBar"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="0"
             android:max="300"
             android:progress="100"
@@ -143,24 +158,24 @@
                 android:id="@+id/textView_servey3_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_weight="0"
+
+                android:layout_weight="1"
                 android:text="100mg" />
 
             <TextView
                 android:id="@+id/textView_servey3_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_weight="0"
+                android:textAlignment="center"
+                android:layout_weight="1"
                 android:text="200mg" />
 
             <TextView
                 android:id="@+id/textView_servey3_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60dp"
-                android:layout_weight="0"
+             android:textAlignment="textEnd"
+                android:layout_weight="1"
                 android:text="300mg+" />
 
         </LinearLayout>

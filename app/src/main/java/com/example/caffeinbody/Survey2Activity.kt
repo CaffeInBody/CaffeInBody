@@ -59,7 +59,7 @@ class Survey2Activity  : AppCompatActivity() {
         addDrinksDatabaseGongCha(db)
         addEtc(db)*/
 
-        binding.progressBar.incrementProgressBy(33)
+
 
         binding.checkBox.setOnCheckedChangeListener{compoundButton, b ->
             if(binding.checkBox.isChecked) question[0]=1

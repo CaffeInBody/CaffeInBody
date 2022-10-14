@@ -12,21 +12,26 @@
         android:layout_marginTop="50dp"
         android:layout_marginHorizontal="30dp"
         android:layout_weight="0"
-        android:text="평소 카페인을 섭취하는\n 이유를 알려주세요"
+        android:text="평소 카페인을 섭취하는\n이유를 알려주세요"
+        style="@style/bold_16dp"
         android:textSize="20dp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
+
+    <devmike.jade.com.PageStepIndicator
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:progressTint="#D5F8786F"
         android:layout_width="match_parent"
+        android:layout_marginHorizontal="25dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        app:pgTextColor="@color/pink"
+        app:pgCurrentStepColor="@color/pink"
+        app:pgStepColor="@color/pink"
+        app:pgSecondaryTextColor="@color/gray"
+        app:pgBackgroundColor="@color/gray"
+        app:pgRadius="9dp"
+        app:pgStepCount="3"
         android:layout_weight="0"
-        android:layout_marginHorizontal="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_servey2_1" />

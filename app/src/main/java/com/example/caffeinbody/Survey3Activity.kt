@@ -23,8 +23,10 @@ class Survey3Activity  : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var caffeine = intent.getDoubleExtra("caffeine", 0.0)
-        binding.progressBar.incrementProgressBy(66)
+
+
         binding.seekBar.setProgress(0)
+
 
         //총 곱하는 수치 저장
         binding.buttonNext.setOnClickListener {

@@ -191,7 +191,8 @@ class HomeFragment : Fragment() {
             App.prefs.currentcaffeine = App.prefs.sensetivity
         }
         binding.heart.start()
-        binding.heart.waveHeightPercent = (percent).toFloat()
+      //  binding.heart.waveHeightPercent = (percent).toFloat()
+        binding.heart.progress = (percent).toFloat()
 
         binding.sensitivity.text = App.prefs.sensetivity
         if(App.prefs.todayCaf != null && App.prefs.dayCaffeine != null)

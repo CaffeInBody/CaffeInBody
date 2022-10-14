@@ -5,47 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
 >
+
+    <TextView
+        android:id="@+id/textView_survey1_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="30dp"
+        android:text="당신의 기본 정보를 \n입력해주세요"
+        style="@style/bold_16dp"
+        android:textSize="20dp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <devmike.jade.com.PageStepIndicator
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="25dp"
+        android:layout_height="wrap_content"
+        app:pgTextColor="@color/pink"
+        app:pgCurrentStepColor="@color/pink"
+        app:pgStepColor="@color/pink"
+        app:pgSecondaryTextColor="@color/gray"
+        app:pgBackgroundColor="@color/gray"
+        app:pgRadius="9dp"
+        app:pgStepCount="3"
+        android:layout_weight="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_survey1_1" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="335dp"
+        android:layout_marginTop="12dp"
         android:orientation="vertical"
-        android:paddingHorizontal="50dp"
-        android:paddingTop="200dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_next"
+        android:paddingHorizontal="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/progressBar">
 
-        <TextView
-            android:id="@+id/textView_survey1_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="당신의 기본 정보를 입력해주세요"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="40dp"
-            android:layout_weight="0" />
 
         <TextView
             android:id="@+id/textView_survey1_2"
+            style="@style/bold_14dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="0"
-            android:text="나이"
-            style="@style/bold_14dp"/>
+            android:text="나이" />
 
         <RadioGroup
             android:id="@+id/btn_age_layout"
@@ -55,43 +68,43 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:checked="true"
                 android:id="@+id/btn_age_minor"
-                android:paddingVertical="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:button="@null"
+                android:checked="true"
                 android:gravity="center"
-                android:textColor="@drawable/txt_color"
-                android:text="미성년자\n(13~19)" />
+                android:paddingVertical="10dp"
+                android:text="미성년자\n(13~19)"
+                android:textColor="@drawable/txt_color" />
 
             <RadioButton
                 android:id="@+id/btn_age_adult"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingVertical="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:button="@null"
                 android:gravity="center"
-                android:textColor="@drawable/txt_color"
-                android:text="성인\n(20~64)" />
+                android:paddingVertical="10dp"
+                android:text="성인\n(20~64)"
+                android:textColor="@drawable/txt_color" />
 
             <RadioButton
                 android:id="@+id/btn_age_senior"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingVertical="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
                 android:button="@null"
                 android:gravity="center"
-                android:textColor="@drawable/txt_color"
-                android:text="노인\n(65~)" />
+                android:paddingVertical="10dp"
+                android:text="노인\n(65~)"
+                android:textColor="@drawable/txt_color" />
         </RadioGroup>
 
         <TextView
@@ -99,8 +112,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_weight="0"
             android:layout_marginTop="10dp"
+            android:layout_weight="0"
             android:text="성별"
             android:textStyle="bold" />
 
@@ -112,28 +125,28 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:checked="true"
                 android:id="@+id/button_female"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:button="@null"
                 android:background="@drawable/btn_select"
+                android:button="@null"
+                android:checked="true"
                 android:gravity="center"
-                android:textColor="@drawable/txt_color"
-                android:text="여자" />
+                android:text="여자"
+                android:textColor="@drawable/txt_color" />
 
             <RadioButton
                 android:id="@+id/button_male"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:button="@null"
                 android:background="@drawable/btn_select"
-                android:textColor="@drawable/txt_color"
-                android:text="남자" />
+                android:button="@null"
+                android:gravity="center"
+                android:text="남자"
+                android:textColor="@drawable/txt_color" />
         </RadioGroup>
 
         <TextView
@@ -141,9 +154,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
+            android:layout_marginTop="10dp"
             android:layout_weight="0"
             android:text="체중"
-            android:layout_marginTop="10dp"
             android:textStyle="bold" />
 
         <EditText
@@ -151,29 +164,30 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="left"
-            android:paddingStart="10dp"
             android:layout_marginVertical="10dp"
-            android:inputType="numberDecimal"
             android:height="35dp"
             android:background="@drawable/roundcorner_rectangle2"
-            android:ems="15" />
+            android:ems="15"
+            android:inputType="numberDecimal"
+            android:paddingStart="10dp" />
+
         <TextView
             android:id="@+id/weightTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="체중을 입력해주세요"
             android:textColor="@color/brown"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/textView_survey1_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_weight="0"
-
-            android:text="현재 임신 여부"
             android:layout_marginTop="10dp"
+
+            android:layout_weight="0"
+            android:text="현재 임신 여부"
             android:textStyle="bold" />
 
         <RadioGroup
@@ -188,24 +202,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
-                android:button="@null"
                 android:layout_weight="1"
                 android:background="@drawable/btn_select"
+                android:button="@null"
                 android:gravity="center"
-                android:textColor="@drawable/txt_color"
-                android:text="O" />
+                android:text="O"
+                android:textColor="@drawable/txt_color" />
 
             <RadioButton
-                android:checked="true"
                 android:id="@+id/button_notPregnant"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:button="@null"
                 android:background="@drawable/btn_select"
+                android:button="@null"
+                android:checked="true"
                 android:gravity="center"
-                android:textColor="@drawable/txt_color"
-                android:text="X" />
+                android:text="X"
+                android:textColor="@drawable/txt_color" />
         </RadioGroup>
 
     </LinearLayout>

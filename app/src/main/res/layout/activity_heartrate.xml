@@ -20,13 +20,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="평소 심박수는 '삼성헬스>심박수>우측상단 차트버튼\n>최소-최대 옆 삼각형>안정 시 심박수'를 통해 확인할 수 있어요"
+        android:layout_marginHorizontal="24dp"
         android:layout_marginTop="10dp"
+        android:text="평소 심박수는 '삼성헬스>심박수>우측상단 차트버튼\n>최소-최대 옆 삼각형>안정 시 심박수'를 통해 확인할 수 있어요"
         android:textColor="#666666"
         android:textSize="12sp"
-        android:layout_marginHorizontal="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -34,22 +35,19 @@
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="80dp"
         android:orientation="vertical"
-
-        android:paddingTop="20dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/button_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/textView20">
 
         <LinearLayout
-            android:paddingStart="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+      >
 
             <TextView
                 android:layout_width="match_parent"
@@ -74,30 +72,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:textSize="12sp"
-            android:paddingStart="50dp"
             android:text="현재 심박수는 워치 검사를 통해 나타납니다"
-            android:textColor="#666666" />
+            android:textColor="#666666"
+            android:textSize="12sp" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="50dp"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+        >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
-                android:text="평소 심박수: "
+                android:layout_marginTop="5dp"
+                android:text="평소 심박수 "
                 android:textSize="20dp" />
 
             <EditText
                 android:id="@+id/normalHeartrateEditText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_weight="0"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/roundcorner_rectangle2"
                 android:ems="5"
                 android:inputType="number" />
 
@@ -106,24 +106,30 @@
 
         <Button
             android:id="@+id/getResultBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+
             android:layout_marginTop="30dp"
             android:layout_weight="1"
-            android:background="@drawable/roundcorner_rectangle2"
+            android:background="@drawable/btn_select"
             android:padding="9dp"
             android:text="권장 섭취량 확인" />
 
         <LinearLayout
             android:id="@+id/resultLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/roundcorner_rectangle"
+            android:backgroundTintMode="multiply"
+            android:elevation="1dp"
+            android:orientation="vertical"
+            android:padding="20dp"
             android:visibility="gone"
-        >
+
+            >
             <!--나중에 visibility 변경하기-->
             <TextView
                 android:id="@+id/tv_recommend"
@@ -132,9 +138,9 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
                 android:layout_weight="0"
-                android:text="당신의 심박수 기반 권장 카페인 섭취량은"
+                android:text="당신의 심박수 기반\n 권장 카페인 섭취량"
 
- />
+                />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -149,8 +155,9 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
+                    style="@style/bold_16dp"
                     android:text="1회: "
-                    android:textSize="25dp" />
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tv_recommendOnceCaffeine"
@@ -159,7 +166,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="25dp"
+                    style="@style/bold_16dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -177,7 +185,8 @@
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:text="1일최대: "
-                    android:textSize="25dp" />
+                    style="@style/bold_16dp"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tv_recommendDayCaffeine"
@@ -185,7 +194,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textSize="25dp"
+                    style="@style/bold_16dp"
+                    android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -194,18 +204,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="*아메리카노 한잔의 카페인함량은 150mg입니다(스타벅스 톨사이즈 기준)."
+                android:text="*아메리카노 한잔의 카페인함량은 \n150mg입니다(스타벅스 톨사이즈 기준)."
+                android:textAlignment="center"
                 android:textColor="#bdbdbd"
                 android:textSize="10dp" />
 
-            <TextView
-                android:id="@+id/tv_endSentence"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="0"
-                android:text="입니다."
-       />
 
         </LinearLayout>
     </LinearLayout>

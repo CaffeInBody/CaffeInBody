@@ -126,8 +126,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                     .load(article.imgurl).override(450)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .skipMemoryCache(true)
-                    .placeholder(R.drawable.logo)
-                    .error(R.drawable.logo)
+                    .error(R.drawable.logo_type)
                     .into(img)
                 img.visibility = VISIBLE
                 logo.visibility = GONE
@@ -136,7 +135,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                 img.setImageResource(0)
                 //Log.e("CaffeineAdapter", "2" + article.toString())
                 val bm = BitmapFactory.decodeFile(article.imgurl)
-                Glide.with(itemView).load(bm).placeholder(R.drawable.logo)
+                Glide.with(itemView).load(bm)
                     .override(600).into(img)
                 img.visibility = VISIBLE
                 logo.visibility = GONE
@@ -167,7 +166,7 @@ class CaffeineAdapter (private val context: Context, type:CaffeinCase) : Recycle
                     "공차"->{Glide.with(itemView)
                         .load(R.drawable.gongcha_logo).override(250).into(logo)}
                         //Log.e("오류해결", "공 " + article.drinkName + article.madeBy)}
-                    else->{Glide.with(itemView).load(R.drawable.logo).into(logo)
+                    else->{Glide.with(itemView).load(R.drawable.logo_type).into(logo)
                         Log.e("오류해결", "그외 " + article.drinkName + article.madeBy)}
 
 
