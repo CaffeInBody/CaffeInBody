@@ -288,11 +288,11 @@
 
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-
-        android:padding="30dp"
+        android:gravity="center"
+        android:padding="60dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -302,8 +302,9 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/checkWatchBtn"
-            android:layout_width="230dp"
+            android:layout_width="wrap_content"
             android:layout_height="60dp"
+
             android:layout_gravity="center"
             android:background="@drawable/roundcorner_rectangle"
             android:backgroundTint="@color/brown"
@@ -313,11 +314,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:paddingHorizontal="25dp"
+                android:clipToPadding="true"
                 android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+
                 android:text="워치로 검사하기"
                 android:textColor="@color/white"
                 android:textSize="18dp"
@@ -328,8 +331,8 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:layout_marginEnd="32dp"
-                android:layout_marginStart="12dp"
+
+                android:layout_marginStart="10dp"
                 android:background="@drawable/icon_watch"
                 android:backgroundTint="@color/white"
                 android:padding="10dp" /></LinearLayout>
