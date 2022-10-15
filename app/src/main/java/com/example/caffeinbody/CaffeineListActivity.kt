@@ -67,6 +67,21 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
 
         caffeineadapter.owner = this
 
+        binding.plus.setOnClickListener{
+            val intent = Intent(this, PlusDrinkActivity::class.java)
+            intent.putExtra("name", num2)
+            startActivity(intent)
+            finish()
+
+        }
+        binding.search.setOnClickListener {
+
+            val intent = Intent(this, SearchDrinksActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
         if(num==0) {
             isitcafe= true
             binding.starbucks.setOnClickListener(this)
@@ -145,7 +160,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(com.example.caffeinbody.R.menu.menu_search,menu)
+     //   menuInflater.inflate(com.example.caffeinbody.R.menu.menu_search,menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -154,7 +169,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             finish()
             true
         }
-        R.id.search-> {
+     /*   R.id.search-> {
             val intent = Intent(this, SearchDrinksActivity::class.java)
             startActivity(intent)
             true
@@ -168,7 +183,7 @@ class CaffeineListActivity : AppCompatActivity(), View.OnClickListener {
             finish()
             true
         }
-
+*/
         else -> {
             // If we got here, the user's action was not recognized.
             // Invoke the superclass to handle it.

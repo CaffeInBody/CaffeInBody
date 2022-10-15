@@ -17,7 +17,25 @@
         android:paddingEnd="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:id="@+id/plus"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="end"
+            android:backgroundTint="#666666"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/plus_btn"/>
+        <ImageButton
+            android:id="@+id/search"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="end"
+            android:backgroundTint="#666666"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/search"/>
+
+    </androidx.appcompat.widget.Toolbar>
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

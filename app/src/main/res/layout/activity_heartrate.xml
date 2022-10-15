@@ -26,35 +26,37 @@
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="10dp"
         android:text="평소 심박수는 '삼성헬스>심박수>우측상단 차트버튼\n>최소-최대 옆 삼각형>안정 시 심박수'를 통해 확인할 수 있어요"
-        android:textColor="#666666"
+        android:textColor="#888888"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="80dp"
+        android:layout_marginHorizontal="50dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/button_check"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView20">
+        app:layout_constraintTop_toBottomOf="@+id/textView20"
+        app:layout_constraintVertical_bias="0.18">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:orientation="horizontal"
-      >
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text="현재 심박수: "
-                android:textSize="20dp" />
+              />
 
             <TextView
                 android:id="@+id/heartrateTV"
@@ -62,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
                 android:text=" "
-                android:textSize="20dp" />
+     />
 
 
         </LinearLayout>
@@ -73,30 +75,30 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="현재 심박수는 워치 검사를 통해 나타납니다"
-            android:textColor="#666666"
+            android:textColor="#888888"
             android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:orientation="vertical"
-        >
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
                 android:layout_marginTop="5dp"
+                android:layout_weight="0"
                 android:text="평소 심박수 "
-                android:textSize="20dp" />
+           />
 
             <EditText
                 android:id="@+id/normalHeartrateEditText"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_weight="0"
                 android:layout_marginTop="5dp"
+                android:layout_weight="0"
+                android:textAlignment="center"
                 android:background="@drawable/roundcorner_rectangle3"
                 android:ems="5"
                 android:inputType="number" />
@@ -150,23 +152,23 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/bold_16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    style="@style/bold_16dp"
                     android:text="1회: "
                     android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tv_recommendOnceCaffeine"
+                    style="@style/bold_16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:gravity="center"
-                    style="@style/bold_16dp"
                     android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -179,22 +181,22 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    style="@style/bold_16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
                     android:text="1일최대: "
-                    style="@style/bold_16dp"
                     android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tv_recommendDayCaffeine"
+                    style="@style/bold_16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    style="@style/bold_16dp"
                     android:textSize="20dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -212,7 +214,6 @@
 
         </LinearLayout>
     </LinearLayout>
-
 
     <Button
         android:id="@+id/button_check"

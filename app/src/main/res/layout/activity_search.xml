@@ -55,6 +55,7 @@
                 android:background="@drawable/roundcorner_rectangle3"
                 android:layout_marginStart="10dp"
                 android:paddingStart="10dp"
+                style="@style/basic_16dp"
                 app:layout_constraintLeft_toRightOf="@+id/textView13"
                 app:layout_constraintTop_toTopOf="parent" />
 
