@@ -1,3 +1,8 @@
+## Architecture
+`MVC`
+
+## Technical Stack
+`Retrofit`, `Glide`, `Amazon S3`
 
 https://swfestival2022.kr/ework
 
